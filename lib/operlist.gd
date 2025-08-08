@@ -1,0 +1,2 @@
+DeclareGlobalFunction( "ConnectedSubset" );
+DeclareGlobalFunction( "SortCircle" );

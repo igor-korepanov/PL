@@ -1,0 +1,99 @@
+  
+  
+                                [1X The [5XPL[105X package [101X
+  
+  
+                                  Version 1.2
+  
+  
+                                 February 2014
+  
+  
+                               Igor G. Korepanov
+  
+                               Alex I. Korepanov
+  
+                               Nurlan M. Sadikov
+  
+  
+  
+  Nurlan M. Sadikov
+      Email:    [7Xmailto:ancleCharly@gmail.com[107X
+  
+  -------------------------------------------------------
+  [1XCopyright[101X
+  [33X[0;0Y© 2000-2014 by Igor G. Korepanov, Nurlan M. Sadykov and Alex I. Korepanov[133X
+  
+  [33X[0;0YUNKNOWNEntity(PL)  is free sotware; you car redistribute it and/or modify it
+  under     the     terms     of    the    GNU    General    Public    License
+  ([7Xhttp://www.fsf.org/licenses/gpl.html[107X)   as   published   by  Free  Software
+  Foundation;  either  version  2 of the License, or (at any your options) any
+  later version.[133X
+  
+  
+  -------------------------------------------------------
+  
+  
+  [1XСодержание (PL-manual)[101X
+  
+  1 [33X[0;0YШаровые комплексы.[133X
+    1.1 [33X[0;0YRepresentation of a PL ball complex[133X
+      1.1-1 IsPolytope
+    1.2 [33X[0;0YУкзывающие функции[133X
+      1.2-1 FundGroup
+    1.3 [33X[0;0YОбщая информация о шаровом комлпексе[133X
+      1.3-1 PolBoundary
+      1.3-2 PolInnerFaces
+      1.3-3 MaxTree
+      1.3-4 CellOrient
+      1.3-5 PolOrient
+      1.3-6 OrientTriangulated
+      1.3-7 dataPachner
+      1.3-8 FromSimplexToPolytope
+    1.4 [33X[0;0YРабота с клетками[133X
+      1.4-1 PolBnd
+      1.4-2 FaceComp
+      1.4-3 StarFace
+      1.4-4 PolCheckComb
+    1.5 [33X[0;0YИзменение [22Xpl-[122Xразбиения (не изменющие)[133X
+      1.5-1 PolTriangulate
+      1.5-2 FirstBoundary
+      1.5-3 PermFaces
+      1.5-4 ContractMiniFace
+      1.5-5 DivideFace
+      1.5-6 PolSimplify1
+    1.6 [33X[0;0YНепосредственное создание политопов[133X
+      1.6-1 ballAB
+      1.6-2 sphereAB
+      1.6-3 ballTriangul
+      1.6-4 sphereTriangul
+    1.7 [33X[0;0YТопологические операции[133X
+      1.7-1 FreeUnionPol
+      1.7-2 PolCylinder
+      1.7-3 PolDoubleCone
+      1.7-4 PolProduct
+      1.7-5 ImageInPolProduct
+      1.7-6 PolProductSyms
+      1.7-7 PolProductSymsDict
+      1.7-8 PolFactorInvolution
+    1.8 [33X[0;0YОсновные принцыпы перестроек шаровых комплексов[133X
+      1.8-1 DelFace
+  2 [33X[0;0YПодполитопы, вложения[133X
+    2.1 [33X[0;0YРаспознающие[133X
+      2.1-1 SetOfFacesBoundary
+      2.1-2 SubPolytope
+      2.1-3 PolMinusFace
+      2.1-4 PolMinusFaceDoublingMethod
+      2.1-5 PolMinusPol
+  3 [33X[0;0YПогружения и узлы.[133X
+    3.1 [33X[0;0YЗадание диаграмм узлов.[133X
+    3.2 [33X[0;0YОдномерные узлы[133X
+      3.2-1 KnotInS3
+      3.2-2 ZeroLinkFromKnot
+      3.2-3 ComplementOfKnot
+      3.2-4 TriangulateComplementOfKnot
+      3.2-5 ZeifertSurface
+      3.2-6 ZeifertSurfaceWithSimplyBoundary
+  
+  
+  [32X

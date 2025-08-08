@@ -1,0 +1,916 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE BOOK SYSTEM "gapdoc.dtd">
+<Book Name="PL-manual">
+
+<TitlePage>
+	<Title>
+		The <Package>PL</Package> package
+	</Title>
+	<Version> Version 1.2 </Version>
+	<Author> Igor G. Korepanov </Author>
+	<Author> Alex I. Korepanov </Author>
+	<Author> Nurlan M. Sadikov <Email>ancleCharly@gmail.com</Email></Author>
+	<Date>February 2014</Date>
+	<Copyright><Index>License</Index>
+		&copyright; 2000-2014 by Igor G. Korepanov, Nurlan M. Sadykov and
+		Alex I. Korepanov <P/>
+		&PL; is free sotware; you car redistribute it and/or modify it
+		under the terms of the 
+		<URL Text="GNU General Public License">
+			http://www.fsf.org/licenses/gpl.html
+		</URL> as published by
+		Free Software Foundation; either version 2 of the License, or (at
+		any your options) any later version.
+	</Copyright>
+</TitlePage>
+
+
+<TableOfContents/>
+<Body>
+	<Chapter><Heading>Шаровые комплексы.</Heading>
+		Piecewise-linear, or simply PL, ball complexes are, at least at this
+		moment, the central objects with which our package <M>PL</M> deals.
+
+		First, a ball complex is, simply speaking, a kind of
+		cell complex but such where all <E>closed</E> cells ( =
+		balls) are <E>embedded</E>. In particular, their
+		boundaries are genuine spheres, not crumpled/folded. The
+		formal definition of <M>PL</M> ball complex reads:
+
+		A PL ball complex is a pair <M>(X, U)</M>, where
+		<M>X</M> is a compact Euclidean polyhedron and <M>U</M>
+		is a covering of <M>X</M> by closed PL-balls such that
+		the following axioms are satisfied:
+		
+		<List>
+			<Item> the relative interiors of balls from <M>U</M> form
+				a partition of <M>X</M>, </Item>
+			<Item> the boundary of each ball from <M>U</M> is a union of
+				balls from	<M>U</M>.</Item>
+		</List>
+
+		We also call PL ball complexes ``polytopes'', for brevity, hence
+		prefix ``Pol'' in the names of some of our functions.
+
+		<Section><Heading>Representation of a PL ball complex</Heading>
+			A <M>PL</M>-ball complex is defined up to <M>PL</M>-homeomorphism only by
+			the combinatorics of adjunctions of its balls. Due to this,
+			we represent them combinatorially in the following way.
+
+			First, we assume that all vertices in the complex are
+			numbered from 1 to their total number <M>N_0</M>. Hence, in
+			this sense, the 0-skeleton of the complex is described.
+			Next, assuming that the <M>k</M>-skeleton is already given,
+			which implies (in particular) the numeration of all
+			<M>k</M>-cells, we describe the <M>(k+1)</M>-skeleton as the
+			list of all <M>(k+1)</M>-cells, each of which, in its turn,
+			is the set of numbers of <M>k</M>-cells in its boundary.
+			Then we compose the list of length <M>n</M>, where <M>n</M>
+			is the dimension of the complex, whose elements are lists of
+			1-,..., <M>n</M>-cells.
+
+			Thus, a three-dimensional ball <M>B^3</M> can be represented
+			by the following <M>PL</M> ball complex with two vertices 1 and 2:
+
+			<Example>
+
+  [ [1,2], [1,2] ], # two one-dimensional simplexes, each with
+                    # ends 1 and 2, of which the first is referred to
+                    # in the next line as 1, the second - as 2;
+  [ [1,2], [1,2] ], # two disks - bigons - bounded each by
+                    # one-dimensional simplexes 1 and 2;
+  [ [1,2] ]         # the three-ball bounded by bigons 1 and 2
+]
+			</Example>
+
+			ТУТ БЫ НАДО ВСТАВИТЬ КАРТИНКУ
+
+			Actually, we add a list of vertices with their names or
+			something like that in the beginning of the above ball
+			complex representation. For instance, our function
+			<C>ballAB</C><M>(n)</M> calls them <C>"A"</C>
+			and <C>"B"</C>. So, our &GAP; representation of the ball in
+			Figure~\ref{fig:B3} is the following record:
+
+			<Example>
+gap> ballAB(3);  
+rec( vertices := [ "A", "B" ], 
+  faces := [ [ [ 1, 2 ], [ 1, 2 ] ], [ [ 1, 2 ], [ 1, 2 ] ], [ [ 1, 2 ] ] ] 
+ )
+			</Example>
+
+		<ManSection><Func Name="IsPolytope"  Arg="pol" />
+			<Description>
+				Функция проверяет формальные признаки структуры <M>pol</M> в
+				соответствии с правилами задания политопов. Если данные
+				построенны корректным образом, то функция выдаст <M>true</M> и
+				<M>false</M> в 	противном случае.
+				<Example>
+gap> IsPolytope(T2);
+true
+				</Example>
+				Так как нет единого алгоритма распознавания <M>n-</M>мерной
+				сферы, проверка того, что каждая клетка является шаром опушена.
+				Это может породить ошибку когда данные удовлетворяют всем
+				формальным признакам, но политоп не является шаровым. В данном
+				случае программа, все равно выдаст <M>true</M> вместо
+				положенноего <M>false.</M>
+			</Description>
+		</ManSection>
+		</Section>
+		<Section><Heading>Укзывающие функции</Heading>
+			В данном разделе представлены функции которые могут либо разпознать
+			многообразие по политопу, либо вычислить инвариант этого
+			многообразия.
+
+
+			<ManSection><Func Name="FundGroup" Arg="pol" />
+				<Description>
+					Computes the fundamental group of the given polytope.
+				</Description>
+			</ManSection>
+		</Section>
+		<Section><Heading>Информация по политопе (расскзывающие)</Heading>
+			С помощью функций собранных в этом разделе можно узнать информацию
+			связанную с шаровым разбиением многообразия.
+
+			<Subsection><Heading>Общая информация о шаровом комлпексе</Heading>
+				<ManSection><Func Name="PolBoundary"  Arg="pol" />
+					<Description>
+						вычисляет границу политопа. На выход подает список в
+						котором указаны только клетки размерности <M>n-1</M>
+						составляющие границу.
+						<Example>
+gap> PolBoundary(T2);
+[ ]
+gap> s1:=sphereAB(1);;
+gap> d2:=ballAB(2);;
+gap> ft2:=PolProduct(d2,s1);;
+gap> PolBoundary(ft2);
+[ 1, 2, 3, 4 ]
+						</Example>
+						В данном примере <M>T2</M> является тором, <M>s1</M> -
+						одномерная сфера, <M>d2</M> - двумерный диск и
+						<M>ft2</M> - полнторие созданное как декартово
+						произведение 2-диска и 1-сферы.
+					</Description>
+				</ManSection>
+				<ManSection><Func Name="PolInnerFaces"  Arg="pol" />
+					<Description>
+						Build index of inner faces of given polytope complex
+						<M>returned[i]</M> - set of inner faces of dimensions
+						(i-1). Any face is outer if it has at most 1 adjacent
+						face of higher dimension of if it lies in the boundary
+						of such a face. And inner faces are not outer faces.
+						<Example>
+gap> PolInnerFaces(T2);
+[ [ 1 .. 4 ], [ 1 .. 8 ] ]
+gap> PolInnerFaces(ft2);
+[ [  ], [  ], [ 5, 6 ] ]
+						</Example>
+					</Description>
+				</ManSection>
+				<ManSection><Func Name="MaxTree"  Arg="pol" />
+					<Description>
+						finds a maximal tree in the 1-skeleton of a polytope as
+						a list of edges.
+					</Description>
+				</ManSection>
+				<ManSection><Func Name="CellOrient" Arg="pol" />
+					<Description>
+						Provides inductively some orientations for cells of
+						dimensions <M>1..n=dim(pol)</M>
+						<Example>
+gap> s3:=sphereAB(3);;
+gap> CellOrient(s3);
+[ [ [ -1, 1 ], [ -1, 1 ] ], [ [ -1, 1 ], [ -1, 1 ] ], [ [ -1, 1 ], [ -1, 1 ] ] ]
+						</Example>
+					</Description>
+				</ManSection>
+				<ManSection><Func Name="PolOrient" Arg="pol" />
+					<Description>
+						If <M>pol</M> is orientable, gives a consistent
+						orientation of <M>n-</M>faces (<M>n=dim(pol)</M>),
+						otherwise returns <M>fail.</M>
+					</Description>
+				</ManSection>
+				<ManSection><Func Name="OrientTriangulated"  Arg="pol" />
+					<Description>
+						Function computes consistent orientation on simpleces of
+						greatest dimension on a given triangulated complex
+						<M>pol.</M> Returns array of -1, 1-s which correspond to
+						the orientation of simplices of greatest dimension of
+						<M>pol.</M>
+					</Description>
+				</ManSection>
+				<ManSection><Func Name="dataPachner"  Arg="dim,k" />
+					<Description>
+						Выводит информацию о указанном движении Пахнера
+						размерности <M>dim</M>, один из класстеров которого
+						содержит <M>k</M> - симплексов, все информация
+						пренадлежащая данному кластеру условно обозначена буквой
+						<M>l</M> (left). Второй кластер симплексов получающийся
+						при преобразованиях Пахнера обозначен буквой <M>r</M>
+						(right).
+						<Example>
+gap> Print(dataPachner(3,2));
+rec(
+  l := rec(
+      pol := rec(
+          faces :=
+           [
+              [ [ 1, 2 ], [ 1, 3 ], [ 2, 3 ], [ 1, 4 ], [ 2, 4 ], [ 3, 4 ],
+                  [ 1, 5 ], [ 2, 5 ], [ 3, 5 ] ],
+              [ [ 1, 4, 5 ], [ 1, 7, 8 ], [ 2, 4, 6 ], [ 2, 7, 9 ],
+                  [ 3, 5, 6 ], [ 3, 8, 9 ], [ 1, 2, 3 ] ],
+              [ [ 1, 3, 5, 7 ], [ 2, 4, 6, 7 ] ] ],
+          vertices := [ 1, 2, 3, 4, 5 ] ),
+      sim := [ [ 1, 2, 3, 4 ], [ 1, 2, 3, 5 ] ],
+      vnut := [ 7 ] ),
+  r := rec(
+      pol := rec(
+          faces :=
+           [
+              [ [ 1, 2 ], [ 1, 4 ], [ 2, 4 ], [ 1, 5 ], [ 2, 5 ], [ 4, 5 ],
+                  [ 1, 3 ], [ 3, 4 ], [ 3, 5 ], [ 2, 3 ] ],
+              [ [ 1, 2, 3 ], [ 1, 4, 5 ], [ 2, 7, 8 ], [ 4, 7, 9 ],
+                  [ 3, 8, 10 ], [ 5, 9, 10 ], [ 2, 4, 6 ], [ 3, 5, 6 ],
+                  [ 6, 8, 9 ] ],
+              [ [ 1, 2, 7, 8 ], [ 3, 4, 7, 9 ], [ 5, 6, 8, 9 ] ] ],
+          vertices := [ 1, 2, 3, 4, 5 ] ),
+      sim := [ [ 1, 2, 4, 5 ], [ 1, 3, 4, 5 ], [ 2, 3, 4, 5 ] ],
+      vnut := [ 7, 8, 9 ] ) )
+  						</Example>
+						В каждой из этих двух записей <M>.l</M> или <M>.r</M>
+						содержится <M>.pol</M> - задание кластера в виде
+						шарового комплекса, <M>.sim</M> - представление кластера
+						в виде симплексов, то есть задание симплексов через
+						набор вершин на которые они натянуты и <M>.vnut</M>
+						список внутренних <M>(n-1)-</M>мерных клеток шарового
+						комплекса.
+					</Description>
+				</ManSection>
+			
+				Симплциальный комплекс может быть задан как набор симплексов,
+				каждый из которых представлен списком вершин на которые он
+				натянут. При задании симплициальных многообразий достаточно
+				указать симплексы размерности <M>n.</M> При этом существенным
+				условием является то, что все симплексы должны быть натянуты на
+				различные наборы вершин. Например граница четырехмерного
+				симплекса может быть представлена как
+				<Example>
+gap> sim:=[ [ 1, 2, 3, 4 ], [ 1, 2, 3, 5 ], [ 1, 2, 4, 5 ],
+				[ 1, 3, 4, 5 ], [ 2, 3, 4, 5 ] ];
+				</Example>
+				<ManSection><Func Name="FromSimplexToPolytope"  Arg="simplex" />
+					<Description>
+						преобразует список симплексов в шаровой комплекс.
+						<Example>
+gap> FromSimplexToPolytope(sim);
+rec(
+  faces :=
+    [ [ [ 1, 2 ], [ 1, 3 ], [ 2, 3 ], [ 1, 4 ], [ 2, 4 ], [ 3, 4 ], [ 1, 5 ],
+          [ 2, 5 ], [ 3, 5 ], [ 4, 5 ] ],
+      [ [ 1, 2, 3 ], [ 1, 4, 5 ], [ 2, 4, 6 ], [ 3, 5, 6 ], [ 1, 7, 8 ],
+          [ 2, 7, 9 ], [ 3, 8, 9 ], [ 4, 7, 10 ], [ 5, 8, 10 ], [ 6, 9, 10 ] ]
+        , [ [ 1, 2, 3, 4 ], [ 1, 5, 6, 7 ], [ 2, 5, 8, 9 ], [ 3, 6, 8, 10 ],
+          [ 4, 7, 9, 10 ] ] ], vertices := [ 1, 2, 3, 4, 5 ] )
+						</Example>
+					</Description>
+				</ManSection>
+			</Subsection>
+			<Subsection><Heading>Работа с клетками</Heading>
+				В данном разделе собранны все функции позволяющие узнать
+				информацию связанную с какой-либо клеткой в pl-разбиении
+				многообарзия. 
+
+				Клетка в pl-многообразии указывается как пара чисел [dim,ind],
+				первое из которых dim есть размерность клетки, второе ind -
+				позиция клетки в списке pol.faces[dim].
+			
+				<ManSection><Func Name="PolBnd"  Arg="pol,adr" />
+					<Description>
+						<!-- Создает список клеток из которых состоит клетка с
+						адресом <M>adr</M> так же как и функция <M>StarFace</M>
+						но имеет иной вывод -->
+						Creating an index of boundary faces of face
+						<M>adr=[dim,ind]</M> of complex <M>pol</M>.
+						<M>result[i]</M> - index of (i-1)-dimensional faces of
+						<M>pol</M> which are in the boundary of <M>adr</M>.
+						<Example>
+gap> PolBnd(T2,[2,3]);
+[ [ 1, 2, 3, 4 ], [ 2, 4, 5, 7 ] ]
+						</Example>
+					</Description>
+				</ManSection>
+				<ManSection><Func Name="FaceComp"  Arg="pol,adr" />
+					<Description>
+						функция аналогичная функции <M>PolBnd,</M> выходные
+						данные в функции собраны по размерностям.
+						<M>adr</M>
+						<Example>
+gap> FaceComp(T2,[2,3]);
+rec( 0 := [ 1, 2, 3, 4 ], 1 := [ 2, 4, 5, 7 ], 2 := [ 3 ] )
+						</Example>
+						Как видно на выходе данные сгруппированы так же как и
+						в функции <M>StarFace</M>
+					</Description>
+				</ManSection>
+				<ManSection><Func Name="StarFace"  Arg="pol,adr" />
+					<Description>
+						Вычисляет все клетки которые содержат клетку <M>adr</M>
+						в политопе <M>pol</M>. Другими словами функция вычисляет
+						звезду указанной клетки. result.(i) содержит индексы
+						<M>i-</M>клеток входящих в состав звезды.
+						<Example>
+gap> StarFace(T2,[0,3]);
+rec( 1 := [ 2, 3, 6, 7 ], 2 := [ 1, 2, 3, 4 ] )
+						</Example>
+						В данном примере 1-клетки с индексами 2, 3, 6 и 7 и
+						2-клетки с индексами 1, 2, 3 и 4 образуют звезду вершины
+						3 данного шарового разбиения.
+					</Description>
+				</ManSection>
+				<ManSection><Func Name="PolCheckComb"  Arg="pol, dim, pos" />
+					<Description>
+						check if a face of given complex is combinatorial
+						complex that is, whether every its subface of lower
+						dimension is uniquely determined by its vertices (and
+						dimension)
+					</Description>
+				</ManSection>
+			</Subsection>
+		</Section>
+		<Section><Heading>Изменение <M>pl-</M>разбиения (не изменющие)</Heading>
+			Функции которые изменяют представленной разбиение без изменения
+			многообразия собраны в этом разделе.
+
+			<ManSection><Func Name="PolTriangulate"  Arg="pol" />
+				<Description>
+					функция содает триангуляцию политопа <M>pol</M>. Заметим,
+					что политоп после треангуляции может остаться не
+					комбинаторным.
+					<Example>
+gap> PolTriangulate(sphereAB(2));
+rec(
+  faces := [ [ [ 1, 2 ], [ 1, 2 ], [ 1, 3 ], [ 2, 3 ], [ 1, 4 ], [ 2, 4 ] ],
+      [ [ 1, 3, 4 ], [ 2, 3, 4 ], [ 1, 5, 6 ], [ 2, 5, 6 ] ] ],
+  vertices := [ "A", "B", "V1", "V2" ] )
+					</Example>
+					Triangulating a polytope.
+				</Description>
+			</ManSection>
+			<ManSection><Func Name="FirstBoundary"  Arg="pol" />
+				<Description>
+					данная функция создает такое упорядочение клеток политопа,
+					что клетки лежащие на границе имеют наименьшие индексы в
+					списках pol.faces[dim].
+				</Description>
+			</ManSection>
+			<ManSection><Func Name="PermFaces"  Arg="pol,perm,dim" />
+				<Description>
+					производит переупорядочение клеток размерности <M>dim</M> в
+					политопе <M>pol</M> по перестановке <M>perm.</M>
+				</Description>
+			</ManSection>
+
+			Клетку размерности <M>d</M> в шаровом комплексе называем
+			минимальной, если ее граница содержит только две клетки размерности
+			<M>d - 1</M>
+
+			<ManSection><Func Name="ContractMiniFace"  Arg="pol,adr" />
+				<Description>
+					в политопе <M>pol</M> стягивается минимальная клетка
+					<M>adr.</M>
+					<Example>
+gap> s1:=sphereTriangul(1);
+rec( faces := [ [ [ 1, 2 ], [ 1, 3 ], [ 2, 3 ] ] ], vertices := [ 1 .. 3 ] )
+gap> s1:=ContractMiniFace(s1,[1,1]);
+rec( faces := [ [ [ 1, 2 ], [ 1, 2 ] ] ], vertices := [ 1, 3 ] )
+					</Example>
+					В некоторых случаях стягивание минимальной клетки
+					невозможно, так как данные которые мы получим после
+					стягивания могут не оказаться <M>pl-</M>комплексом.
+					Программа проведет стягиваение минимальной клетки в любом
+					случае, даже если это запрещено. По этому, применение этой
+					функции требует доказательства того, что после стягивание не
+					нарушится условие, что все клетки полчившегося комплекса
+					шары.
+
+					Например, если в примере описанном выше попоробовать стянуть
+					в окружности <M>s1</M> ребро, то получим следующее
+					<Example>
+gap> s1:=ContractMiniFace(s1,[1,1]);
+rec( faces := [ [ [ 1 ] ] ], vertices := [ 1 ] )
+gap> IsPolytope(s1);
+false
+					</Example>
+					Как видим выходные данные не являются политопом. По этому
+					проверка возможности проведения этой операции остается за
+					пользователем.
+				</Description>
+			</ManSection>
+			<ManSection><Func Name="DivideFace"  Arg="pol,adr,set" />
+				<Description>
+					пусть имеется клетка с адресом <M>adr</M> размерности
+					<M>d=adr[1]</M> и клетки <M>set</M> лежащие на гаранице
+					клетки <M>adr</M> образуют <M>(d-2)-</M>мерную сферу, тогда
+					клетку <M>adr</M> можно разбить на две части натянув на
+					<M>(d-2)-</M>мерную сферу диск.
+					<Example>
+gap> octahedron:=rec(vertices:=[1..6], faces:=[
+		[	[ 1, 2 ], [ 2, 3 ], [ 3, 4 ], [ 1, 4 ], [ 1, 5 ], [ 2, 5 ],
+			[ 3, 5 ], [ 4, 5 ], [ 1, 6 ], [ 2, 6 ], [ 3, 6 ], [ 4, 6 ] ],
+
+					</Example>
+					
+					В случае когда разбивается одномерная клетка разбиение
+					проводится однозначно --- клетка дробится на две части новой
+					вершиной, вместо множества <M>set</M> указывается имя новой
+					вершины разбиения.
+					<Example>
+						<!-- TODO привести пример с добавлением вершины -->
+					</Example>
+				</Description>
+			</ManSection>
+			<ManSection><Func Name="PolSimplify1" Arg="pol" />
+				<Description>
+					По возможности проводит упрощение разбиения объединяя
+					соседние клетки, производя обратную операцию к функции
+					<M>DivideFace.</M>
+					<Example>
+						<!-- TODO после исправелния ошибки привести пример с
+						триангулированной двумерной сферой -->
+					</Example>
+				</Description>
+			</ManSection>
+		</Section>
+		<Section><Heading>Создание новых комплексов (создающие)</Heading>
+			В данном разделе собраны функции которые создают новые шаровые
+			комплексы и функции которые преобразовывают многообразие так, то оно
+			менятся. <!-- TODO как-то это корявенько написанно надобно изменить
+			-->
+			<Subsection><Heading>Непосредственное создание политопов</Heading>
+				Для создания <M>n-</M>мерного диска и сферы имеются стандартные
+				функции включенные в библиотеку
+				<ManSection><Func Name="ballAB" Arg="dim" />
+					<Description>
+						создает минимально возможное шаровое разбиение диска
+						размерности <M>dim.</M>
+					</Description>
+				</ManSection>
+				<ManSection><Func Name="sphereAB" Arg="dim" />
+					<Description>
+						создает минимально возможное pl-разбиение сферы
+						размерности <M>dim.</M>
+						<Example>
+gap> sphereAB(3);
+rec(
+  faces := [ [ [ 1, 2 ], [ 1, 2 ] ], [ [ 1, 2 ], [ 1, 2 ] ],
+      [ [ 1, 2 ], [ 1, 2 ] ] ], vertices := [ "A", "B" ] )
+						</Example>
+					</Description>
+				</ManSection>
+				В библиотеку так же влючена функция создающая задание диска и
+				сферы в виде триангуливаронных шаровых комплексов
+				<ManSection><Func Name="ballTriangul"  Arg="dim" />
+					<Description>
+						создает симплекс размерности <M>dim</M>
+						<Example>
+gap> ballTriangul(2);
+rec( faces := [ [ [ 1, 2 ], [ 1, 3 ], [ 2, 3 ] ], [ [ 1 .. 3 ] ] ],
+  vertices := [ 1 .. 3 ] )
+						</Example>
+					</Description>
+				</ManSection>
+				<ManSection><Func Name="sphereTriangul"  Arg="dim" />
+					<Description>
+						триангулированная сфера создается как граница
+						<M>(dim+1)-</M>мерного симплекса
+						<Example>
+gap> sphereTriangul(1);
+rec( faces := [ [ [ 1, 2 ], [ 1, 3 ], [ 2, 3 ] ] ], vertices := [ 1 .. 3 ] )
+						</Example>
+					</Description>
+				</ManSection>
+				<!-- TODO добавить описание попверхности Куммера и линзовых
+				пространств -->
+			</Subsection>
+			<Subsection><Heading>Топологические операции</Heading>
+				<ManSection><Func Name="FreeUnionPol"  Arg="pol1,pol2" />
+					<Description>
+						свободное объединение политопов.
+						<Example>
+gap> FreeUnionPol(s1,s1);
+rec( faces := [ [ [ 1, 2 ], [ 1, 2 ], [ 3, 4 ], [ 3, 4 ] ] ],
+  vertices := [ [ 1, "A" ], [ 1, "B" ], [ 2, "A" ], [ 2, "B" ] ] )
+						</Example>
+					</Description>
+				</ManSection>
+				<ManSection><Func Name="PolCylinder"  Arg="pol" />
+					<Description>
+						Maybe not needed in view of the existence of
+						<M>PolProduct</M>, but anyhow: triangulates a polytope
+						<M>pol</M> and creates a triangulated cylinder over it;
+						in the list for faces of any dimensions (including
+						vertices), first go to identical copies of triangulated
+						<M>pol</M> - <M>pol x {0}</M> and <M>pol x {1}</M>.
+						Also, <M>result.l[i+1]</M> is the number of i-faces in
+						the triangulated <M>pol.</M>
+					</Description>
+				</ManSection>
+				<ManSection><Func Name="PolDoubleCone"  Arg="pol" />
+					<Description>
+						Make a double cone with vertices V1 and V2 over the
+						given polytope <M>pol.</M>
+						<Example>
+gap> PolDoubleCone(s1);
+rec(
+  faces := [ [ [ 1, 2 ], [ 1, 2 ], [ 1, 3 ], [ 2, 3 ], [ 1, 4 ], [ 2, 4 ] ],
+      [ [ 1, 3, 4 ], [ 2, 3, 4 ], [ 1, 5, 6 ], [ 2, 5, 6 ] ] ],
+  vertices := [ "A", "B", "V1", "V2" ] )
+						</Example>
+					</Description>
+				</ManSection>
+				<ManSection><Func Name="PolProduct"  Arg="pol1,pol2" />
+					<Description>
+						функция вычисляет декартово произведение двух шаровых
+						комплексов pol1 и pol2. Декартово произведение для двух
+						шаровых комплексов определяется как шаровой комплекс
+						составленный из всевозможных шаров <M>D^s_i \times
+							D^t_j</M>, где <M>D^s_i</M> и <M>D^t_j</M> клетки
+						комплексов <M>M</M> и <M>N</M>, соответственно.
+
+						cartesian product of two polytopes.
+						<Example>
+gap> PolProduct(s1,s1);
+rec(
+  faces :=
+    [ [ [ 1, 2 ], [ 1, 2 ], [ 3, 4 ], [ 3, 4 ], [ 1, 3 ], [ 2, 4 ], [ 1, 3 ],
+          [ 2, 4 ] ],
+      [ [ 1, 3, 5, 6 ], [ 2, 4, 5, 6 ], [ 1, 3, 7, 8 ], [ 2, 4, 7, 8 ] ] ],
+  vertices := [ [ "A", "A" ], [ "A", "B" ], [ "B", "A" ], [ "B", "B" ] ] )
+						</Example>
+					</Description>
+				</ManSection>
+				<ManSection><Func Name="ImageInPolProduct"
+						Arg="pol1,pol2,[adr1,adr2]" />
+					<Description>
+						вспомогательная функция для декартового произведения, 
+						вычисляет адрес клетки составленной как произведение
+						клеткок <M>adr1</M> и <M>adr2</M> из политопов <M>pol1</M>
+						и <M>pol2,</M> соответственно.
+						<Example>
+gap> t2:=PolProduct(s1,s1);;
+gap> ImageInPolProduct(s1,s1,[[1,2],[1,1]]);
+[ 2, 3 ]
+						</Example>
+
+						В качестве входных данных функции могут поступить не
+						только политопы pol1 и pol2, но и именованные списки по
+						размерностям, каждой размерности k в котором
+						сопоставлена мощность клеток размерности k. Данная
+						возможность позволяет не вычислять эту информацию, при
+						частом вызове функции для одного и тогоже декартового
+						произведения.
+						<Example>
+gap> ls1:=rec(0:=2, 1:=2);
+rec( 0 := 2, 1 := 2 )
+gap> ImageInPolProduct(ls1,ls1,[[1,2],[1,1]]);
+[ 2, 3 ]
+						</Example>
+						Обратим внимание, что функция вычисляет клетку только в
+						комплексе составленном функцией PolProduct. Если
+						произошло какое-либо изменение комплекса, указанный
+						адрес может оказаться не корректным.
+					</Description>
+				</ManSection>
+					<!-- TODO дать описание что такое симметрия в задании
+					политопов -->
+				<ManSection><Func Name="PolProductSyms"  Arg="" />
+					Cartesian product of two polytopes with symmetries of
+					multipliers transferred to it. First go the symmetries of
+					the first multiplier, then - the second.
+				</ManSection>
+				<ManSection><Func Name="PolProductSymsDict"  Arg="" />
+					Cartesian product of two polytopes with symmetries of
+					multipliers transferred to it. First go the symmetries of
+					the first multiplier, then - the second.
+					Also returns the face dictionary.
+				</ManSection>
+				<ManSection><Func Name="PolFactorInvolution" Arg="pol, invol" />
+					<M>pol</M> is polytope with symmetries, <M>invol</M> is such
+					a list of some of its symmetries (repetitions possible) that
+					it is known that the product of symmetries in s is an
+					involution returns the factored polytope.
+				</ManSection>
+			</Subsection>
+		</Section>
+	</Chapter>
+	<Chapter><Heading>Основные принцыпы перестроек шаровых комплексов</Heading>
+		В данном разделе рассказывается об основхных принцыпах перестройки
+		шаровых комплексов связанных с изменением индексации клеток.
+
+		Изменение индексации клеток является одной из основных трудностей для
+		быстрого и удобного построения программ. Во второй версии пакета
+		<M>PL</M> мы пользовались следующим принцыпом.
+
+		<ManSection><Func Name="DelFace" Arg="pol,adr" />
+			<Description>
+				клетка <M>adr</M> корректным образом исключается из политопа
+				<M>pol.</M> После проведения данной операции корректность данных
+				может быть нарушена.
+				<Example>
+gap> pol:=DelFace(t2,[1,2]);;
+gap> IsPolytope(pol);
+false
+				</Example>
+				Функция содержит наиболее часто встречающийся код в функциях
+				который позволяет корректно удалить все упоминания о данной
+				клетке и подготовить данные для дальнейшей работы алгоритма.
+
+			</Description> 
+		</ManSection>
+	</Chapter>
+	<Chapter><Heading>Подполитопы, вложения</Heading>
+		Множество <M>subpol</M> клеток размерности <M>k</M> будем называть
+		подполитопом, если они задают некоторое вложенное многообразие в
+		многообразие <M>pol.</M>
+
+		Самый простой пример подполитопа это список из одного элемента любой
+		размерности, который здает диск внутри политопа <M>pol.</M> Тем не менее
+		мы не будем создавать какой либо жесткой структуры обозначающей
+		подполитоп, так как его использование будет ясным из контекста программ.
+		<Section><Heading>Распознающие</Heading></Section>
+			<ManSection><Func Name="SetOfFacesBoundary"  Arg="pol,subpol,dim" />
+				<Description>
+					Функция выводит границу подполитопа <M>subpol</M>. На выходе
+					будут указаны клетки внутри политопа <M>pol</M> образующие
+					границу подполитопа <M>subpol.</M> Размерность указанных
+					клеток <M>dim-1.</M>
+					<Example>
+gap> SetOfFacesBoundary(t2,[2,1],2);
+[ 1, 2, 3, 4 ]
+					</Example>
+					<!-- TODO тут можно вставить иллюстрацию -->
+				</Description>
+			</ManSection>
+			<ManSection><Func Name="SubPolytope" Arg="pol,subpol,dim" />
+				<Description>
+					выделяем указанный подполитоп как самостоятельный.
+					<Example>
+gap> SubPolytope(t2,[1,2],1);
+rec( faces := [ [ [ 1, 2 ], [ 1, 2 ] ] ],
+  vertices := [ [ "A", "A" ], [ "A", "B" ] ] )
+					</Example>
+				</Description>
+			</ManSection>
+			<ManSection><Func Name="PolMinusFace"  Arg="pol,adr" />
+				<Description>
+					cuts out a neighborhood of a face with given adress from
+					polytope.
+
+					Функция построена таким образом, что после вырезания клетки
+					позиции старых клеток в списках pol.faces[i] и pol.vertices
+					не изменяются.
+				</Description>
+			</ManSection>
+			<ManSection><Func Name="PolMinusFaceDoublingMethod"  Arg="pol,adr" />
+				<Description>
+					Допустим, некоторая окрестность k-клетки <M>a</M> в
+					pl-комплексе <M>M</M> обладает окрестностью эквиванетной
+					нескольким копиям n-дисков <M>D^n_i</M> склееных  по
+					представленной клетке <M>a.</M> Тогда можно осуществить
+					разрез по данной клетке в pl-многообразии более
+					экономичным способом, создав для каждого n-диска
+					<M>D^n_i</M> свою копию клетки <M>a.</M>
+
+					В качестве примера приведем букет трех отрезков, склеенный
+					по вершине [0,1].
+					<Example>
+gap> buket:=rec( vertices := [ 1, 2, 3, 4 ],
+faces := [ [ [ 1, 2 ], [ 1, 3 ], [ 1, 4 ] ] ] );;
+gap> PolMinusFaceDoublingMethod(buket,[0,1]);
+rec( vertices := [ 1, 2, 3, 4, 5, 6 ],
+ faces:=[ [ [ 1, 2 ], [ 3, 5 ], [ 4, 6 ] ] ] )
+					</Example>
+
+					Каждый диск <M>D^n_i</M> может иметь свое подразбиение
+					внутри pl-многообразия <M>M.</M> При этом очевидно, что в
+					pl-комплексе существует такое подразбиение шарвого
+					комплекса, что линк клетки <M>a</M> распадается на несколько
+					связных компонент (по числу дисков <M>D^n_i</M>). Именно это
+					свойство взято в качестве критерия нахождения и разделения
+					дисков <M>D^n_i.</M>
+
+					Данное вырезание не затрагивает границу клетки, оставляя ее
+					на месте, при этом индексы не участвующих в разрезании
+					клеток не изменяются.
+					<!-- TODO этот абзац надо пояснить -->
+				</Description>
+			</ManSection>
+			<ManSection><Func Name="PolMinusPol"  Arg="pol,subpol" />
+				<Description>
+					cut out a neighborhood of a subpolytope from polytope.
+					<!-- TODO привести указываемый подполитоп в программе к
+					стандартному виду, функция будет размножена, и переписана с
+					учетом различных методов -->
+				</Description>
+			</ManSection>
+	</Chapter>
+	<Chapter><Heading>Погружения и узлы.</Heading>
+		Пакет <M>PL</M> предоставляет возможность работы с одномерными узлами и
+		двумерными заузленными поврехностями. 
+
+		<Section><Heading>Задание диаграмм узлов.</Heading>
+			В пакете предоставляется задание диаграммы узла двумя различными
+			способами каждый из которых имеет свои плюсы и свои минусы.
+
+			Первый способ основан на том, что диаграмме узла сопоставляются
+			атрибуты которые однозначно характеризуют диаграмму. Присвоим имена
+			каждой двойной точке диаграммы, которые назовем образующими и
+			выберем на узле произовольным образом начальную точку и направление,
+			причем диаграмму можно построить так, что бы отмеченная точка не
+			стала при проекции двойной точкой. Тогда при обходе диаграммы
+			начиная от отмеченной точки по выбранному направлению можно
+			составить слово по следующему правилу: на начальном этапе имеем
+			пустое слово, далее каждая встреченная двойная точка приписывается к
+			слову справа в степени <M>-1</M> если мы пришли в эту вершину снизу
+			и в степени <M>1</M> если пришли сверху. Приписывание к слову
+			образующих заканчивается когда мы снова придем в начальную точку.
+			Дополнительно, каждая двойная точка имеет ориентацию которую
+			образует выбранное нами направление.
+			<!-- TODO нужно указать когда двойной точке сопоставляется
+			положительная ориентация, когда отрицательная. Думаю это можно
+			будет сделать следующим образом, но это нужно проверить -->
+			Довойной точке сопоставляется положительная ориентация если
+			касательные вектора в этой точке составленные таким образом, что
+			первым идет касательный вектор верхней дуги, вторым --- нижней,
+			образуют положительный репер на плоскости. В противном случае, если
+			эти вектора образуют отрицательный репер, то и двойной точке
+			приписывается отрицательная ориентация.
+			<!-- TODO нарисовать рисунки с ориентациями -->
+
+			Ниже представленна диаграмма узла трилистника включенная в
+			библиотеку пакета <M>PL.</M>
+			<Example>
+gap> Trefoil;
+rec(
+	kod := [ 	[ "a", 1 ], [ "c", -1 ], [ "b", 1 ],
+				[ "a", -1 ], [ "c", 1 ], [ "b", -1 ] ],
+	orient := [ [ "a", -1 ], [ "b", -1 ], [ "c", -1 ] ] 
+				)
+  			</Example>
+			Как видно из примера все необходимая информация собрана в списках
+			.kod и .orient . Слово которое составляется при обходе узла
+			представлено списком .kod который содержит двуэлементные списки,
+			первым элементом которого являетя имя двойной точки, вторым 1 если
+			мы пришли в эту точку сверх, и -1 если пришли снизу. Сравните с
+			<M>ac^{-1}ba^{-1}cb^{-1}</M> слово составленное по трилистнику.
+			<!-- TODO создать рисунок трилистника с отмеченной точкой -->
+			Список .orient составлен из списка пар, первый элемент пары --- имя
+			двойной точки, второй ориентация.
+
+			Предполагается, что данная диаграмма лежит на двумерной плоскости на
+			которую она была спроецирована. Задание таким образом зацеплений
+			несоколько усложняется тем, что необходимо отдельно указывать
+			компоненты зацепления, но в случае если стоит необходимость вручную
+			задать диаграмму обычного узла данный способ является лучшим
+			поскольку информция легко проверяется. 
+
+			Другой способ задания диаграммы узла основан на той идее, что
+			диаграмма узла естественным образом задает разбиение двумерной
+			плоскости, а следовательно и на сфере <M>S^2</M> после
+			компактификации. Таким образом данный способ описания диаграммы
+			заключается в создании такого шарового разбиения двумерной сферы по
+			клеткам котрого проходят клетки диаграммы узла. То есть
+			дополнительно к <M>pl-</M>разбиению присоединяется о дугах диаграмы
+			узали и о том как ведут себя дуги в районе двойной точки.
+
+			<Example>
+rec(
+  1knot :=
+    rec(
+      dpoints := rec( 1 := [ 6, 1, 3, 4 ], 2 := [ 2, 3, 5, 6 ],
+          3 := [ 4, 5, 1, 2 ] ), sheets := [ 1 .. 6 ] ),
+  faces := [ [ [ 1, 3 ], [ 2, 3 ], [ 1, 2 ], [ 1, 3 ], [ 2, 3 ], [ 1, 2 ] ],
+      [ [ 1, 3, 5 ], [ 1, 4 ], [ 2, 4, 6 ], [ 2, 5 ], [ 3, 6 ] ] ],
+  vertices := [ "a", "b", "c" ] )
+			</Example>
+			В данном примере приведена диаграмма узла трилистника расположенная
+			на двумерной сфере. Сначала, обратим внимание, что вся информация
+			касающаяся узла помещена в именованный список .1knot, в котором
+			содержится список .sheets всех 1-клеток <M>pl-</M>разбиения по
+			которому проходит диаграмма и именованный список .dpoints который в
+			качестве именованных полей содержит индексы вершин, а в качестве
+			соответствующих объектов списки из четырех элементов в которых
+			первые пара элементов это индексы 1-клеток входящие в верхнюю дугу
+			диаграммы в этой точке, оставшиеся два --- индексы 1-клеток входящие
+			в нижнюю дугу диаграммы в данной точке.
+			<!-- TODO создать рисунок сферы в которой отмечена диаграмма
+			трилистника и указаны индексы всех клеток, создать пояснение к
+			описанной выше конструкции по данному рисунку -->
+
+			Данная конструкция неудобна для описания ее напрямую для диаграмм
+			узла, но с другой стороны построенная конструкция обладает двумя
+			преимуществами. Во-первых, данное задание может напрямую работать с
+			диаграммами зацеплений узлов. Во-вторых, такое задание обобщается на
+			заузленные поверности. Подробнее об этом. 
+
+			Аналогично одномерным узлам, двумерные узлы могут быть рассмотрены
+			внутри разбиения трехмерной сферы <M>S^3.</M> Точно так же,
+			определяется структура .2knot которая приклепляется к
+			соответствующему <M>pl-</M>разбиению сферы <M>S^3.</M> Внутри .2knot
+			содержится список .sheets в котром собраны уже индексы 2-клеток
+			шарового разбиения по которым проходит диаграмма двумерного узла. И
+			аналогичный именованный список .dpints в котром именами уже
+			выступают ребра двойных точек, а в соответствии им поставлены
+			четырехэлементные списки с индексами 2-клеток диаграммы. Опять же
+			первые два индекса соответствуют верхнему листу, последние два ---
+			нижнему. Тройные токи и точки ветвления могут быть вычислены из
+			представленных данных.
+		</Section>
+		<Section><Heading>Одномерные узлы</Heading>
+			<ManSection><Func Name="KnotInS3" Arg="knot" />
+				<Description>
+					создает трехмерную сферу в которую вложен узел. Клетки узла
+					указаны в result.knot .
+				</Description>
+			</ManSection>
+			<ManSection><Func Name="ZeroLinkFromKnot" Arg="" />
+				<Description>
+					Попытка два:
+					используя данную диаграмму узла, функция создает такую
+					диаграмму при которой узел имеет нулевое зацепление с узлом
+					полученым при проекции узла на трубчатую окрестность.
+
+					Попытка раз:
+					Не изменяя самого узла, данная функция создает такую
+					диаграмму, которая будет иметь нулевой коэффициент
+					зацепления с диаграммой составленной следующим образом. Для
+					узла создается трубчатая окрестность в трехмерном
+					пространстве. Проекция узла параллельно оси <M>Oz</M> на
+					трубчатую окрестность создает новый узел (по сути дела тот
+					же самый). Два узла созданных по предложенной диаграмме
+					образуют зацепление с нулевым коэффициентом.
+				</Description>
+			</ManSection>
+			<ManSection><Func Name="ComplementOfKnot" Arg="knot" />
+				<Description>
+					Создает политоп являющийся дополнением узла в <M>S^3.</M>
+					Разбиение дополнения по возможности минимизируется. Граница
+					получившегося многообразия является тором составленным из
+					четырех прямоугольников.
+					<!-- TODO проверить указывает ли программа меридиану и
+					параллель, если указывает описать это -->
+				</Description>
+			</ManSection>
+			<ManSection><Func Name="TriangulateComplementOfKnot" Arg="knot" />
+				<Description>
+					аналогично функции ComplementOfKnot создаем дополнение узла
+					в трехмерной сфере, но в данном случае дополнение
+					триангулированное. Граница имеет фиксированную триагуляцию
+					из восьми треугольников.
+				</Description>
+			</ManSection>
+			<ManSection><Func Name="ZeifertSurface" Arg="knot" />
+				<Description>
+					создает поверхность Зейферта узла, вложенную в трехмерную
+					сферу. Все 2-клетки отвечающие поверхности Зейферта собраны
+					в списке .zeifert прикрепленному к политопу.
+					<Example>
+gap> pol:=ZeifertSurface(Knot7_7);;
+gap> zeif:=SubPolytope(pol, pol.zeifert, 2);;
+gap> PolOrient(zeif);
+[ 1, 1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, 1 ]
+					</Example>
+					Данный примере мы создали сферу с указаной в ней
+					поверхнсотью Зейферта, выделили ее как сасмотоятельный
+					политоп и проверили является ли эта поврехность
+					ориентируемоей. Тем самым мы проиллюстрировали
+					ориентируемость полученного объекта.
+				</Description>
+			</ManSection>
+			<ManSection><Func Name="ZeifertSurfaceWithSimplyBoundary" Arg="knot" />
+				<Description>
+				создает поверхность Зейферта узла <M>knot,</M> чья граница
+				состоит только из двух 1-клеток (соответственно по которым и
+				проходит сам узел).
+				<Example>
+gap> pol:=ZeifertSurfaceWithSimplyBoundary(Knot7_7);;
+gap> SetOfFacesBoundary(pol,pol.zeifert,2);
+[ 49, 159 ]
+				</Example>
+				<!-- TODO такого не могло получиться, не могла граница
+				поверхности Зейферта получитсья пустой. По идее в данном примере
+				должен был получиться список из двух элементов которые
+				соответствуют списку zeif.knot -->
+				</Description>
+			</ManSection>
+		</Section>
+	</Chapter>
+</Body>
+<Bibliography Databases="PL-manual" />
+<TheIndex/>
+</Book>

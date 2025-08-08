@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (PL-manual) - Глава 3: Погружения и узлы.</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap3"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Перейти к главе: </span><a href="chap0.html">Начало</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Начало книги]</a>&nbsp;  <a href="chap0.html#contents">[Содержание]</a>&nbsp;  &nbsp;<a href="chap2.html">[Предыдущая глава]</a>&nbsp;  &nbsp;<a href="chapBib.html">[Следующая глава]</a>&nbsp;  </div>
+
+<p><a id="X861475A37A016C0D" name="X861475A37A016C0D"></a></p>
+<div class="ChapSects"><a href="chap3.html#X861475A37A016C0D">3 <span class="Heading">Погружения и узлы.</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X78F5E8438512D264">3.1 <span class="Heading">Задание диаграмм узлов.</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X7FA0E5777D412E63">3.2 <span class="Heading">Одномерные узлы</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7A626B2A84CAD77E">3.2-1 KnotInS3</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7E710DED7C4E5B3A">3.2-2 ZeroLinkFromKnot</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7F6188537D195EEE">3.2-3 ComplementOfKnot</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X795B88437E551644">3.2-4 TriangulateComplementOfKnot</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8575EC5C7B564A45">3.2-5 ZeifertSurface</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7D8D06467FBEB8CF">3.2-6 ZeifertSurfaceWithSimplyBoundary</a></span>
+</div></div>
+</div>
+
+<h3>3 <span class="Heading">Погружения и узлы.</span></h3>
+
+<p>Пакет <span class="SimpleMath">PL</span> предоставляет возможность работы с одномерными узлами и двумерными заузленными поврехностями.</p>
+
+<p><a id="X78F5E8438512D264" name="X78F5E8438512D264"></a></p>
+
+<h4>3.1 <span class="Heading">Задание диаграмм узлов.</span></h4>
+
+<p>В пакете предоставляется задание диаграммы узла двумя различными способами каждый из которых имеет свои плюсы и свои минусы. Первый способ основан на том, что диаграмме узла сопоставляются атрибуты которые однозначно характеризуют диаграмму. Присвоим имена каждой двойной точке диаграммы, которые назовем образующими и выберем на узле произовольным образом начальную точку и направление, причем диаграмму можно построить так, что бы отмеченная точка не стала при проекции двойной точкой. Тогда при обходе диаграммы начиная от отмеченной точки по выбранному направлению можно составить слово по следующему правилу: на начальном этапе имеем пустое слово, далее каждая встреченная двойная точка приписывается к слову справа в степени <span class="SimpleMath">-1</span> если мы пришли в эту вершину снизу и в степени <span class="SimpleMath">1</span> если пришли сверху. Приписывание к слову образующих заканчивается когда мы снова придем в начальную точку. Дополнительно, каждая двойная точка имеет ориентацию которую образует выбранное нами направление. Довойной точке сопоставляется положительная ориентация если касательные вектора в этой точке составленные таким образом, что первым идет касательный вектор верхней дуги, вторым --- нижней, образуют положительный репер на плоскости. В противном случае, если эти вектора образуют отрицательный репер, то и двойной точке приписывается отрицательная ориентация. Ниже представленна диаграмма узла трилистника включенная в библиотеку пакета <span class="SimpleMath">PL.</span></p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Trefoil;</span>
+rec(
+	kod := [ 	[ "a", 1 ], [ "c", -1 ], [ "b", 1 ],
+				[ "a", -1 ], [ "c", 1 ], [ "b", -1 ] ],
+	orient := [ [ "a", -1 ], [ "b", -1 ], [ "c", -1 ] ] 
+				)
+  			</pre></div>
+
+<p>Как видно из примера все необходимая информация собрана в списках .kod и .orient . Слово которое составляется при обходе узла представлено списком .kod который содержит двуэлементные списки, первым элементом которого являетя имя двойной точки, вторым 1 если мы пришли в эту точку сверх, и -1 если пришли снизу. Сравните с <span class="SimpleMath">ac^-1ba^-1cb^-1</span> слово составленное по трилистнику. Список .orient составлен из списка пар, первый элемент пары --- имя двойной точки, второй ориентация. Предполагается, что данная диаграмма лежит на двумерной плоскости на которую она была спроецирована. Задание таким образом зацеплений несоколько усложняется тем, что необходимо отдельно указывать компоненты зацепления, но в случае если стоит необходимость вручную задать диаграмму обычного узла данный способ является лучшим поскольку информция легко проверяется. Другой способ задания диаграммы узла основан на той идее, что диаграмма узла естественным образом задает разбиение двумерной плоскости, а следовательно и на сфере <span class="SimpleMath">S^2</span> после компактификации. Таким образом данный способ описания диаграммы заключается в создании такого шарового разбиения двумерной сферы по клеткам котрого проходят клетки диаграммы узла. То есть дополнительно к <span class="SimpleMath">pl-</span>разбиению присоединяется о дугах диаграмы узали и о том как ведут себя дуги в районе двойной точки.</p>
+
+
+<div class="example"><pre>
+rec(
+  1knot :=
+    rec(
+      dpoints := rec( 1 := [ 6, 1, 3, 4 ], 2 := [ 2, 3, 5, 6 ],
+          3 := [ 4, 5, 1, 2 ] ), sheets := [ 1 .. 6 ] ),
+  faces := [ [ [ 1, 3 ], [ 2, 3 ], [ 1, 2 ], [ 1, 3 ], [ 2, 3 ], [ 1, 2 ] ],
+      [ [ 1, 3, 5 ], [ 1, 4 ], [ 2, 4, 6 ], [ 2, 5 ], [ 3, 6 ] ] ],
+  vertices := [ "a", "b", "c" ] )
+			</pre></div>
+
+<p>В данном примере приведена диаграмма узла трилистника расположенная на двумерной сфере. Сначала, обратим внимание, что вся информация касающаяся узла помещена в именованный список .1knot, в котором содержится список .sheets всех 1-клеток <span class="SimpleMath">pl-</span>разбиения по которому проходит диаграмма и именованный список .dpoints который в качестве именованных полей содержит индексы вершин, а в качестве соответствующих объектов списки из четырех элементов в которых первые пара элементов это индексы 1-клеток входящие в верхнюю дугу диаграммы в этой точке, оставшиеся два --- индексы 1-клеток входящие в нижнюю дугу диаграммы в данной точке. Данная конструкция неудобна для описания ее напрямую для диаграмм узла, но с другой стороны построенная конструкция обладает двумя преимуществами. Во-первых, данное задание может напрямую работать с диаграммами зацеплений узлов. Во-вторых, такое задание обобщается на заузленные поверности. Подробнее об этом. Аналогично одномерным узлам, двумерные узлы могут быть рассмотрены внутри разбиения трехмерной сферы <span class="SimpleMath">S^3.</span> Точно так же, определяется структура .2knot которая приклепляется к соответствующему <span class="SimpleMath">pl-</span>разбиению сферы <span class="SimpleMath">S^3.</span> Внутри .2knot содержится список .sheets в котром собраны уже индексы 2-клеток шарового разбиения по которым проходит диаграмма двумерного узла. И аналогичный именованный список .dpints в котром именами уже выступают ребра двойных точек, а в соответствии им поставлены четырехэлементные списки с индексами 2-клеток диаграммы. Опять же первые два индекса соответствуют верхнему листу, последние два --- нижнему. Тройные токи и точки ветвления могут быть вычислены из представленных данных.</p>
+
+<p><a id="X7FA0E5777D412E63" name="X7FA0E5777D412E63"></a></p>
+
+<h4>3.2 <span class="Heading">Одномерные узлы</span></h4>
+
+<p><a id="X7A626B2A84CAD77E" name="X7A626B2A84CAD77E"></a></p>
+
+<h5>3.2-1 KnotInS3</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; KnotInS3</code>( <var class="Arg">knot</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<p>создает трехмерную сферу в которую вложен узел. Клетки узла указаны в result.knot .</p>
+
+<p><a id="X7E710DED7C4E5B3A" name="X7E710DED7C4E5B3A"></a></p>
+
+<h5>3.2-2 ZeroLinkFromKnot</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZeroLinkFromKnot</code>(  )</td><td class="tdright">( функция )</td></tr></table></div>
+<p>Попытка два: используя данную диаграмму узла, функция создает такую диаграмму при которой узел имеет нулевое зацепление с узлом полученым при проекции узла на трубчатую окрестность. Попытка раз: Не изменяя самого узла, данная функция создает такую диаграмму, которая будет иметь нулевой коэффициент зацепления с диаграммой составленной следующим образом. Для узла создается трубчатая окрестность в трехмерном пространстве. Проекция узла параллельно оси <span class="SimpleMath">Oz</span> на трубчатую окрестность создает новый узел (по сути дела тот же самый). Два узла созданных по предложенной диаграмме образуют зацепление с нулевым коэффициентом.</p>
+
+<p><a id="X7F6188537D195EEE" name="X7F6188537D195EEE"></a></p>
+
+<h5>3.2-3 ComplementOfKnot</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ComplementOfKnot</code>( <var class="Arg">knot</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<p>Создает политоп являющийся дополнением узла в <span class="SimpleMath">S^3.</span> Разбиение дополнения по возможности минимизируется. Граница получившегося многообразия является тором составленным из четырех прямоугольников.</p>
+
+<p><a id="X795B88437E551644" name="X795B88437E551644"></a></p>
+
+<h5>3.2-4 TriangulateComplementOfKnot</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TriangulateComplementOfKnot</code>( <var class="Arg">knot</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<p>аналогично функции ComplementOfKnot создаем дополнение узла в трехмерной сфере, но в данном случае дополнение триангулированное. Граница имеет фиксированную триагуляцию из восьми треугольников.</p>
+
+<p><a id="X8575EC5C7B564A45" name="X8575EC5C7B564A45"></a></p>
+
+<h5>3.2-5 ZeifertSurface</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZeifertSurface</code>( <var class="Arg">knot</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<p>создает поверхность Зейферта узла, вложенную в трехмерную сферу. Все 2-клетки отвечающие поверхности Зейферта собраны в списке .zeifert прикрепленному к политопу.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pol:=ZeifertSurface(Knot7_7);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">zeif:=SubPolytope(pol, pol.zeifert, 2);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">PolOrient(zeif);</span>
+[ 1, 1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, -1, 1, 1 ]
+					</pre></div>
+
+<p>Данный примере мы создали сферу с указаной в ней поверхнсотью Зейферта, выделили ее как сасмотоятельный политоп и проверили является ли эта поврехность ориентируемоей. Тем самым мы проиллюстрировали ориентируемость полученного объекта.</p>
+
+<p><a id="X7D8D06467FBEB8CF" name="X7D8D06467FBEB8CF"></a></p>
+
+<h5>3.2-6 ZeifertSurfaceWithSimplyBoundary</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZeifertSurfaceWithSimplyBoundary</code>( <var class="Arg">knot</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<p>создает поверхность Зейферта узла <span class="SimpleMath">knot,</span> чья граница состоит только из двух 1-клеток (соответственно по которым и проходит сам узел).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">pol:=ZeifertSurfaceWithSimplyBoundary(Knot7_7);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SetOfFacesBoundary(pol,pol.zeifert,2);</span>
+[ 49, 159 ]
+				</pre></div>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Начало книги]</a>&nbsp;  <a href="chap0.html#contents">[Содержание]</a>&nbsp;  &nbsp;<a href="chap2.html">[Предыдущая глава]</a>&nbsp;  &nbsp;<a href="chapBib.html">[Следующая глава]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Перейти к главе: </span><a href="chap0.html">Начало</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

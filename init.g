@@ -6,11 +6,16 @@
 ###
 #############################################################################
 
-ReadPackage( "PL", "lib/polytopes.gd" );
-ReadPackage( "PL", "lib/combinatorics.gd" );
+
+ReadPackage( "PL", "lib/libPolytopes.gd" );
+ReadPackage( "PL", "lib/libKnots.gd");
+ReadPackage( "PL", "lib/operpol1.gd" );
 ReadPackage( "PL", "lib/compbuild.gd" );
 ReadPackage( "PL", "lib/compcalc.gd" );
-ReadPackage( "PL", "lib/knots.gd" );
+ReadPackage( "PL", "lib/operknot1.gd" );
 ReadPackage( "PL", "lib/grassmann.gd" );
 
+ReadPackage( "PL", "lib/operpol2.gd" );
+ReadPackage( "PL", "lib/operlist.gd" );
+ReadPackage( "PL", "lib/operknot2.gd" );
 

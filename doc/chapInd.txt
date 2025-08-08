@@ -1,0 +1,52 @@
+  
+  
+  [1XИндекс[101X
+  
+  [2XballAB[102X  1.6-1
+  [2XballTriangul[102X  1.6-3
+  [2XCellOrient[102X  1.3-4
+  [2XComplementOfKnot[102X  3.2-3
+  [2XContractMiniFace[102X  1.5-4
+  [2XdataPachner[102X  1.3-7
+  [2XDelFace[102X  1.8-1
+  [2XDivideFace[102X  1.5-5
+  [2XFaceComp[102X  1.4-2
+  [2XFirstBoundary[102X  1.5-2
+  [2XFreeUnionPol[102X  1.7-1
+  [2XFromSimplexToPolytope[102X  1.3-8
+  [2XFundGroup[102X  1.2-1
+  [2XImageInPolProduct[102X  1.7-5
+  [2XIsPolytope[102X  1.1-1
+  [2XKnotInS3[102X  3.2-1
+  License  .-1
+  [2XMaxTree[102X  1.3-3
+  [2XOrientTriangulated[102X  1.3-6
+  [2XPermFaces[102X  1.5-3
+  [2XPolBnd[102X  1.4-1
+  [2XPolBoundary[102X  1.3-1
+  [2XPolCheckComb[102X  1.4-4
+  [2XPolCylinder[102X  1.7-2
+  [2XPolDoubleCone[102X  1.7-3
+  [2XPolFactorInvolution[102X  1.7-8
+  [2XPolInnerFaces[102X  1.3-2
+  [2XPolMinusFace[102X  2.1-3
+  [2XPolMinusFaceDoublingMethod[102X  2.1-4
+  [2XPolMinusPol[102X  2.1-5
+  [2XPolOrient[102X  1.3-5
+  [2XPolProduct[102X  1.7-4
+  [2XPolProductSyms[102X  1.7-6
+  [2XPolProductSymsDict[102X  1.7-7
+  [2XPolSimplify1[102X  1.5-6
+  [2XPolTriangulate[102X  1.5-1
+  [2XSetOfFacesBoundary[102X  2.1-1
+  [2XsphereAB[102X  1.6-2
+  [2XsphereTriangul[102X  1.6-4
+  [2XStarFace[102X  1.4-3
+  [2XSubPolytope[102X  2.1-2
+  [2XTriangulateComplementOfKnot[102X  3.2-4
+  [2XZeifertSurface[102X  3.2-5
+  [2XZeifertSurfaceWithSimplyBoundary[102X  3.2-6
+  [2XZeroLinkFromKnot[102X  3.2-2
+  
+  
+  -------------------------------------------------------

@@ -6,9 +6,13 @@ InstallGlobalFunction( PolBnd,
 # <result>[i] --- index of (i-1)-dimensional faces of s which are in the boundary of [d,fn].
 # Input data: polytope, d, fn
 
-function (s, d, fn)	
+#function (s, d, fn)	
+function (s,adr)
  
-  local i, d1, f_b;
+  local i, d1, f_b, d, fn;
+
+  d	:=adr[1];
+  fn	:=adr[2];
 
   f_b := List([1..d], x->Set([]) );
   f_b[d] := StructuralCopy(s.faces[d][fn]);
@@ -22,49 +26,18 @@ function (s, d, fn)
 
 end );
 
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
-InstallGlobalFunction( SostavFace,
-# almost the same as PolBnd, but written by another author and having slightly different syntax:
-# input data: polytope, address, where address is the list [d,fn]
-
-# ОПИСАНИЕ:
-# функция вычисляет какие грани входят в грань с адресом m = [размерность, индекс].
-# способ задания (комбинаторный или нет) значения не имеет.
-# входные данные: p-политоп, m-адрес грани.
-# выходные данные: на i-ом месте в списке указано, какие (i-1)-грани входят в состав грани с адресом m.
-# Зависимости: нет зависимостей.
-
-function(p,m)
-  local s,k,i,V;
-
-if m[1]=0 then V:=[];
-  else
-      s:=m[1];
-      V:=[];
-      V[s]:=StructuralCopy( p.faces[m[1]][m[2]] ); # I inserted "StructuralCopy" here! - I.K.
-      s:=s-1;
-      while s<>0 do
-            V[s]:=[];
-            k:=1;
-            for i in V[s+1] do
-                UniteSet(V[s],p.faces[s][i]); # because something is done to V[s] here - I.K.
-                k:=k+1;
-            od;
-            s:=s-1;
-      od;
-fi;
-
-return V;
-end );
 
 ##############################################################################
 
 InstallGlobalFunction( PolFaceVertices,
 # function returning set of vertices (as numbers) bounding given face of complex
 # s for complex, d for dimension of the face, f for number of the face
-function(s, d, f)
-  local v, g, d1, i;
+#function(s, d, f)
+function(s,adr)
+  local v, g, d1, i, d,f;
+
+  d:=adr[1];
+  f:=adr[2];
   v := StructuralCopy(s.faces[d][f]);
   # recursively substitute faces
   for d1 in [d-1,d-2..1] do
@@ -96,7 +69,7 @@ function (p, d, fn)
     , faces_in_vertices_n
     ;
 
-  f_b := PolBnd(p,d,fn);
+  f_b := PolBnd(p,[d,fn]);
 
   # check that every subface of p which is in the index f_b
   # is uniquely determined by its vertices (and dimension)
@@ -107,7 +80,7 @@ function (p, d, fn)
     faces_in_vertices_n := 0;
     # in a loop over faces
     for f1n in f_b[d1] do
-      AddSet(faces_in_vertices, PolFaceVertices(p,d1-1,f1n));
+      AddSet(faces_in_vertices, PolFaceVertices(p,[d1-1,f1n]));
       faces_in_vertices_n := faces_in_vertices_n + 1;
       if Length(faces_in_vertices)<>faces_in_vertices_n then
         return false;
@@ -625,7 +598,7 @@ function (p)
       f := s.faces[d][fn];
       
       # 0. Find mimimal vertex
-      v := Minimum(PolFaceVertices(s, d, fn));
+      v := Minimum(PolFaceVertices(s,[ d, fn]));
 
       # compute n_f --- number of faces "against" (i.e., not touching) v
       n_f := 0;
@@ -633,7 +606,7 @@ function (p)
         n_f := Length(f)-1;
       else
         for i in f do
-          if not (v in PolFaceVertices(s,d-1,i)) then
+          if not (v in PolFaceVertices(s,[d-1,i])) then
             n_f := n_f + 1;
           fi;
         od;
@@ -652,7 +625,7 @@ function (p)
 
         # "connect" existing boundary faces of f to a new vertex
         # starting with dimension 0
-        f_b := PolBnd(s,d,fn);
+        f_b := PolBnd(s,[d,fn]);
         # to every element from f_b there corresponds a new face of a bigger dimension having newV as vertex;
         # we will use a sort of index (face of s -> new face):
         f_new_ind := [List(s.vertices, x->0)];
@@ -700,7 +673,7 @@ function (p)
 
 	# 1. Create f_b --- an index of boundaries of subcomplex [d,fn]
 	# f_b[i] --- index of (i-1)-dimensional faces of s which are boundaries of [d,fn]
-	f_b := PolBnd(s,d,fn);
+	f_b := PolBnd(s,[d,fn]);
 	Append(f_b, [[]]);
 	
 	# 2. Create (initially empty) index of newly added faces
@@ -711,13 +684,13 @@ function (p)
 	  # In the loop over faces-boundaries of [d,fn] of dimension d1 not touching v
 	  for i in [1..Length(f_b[d1+1])] do
 	    if (d1=0 and f_b[d1+1][i]<>v) or 
-	       (d1>0 and  not ( v in PolFaceVertices(s,d1,f_b[d1+1][i]))) then
+	       (d1>0 and  not ( v in PolFaceVertices(s,[d1,f_b[d1+1][i]]))) then
 	      # look for face of dimension d1+1, having [d1, f_b[d1+1][i]] and v as boundaries
 	      f_found := false;
 	      # among boundaries of [d,fn] and among newly added faces
 	      for j in Union(f_b[d1+2], new_faces[d1+1]) do
 	      	if (f_b[d1+1][i] in s.faces[d1+1][j])
-		  and (v in PolFaceVertices(s,d1+1,j)) then
+		  and (v in PolFaceVertices(s,[d1+1,j])) then
 
 		  # found!
 		  f_found := true;
@@ -736,7 +709,7 @@ function (p)
 	            # look for face of dimension d1 having [d1-1, k] and [0,v] as boundaries 
 		    for j in Union(f_b[d1+1], new_faces[d1]) do
 	      	      if (k in s.faces[d1][j]) and 
-		         (v in PolFaceVertices(s,d1,j)) then
+		         (v in PolFaceVertices(s,[d1,j])) then
 		        # found!
 		        AddSet(n_a_f, j);
 		      fi;
@@ -759,7 +732,8 @@ function (p)
 	if Length(s.faces)>d then 
 	  for i in [1..Length(s.faces[d+1])] do
 	    if fn in s.faces[d+1][i] then
-	      RemoveSet(s.faces[d+1][i], fn);
+	      #RemoveSet(s.faces[d+1][i], fn); # какая то огреха с mutable\immutable над множетсвами
+	      s.faces[d+1][i]:=Difference(s.faces[d+1][i], [fn]);
 	      UniteSet(s.faces[d+1][i], new_faces[d]);
 	    fi;
 	  od;
@@ -830,9 +804,9 @@ function(s)
     for j in [(i+1)..Length(s.faces[d])] do
       for k in Intersection(s.faces[d][i],s.faces[d][j]) do
         # vertices of involved simplices
-        i_v := PolFaceVertices(s,d,i);
-        j_v := PolFaceVertices(s,d,j);
-        k_v := PolFaceVertices(s,d-1,k);
+        i_v := PolFaceVertices(s,[d,i]);
+        j_v := PolFaceVertices(s,[d,j]);
+        k_v := PolFaceVertices(s,[d-1,k]);
         # posisions of removed vertices in i-th and j-th d-faces minus 1 modulo 2 
         i_s := RemInt(Position(i_v,Difference(i_v,k_v)[1])-1,2);
         j_s := RemInt(Position(j_v,Difference(j_v,k_v)[1])-1,2);
@@ -952,7 +926,7 @@ function(p)
         AddSet(outer_faces[d1+1],i);
         # get index of bounaries of [d1,i]
         if d1>0 then
-          ib := PolBnd(p,d1,i);
+          ib := PolBnd(p,[d1,i]);
           # add all those to outer_faces
           for k in [1..Length(ib)] do
             UniteSet(outer_faces[k],ib[k]);
@@ -1156,7 +1130,7 @@ s:=1;
 orient:=[[]];
 for i in p.faces[1] do
     p.faces[1][s]:=Set(i);
-    Print("CellOrient orders vertices in edges, which is probably unnecessary","\n");
+#    Print("CellOrient orders vertices in edges, which is probably unnecessary","\n");
     orient[1][s]:=[-1,+1];
     s:=s+1;
 od;
@@ -1261,137 +1235,6 @@ fi;
 return E;
 
 end );
-
-#####################################################################################################
-
-InstallGlobalFunction( BoundaryComponents,
-# ОПИСАНИЕ:
-# программа которая вычисляет границу политопа, если она есть.
-# входные данные: p - политоп
-# выходные данные: списки номеров (n-1)-граней, которые входят в границы,
-#                  номера объединены в списки по компонентам связности.
-# зависимости: SostavFace.g
-
-function(p)
-  local gr,n,s,i,j,border,k,vert ;
-
-gr:=[];
-n:=Length(p.faces);
-# граница политопа состоит из (n-1)-граней.
-# если (n-1)-грань входит в состав границы, то она принадлежит только одной n-грани.
-for i in [1..Length(p.faces[n-1])] do
-    s:=0;
-    for j in [1..Length(p.faces[n])] do
-        if (i in p.faces[n][j]) and (s<2) then
-           s:=s+1;
-        fi;
-    od;
-
-   if s=1 then 
-      Add(gr,i);
-   fi;
-od;
-
-# теперь разделим список по компонентам связности.
-# если грани имеют хотя бы одну общую вершину,
-# значит эти грани входят в одну компоненту связности.
-k:=1; # счетчик, считающий количество компонент связности
-border:=[];
-vert:=[];
-while gr<>[] do
-
-     border[k]:=[];
-     vert:=SostavFace(p,[n-1,gr[1]])[1];
-
-     s:=1; 
-     while (s>0) do
-          s:=0; # маркер 
-          for i in gr do # если какие-либо грани имеют общие вершины с вершинами vert 
-                         # (которые изначально представляют собой список вершин первой грани),
-              if Intersection(vert,SostavFace(p,[n-1,i])[1])<>[] then 
-                 # то эти грани входят в одну компоненту связности. 
-                 Add(border[k],i); # добавляем их индексы к индексам граней этой компоненты связности
-                 UniteSet(vert,SostavFace(p,[n-1,i])[1]); 
-                 # и добавляем новые вершины, на которые натянута эта компонента связности.
-
-                 s:=s+1; # пометка "продолжить выполнение цикла" (маркер)
-# Маркер: если добавится какая-либо грань к компоненте связности, то сработает маркер 
-# (он перестанет быть нулевым), что означает, что  изменился
-# состав компоненты и вершины компоненты. Вследствие чего нужно будет проверить: 
-# возможно, с новыми вершинами пересекаются другие грани, которые мы еще не учли, но которые 
-# также будут принадлежать этой компоненте связности. Цикл повторится еще раз.
-# Если маркер не изменился (т.е. остался нулевым), значит ни одна грань не имеет общих вершин 
-# с этой компонентой связности, следовательно
-# оставшиеся грани принадлежат другим компонентам. Цикл нужно завершить.
-
-              fi;
-          od;
-          gr:=Difference(gr,border[k]);
-     od;
-
-     k:=k+1;
-
-od;
-
-
-return border;
-end );
-
-
-#############################################################################################################
-
-InstallGlobalFunction( BoundaryComponentsAsPolytopes,
-# ОПИСАНИЕ:
-# программа, которая вычисляет границу политопа.
-# входные данные: р - политоп
-# выходные данные: список политопов (длина списка равно количеству компонент связности).
-# зависимости: BoundaryComponents, SostavFace
-
-function(p)
-     local n,border, g,sostav,i,j,k,t,SF,ism,x,s ;
-
-# 1) вычисляем индексы граничных граней.
-n := Length(p.faces);
-border := BoundaryComponents(p);
-
-# 2) для каждой компоненты связности
-g:=[];
-for t in [1..Length(border)] do
-
-# 3) Создадим список граней меньшей размерности которые входят в текущую компоненту связности.
-    sostav:=[];
-    for i in [1..n-1] do
-        sostav[i]:=[];
-    od;
-#    а) для каждой грани из списка border[t] вычислим ее состав и объединим эти списки.
-    for k in border[t] do
-        SF:=SostavFace(p,[n-1,k]);
-        for i in [1..n-1] do
-            UniteSet(sostav[i],SF[i]);
-        od;
-    od;
-#    б) включим в состав и (n-1)-грани
-    Add(sostav,border[t]);
-
-# !!
-# 4) Создадим список политопов по числу компонент связности.
-    g[t]:=rec(vertices:=p.vertices{sostav[1]}, faces:=[]);
-    for i in [1..n-1] do
-       ism:=p.faces[i]{sostav[i+1]};
-       s:=1;
-       g[t].faces[i]:=[];
-       for k in ism do
-           g[t].faces[i][s]:=List( k,x->Position(sostav[i],x) );
-           s:=s+1;
-       od;
-    od;
-
-od;
-
-
-return g;
-end );
-
 
 
 ###############################################################################################################
@@ -1501,7 +1344,7 @@ InstallGlobalFunction( PolMinusFace,
 # функция которая из политопа p вырезает грань с адресом m
 # входные данные: p - политоп, m - адрес вырезаемой грани
 # выходные данные: новый политоп
-# зависимости: SostavFace
+# зависимости: PolBnd
 
 function(p,m)
   local g,n,ind,i,st,d,s,pos,k,K,st_old,j,new,newk,gr;
@@ -1599,7 +1442,7 @@ else
       s:=1;
       newk:=[];
       for i in st do 
-        gr:=Intersection(SostavFace(g,[j,i])[j-1],new);  # находим, какие новые (j-1)-грани добавятся
+        gr:=Intersection(PolBnd(g,[j,i])[j-1],new);  # находим, какие новые (j-1)-грани добавятся
         Add(newk,K+s); # учитываем индекс созданной грани.
         Add(g.faces[j-1],gr); # добавляем новую грань в список (j-1)-граней
         Add(g.faces[j][i],K+s); # добавляем индекс новой грани в список образующих текущей грани 
@@ -1628,15 +1471,38 @@ InstallGlobalFunction( PolMinusPol,
 # выходные данные: новый политоп
 # зависимости: PolMinusFace
 
-function(p,sp)
-     local g,i,n,j;
+# функция которая из политопа вырезает подполитоп, начиная с граней высших
+# размерностей.
+# входные данные:	pol 	- политопа
+# 			subpol 	- подполитоп, указываются номера клеток по
+# 				которым проходит подполитоп
+# 			dim 	- размерность подполитопа.
+
+function(p,subpol,dim)
+     local g,i,n,j, sp,sost,l;
 
 
 g:=StructuralCopy(p);
 g.syms := [];
-n:=Length(sp.faces);
 
+# составляем списки тех клеток, которые нужно вырезать
+sp:=rec(vertices:=[], faces:=[]);
+n:=StructuralCopy(dim);
+sost:=List(subpol, i -> FaceComp(p, [dim,i])); 
+l:=Length(subpol);
 
+for j in [1 .. l] do
+	UniteSet(sp.vertices, sost[j].0);
+od;
+
+for i in [1 .. n] do
+	sp.faces[i]:=[];
+	for j in [1 .. l] do
+		UniteSet(sp.faces[i],sost[j].(i));
+	od;
+od;
+
+		
 for i in [n,n-1..1] do             # вырезаем грани, начиная с высших размерностей
    for j in Reversed( Set( sp.faces[i] )) do # обратный порядок, чтобы не портились номера
        g:=PolMinusFace(g,[i,j]); # вырезаем грань из списка
@@ -1739,9 +1605,9 @@ while m>0 do
 #   в) если текущая (k-1)-грань встречается только в двух k-гранях
          if Length(ch)=2 then
           if g.faces[k][ch[1]]<>g.faces[k][ch[2]] then # 
-            v1:=SostavFace(g,[k,ch[1]]);
-            v2:=SostavFace(g,[k,ch[2]]);
-            va:=SostavFace(g,[k-1,(ta-sa)]);
+            v1:=PolBnd(g,[k,ch[1]]);
+            v2:=PolBnd(g,[k,ch[2]]);
+            va:=PolBnd(g,[k-1,(ta-sa)]);
 
 #   г) если исследуемые k-грани пересекаются только по текущей грани
 
@@ -1857,7 +1723,4 @@ return(s);
 end );
 
 ##############################################################################################################
-
-
-
 

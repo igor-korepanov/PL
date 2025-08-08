@@ -1,0 +1,60 @@
+\contentsline {chapter}{\numberline {1}\leavevmode {\color {Chapter }Unicode(1064)Unicode(1072)Unicode(1088)Unicode(1086)Unicode(1074)Unicode(1099)Unicode(1077) Unicode(1082)Unicode(1086)Unicode(1084)Unicode(1087)Unicode(1083)Unicode(1077)Unicode(1082)Unicode(1089)Unicode(1099).}}{5}{chapter.1}
+\contentsline {section}{\numberline {1.1}\leavevmode {\color {Chapter }Representation of a PL ball complex}}{5}{section.1.1}
+\contentsline {subsection}{\numberline {1.1.1}\leavevmode {\color {Chapter }IsPolytope}}{6}{subsection.1.1.1}
+\contentsline {section}{\numberline {1.2}\leavevmode {\color {Chapter }Unicode(1059)Unicode(1082)Unicode(1079)Unicode(1099)Unicode(1074)Unicode(1072)Unicode(1102)Unicode(1097)Unicode(1080)Unicode(1077) Unicode(1092)Unicode(1091)Unicode(1085)Unicode(1082)Unicode(1094)Unicode(1080)Unicode(1080)}}{7}{section.1.2}
+\contentsline {subsection}{\numberline {1.2.1}\leavevmode {\color {Chapter }FundGroup}}{7}{subsection.1.2.1}
+\contentsline {section}{\numberline {1.3}\leavevmode {\color {Chapter }Unicode(1054)Unicode(1073)Unicode(1097)Unicode(1072)Unicode(1103) Unicode(1080)Unicode(1085)Unicode(1092)Unicode(1086)Unicode(1088)Unicode(1084)Unicode(1072)Unicode(1094)Unicode(1080)Unicode(1103) Unicode(1086) Unicode(1096)Unicode(1072)Unicode(1088)Unicode(1086)Unicode(1074)Unicode(1086)Unicode(1084) Unicode(1082)Unicode(1086)Unicode(1084)Unicode(1083)Unicode(1087)Unicode(1077)Unicode(1082)Unicode(1089)Unicode(1077)}}{7}{section.1.3}
+\contentsline {subsection}{\numberline {1.3.1}\leavevmode {\color {Chapter }PolBoundary}}{7}{subsection.1.3.1}
+\contentsline {subsection}{\numberline {1.3.2}\leavevmode {\color {Chapter }PolInnerFaces}}{8}{subsection.1.3.2}
+\contentsline {subsection}{\numberline {1.3.3}\leavevmode {\color {Chapter }MaxTree}}{8}{subsection.1.3.3}
+\contentsline {subsection}{\numberline {1.3.4}\leavevmode {\color {Chapter }CellOrient}}{8}{subsection.1.3.4}
+\contentsline {subsection}{\numberline {1.3.5}\leavevmode {\color {Chapter }PolOrient}}{9}{subsection.1.3.5}
+\contentsline {subsection}{\numberline {1.3.6}\leavevmode {\color {Chapter }OrientTriangulated}}{9}{subsection.1.3.6}
+\contentsline {subsection}{\numberline {1.3.7}\leavevmode {\color {Chapter }dataPachner}}{9}{subsection.1.3.7}
+\contentsline {subsection}{\numberline {1.3.8}\leavevmode {\color {Chapter }FromSimplexToPolytope}}{11}{subsection.1.3.8}
+\contentsline {section}{\numberline {1.4}\leavevmode {\color {Chapter }Unicode(1056)Unicode(1072)Unicode(1073)Unicode(1086)Unicode(1090)Unicode(1072) Unicode(1089) Unicode(1082)Unicode(1083)Unicode(1077)Unicode(1090)Unicode(1082)Unicode(1072)Unicode(1084)Unicode(1080)}}{11}{section.1.4}
+\contentsline {subsection}{\numberline {1.4.1}\leavevmode {\color {Chapter }PolBnd}}{12}{subsection.1.4.1}
+\contentsline {subsection}{\numberline {1.4.2}\leavevmode {\color {Chapter }FaceComp}}{12}{subsection.1.4.2}
+\contentsline {subsection}{\numberline {1.4.3}\leavevmode {\color {Chapter }StarFace}}{13}{subsection.1.4.3}
+\contentsline {subsection}{\numberline {1.4.4}\leavevmode {\color {Chapter }PolCheckComb}}{13}{subsection.1.4.4}
+\contentsline {section}{\numberline {1.5}\leavevmode {\color {Chapter }Unicode(1048)Unicode(1079)Unicode(1084)Unicode(1077)Unicode(1085)Unicode(1077)Unicode(1085)Unicode(1080)Unicode(1077) $pl-$Unicode(1088)Unicode(1072)Unicode(1079)Unicode(1073)Unicode(1080)Unicode(1077)Unicode(1085)Unicode(1080)Unicode(1103) (Unicode(1085)Unicode(1077) Unicode(1080)Unicode(1079)Unicode(1084)Unicode(1077)Unicode(1085)Unicode(1102)Unicode(1097)Unicode(1080)Unicode(1077))}}{14}{section.1.5}
+\contentsline {subsection}{\numberline {1.5.1}\leavevmode {\color {Chapter }PolTriangulate}}{14}{subsection.1.5.1}
+\contentsline {subsection}{\numberline {1.5.2}\leavevmode {\color {Chapter }FirstBoundary}}{14}{subsection.1.5.2}
+\contentsline {subsection}{\numberline {1.5.3}\leavevmode {\color {Chapter }PermFaces}}{15}{subsection.1.5.3}
+\contentsline {subsection}{\numberline {1.5.4}\leavevmode {\color {Chapter }ContractMiniFace}}{15}{subsection.1.5.4}
+\contentsline {subsection}{\numberline {1.5.5}\leavevmode {\color {Chapter }DivideFace}}{17}{subsection.1.5.5}
+\contentsline {subsection}{\numberline {1.5.6}\leavevmode {\color {Chapter }PolSimplify1}}{18}{subsection.1.5.6}
+\contentsline {section}{\numberline {1.6}\leavevmode {\color {Chapter }Unicode(1053)Unicode(1077)Unicode(1087)Unicode(1086)Unicode(1089)Unicode(1088)Unicode(1077)Unicode(1076)Unicode(1089)Unicode(1090)Unicode(1074)Unicode(1077)Unicode(1085)Unicode(1085)Unicode(1086)Unicode(1077) Unicode(1089)Unicode(1086)Unicode(1079)Unicode(1076)Unicode(1072)Unicode(1085)Unicode(1080)Unicode(1077) Unicode(1087)Unicode(1086)Unicode(1083)Unicode(1080)Unicode(1090)Unicode(1086)Unicode(1087)Unicode(1086)Unicode(1074)}}{18}{section.1.6}
+\contentsline {subsection}{\numberline {1.6.1}\leavevmode {\color {Chapter }ballAB}}{19}{subsection.1.6.1}
+\contentsline {subsection}{\numberline {1.6.2}\leavevmode {\color {Chapter }sphereAB}}{19}{subsection.1.6.2}
+\contentsline {subsection}{\numberline {1.6.3}\leavevmode {\color {Chapter }ballTriangul}}{19}{subsection.1.6.3}
+\contentsline {subsection}{\numberline {1.6.4}\leavevmode {\color {Chapter }sphereTriangul}}{20}{subsection.1.6.4}
+\contentsline {section}{\numberline {1.7}\leavevmode {\color {Chapter }Unicode(1058)Unicode(1086)Unicode(1087)Unicode(1086)Unicode(1083)Unicode(1086)Unicode(1075)Unicode(1080)Unicode(1095)Unicode(1077)Unicode(1089)Unicode(1082)Unicode(1080)Unicode(1077) Unicode(1086)Unicode(1087)Unicode(1077)Unicode(1088)Unicode(1072)Unicode(1094)Unicode(1080)Unicode(1080)}}{20}{section.1.7}
+\contentsline {subsection}{\numberline {1.7.1}\leavevmode {\color {Chapter }FreeUnionPol}}{20}{subsection.1.7.1}
+\contentsline {subsection}{\numberline {1.7.2}\leavevmode {\color {Chapter }PolCylinder}}{20}{subsection.1.7.2}
+\contentsline {subsection}{\numberline {1.7.3}\leavevmode {\color {Chapter }PolDoubleCone}}{20}{subsection.1.7.3}
+\contentsline {subsection}{\numberline {1.7.4}\leavevmode {\color {Chapter }PolProduct}}{20}{subsection.1.7.4}
+\contentsline {subsection}{\numberline {1.7.5}\leavevmode {\color {Chapter }ImageInPolProduct}}{21}{subsection.1.7.5}
+\contentsline {subsection}{\numberline {1.7.6}\leavevmode {\color {Chapter }PolProductSyms}}{22}{subsection.1.7.6}
+\contentsline {subsection}{\numberline {1.7.7}\leavevmode {\color {Chapter }PolProductSymsDict}}{23}{subsection.1.7.7}
+\contentsline {subsection}{\numberline {1.7.8}\leavevmode {\color {Chapter }PolFactorInvolution}}{23}{subsection.1.7.8}
+\contentsline {section}{\numberline {1.8}\leavevmode {\color {Chapter }Unicode(1054)Unicode(1089)Unicode(1085)Unicode(1086)Unicode(1074)Unicode(1085)Unicode(1099)Unicode(1077) Unicode(1087)Unicode(1088)Unicode(1080)Unicode(1085)Unicode(1094)Unicode(1099)Unicode(1087)Unicode(1099) Unicode(1087)Unicode(1077)Unicode(1088)Unicode(1077)Unicode(1089)Unicode(1090)Unicode(1088)Unicode(1086)Unicode(1077)Unicode(1082) Unicode(1096)Unicode(1072)Unicode(1088)Unicode(1086)Unicode(1074)Unicode(1099)Unicode(1093) Unicode(1082)Unicode(1086)Unicode(1084)Unicode(1087)Unicode(1083)Unicode(1077)Unicode(1082)Unicode(1089)Unicode(1086)Unicode(1074)}}{23}{section.1.8}
+\contentsline {subsection}{\numberline {1.8.1}\leavevmode {\color {Chapter }DelFace}}{24}{subsection.1.8.1}
+\contentsline {chapter}{\numberline {2}\leavevmode {\color {Chapter }Unicode(1055)Unicode(1086)Unicode(1076)Unicode(1087)Unicode(1086)Unicode(1083)Unicode(1080)Unicode(1090)Unicode(1086)Unicode(1087)Unicode(1099), Unicode(1074)Unicode(1083)Unicode(1086)Unicode(1078)Unicode(1077)Unicode(1085)Unicode(1080)Unicode(1103)}}{25}{chapter.2}
+\contentsline {section}{\numberline {2.1}\leavevmode {\color {Chapter }Unicode(1056)Unicode(1072)Unicode(1089)Unicode(1087)Unicode(1086)Unicode(1079)Unicode(1085)Unicode(1072)Unicode(1102)Unicode(1097)Unicode(1080)Unicode(1077)}}{26}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}\leavevmode {\color {Chapter }SetOfFacesBoundary}}{26}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2}\leavevmode {\color {Chapter }SubPolytope}}{26}{subsection.2.1.2}
+\contentsline {subsection}{\numberline {2.1.3}\leavevmode {\color {Chapter }PolMinusFace}}{27}{subsection.2.1.3}
+\contentsline {subsection}{\numberline {2.1.4}\leavevmode {\color {Chapter }PolMinusFaceDoublingMethod}}{27}{subsection.2.1.4}
+\contentsline {subsection}{\numberline {2.1.5}\leavevmode {\color {Chapter }PolMinusPol}}{29}{subsection.2.1.5}
+\contentsline {chapter}{\numberline {3}\leavevmode {\color {Chapter }Unicode(1055)Unicode(1086)Unicode(1075)Unicode(1088)Unicode(1091)Unicode(1078)Unicode(1077)Unicode(1085)Unicode(1080)Unicode(1103) Unicode(1080) Unicode(1091)Unicode(1079)Unicode(1083)Unicode(1099).}}{30}{chapter.3}
+\contentsline {section}{\numberline {3.1}\leavevmode {\color {Chapter }Unicode(1047)Unicode(1072)Unicode(1076)Unicode(1072)Unicode(1085)Unicode(1080)Unicode(1077) Unicode(1076)Unicode(1080)Unicode(1072)Unicode(1075)Unicode(1088)Unicode(1072)Unicode(1084)Unicode(1084) Unicode(1091)Unicode(1079)Unicode(1083)Unicode(1086)Unicode(1074).}}{30}{section.3.1}
+\contentsline {section}{\numberline {3.2}\leavevmode {\color {Chapter }Unicode(1054)Unicode(1076)Unicode(1085)Unicode(1086)Unicode(1084)Unicode(1077)Unicode(1088)Unicode(1085)Unicode(1099)Unicode(1077) Unicode(1091)Unicode(1079)Unicode(1083)Unicode(1099)}}{40}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}\leavevmode {\color {Chapter }KnotInS3}}{40}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}\leavevmode {\color {Chapter }ZeroLinkFromKnot}}{40}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}\leavevmode {\color {Chapter }ComplementOfKnot}}{41}{subsection.3.2.3}
+\contentsline {subsection}{\numberline {3.2.4}\leavevmode {\color {Chapter }TriangulateComplementOfKnot}}{42}{subsection.3.2.4}
+\contentsline {subsection}{\numberline {3.2.5}\leavevmode {\color {Chapter }ZeifertSurface}}{42}{subsection.3.2.5}
+\contentsline {subsection}{\numberline {3.2.6}\leavevmode {\color {Chapter }ZeifertSurfaceWithSimplyBoundary}}{43}{subsection.3.2.6}
+\contentsline {chapter}{\IeC {\DH }\IeC {\textexclamdown }\~N\@inpenc@undefined@ {latin1}\~N\@inpenc@undefined@ {latin1}\IeC {\DH }\IeC {\guillemotright }\IeC {\DH }\IeC {\textordmasculine }\IeC {\DH }\IeC {\c \ }}{45}{chapter*.3}
+\contentsline {chapter}{\IeC {\DH }\@inpenc@undefined@ {latin1}\IeC {\DH }\IeC {\textonehalf }\IeC {\DH }\'{}\IeC {\DH }\mu \IeC {\DH }\IeC {\textordmasculine }\~N\@inpenc@undefined@ {latin1}}{46}{section*.4}

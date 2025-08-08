@@ -3,10 +3,6 @@ DeclareGlobalFunction( "PolBnd" );
 # <result>[i] --- index of (i-1)-dimensional faces of s which are in the boundary of [d,fn]
 # Input data: polytope, d, fn
 
-DeclareGlobalFunction( "SostavFace" );
-# almost the same as PolBnd, but written by another author and having slightly different syntax:
-# input data: polytope, address, where address is the list [d,fn]
-
 DeclareGlobalFunction( "PolFaceVertices" );
 # function returning set of vertices (as numbers) bounding given face of complex
 # s for complex, d for dimension of the face, f for number of the face
@@ -67,14 +63,6 @@ DeclareGlobalFunction( "PolOrient" );
 # Argument: ball complex  p of dimension >1.
 # If  p  is orientable, gives a consistent orientation of n-faces (n= dim p),
 # otherwise returns fail
-
-DeclareGlobalFunction( "BoundaryComponents" );
-# Argument: ball complex  p of dimension >1.
-# Output: list of boundary components, each being the list of its (n-1)-faces
-
-DeclareGlobalFunction( "BoundaryComponentsAsPolytopes" );
-# Argument: ball complex  p of dimension >1.
-# Output: list of boundary components, each represented as a polytope
 
 DeclareGlobalFunction( "Slovo" );
 # Arguments: two lists, both corresponding to a certain 2-face.

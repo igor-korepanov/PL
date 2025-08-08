@@ -1,0 +1,85 @@
+\begin{theindex}
+
+  \item \texttt  {ballAB}, \hyperpage{19}
+  \item \texttt  {ballTriangul}, \hyperpage{19}
+
+  \indexspace
+
+  \item \texttt  {CellOrient}, \hyperpage{8}
+  \item \texttt  {ComplementOfKnot}, \hyperpage{41}
+  \item \texttt  {ContractMiniFace}, \hyperpage{15}
+
+  \indexspace
+
+  \item \texttt  {dataPachner}, \hyperpage{9}
+  \item \texttt  {DelFace}, \hyperpage{24}
+  \item \texttt  {DivideFace}, \hyperpage{17}
+
+  \indexspace
+
+  \item \texttt  {FaceComp}, \hyperpage{12}
+  \item \texttt  {FirstBoundary}, \hyperpage{14}
+  \item \texttt  {FreeUnionPol}, \hyperpage{20}
+  \item \texttt  {FromSimplexToPolytope}, \hyperpage{11}
+  \item \texttt  {FundGroup}, \hyperpage{7}
+
+  \indexspace
+
+  \item \texttt  {ImageInPolProduct}, \hyperpage{21}
+  \item \texttt  {IsPolytope}, \hyperpage{6}
+
+  \indexspace
+
+  \item \texttt  {KnotInS3}, \hyperpage{40}
+
+  \indexspace
+
+  \item License, \hyperpage{2}
+
+  \indexspace
+
+  \item \texttt  {MaxTree}, \hyperpage{8}
+
+  \indexspace
+
+  \item \texttt  {OrientTriangulated}, \hyperpage{9}
+
+  \indexspace
+
+  \item \texttt  {PermFaces}, \hyperpage{15}
+  \item \texttt  {PolBnd}, \hyperpage{12}
+  \item \texttt  {PolBoundary}, \hyperpage{7}
+  \item \texttt  {PolCheckComb}, \hyperpage{13}
+  \item \texttt  {PolCylinder}, \hyperpage{20}
+  \item \texttt  {PolDoubleCone}, \hyperpage{20}
+  \item \texttt  {PolFactorInvolution}, \hyperpage{23}
+  \item \texttt  {PolInnerFaces}, \hyperpage{8}
+  \item \texttt  {PolMinusFace}, \hyperpage{27}
+  \item \texttt  {PolMinusFaceDoublingMethod}, \hyperpage{27}
+  \item \texttt  {PolMinusPol}, \hyperpage{29}
+  \item \texttt  {PolOrient}, \hyperpage{9}
+  \item \texttt  {PolProduct}, \hyperpage{20}
+  \item \texttt  {PolProductSyms}, \hyperpage{22}
+  \item \texttt  {PolProductSymsDict}, \hyperpage{23}
+  \item \texttt  {PolSimplify1}, \hyperpage{18}
+  \item \texttt  {PolTriangulate}, \hyperpage{14}
+
+  \indexspace
+
+  \item \texttt  {SetOfFacesBoundary}, \hyperpage{26}
+  \item \texttt  {sphereAB}, \hyperpage{19}
+  \item \texttt  {sphereTriangul}, \hyperpage{20}
+  \item \texttt  {StarFace}, \hyperpage{13}
+  \item \texttt  {SubPolytope}, \hyperpage{26}
+
+  \indexspace
+
+  \item \texttt  {TriangulateComplementOfKnot}, \hyperpage{42}
+
+  \indexspace
+
+  \item \texttt  {ZeifertSurface}, \hyperpage{42}
+  \item \texttt  {ZeifertSurfaceWithSimplyBoundary}, \hyperpage{43}
+  \item \texttt  {ZeroLinkFromKnot}, \hyperpage{40}
+
+\end{theindex}
