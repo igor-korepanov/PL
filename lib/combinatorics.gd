@@ -24,6 +24,11 @@ DeclareGlobalFunction( "PolProductSyms" );
 # Cartesian product of two polytopes with symmetries of multipliers transferred to it.
 # First go the symmetries of the first multiplier, then - the second
 
+DeclareGlobalFunction( "PolProductSymsDict" );
+# Cartesian product of two polytopes with symmetries of multipliers transferred to it.
+# First go the symmetries of the first multiplier, then - the second.
+# Also returns the face dictionary.
+
 DeclareGlobalFunction( "PolTriangulate" );
 # triangulating a polytope ( = ball complex)
 
@@ -102,5 +107,11 @@ DeclareGlobalFunction( "PolSimplify1" );
 # and down to k=1. If actual simplification is achieved, try this again and so on.
 # Probably, there will be "PolSymplify2" and so on in the future.
 
+DeclareGlobalFunction( "PolFactorInvolution" );
+# PolFactorInvolution := function( p, invol )
+# p is the polytope with symmetries
+# invol is such a list of some of its symmetries (repetitions possible)
+# that it is known that the product of symmetries in s is an involution
+# returns the factored polytope
 
 

@@ -3,7 +3,7 @@ Print("We gonna eat your brain\n");
 # Define polytopes somehow
 
 InstallValue(
-s1, rec(
+Simplex1, rec(
   vertices := List(["A", "B"]),
   faces := List([
     # 1-faces
@@ -12,7 +12,7 @@ s1, rec(
 ));
 
 InstallValue(
-s2, rec( 
+Simplex2, rec( 
   vertices := List(["A", "B", "C"]),
   faces := List([
     # 1-faces
@@ -23,7 +23,7 @@ s2, rec(
 ));
 
 InstallValue(
-s3, rec( 
+Simplex3, rec( 
   vertices := List(["A", "B", "C","D"]),
   faces := List([
     # 1-faces
@@ -66,7 +66,7 @@ T2, rec(
 ));
 
 InstallValue(
-cube, rec(
+Cube, rec(
   vertices := List(["A", "B", "C", "D", "A'", "B'", "C'", "D'"]),
   faces := List([
     # 1-faces
@@ -99,7 +99,7 @@ S3cubic, rec(
 ));
 
 InstallValue(
-S1, rec(
+Sphere1, rec(
   vertices := ["A","B"],
   faces := [
     # 1-faces
@@ -109,7 +109,7 @@ S1, rec(
 ));
 
 InstallValue(
-S2, rec(
+Sphere2, rec(
   vertices := ["A", "B", "C"],
   faces := [
     # 1-faces
@@ -122,7 +122,7 @@ S2, rec(
     
 
 InstallValue(
-S4, rec(
+Sphere4, rec(
   vertices := ["A","B","C","D","E"],
   faces := [
     # 1-faces
@@ -141,7 +141,7 @@ S4, rec(
 ));
 
 InstallValue(
-D3, rec(
+Disk3, rec(
   vertices := List(["A","B","C","D"]),
   faces := List([
     # 1-faces
@@ -170,7 +170,7 @@ InstallValue(
 ));
 
 InstallValue(
-bigon, rec(
+Bigon, rec(
   vertices := ["A","B"],
   faces := [
     # 1-faces
@@ -207,7 +207,7 @@ InstallValue(
 ));
 
 InstallValue(
-lantern, rec(
+Lantern, rec(
   vertices := ["A", "B"],
   faces := [
     # 1-faces
@@ -243,8 +243,11 @@ MobiusBand, rec(
   ]
 ));
 
-################################################################################### now functions
-###################################################################################
+
+##### Now functions - but KummerSurface will go *after* the function KummerSurface_ !
+
+###############################################################################################
+###############################################################################################
 
 InstallGlobalFunction( Lens,
 function (p,q)
@@ -264,7 +267,7 @@ edges_AC := List( [1..p], i -> [1,3] );
 edges_BC := List( [1..p], i -> [2,3] );
 edges_AD := List( [1..p], i -> [1,4] );
 edges_BD := List( [1..p], i -> [2,4] );
-edges_AB := [[1,2], [1,2]]; # first upper, then lower
+edges_AB := [[1,2], [1,2]]; # first left, then right
 edges_CD := [[3,4], [3,4]]; # first upper, then lower
 # and then all edges will be assembled in a single list in this very order
 
@@ -297,7 +300,7 @@ end );
 
 
 
-#########################
+###############################################################################################
 
 InstallGlobalFunction( PolPrint,
 # print all the faces of simplitial complex in terms of names of vertices
@@ -332,7 +335,7 @@ function (s)
 end );
 
 
-##################################
+###############################################################################################
 
 InstallGlobalFunction( ballAB,
 # a ball of dimension n and just two vertices A and B
@@ -347,7 +350,7 @@ function(n)
   );
 end );
 
-#######################################
+###############################################################################################
 
 InstallGlobalFunction( sphereAB,
 # a sphere of dimension n and just two vertices A and B
@@ -361,7 +364,194 @@ function(n)
   );
 end );
 
-###########################################
+###############################################################################################
+
+InstallGlobalFunction( KummerSurface,
+
+function()
+local s,isyms,sym,i0,i1,i2,lv1,lv2,i,j,k,pl,4l,i_,j_,k_,i_1,i_2,j_1,j_2,
+k_1,k_2,l1,l2,k3,k2_1,k2_2,l,x;
+
+s := PolProductSymsDict( T2, T2 );
+
+# numbers of vertices and faces in T2 x T2
+i0 := Length( s.vertices );  # the number 16
+i1 := Length( s.faces[1] );  # the number 64
+i2 := Length( s.faces[2] );
+
+# symmetries of T2 x T2
+isyms := StructuralCopy(s.syms);
+
+
+### begin vertices:
+lv1 := StructuralCopy(s.vertices);
+lv2 := StructuralCopy(s.vertices);
+
+for i in [1..i0] do Add(lv1[i],"rho"); od;
+
+for i in [1..i0] do Add(lv2[i],"sigma"); od;
+
+s.vertices := Concatenation( lv1, lv2 );
+
+for i in [1..Length(isyms)] do
+  pl := Concatenation( Permuted([1..i0], isyms[i][1]), Permuted([i0+1..2*i0], isyms[i][1]) );
+  s.syms[i][1] := PermListList( pl,[1..2*i0] );
+od;
+### end vertices
+
+
+### begin edges
+
+# changing boundary vertices for edges of type "edge x vertex"
+for i in [1..Length(T2.faces[1])] do
+  for j in [1..Length(T2.vertices)] do
+    k := LookupDictionary(s.fd, [[1,i],[0,j]]);
+    s.faces[1][k] := s.faces[1][k] + i0; # adds i0 to both the edge beginning and end
+  od;
+od;
+
+# creating meridians
+# the numbers of meridians corresponding to initial vertex j will be
+  # i1+j, i1+i0+j, i1+2*i0+j, i1+3*i0+j
+for i in [1..4] do
+  for j in [1..i0] do
+    Add( s.faces[1], [j,i0+j] );
+  od;
+od;
+
+# creating the action of symmetries on meridians
+for i in [1..Length(s.syms)] do
+  # first write down what is due to action on vertices
+  4l := List( [1..4], j-> Permuted([i1+(j-1)*i0+1..i1+j*i0], isyms[i][1]) );
+  # then action on meridians within each vertex
+  if i=3 then 4l := Permuted(4l, (1,3)(2,4)); # reflection in the first T2
+  elif i=4 then 4l := Permuted(4l, (1,2,3,4)); # rotation in the first T2
+  elif i=7 then 4l := Permuted(4l, (1,3)(2,4)); # reflection in the second T2
+  elif i=8 then 4l := Permuted(4l, (1,2,3,4)^-1); # rotation in the second T2
+  fi;
+  4l := Concatenation( 4l );
+  pl := Concatenation( Permuted([1..i1], isyms[i][2]), 4l );
+  s.syms[i][2] := PermListList( pl,[1..i1+4*i0] );
+od;
+### end edges
+
+
+### begin 2-faces
+
+# finding a vertex in the first 2-face of type "edge x edge"
+k_ := LookupDictionary(s.fd, [[1,1],[1,1]]); # the number 17
+i_ := s.faces[2][k][1]; # the number 1
+j_ := s.faces[1][i][1]; # again the number 1
+
+# putting a meridian corresponding to this vertex into the boundary of the 2-face
+  # and the meridians obtained from this by symmetries
+    # into the boundaries of the 2-faces obtained by the same symmetries
+for i_1 in [0..1] do for i_2 in [0..1] do # first translation in the first and second T2
+  for j_1 in [0..1] do for j_2 in [0..1] do # second translation in the first and second T2
+    for k_1 in [0..3] do for k_2 in [0..3] do
+      l2 := Permuted( [1..i2], isyms[1][3]^i_1 * isyms[5][3]^i_2 * 
+       isyms[2][3]^j_1 * isyms[6][3]^j_2 * isyms[4][3]^k_1 * isyms[8][3]^k_2 );
+      l1 := Permuted( [1..Length(s.faces[1])], s.syms[1][2]^i_1 * s.syms[5][2]^i_2 * 
+       s.syms[2][2]^j_1 * s.syms[6][2]^j_2 * s.syms[4][2]^k_1 * s.syms[8][2]^k_2 );
+      AddSet( s.faces[2][l2[k_]], l1[i1+j_] ); # или здесь позиции? наверно, всё равно
+    od; od;
+  od; od;
+od; od;
+
+# creating sectors
+# the numbers of sectors corresponding to initial vertex j will be
+  # i2+j, i2+i0+j, i2+2*i0+j, i2+3*i0+j
+    # also remember that the numbers of meridians corresponding to initial vertex j are
+     # i1+j, i1+i0+j, i1+2*i0+j, i1+3*i0+j
+for i in [0..3] do
+  for j in [1..i0] do
+    Add( s.faces[2], Set( [i1+i*i0+j, i1+((i+1) mod 4)*i0+j] ) );
+  od;
+od;
+
+# creating the action of symmetries on sectors
+for i in [1..Length(s.syms)] do
+  # first write down what is due to action on vertices
+  4l := List( [1..4], j-> Permuted([i2+(j-1)*i0+1..i2+j*i0], isyms[i][1]) );
+  # then action on meridians within each vertex
+  if i=3 then 4l := Permuted(4l, (1,3)(2,4)); # reflection in the first T2
+  elif i=4 then 4l := Permuted(4l, (1,2,3,4)); # rotation in the first T2
+  elif i=7 then 4l := Permuted(4l, (1,3)(2,4)); # reflection in the second T2
+  elif i=8 then 4l := Permuted(4l, (1,2,3,4)^-1); # rotation in the second T2
+  fi;
+  4l := Concatenation( 4l );
+  pl := Concatenation( Permuted([1..i2], isyms[i][3]), 4l );
+  s.syms[i][3] := PermListList( pl,[1..i2+4*i0] );
+od;
+### end 2-faces
+
+
+
+### begin 3-faces
+
+# "2-face x edge" - adding sector(s)
+for i in [1..Length(T2.faces[2])] do
+  for k_1 in [1..Length(T2.faces[2][i])] do
+    for k_2 in [1..Length(T2.faces[2][i])] do
+      l1 := T2.faces[2][i][k_1]; # a number of edge entering in 2-face i
+      l2 := T2.faces[2][i][k_2]; # also a number of edge entering in 2-face i
+      if k_1<>k_2 and Intersection(T2.faces[1][l1], T2.faces[1][l2]) <> [] then
+        for j in [1..Length(T2.faces[1])] do
+          k3 := LookupDictionary(s.fd, [[2,i],[1,j]]);
+          k2_1 := LookupDictionary(s.fd, [[1,l1],[1,j]]);
+          k2_2 := LookupDictionary(s.fd, [[1,l2],[1,j]]);
+          for l in [i2+1..Length(s.faces[2])] do
+            if Intersection( s.faces[2][l], s.faces[2][k2_1] ) <> []
+              and Intersection( s.faces[2][l], s.faces[2][k2_2] ) <> [] then
+              AddSet( s.faces[3][k3], l );
+            fi;
+          od;
+        od;
+      fi;
+    od;
+  od;
+od;
+
+# "edge x 2-face" - adding sector(s)
+for i in [1..Length(T2.faces[2])] do
+  for k_1 in [1..Length(T2.faces[2][i])] do
+    for k_2 in [1..Length(T2.faces[2][i])] do
+      l1 := T2.faces[2][i][k_1]; # a number of edge entering in 2-face i
+      l2 := T2.faces[2][i][k_2]; # also a number of edge entering in 2-face i
+      if k_1<>k_2 and Intersection(T2.faces[1][l1], T2.faces[1][l2]) <> [] then
+        for j in [1..Length(T2.faces[1])] do
+          k3 := LookupDictionary(s.fd, [[1,j],[2,i]]);
+          k2_1 := LookupDictionary(s.fd, [[1,j],[1,l1]]);
+          k2_2 := LookupDictionary(s.fd, [[1,j],[1,l2]]);
+          for l in [i2+1..Length(s.faces[2])] do
+            if Intersection( s.faces[2][l], s.faces[2][k2_1] ) <> []
+              and Intersection( s.faces[2][l], s.faces[2][k2_2] ) <> [] then
+              AddSet( s.faces[3][k3], l );
+            fi;
+          od;
+        od;
+      fi;
+    od;
+  od;
+od;
+### end 3-faces
+
+
+### symmetry
+
+x := PolFactorInvolution( s, [3,7] );
+
+Unbind(x.syms);
+Unbind(x.fd);
+
+return(x);
+
+end );
+
+
+###############################################################################################
+
+
 
 
 

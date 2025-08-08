@@ -42,13 +42,13 @@ if m[1]=0 then V:=[];
   else
       s:=m[1];
       V:=[];
-      V[s]:=p.faces[m[1]][m[2]];
+      V[s]:=StructuralCopy( p.faces[m[1]][m[2]] ); # I inserted "StructuralCopy" here! - I.K.
       s:=s-1;
       while s<>0 do
             V[s]:=[];
             k:=1;
             for i in V[s+1] do
-                UniteSet(V[s],p.faces[s][i]);
+                UniteSet(V[s],p.faces[s][i]); # because something is done to V[s] here - I.K.
                 k:=k+1;
             od;
             s:=s-1;
@@ -401,7 +401,208 @@ od;
 end );
 
 
-#####################################################################
+############################################################################################
+
+InstallGlobalFunction( PolProductSymsDict,
+
+# Cartesian product of two polytopes with symmetries of multipliers transferred to it.
+# First go the symmetries of the first multiplier, then - the second.
+# Also returns the face dictionary.
+
+function (s1, s2)
+
+  local d1,d2,i,i1,i2,i1_,i2_,s,faces_dict, f,
+##### new locals and other stuff added by me - I.K.
+l_, k, s1syms, s2syms, sym_l1, sym_l2, sym_l, s1sym_l, s2sym_l, j1, j2;
+
+# The list of generating symmetries is arranged according to the following principle:
+# syms [ symmetry_number ][ face_dimension+1 ] = permutation_of_faces
+
+if IsBound(s1.syms) then s1syms := ShallowCopy(s1.syms); else s1syms := []; fi;
+if IsBound(s2.syms) then s2syms := ShallowCopy(s2.syms); else s2syms := []; fi;
+#####
+
+
+  # init new complex
+  s := rec(
+    vertices := List([]),
+    faces := List([1..(Length(s1.faces)+Length(s2.faces))], x->[]),
+#####
+    syms := List( [1..Length(s1syms)+Length(s2syms)], i -> List( [1..Length(s1.faces)+Length(s2.faces)+1], j -> [] ) ),
+#####
+  );
+ 
+  # build the correspondense table for 2 faces (one from s1, another from s2) with their product
+  # (extensively)
+  faces_dict := NewDictionary([[1,1],[1,1]], true);  
+  for d1 in [0..Length(s1.faces)] do
+    for d2 in [0..Length(s2.faces)] do
+      if d1=0 then
+        i1_ := Length(s1.vertices);
+      else
+        i1_ := Length(s1.faces[d1]);
+      fi;
+      if d2=0 then
+        i2_ := Length(s2.vertices);
+      else 
+        i2_ := Length(s2.faces[d2]);
+      fi;
+      for i1 in [1..i1_] do
+        for i2 in [1..i2_] do
+	  if d1=0 and d2=0 then
+	    Add(s.vertices,0);
+	    AddDictionary(faces_dict, [[d1,i1],[d2,i2]], Length(s.vertices)); 
+	  else
+	    Add(s.faces[d1+d2],0);
+	    AddDictionary(faces_dict, [[d1,i1],[d2,i2]], Length(s.faces[d1+d2])); 
+	  fi;
+	od;
+      od;
+    od;
+  od;
+
+  # form new set of vertices
+  for i1 in [1..Length(s1.vertices)] do
+    for i2 in [1..Length(s2.vertices)] do
+      s.vertices[LookupDictionary(faces_dict,[[0,i1],[0,i2]])] := 
+        StructuralCopy([s1.vertices[i1], s2.vertices[i2]]);
+    od;
+  od;
+ 
+  # compute the faces
+  for d1 in [0..Length(s1.faces)] do
+    for d2 in [0..Length(s2.faces)] do
+      if d1=0 then
+        i1_ := Length(s1.vertices);
+      else
+        i1_ := Length(s1.faces[d1]);
+      fi;
+      if d2=0 then
+        i2_ := Length(s2.vertices);
+      else 
+        i2_ := Length(s2.faces[d2]);
+      fi;
+      if d1>0 or d2>0 then
+        for i1 in [1..i1_] do
+          for i2 in [1..i2_] do
+	    f := Set([]);
+	    # boundary faces of  s1  multiplied by the whole  s2
+	    if d1>0 then
+	      for i in s1.faces[d1][i1] do
+	        AddSet(f, LookupDictionary(faces_dict, [[d1-1,i],[d2,i2]])); 
+	      od;
+	    fi;
+	    # the whole  s1  multiplied by boundary faces of  s2
+	    if d2>0 then
+	      for i in s2.faces[d2][i2] do
+	        AddSet(f, LookupDictionary(faces_dict, [[d1,i1],[d2-1,i]])); 
+	      od;
+	    fi;
+	    # write down new face
+	    s.faces[d1+d2][LookupDictionary(faces_dict, [[d1,i1],[d2,i2]])] := f;
+	  od;
+        od;
+      fi;
+    od; 
+  od;
+
+
+
+
+#####
+
+# preparing permuted lists of vertices/faces for complexes  s1  and  s2,
+# for each face dimension  d1  or  d2  and for each face number  i
+# These lists are organized according to the following principle:
+# sym_l [ symmetry_number ][ face_dimension+1 ] = permuted_list_of_faces
+
+s1sym_l := List( [1..Length(s1syms)], i -> List( [1..Length(s1.faces)+1], j -> [] ) );
+s2sym_l := List( [1..Length(s2syms)], i -> List( [1..Length(s2.faces)+1], j -> [] ) );
+
+for i in [1..Length(s1syms)] do
+  for d1 in [0..Length(s1.faces)] do
+    if d1=0 then
+      i1_ := Length(s1.vertices);
+    else
+      i1_ := Length(s1.faces[d1]);
+    fi;
+    s1sym_l[i][d1+1] := Permuted( [1..i1_], s1syms[i][d1+1] );
+  od;
+od;
+
+for i in [1..Length(s2syms)] do
+  for d2 in [0..Length(s2.faces)] do
+    if d2=0 then
+      i2_ := Length(s2.vertices);
+    else
+      i2_ := Length(s2.faces[d2]);
+    fi;
+    s2sym_l[i][d2+1] := Permuted( [1..i2_], s2syms[i][d2+1] );
+  od;
+od;
+
+
+# now preparing permuted lists of vertices/faces for complex  s,
+# using dictionary  faces_dict
+
+sym_l1 := List( [1..Length(s1syms)], i -> List( [1..Length(s1.faces)+Length(s2.faces)+1], j -> [] ) );
+sym_l2 := List( [1..Length(s2syms)], i -> List( [1..Length(s1.faces)+Length(s2.faces)+1], j -> [] ) );
+
+  for d1 in [0..Length(s1.faces)] do
+    for d2 in [0..Length(s2.faces)] do
+      if d1=0 then
+        i1_ := Length(s1.vertices);
+      else
+        i1_ := Length(s1.faces[d1]);
+      fi;
+      if d2=0 then
+        i2_ := Length(s2.vertices);
+      else 
+        i2_ := Length(s2.faces[d2]);
+      fi;
+        for i1 in [1..i1_] do
+          for i2 in [1..i2_] do
+            l_ := LookupDictionary( faces_dict, [[d1,i1],[d2,i2]] );
+            for i in [1..Length(s1syms)] do
+              j1 := s1sym_l[i][d1+1][i1];
+              sym_l1[i][d1+d2+1][l_] := LookupDictionary( faces_dict, [[d1,j1],[d2,i2]] ); 
+              # here  i  numbers the symmetries of  s1
+            od;
+            for i in [1..Length(s2syms)] do
+              j2 := s2sym_l[i][d2+1][i2];
+              sym_l2[i][d1+d2+1][l_] := LookupDictionary( faces_dict, [[d1,i1],[d2,j2]] ); 
+              # here  i  numbers the symmetries of  s2
+            od;
+          od;
+        od;
+    od;
+  od;
+
+sym_l := Concatenation( sym_l1, sym_l2 );
+
+
+# making the final lists of permutations
+
+for i in [1..Length(sym_l)] do
+  for k in [1..Length(sym_l[i])] do
+s.syms[i][k] := PermListList( [1..Length(sym_l[i][k])], sym_l[i][k] );
+  od;
+od;
+
+#####
+
+  # and now adding the dictionary to the record
+  s.fd := faces_dict;
+
+  return s;
+# end );
+
+end );
+
+
+
+############################################################################################
+
 
 InstallGlobalFunction( PolTriangulate,
 # triangulating a polytope ( = ball complex)
@@ -955,6 +1156,7 @@ s:=1;
 orient:=[[]];
 for i in p.faces[1] do
     p.faces[1][s]:=Set(i);
+    Print("CellOrient orders vertices in edges, which is probably unnecessary","\n");
     orient[1][s]:=[-1,+1];
     s:=s+1;
 od;
@@ -1410,6 +1612,9 @@ else
   fi;
 fi;
 
+Unbind(g.syms); # unbinds the symmetries, if there were any
+Unbind(g.fd); # unbinds the face dictionary, if any and if it was called "fd"
+
 return g; 
 end );
 
@@ -1571,6 +1776,88 @@ return g;
 end );
 
 ##############################################################################################################
+
+InstallGlobalFunction( PolFactorInvolution,
+
+function( p, invol )
+
+# p is the polytope with symmetries
+# invol is such a list of some of its symmetries (repetitions possible)
+# that it is known that the product of symmetries in s is an involution
+
+# returns the factored polytope
+
+local s,sym,sp,sp_,lv,i,j,k,n;
+
+s := StructuralCopy(p);
+
+sym := List( [1..Length(s.faces)+1 ], 
+  i -> Product( [1..Length(invol)], j->s.syms[ invol[j] ][i] ) );
+
+sp := []; # here will be stored vertex numbers to be deleted
+lv := Permuted([1..Length(s.vertices)], sym[1]);
+for i in [1..Length(s.vertices)] do
+  if i<lv[i] then 
+    Add(sp,lv[i]);
+    for j in [1..Length(s.faces[1])] do
+      if lv[i] in s.faces[1][j] then
+        s.faces[1][j] := Difference(s.faces[1][j],[lv[i]]);
+        AddSet(s.faces[1][j],i);
+      fi;
+    od;
+  fi;
+od;
+sp_ := Difference([1..Length(s.vertices)], sp); # list of numbers of remaining vertices
+s.vertices := s.vertices{sp_};
+for i in [1..Length(s.faces[1])] do
+  for j in [1..Length(s.faces[1][i])] do
+    s.faces[1][i][j] := Position( sp_, s.faces[1][i][j] );
+  od;
+od;
+
+for k in [1..Length(s.faces)-1] do
+  sp := [];
+  lv := Permuted([1..Length(s.faces[k])], sym[k+1]);
+  for i in [1..Length(s.faces[k])] do
+    if i<lv[i] then 
+      Add(sp,lv[i]);
+      for j in [1..Length(s.faces[k+1])] do
+        if lv[i] in s.faces[k+1][j] then
+          s.faces[k+1][j] := Difference(s.faces[k+1][j],[lv[i]]);
+          AddSet(s.faces[k+1][j],i);
+        fi;
+      od;
+    fi;
+  od;
+  sp_ := Difference([1..Length(s.faces[k])], sp); # list of numbers of remaining k-faces
+  s.faces[k] := s.faces[k]{sp_};
+  for i in [1..Length(s.faces[k+1])] do
+    for j in [1..Length(s.faces[k+1][i])] do
+      s.faces[k+1][i][j] := Position( sp_, s.faces[k+1][i][j] );
+    od;
+  od;
+od;
+
+n := Length( s.faces );
+sp := [];
+lv := Permuted([1..Length(s.faces[n])], sym[n+1]);
+for i in [1..Length(s.faces[n])] do
+  if i<lv[i] then 
+    Add(sp,lv[i]);
+  fi;
+od;
+sp_ := Difference([1..Length(s.faces[n])], sp);
+s.faces[n] := s.faces[n]{sp_};
+
+Unbind( s.syms );
+Unbind( s.fd );
+
+return(s);
+
+end );
+
+##############################################################################################################
+
 
 
 

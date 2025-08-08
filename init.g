@@ -11,5 +11,6 @@ ReadPackage( "PL", "lib/combinatorics.gd" );
 ReadPackage( "PL", "lib/compbuild.gd" );
 ReadPackage( "PL", "lib/compcalc.gd" );
 ReadPackage( "PL", "lib/knots.gd" );
+ReadPackage( "PL", "lib/grassmann.gd" );
 
 

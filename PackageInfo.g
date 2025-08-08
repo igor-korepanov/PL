@@ -9,7 +9,7 @@ PackageName := "PL",
 Subtitle := "Piecewise-Linear Topology and Mathematical Physics",
 
 
-Version := "0.1.1",
+Version := "0.1.2",
 
 PackageDoc := rec(
   BookName  := "PL",
