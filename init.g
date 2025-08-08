@@ -18,4 +18,6 @@ ReadPackage( "PL", "lib/grassmann.gd" );
 ReadPackage( "PL", "lib/operpol2.gd" );
 ReadPackage( "PL", "lib/operlist.gd" );
 ReadPackage( "PL", "lib/operknot2.gd" );
+ReadPackage( "PL", "lib/ratfunc.gd" );
+ReadPackage( "PL", "lib/opermat.gd" );
 

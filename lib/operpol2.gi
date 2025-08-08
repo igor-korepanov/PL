@@ -660,7 +660,8 @@ od;
 # список вершин выделим отдельно
 ver:=Remove(sost,1);
 # добавляем индексы самих клеток
-Add(sost,Set(ind));
+#Add(sost,Set(ind));
+# NOTE: В данном случае список ind должен быть сортированным
 
 s:=1;
 for i in ver do
@@ -673,7 +674,7 @@ od;
 l:=Length(ver);
 pol.vertices:=pol.vertices{[1 .. l]};
 
-for k in [1 .. dim] do
+for k in [1 .. dim-1] do
 	s:=1;
 	for i in sost[k] do
 		if i<>s then
@@ -686,6 +687,7 @@ for k in [1 .. dim] do
 od;
 
 pol.faces:=pol.faces{[1 .. dim]};
+pol.faces[dim]:=pol.faces[dim]{ind};
 
 
 return pol;
@@ -1200,14 +1202,14 @@ end);
 
 ################################################################################
 
-# <ManSection><Func Name="UnionFace" Arg="pol, kl1, kl2" />
+# <ManSection><Func Name="UnionFaces" Arg="pol, kl1, kl2" />
 # 	<Description>
 # 		на вход функции посылаются две клетки одной и той же размерности для
 # 		объединения их в одну клетку. По сути данной функцией реализуется
 # 		обратная операция к функции <M>DivideFace</M> разбивающей клетку на две
 # 		части.
 # 		<Example>
-# gap> UnionFace(p3,[3,1],[3,2]);
+# gap> UnionFaces(p3,[3,1],[3,2]);
 # rec(
 #   faces :=
 #     [ [ [ 1, 2 ], [ 1, 3 ], [ 2, 3 ], [ 1, 4 ], [ 2, 4 ], [ 3, 4 ], [ 1, 5 ],
@@ -1228,7 +1230,7 @@ end);
 # 		не будет проводить объединение, на выход будет подан начальный политоп и
 # 		информационная строка с пояснением почему функция отказывается работать.
 #		<Example>
-# gap> UnionFace(T2,[2,1],[2,3]);;
+# gap> UnionFaces(T2,[2,1],[2,3]);;
 # This faces intersected on some balls or not intersected.
 # I cannot union the faces in a polytope.
 #		</Example>
@@ -1236,7 +1238,7 @@ end);
 # </ManSection>
 
 
-InstallGlobalFunction(UnionFace, function(pol0, adr1, adr2)
+InstallGlobalFunction(UnionFaces, function(pol0, adr1, adr2)
 	local	pol, dim, sost1, sost2, i, int, disk, generalsost, max, min, l,
 	verify, ssilki;
 
@@ -1422,10 +1424,10 @@ end);
 InstallGlobalFunction(PolMinusPol, function(pol1,subpol,dim)
 	local	pol, sostav, d, bigdim, kl;
 
-	pol:=StructuralCopy(pol);
+	pol:=StructuralCopy(pol1);
 	sostav:=rec();
 	sostav.(dim):=subpol;
-	for d in [1 .. dim] do
+	for d in [dim, dim-1 .. 1] do
 		sostav.(d-1):=Set(Concatenation(pol.faces[d]{sostav.(d)}));
 	od;
 	bigdim:=Length(pol.faces);
@@ -1485,7 +1487,7 @@ InstallGlobalFunction(PolSimplify, function(pol0)
 			pos:=List([1 .. Length(pol.faces[d+1])], 
 		 		x -> (kl in pol.faces[d+1][x]));
 			pos:=Positions(pos,true);
-			pol:=UnionFace(pol,[d+1,pos[1]],[d+1,pos[2]]);
+			pol:=UnionFaces(pol,[d+1,pos[1]],[d+1,pos[2]]);
 		od;
 	od;
 
@@ -1497,7 +1499,7 @@ InstallGlobalFunction(PolSimplify, function(pol0)
 	for kl in wherecan do
 		pos:=List([1 .. Length(pol.faces[1])], x->(kl in pol.faces[1][x]));
 		pos:=Positions(pos,true);
-		pol:=UnionFace(pol,[1,pos[1]],[1,pos[2]]);
+		pol:=UnionFaces(pol,[1,pos[1]],[1,pos[2]]);
 	od;
 
 
@@ -1543,7 +1545,7 @@ InstallGlobalFunction(ParallelSimplify, function(pol0,subpol,dim)
 			where:=Positions(where, true);
 			kl1:=[d+1, where[1]];
 			kl2:=[d+1, where[2]];
-			pol:=UnionFace(pol,kl1,kl2);
+			pol:=UnionFaces(pol,kl1,kl2);
 		od;
 		d:=d-1;
 	od;
@@ -1562,7 +1564,7 @@ InstallGlobalFunction(ParallelSimplify, function(pol0,subpol,dim)
 		where:=Positions(where, true);
 		kl1:=[d+1, where[1]];
 		kl2:=[d+1, where[2]];
-		pol:=UnionFace(pol,kl1,kl2);
+		pol:=UnionFaces(pol,kl1,kl2);
 		newl:=Length(pol.faces[d]);
 		if newl < l then
 			Add(wasdel,kl);
@@ -1596,7 +1598,7 @@ InstallGlobalFunction(ParallelSimplify, function(pol0,subpol,dim)
 			verify:=Intersection(where, sost);
 			verify:= not (Length(verify)=1);
 			if verify then
-				pol:=UnionFace(pol,kl1,kl2);
+				pol:=UnionFaces(pol,kl1,kl2);
 				newl:=Length(pol.faces[d+1]);
 				if l > newl then
 					l:=StructuralCopy(newl);
@@ -1660,4 +1662,100 @@ InstallGlobalFunction(LengthPol, function(pol)
 	Print("total: ", Sum(total),"\n");
 
 return l;
+end);
+
+################################################################################
+
+#			<ManSection><Func Name="ConnectedSum" Arg="N,M" />
+#				<Description>
+#					Фукнция создает связную сумму двух политопов <M>N</M> и
+#					<M>M</M> одинаковой размерности. 
+#					<Example>
+#gap> s2:=sphereAB(2);;
+#gap> ConnectedSum(s2,s2);
+#rec(
+#  faces := [ [ [ 1, 2 ], [ 1, 2 ], [ 1, 2 ], [ 1, 2 ] ],
+#      [ [ 1, 3 ], [ 1, 2 ], [ 3, 4 ], [ 2, 4 ] ] ],
+#  vertices := [ [ 1, "A" ], [ 1, "B" ] ] )
+#					</Example>
+#					Если попробовать нарисовать этот пример, то получится д
+#				</Description>
+#			</ManSection>
+
+InstallGlobalFunction(ConnectedSum, function(pol10, pol20)
+	local	pol1, pol2, n, a, b, bord1, bord2, bord1kl_a, bord1kl_b, sp1, sp2,
+	l, kl, vertname, ind, pol, r1, r2, sost1, sost2, i,j;
+
+	pol1:=StructuralCopy(pol10);
+	pol2:=StructuralCopy(pol20);
+	if Length(pol1.faces) = Length(pol2.faces) then
+		n:=Length(pol1.faces);
+	else
+		Print("Dimensions of that polytopes must be equal.\n");
+	fi;
+	#
+	# Еще более простой идеей является создать минимальную (n-1)-клетку в
+	# каждом многообразии и уже тут и проводить вырезания. Думаю такая идея
+	# является наиболее оптимальной и экономичной в данном случае. Плюс ко всему
+	# это дает решение задачи о построении цилиндра над двумя сферами. Возмоно
+	# даже самое оптимальное построение с точки зрения шаровых комплексов.
+	
+	# Нам не обязательно искать или строить минимальную клетку, поскольку для
+	# нас имеет важность минимальность границы, то есть разбиения сферы.
+	# Поступим так. Вырежем окрестность некоторого ребра в двух разбиениях.
+	# Получившаяся сфера будет состоять из двуугольных гиппершаров. Лишние
+	# клетки этого разбиения можно будет стягивать. Данное стягивание можно
+	# продолжить до тех пор пока не останется 2 клеки в границе (это самое
+	# минимальное разбиение сферы), Очевидно, что операция стягивания не будет
+	# выводить из категории шаровых комплексов. 
+	
+	a:=Length(pol1.faces[1]);
+	b:=Length(pol2.faces[1]);
+	bord1:=PolBoundary(pol1);
+	bord1kl_a:=List(bord1, x -> FaceComp(pol1,[n-1,x]).1);
+	bord1kl_a:=Set(Concatenation(bord1kl_a));
+	bord2:=PolBoundary(pol2);
+	bord1kl_b:=List(bord2, x -> FaceComp(pol2,[n-1,x]).1);
+	bord1kl_b:=Set(Concatenation(bord1kl_b));
+	while a in bord1 do a:=a-1; od;
+	while b in bord2 do b:=b-1; od;
+	pol1:=PolMinusFace(pol1,[1,a]);
+	pol2:=PolMinusFace(pol2,[1,b]);
+	sp1:=Difference(PolBoundary(pol1), bord1);
+	sp2:=Difference(PolBoundary(pol2), bord2);
+
+	l:=Length(sp1);
+	while l > 2 do
+		kl:=Remove(sp1);
+		pol1:=ContractMiniFace(pol1,[n-1, kl]);
+		l:=l-1;
+	od;
+	l:=Length(sp2);
+	while l > 2 do
+		kl:=Remove(sp2);
+		pol2:=ContractMiniFace(pol2,[n-1, kl]);
+		l:=l-1;
+	od;
+
+	l:=Length(pol1.faces[n-1]);
+	sp2:=sp2 + l;
+	pol:=FreeUnionPol(pol1,pol2);
+	vertname:=FaceComp(pol,[n-1,sp1[1]]).0;
+	vertname:=pol.vertices{vertname};
+	ind:=FaceComp(pol,[n-1,sp2[1]]).0;
+	pol.vertices[ind[1]]:=vertname[1];
+	pol.vertices[ind[2]]:=vertname[2];
+	# по построению списки sp1 и sp2 упорядочены по возрастанию, так же будут
+	# упорядочены и списки sostX.(i)
+	sost1:=FaceComp(pol,[n-1,sp1[2]]);
+	sost2:=FaceComp(pol,[n-1,sp2[2]]);
+	sost1.(n-1):=sp1;
+	sost2.(n-1):=sp2;
+	for i in [0 .. n-1] do
+		for j in [2,1] do
+			pol:=GlueFaces(pol,[sost1.(i)[j],sost2.(i)[j]],i);
+		od;
+	od;
+
+return pol;
 end);

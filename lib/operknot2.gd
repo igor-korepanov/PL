@@ -11,5 +11,9 @@ DeclareGlobalFunction( "Knot1OnSphere2" );
 DeclareGlobalFunction( "TurnKnot" );
 DeclareGlobalFunction( "TripleDoubleBranchPoints" );
 DeclareGlobalFunction( "2KnotInS4" );
-DeclareGlobalFunction( "Preimage2Knot" );
+##  DeclareGlobalFunction( "Preimage2Knot" );
 DeclareGlobalFunction( "IsDiagrammOf2Kont" );
+################################################################################
+DeclareGlobalFunction( "KnotGroup" );
+DeclareGlobalFunction( "TorusKnot" );
+DeclareGlobalFunction( "SurfaceOf2Knot" );

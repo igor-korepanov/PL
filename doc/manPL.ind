@@ -1,18 +1,19 @@
 \begin{theindex}
 
-  \item \texttt  {2KnotInS4}, \hyperpage{67}
+  \item \texttt  {2KnotInS4}, \hyperpage{70}
 
   \indexspace
 
   \item \texttt  {ballAB}, \hyperpage{22}
   \item \texttt  {ballTriangul}, \hyperpage{23}
-  \item \texttt  {BerezinIntegral}, \hyperpage{72}
-  \item \texttt  {BerezinMultipleIntegral}, \hyperpage{72}
+  \item \texttt  {BerezinIntegral}, \hyperpage{79}
+  \item \texttt  {BerezinMultipleIntegral}, \hyperpage{79}
 
   \indexspace
 
   \item \texttt  {CellOrient}, \hyperpage{10}
-  \item \texttt  {ConnectedSubset}, \hyperpage{73}
+  \item \texttt  {ConnectedSubset}, \hyperpage{71}
+  \item \texttt  {ConnectedSum}, \hyperpage{24}
   \item \texttt  {ContractMiniFace}, \hyperpage{17}
 
   \indexspace
@@ -20,6 +21,7 @@
   \item \texttt  {dataPachner}, \hyperpage{10}
   \item \texttt  {DelFace}, \hyperpage{30}
   \item \texttt  {DivideFace}, \hyperpage{19}
+  \item \texttt  {DivideRationalFunction}, \hyperpage{76}
 
   \indexspace
 
@@ -35,24 +37,27 @@
 
   \indexspace
 
+  \item \texttt  {GcdPolynomial}, \hyperpage{75}
   \item \texttt  {GlueFaces}, \hyperpage{39}
-  \item \texttt  {GrassmannMonomialsProduct}, \hyperpage{71}
-  \item \texttt  {GrassmannProduct}, \hyperpage{71}
-  \item \texttt  {GrassmanSum}, \hyperpage{71}
+  \item \texttt  {GrassmannMonomialsProduct}, \hyperpage{78}
+  \item \texttt  {GrassmannProduct}, \hyperpage{79}
+  \item \texttt  {GrassmanSum}, \hyperpage{79}
 
   \indexspace
 
   \item \texttt  {ImageInPolProduct}, \hyperpage{25}
-  \item \texttt  {IsDiagrammOf2Kont}, \hyperpage{65}
+  \item \texttt  {IsDiagrammOf2Kont}, \hyperpage{66}
   \item \texttt  {IsPolytope}, \hyperpage{6}
 
   \indexspace
 
   \item \texttt  {Knot1OnSphere2}, \hyperpage{53}
+  \item \texttt  {KnotGroup}, \hyperpage{55}
   \item \texttt  {KnotInS3}, \hyperpage{53}
 
   \indexspace
 
+  \item \texttt  {LcmPolynomial}, \hyperpage{76}
   \item \texttt  {LengthPol}, \hyperpage{8}
   \item License, \hyperpage{2}
 
@@ -68,6 +73,7 @@
 
   \item \texttt  {ParallelSimplify}, \hyperpage{36}
   \item \texttt  {PermFaces}, \hyperpage{16}
+  \item \texttt  {Pfaffian}, \hyperpage{76}
   \item \texttt  {PolBnd}, \hyperpage{13}
   \item \texttt  {PolBoundary}, \hyperpage{9}
   \item \texttt  {PolCheckComb}, \hyperpage{15}
@@ -78,14 +84,14 @@
   \item \texttt  {PolMinusFaceDoublingMethod}, \hyperpage{37}
   \item \texttt  {PolMinusPol}, \hyperpage{39}
   \item \texttt  {PolOrient}, \hyperpage{10}
-  \item \texttt  {PolProduct}, \hyperpage{24}
+  \item \texttt  {PolProduct}, \hyperpage{25}
   \item \texttt  {PolProductSyms}, \hyperpage{27}
   \item \texttt  {PolProductSymsDict}, \hyperpage{27}
   \item \texttt  {PolSimplify}, \hyperpage{21}
-  \item \texttt  {PolSimplifyWith2Knot}, \hyperpage{61}
+  \item \texttt  {PolSimplifyWith2Knot}, \hyperpage{62}
   \item \texttt  {PolTriangulate}, \hyperpage{15}
-  \item \texttt  {Preimage2Knot}, \hyperpage{66}
   \item \texttt  {PreimageInPolProduct}, \hyperpage{27}
+  \item \texttt  {ProductRationalFunctions}, \hyperpage{76}
 
   \indexspace
 
@@ -94,17 +100,20 @@
   \indexspace
 
   \item \texttt  {SetOfFacesBoundary}, \hyperpage{35}
-  \item \texttt  {SingularitySet2Knot}, \hyperpage{62}
-  \item \texttt  {SortCircle}, \hyperpage{74}
+  \item \texttt  {SimplifyRationalFunction}, \hyperpage{75}
+  \item \texttt  {SingularitySet2Knot}, \hyperpage{63}
+  \item \texttt  {SortCircle}, \hyperpage{72}
   \item \texttt  {sphereAB}, \hyperpage{23}
   \item \texttt  {sphereTriangul}, \hyperpage{23}
   \item \texttt  {StarFace}, \hyperpage{14}
   \item \texttt  {SubPolytope}, \hyperpage{35}
+  \item \texttt  {SurfaceOf2Knot}, \hyperpage{67}
 
   \indexspace
 
-  \item \texttt  {TripleDoubleBranchPoints}, \hyperpage{64}
-  \item \texttt  {TurnKnot}, \hyperpage{66}
+  \item \texttt  {TorusKnot}, \hyperpage{56}
+  \item \texttt  {TripleDoubleBranchPoints}, \hyperpage{65}
+  \item \texttt  {TurnKnot}, \hyperpage{69}
 
   \indexspace
 
@@ -121,8 +130,8 @@
 
   \indexspace
 
-  \item \texttt  {ZeifertSurface}, \hyperpage{55}
-  \item \texttt  {ZeifertSurfaceWithSimplyBoundary}, \hyperpage{56}
+  \item \texttt  {ZeifertSurface}, \hyperpage{56}
+  \item \texttt  {ZeifertSurfaceWithSimplyBoundary}, \hyperpage{57}
   \item \texttt  {ZeroLinkFromKnot}, \hyperpage{54}
 
 \end{theindex}

@@ -376,7 +376,7 @@ is the following record:
   !gapprompt@gap>| !gapinput@LengthPol(T2);|
   total16
   rec( 0 := 4, 1 := 8, 2 := 4 )
-    	
+  					  	
 \end{Verbatim}
  }
 
@@ -1212,7 +1212,7 @@ pol.faces[dim].
 }\hfill{\scriptsize (функция)}}\\
 
 
- на
+ На
 вход
 функции
 посылаются
@@ -1249,7 +1249,7 @@ pol.faces[dim].
             [ 5, 8, 10 ], [ 1, 4, 5 ], [ 1, 7, 8 ] ],
         [ [ 1, 2, 4, 5, 7, 8 ], [ 3, 6, 7, 8 ] ] ],
     vertices := [ 1, 2, 3, 4, 5 ] )
-  		
+  						
 \end{Verbatim}
  Объединение
 двух
@@ -1314,7 +1314,7 @@ pol.faces[dim].
   !gapprompt@gap>| !gapinput@UnionFace(T2,[2,1],[2,3]);;|
   This faces intersected on some balls or not intersected.
   I cannot union the faces in a polytope.
-    	
+  						
 \end{Verbatim}
  }
 
@@ -1328,7 +1328,7 @@ pol.faces[dim].
 }\hfill{\scriptsize (функция)}}\\
 
 
- проводит
+ Проводит
 упрощение
 политопа $pol$ фукцией
 UnionFaces.
@@ -1366,7 +1366,7 @@ UnionFaces.
   !gapprompt@gap>| !gapinput@PolSimplify(a);|
   rec( faces := [ [ [ 1, 2 ], [ 1, 2 ] ], [ [ 1, 2 ], [ 1, 2 ] ], [ [ 1, 2 ] ]
        ], vertices := [ 1, 2 ] )
-    	
+  						
 \end{Verbatim}
  }
 
@@ -1550,8 +1550,36 @@ pl-разбиение
 
  
 
-\subsection{\textcolor{Chapter }{PolProduct}}
+\subsection{\textcolor{Chapter }{ConnectedSum}}
 \logpage{[ 1, 7, 3 ]}\nobreak
+\hyperdef{L}{X7F680736784EA2B0}{}
+{\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{ConnectedSum({\mdseries\slshape N, M})\index{ConnectedSum@\texttt{ConnectedSum}}
+\label{ConnectedSum}
+}\hfill{\scriptsize (функция)}}\\
+
+
+ Фукнция
+создает
+связную
+сумму
+двух
+политопов $N$ и $M$ одинаковой
+размерности. 
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
+  !gapprompt@gap>| !gapinput@s2:=sphereAB(2);;|
+  !gapprompt@gap>| !gapinput@ConnectedSum(s2,s2);|
+  rec(
+    faces := [ [ [ 1, 2 ], [ 1, 2 ], [ 1, 2 ], [ 1, 2 ] ],
+        [ [ 1, 3 ], [ 1, 2 ], [ 3, 4 ], [ 2, 4 ] ] ],
+    vertices := [ [ 1, "A" ], [ 1, "B" ] ] )
+  						
+\end{Verbatim}
+ }
+
+ 
+
+\subsection{\textcolor{Chapter }{PolProduct}}
+\logpage{[ 1, 7, 4 ]}\nobreak
 \hyperdef{L}{X7A9E18837F637D8D}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{PolProduct({\mdseries\slshape pol1, pol2})\index{PolProduct@\texttt{PolProduct}}
 \label{PolProduct}
@@ -1597,7 +1625,7 @@ pol1 и pol2.
  
 
 \subsection{\textcolor{Chapter }{ImageInPolProduct}}
-\logpage{[ 1, 7, 4 ]}\nobreak
+\logpage{[ 1, 7, 5 ]}\nobreak
 \hyperdef{L}{X7F0929CD82A0CE28}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{ImageInPolProduct({\mdseries\slshape pol1, pol2, kl1xkl2})\index{ImageInPolProduct@\texttt{ImageInPolProduct}}
 \label{ImageInPolProduct}
@@ -1706,7 +1734,7 @@ PolProduct. Если
  
 
 \subsection{\textcolor{Chapter }{PreimageInPolProduct}}
-\logpage{[ 1, 7, 5 ]}\nobreak
+\logpage{[ 1, 7, 6 ]}\nobreak
 \hyperdef{L}{X7C2DFBEA78356D9D}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{PreimageInPolProduct({\mdseries\slshape pol1, pol2, imageface})\index{PreimageInPolProduct@\texttt{PreimageInPolProduct}}
 \label{PreimageInPolProduct}
@@ -1734,7 +1762,7 @@ imageface. }
   
 
 \subsection{\textcolor{Chapter }{PolProductSyms}}
-\logpage{[ 1, 7, 6 ]}\nobreak
+\logpage{[ 1, 7, 7 ]}\nobreak
 \hyperdef{L}{X7A32AE2D8733963A}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{PolProductSyms({\mdseries\slshape })\index{PolProductSyms@\texttt{PolProductSyms}}
 \label{PolProductSyms}
@@ -1747,7 +1775,7 @@ to it. First go the symmetries of the first multiplier, then - the second. }
  
 
 \subsection{\textcolor{Chapter }{PolProductSymsDict}}
-\logpage{[ 1, 7, 7 ]}\nobreak
+\logpage{[ 1, 7, 8 ]}\nobreak
 \hyperdef{L}{X7B4164647D6C5EC6}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{PolProductSymsDict({\mdseries\slshape })\index{PolProductSymsDict@\texttt{PolProductSymsDict}}
 \label{PolProductSymsDict}
@@ -1761,7 +1789,7 @@ Also returns the face dictionary. }
  
 
 \subsection{\textcolor{Chapter }{PolFactorInvolution}}
-\logpage{[ 1, 7, 8 ]}\nobreak
+\logpage{[ 1, 7, 9 ]}\nobreak
 \hyperdef{L}{X7A3091A38613DA64}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{PolFactorInvolution({\mdseries\slshape pol, invol})\index{PolFactorInvolution@\texttt{PolFactorInvolution}}
 \label{PolFactorInvolution}
@@ -1988,7 +2016,7 @@ pol.faces[k] могут
 }\hfill{\scriptsize (функция)}}\\
 
 
- функция
+ Функция
 корректирует
 сопуствующую
 информацию
@@ -2090,7 +2118,7 @@ pol.faces[k] могут
 соответсвующая
 позиция
 будет
-очищена }
+очищена. }
 
  }
 
@@ -3192,7 +3220,7 @@ Trefoil.kod.
 }\hfill{\scriptsize (функция)}}\\
 
 
- по
+ По
 диаграмме
 узла
 создается
@@ -3231,7 +3259,7 @@ Trefoil.kod.
             [ 1, 2 ] ],
         [ [ 1, 3, 6 ], [ 1, 4, 7 ], [ 2, 5, 7 ], [ 2, 6 ], [ 3, 5, 8 ], [ 4, 8 ]
            ] ], vertices := [ "a", "b", "c", "d" ] )
-  		
+  					
 \end{Verbatim}
  }
 
@@ -3367,10 +3395,75 @@ Trefoil.kod.
 нулевым
 коэффициентом. }
 
+ 
+
+\subsection{\textcolor{Chapter }{KnotGroup}}
+\logpage{[ 3, 1, 6 ]}\nobreak
+\hyperdef{L}{X797F8D4A848DD9BC}{}
+{\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{KnotGroup({\mdseries\slshape knot})\index{KnotGroup@\texttt{KnotGroup}}
+\label{KnotGroup}
+}\hfill{\scriptsize (функция)}}\\
+
+
+ Вычисляется
+фундаментальная
+группа
+узла,
+которая
+определяется
+как
+фундаментальная
+группа
+дополнения
+узла в
+трехмерной
+сфере $S^3.$ Для
+создания
+группы
+используются
+соотношения
+Виртингера. }
+
     
 
+\subsection{\textcolor{Chapter }{TorusKnot}}
+\logpage{[ 3, 1, 7 ]}\nobreak
+\hyperdef{L}{X7EB8D0A97D7D5E57}{}
+{\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{TorusKnot({\mdseries\slshape q, p})\index{TorusKnot@\texttt{TorusKnot}}
+\label{TorusKnot}
+}\hfill{\scriptsize (функция)}}\\
+
+
+ Создается
+диаграмма
+торического
+узла $(q,p),$ если $q$ и $p$ взаимнопростые,
+если
+это не
+так, то
+будет
+создано
+соответствующее
+зацепление.
+Параметр $q > 0$ соответствует
+количеству
+нитей,
+а
+параметр $p$ соответствует
+количеству
+оборотов. 
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
+  !gapprompt@gap>| !gapinput@k:=TorusKnot(2,3);|
+  rec( kod := [ [ 1, 1 ], [ 2, -1 ], [ 3, 1 ], [ 1, -1 ], [ 2, 1 ], [ 3, -1 ] ],
+    orient := [ [ 1, 1 ], [ 2, 1 ], [ 3, 1 ] ] )
+  					
+\end{Verbatim}
+ }
+
+ 
+
 \subsection{\textcolor{Chapter }{ZeifertSurface}}
-\logpage{[ 3, 1, 6 ]}\nobreak
+\logpage{[ 3, 1, 8 ]}\nobreak
 \hyperdef{L}{X8575EC5C7B564A45}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{ZeifertSurface({\mdseries\slshape knot})\index{ZeifertSurface@\texttt{ZeifertSurface}}
 \label{ZeifertSurface}
@@ -3436,7 +3529,7 @@ Trefoil.kod.
  
 
 \subsection{\textcolor{Chapter }{ZeifertSurfaceWithSimplyBoundary}}
-\logpage{[ 3, 1, 7 ]}\nobreak
+\logpage{[ 3, 1, 9 ]}\nobreak
 \hyperdef{L}{X7D8D06467FBEB8CF}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{ZeifertSurfaceWithSimplyBoundary({\mdseries\slshape knot})\index{ZeifertSurfaceWithSimplyBoundary@\texttt{ZeifertSurfaceWithSimplyBoundary}}
 \label{ZeifertSurfaceWithSimplyBoundary}
@@ -3735,7 +3828,7 @@ set).
 }\hfill{\scriptsize (функция)}}\\
 
 
- упрощает
+ Упрощает
 политоп
 содержащий
 2-узел. В
@@ -3775,12 +3868,7 @@ PolSimplify
 на
 вновь
 полученных
-данных. 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
-    	
-    	
-\end{Verbatim}
- }
+данных. }
 
  
 
@@ -3912,7 +4000,7 @@ PolSimplify
         58 := [ 64, 79 ], 59 := [ 136, 78 ], 6 := [ 5, 6, 8, 9, 98, 93 ],
         60 := [ 137, 129 ], 61 := [ 130, 93 ], 62 := [ 138, 131 ],
         64 := [ 134, 90 ], 67 := [ 136, 90 ], 7 := [ 7, 8, 5, 10, 99, 94 ] ) )
-    	
+  					
 \end{Verbatim}
  }
 
@@ -4049,7 +4137,7 @@ result.triple
             u := [ 3, 4, 5, 6 ] ),
         7 := rec( d := [ 23, 28, 31, 36 ], m := [ 25, 26, 33, 34 ],
             u := [ 2, 3, 4, 6 ] ) ) )
-  		
+  					
 \end{Verbatim}
  }
 
@@ -4093,47 +4181,127 @@ result.triple
   
    gap> IsDiagrammOf2Kont(pol);
    true
-  		
+  					
 \end{Verbatim}
  }
 
- 
+  
 
-\subsection{\textcolor{Chapter }{Preimage2Knot}}
+\subsection{\textcolor{Chapter }{SurfaceOf2Knot}}
 \logpage{[ 3, 2, 6 ]}\nobreak
-\hyperdef{L}{X7916ADAB7B29E1E7}{}
-{\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{Preimage2Knot({\mdseries\slshape pol})\index{Preimage2Knot@\texttt{Preimage2Knot}}
-\label{Preimage2Knot}
+\hyperdef{L}{X870383C87924E495}{}
+{\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{SurfaceOf2Knot({\mdseries\slshape M3})\index{SurfaceOf2Knot@\texttt{SurfaceOf2Knot}}
+\label{SurfaceOf2Knot}
 }\hfill{\scriptsize (функция)}}\\
 
 
- Построение
-прообраза
+ Для
 заузленной
 поверхности
-по
-диаграмме. 
+указанной
+внутри
+некоторого
+3-многообразия $M^3$ создается
+прообраз
+этой
+поверхности
+с
+указанием
+прообразов
+двойных
+ребер,
+тройных
+точек
+и
+точек
+ветвления.
+Прообраз
+создается
+как
+pl-комплекс,
+к
+которому
+прикреплена
+дополнительная
+информация
+содеражащаяся
+в
+именнованном
+списке $.preimage$,
+который
+является
+списком
+дублированных
+прообразов.
+В него
+входят
+список $.rebras$ и $.points.$ Список $.rebras$ это
+список
+пар
+содержий
+прообразы
+для
+каждого
+двойного
+ребра,
+первым
+элементом
+пары
+является
+ребро-прообраз
+лежащее
+на
+нижнем
+листе,
+вторым,
+соответственно,
+ребро-прообраз
+лежащее
+на
+верхнем
+листе
+образа
+в
+диаграмме.
+Список $.points$ состоит
+из
+списков
+длины 1
+и 3,
+которые
+являются
+списками
+прообразов
+точек
+ветвления
+и
+тройных
+точек,
+соответственно.
+Причем,
+для
+тройных
+точек
+прообраз
+точки,
+лежащий
+на
+верхнем
+листе
+будет
+третьим
+в
+списке,
+на
+среднем
+-
+вторым
+и на
+нижнем,
+соответственно,
+первым. 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
-  !gapprompt@gap>| !gapinput@pol:=TurnKnot(Trefoil,0);;|
-   ...
-  !gapprompt@gap>| !gapinput@sp:=Preimage2Knot(pol);|
-  rec(
-    faces :=
-      [ [ [ 2, 3 ], [ 2, 7 ], [ 7, 9 ], [ 8, 9 ], [ 1, 8 ], [ 5, 6 ], [ 5, 10 ],
-            [ 10, 12 ], [ 11, 12 ], [ 4, 11 ], [ 7, 10 ], [ 8, 11 ], [ 3, 6 ],
-            [ 7, 10 ], [ 8, 11 ], [ 3, 6 ], [ 9, 12 ], [ 2, 5 ], [ 9, 12 ],
-            [ 1, 4 ], [ 1, 4 ], [ 2, 5 ] ],
-        [ [ 20, 21 ], [ 1, 6, 13, 22 ], [ 2, 7, 11, 22 ], [ 3, 8, 11, 17 ],
-            [ 4, 9, 12, 17 ], [ 5, 10, 12, 20 ], [ 13, 16 ], [ 1, 6, 16, 18 ],
-            [ 2, 7, 14, 18 ], [ 3, 8, 14, 19 ], [ 4, 9, 15, 19 ],
-            [ 5, 10, 15, 21 ] ] ],
-    vertices := [ [ 1, "a" ], [ 1, "b" ], [ 1, "c" ], [ 2, "a" ], [ 2, "b" ],
-        [ 2, "c" ], 7, 8, 9, 10, 11, 12 ] )
-  !gapprompt@gap>| !gapinput@PolSimplify(sp);|
-  ...
-  rec( faces := [ [ [ 1, 2 ], [ 1, 2 ] ], [ [ 1, 2 ], [ 1, 2 ] ] ],
-    vertices := [ [ 1, "a" ], [ 1, "b" ] ] )
-  		
+  					
 \end{Verbatim}
  }
 
@@ -4147,7 +4315,7 @@ result.triple
 }\hfill{\scriptsize (функция)}}\\
 
 
- создается
+ Cоздается
 диаграмма
 2-узла
 вложенная
@@ -4222,7 +4390,7 @@ spun-диаграмму.
             [ 3, 6, 15, 18 ] ] ],
     vertices := [ [ 1, "a" ], [ 1, "b" ], [ 1, "c" ], [ 2, "a" ], [ 2, "b" ],
         [ 2, "c" ] ] )
-  		
+  					
 \end{Verbatim}
  }
 
@@ -4256,11 +4424,413 @@ spun-диаграмму.
  }
 
  
-\chapter{\textcolor{Chapter }{Работа
+\chapter{\textcolor{Chapter }{Структуры
+рядом}}\logpage{[ 4, 0, 0 ]}
+\hyperdef{L}{X7BE97DA57EB12CF8}{}
+{
+ 
+\section{\textcolor{Chapter }{Списки}}\logpage{[ 4, 1, 0 ]}
+\hyperdef{L}{X844F0E76872E84E9}{}
+{
+ Следующие
+списки
+являются
+полезными
+при
+работе
 с
-грассмановыми
-переменными}}\logpage{[ 4, 0, 0 ]}
-\hyperdef{L}{X7D8F0D1584300CE6}{}
+политопами. 
+
+\subsection{\textcolor{Chapter }{ConnectedSubset}}
+\logpage{[ 4, 1, 1 ]}\nobreak
+\hyperdef{L}{X7E8931D08158230B}{}
+{\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{ConnectedSubset({\mdseries\slshape lists})\index{ConnectedSubset@\texttt{ConnectedSubset}}
+\label{ConnectedSubset}
+}\hfill{\scriptsize (функция)}}\\
+
+
+ Пусть
+список
+list
+состоит
+из
+списков.
+Функция
+ConnectedSubset
+выведет
+все
+индексы
+внутренних
+элементов,
+которые
+пересекаются
+или
+могут
+быть
+соединены
+цепочкой
+пересекающихся
+элементов
+с
+первым
+элементом
+списка
+lists. 
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
+  !gapprompt@gap>| !gapinput@ConnectedSubset(T2.faces[1]);|
+  [ 1, 4, 5, 8, 2, 6, 3, 7 ]
+  					
+\end{Verbatim}
+ Наиболее
+частое
+применение
+данная
+функция
+находит
+в
+разделении
+на
+связные
+компоненты
+многообразий,
+отсюда
+и
+название
+этой
+функции. }
+
+ 
+
+\subsection{\textcolor{Chapter }{SortCircle}}
+\logpage{[ 4, 1, 2 ]}\nobreak
+\hyperdef{L}{X81893FB17D432793}{}
+{\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{SortCircle({\mdseries\slshape list})\index{SortCircle@\texttt{SortCircle}}
+\label{SortCircle}
+}\hfill{\scriptsize (функция)}}\\
+
+
+ Входной
+список
+list
+должен
+состоять
+из
+двухэлементных
+списков
+которые
+можно
+рассматривать
+как
+ребра
+графа.
+Функция $SortCircle$ проведет
+сортировку
+списка $list$ исходя
+из
+предположения,
+что
+описываемый
+им
+граф
+является
+циклом. 
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
+  !gapprompt@gap>| !gapinput@list:=T2.faces[1]{T2.faces[2][3]};|
+  [ [ 2, 3 ], [ 1, 4 ], [ 1, 2 ], [ 3, 4 ] ]
+  !gapprompt@gap>| !gapinput@SortCircle(list);|
+  [ [ 2, 3 ], [ 1, 2 ], [ 1, 4 ], [ 3, 4 ] ]
+  !gapprompt@gap>| !gapinput@list;|
+  [  ]
+  					
+\end{Verbatim}
+ }
+
+ }
+
+ 
+\section{\textcolor{Chapter }{Рациональные
+функции}}\logpage{[ 4, 2, 0 ]}
+\hyperdef{L}{X7E0B26D57EB7AC25}{}
+{
+ Для
+удобств
+преобразований
+было
+решено
+рациональные
+функции
+хранить
+в виде
+именованного
+списка
+содержащего
+три
+поля.
+Первые
+два
+поля
+для
+рациональной
+функции $f$ это
+поля $f.numerator$ и $f.denominator$ соответствующие
+числителю
+и
+знаменателю
+рациональной
+фукции.
+Каждое
+из
+этих
+полей
+является
+разложением
+на
+неприводимые
+множители
+числителя
+и
+знаменателя
+соответственно.
+Третье
+поле
+это $f.coef$ которое
+содержит
+числовой
+коэффициент
+рациональной
+функции
+составленный
+как
+отношение
+коэффициента
+при
+старшей
+степени
+числителя
+к
+коэффициенту
+при
+старшей
+степени
+знаменателя.
+Для
+неизвестных $x,y, \dots$ используется
+лексикографическое
+упорядочение.
+Например,
+для
+функции $f = \frac{2x^2-8y^2}{3x^2+2y^3}$ получим
+следующее
+представление 
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
+  !gapprompt@gap>| !gapinput@SimplifyRationalFunction(f);|
+  rec( coef := 2/3, denominator := [ x_1^2+2/3*x_2^2 ],
+    numerator := [ x_1-2*x_2, x_1+2*x_2 ] )
+  			
+\end{Verbatim}
+ Для
+работы
+с
+данным
+форматом
+рациональных
+функций
+реализованы
+основные
+арифметические
+операции
+с
+использованием
+следующего
+приципа.
+Функции
+могут
+примать
+на
+вход
+как
+стандартный
+формат
+записи
+функций,
+так и
+разложенный
+на
+неприводимые
+множители,
+на
+выход
+будет
+подан
+только
+формат
+предлагаемый
+нами.
+Так
+как
+такое
+представление
+потенциально
+занимает
+много
+компьютерной
+помяти
+по
+возможности
+все
+данные
+всегда
+упрощаются. 
+
+\subsection{\textcolor{Chapter }{SimplifyRationalFunction}}
+\logpage{[ 4, 2, 1 ]}\nobreak
+\hyperdef{L}{X7BACF0CC7BB23267}{}
+{\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{SimplifyRationalFunction({\mdseries\slshape f})\index{SimplifyRationalFunction@\texttt{SimplifyRationalFunction}}
+\label{SimplifyRationalFunction}
+}\hfill{\scriptsize (функция)}}\\
+
+
+ Функция
+переводит
+в
+формат
+неприводимых
+множителей
+и
+одновремено
+упрощает
+функцию $f$. }
+
+ 
+
+\subsection{\textcolor{Chapter }{GcdPolynomial}}
+\logpage{[ 4, 2, 2 ]}\nobreak
+\hyperdef{L}{X8500B73B8429F14B}{}
+{\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{GcdPolynomial({\mdseries\slshape f, g})\index{GcdPolynomial@\texttt{GcdPolynomial}}
+\label{GcdPolynomial}
+}\hfill{\scriptsize (функция)}}\\
+
+
+ Находится
+наибольший
+общий
+делитель
+для
+двух
+полиномов.
+Результат
+выдается
+в виде
+списка
+неприводимых
+многочленов. 
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
+  !gapprompt@gap>| !gapinput@a:=x^5+y^5;;|
+  !gapprompt@gap>| !gapinput@b:=(x^7+y^7)*(x+y)^2;;|
+  !gapprompt@gap>| !gapinput@GcdPolynomial(a,b);|
+  [ x_1+x_2 ]
+  					
+\end{Verbatim}
+ }
+
+ 
+
+\subsection{\textcolor{Chapter }{LcmPolynomial}}
+\logpage{[ 4, 2, 3 ]}\nobreak
+\hyperdef{L}{X7CC8FF297DA9CF6B}{}
+{\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{LcmPolynomial({\mdseries\slshape f, g})\index{LcmPolynomial@\texttt{LcmPolynomial}}
+\label{LcmPolynomial}
+}\hfill{\scriptsize (функция)}}\\
+
+
+ Находится
+наименьшее
+общее
+кратное
+для
+двух
+полиномов.
+Результат
+выдается
+в виде
+списка
+неприводимых
+многочленов. 
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
+  !gapprompt@gap>| !gapinput@a:=x^5+y^5;;|
+  !gapprompt@gap>| !gapinput@b:=(x^7+y^7)*(x+y)^2;;|
+  !gapprompt@gap>| !gapinput@LcmPolynomial(a,b);|
+  [ x_1+x_2, x_1+x_2, x_1+x_2, x_1^4-x_1^3*x_2+x_1^2*x_2^2-x_1*x_2^3+x_2^4,
+    x_1^6-x_1^5*x_2+x_1^4*x_2^2-x_1^3*x_2^3+x_1^2*x_2^4-x_1*x_2^5+x_2^6 ]
+  					
+\end{Verbatim}
+ }
+
+ 
+
+\subsection{\textcolor{Chapter }{ProductRationalFunctions}}
+\logpage{[ 4, 2, 4 ]}\nobreak
+\hyperdef{L}{X79D5A7157856DB6A}{}
+{\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{ProductRationalFunctions({\mdseries\slshape f, g})\index{ProductRationalFunctions@\texttt{ProductRationalFunctions}}
+\label{ProductRationalFunctions}
+}\hfill{\scriptsize (функция)}}\\
+\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{DivideRationalFunction({\mdseries\slshape f, g})\index{DivideRationalFunction@\texttt{DivideRationalFunction}}
+\label{DivideRationalFunction}
+}\hfill{\scriptsize (функция)}}\\
+
+
+  Операции
+умножения
+и
+деления
+над
+рациональными
+функциями. }
+
+  }
+
+ 
+\section{\textcolor{Chapter }{Матрицы}}\logpage{[ 4, 3, 0 ]}
+\hyperdef{L}{X838E89737800BD8B}{}
+{
+ 
+
+\subsection{\textcolor{Chapter }{Pfaffian}}
+\logpage{[ 4, 3, 1 ]}\nobreak
+\hyperdef{L}{X7A4302F685FA84A8}{}
+{\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{Pfaffian({\mdseries\slshape mat})\index{Pfaffian@\texttt{Pfaffian}}
+\label{Pfaffian}
+}\hfill{\scriptsize (функция)}}\\
+
+
+ Вычисляется
+пфаффиан
+кососимметирческой
+матрицы $mat.$ Для
+вычисления
+используется
+модифицированный
+аналог
+алгоритма
+Гаусса. 
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
+  !gapprompt@gap>| !gapinput@PrintArray(mat);|
+  [ [   0,  -3,  -1,   1 ],
+    [   3,   0,  -1,   2 ],
+    [   1,   1,   0,   3 ],
+    [  -1,  -2,  -3,   0 ] ]
+  !gapprompt@gap>| !gapinput@Pfaffian(mat);|
+  -8
+  				
+\end{Verbatim}
+ }
+
+ }
+
+ 
+\section{\textcolor{Chapter }{Грассманнова
+алгебра}}\logpage{[ 4, 4, 0 ]}
+\hyperdef{L}{X7C77230C7AC163FF}{}
 {
  На
 данный
@@ -4365,15 +4935,9 @@ f.coeffs[j]
 принадлежит
 слову
 f.monomials[j]. 
-\section{\textcolor{Chapter }{Основные
-арифметические
-операции}}\logpage{[ 4, 1, 0 ]}
-\hyperdef{L}{X872F80867C9AD793}{}
-{
- 
 
 \subsection{\textcolor{Chapter }{GrassmannMonomialsProduct}}
-\logpage{[ 4, 1, 1 ]}\nobreak
+\logpage{[ 4, 4, 1 ]}\nobreak
 \hyperdef{L}{X860AA41783165689}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{GrassmannMonomialsProduct({\mdseries\slshape mon1, mon2})\index{GrassmannMonomialsProduct@\texttt{GrassmannMonomialsProduct}}
 \label{GrassmannMonomialsProduct}
@@ -4402,7 +4966,7 @@ f.monomials[j].
  
 
 \subsection{\textcolor{Chapter }{GrassmannProduct}}
-\logpage{[ 4, 1, 2 ]}\nobreak
+\logpage{[ 4, 4, 2 ]}\nobreak
 \hyperdef{L}{X7F3EE70681C3D8C0}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{GrassmannProduct({\mdseries\slshape f, g})\index{GrassmannProduct@\texttt{GrassmannProduct}}
 \label{GrassmannProduct}
@@ -4416,7 +4980,7 @@ f.monomials[j].
  
 
 \subsection{\textcolor{Chapter }{GrassmanSum}}
-\logpage{[ 4, 1, 3 ]}\nobreak
+\logpage{[ 4, 4, 3 ]}\nobreak
 \hyperdef{L}{X87E817917E35EBA6}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{GrassmanSum({\mdseries\slshape f, g})\index{GrassmanSum@\texttt{GrassmanSum}}
 \label{GrassmanSum}
@@ -4430,7 +4994,7 @@ f.monomials[j].
  
 
 \subsection{\textcolor{Chapter }{BerezinIntegral}}
-\logpage{[ 4, 1, 4 ]}\nobreak
+\logpage{[ 4, 4, 4 ]}\nobreak
 \hyperdef{L}{X80094E517830BE72}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{BerezinIntegral({\mdseries\slshape f, a})\index{BerezinIntegral@\texttt{BerezinIntegral}}
 \label{BerezinIntegral}
@@ -4455,7 +5019,7 @@ f.monomials[j].
  
 
 \subsection{\textcolor{Chapter }{BerezinMultipleIntegral}}
-\logpage{[ 4, 1, 5 ]}\nobreak
+\logpage{[ 4, 4, 5 ]}\nobreak
 \hyperdef{L}{X7A3ACABF7E9F9F6D}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{BerezinMultipleIntegral({\mdseries\slshape f, list})\index{BerezinMultipleIntegral@\texttt{BerezinMultipleIntegral}}
 \label{BerezinMultipleIntegral}
@@ -4488,138 +5052,7 @@ f.monomials[j].
 
  }
 
- 
-\chapter{\textcolor{Chapter }{Прочее}}\logpage{[ 5, 0, 0 ]}
-\hyperdef{L}{X8413BE3A7E960883}{}
-{
- 
-\section{\textcolor{Chapter }{Списки}}\logpage{[ 5, 1, 0 ]}
-\hyperdef{L}{X844F0E76872E84E9}{}
-{
- Следующие
-списки
-являются
-полезными
-при
-работе
-с
-политопами. 
-
-\subsection{\textcolor{Chapter }{ConnectedSubset}}
-\logpage{[ 5, 1, 1 ]}\nobreak
-\hyperdef{L}{X7E8931D08158230B}{}
-{\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{ConnectedSubset({\mdseries\slshape lists})\index{ConnectedSubset@\texttt{ConnectedSubset}}
-\label{ConnectedSubset}
-}\hfill{\scriptsize (функция)}}\\
-
-
- Пусть
-список
-list
-состоит
-из
-списков.
-Функция
-ConnectedSubset
-выведет
-все
-индексы
-внутренних
-элементов,
-которые
-пересекаются
-или
-могут
-быть
-соединены
-цепочкой
-пересекающихся
-элементов
-с
-первым
-элементом
-списка
-lists. 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
-  !gapprompt@gap>| !gapinput@ConnectedSubset(T2.faces[1]);|
-  [ 1, 4, 5, 8, 2, 6, 3, 7 ]
-  					
-\end{Verbatim}
- Наиболее
-частое
-применение
-данная
-функция
-находит
-в
-разделении
-на
-связные
-компоненты
-многообразий,
-отсюда
-и
-название
-этой
-функции. }
-
- 
-
-\subsection{\textcolor{Chapter }{SortCircle}}
-\logpage{[ 5, 1, 2 ]}\nobreak
-\hyperdef{L}{X81893FB17D432793}{}
-{\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{SortCircle({\mdseries\slshape list})\index{SortCircle@\texttt{SortCircle}}
-\label{SortCircle}
-}\hfill{\scriptsize (функция)}}\\
-
-
- Входной
-список
-list
-должен
-состоять
-из
-двухэлементных
-списков
-которые
-можно
-рассматривать
-как
-ребра
-графа.
-Функция $SortCircle$ проведет
-сортировку
-списка $list$ исходя
-из
-предположения,
-что
-описываемый
-им
-граф
-является
-циклом. 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
-  !gapprompt@gap>| !gapinput@list:=T2.faces[1]{T2.faces[2][3]};|
-  [ [ 2, 3 ], [ 1, 4 ], [ 1, 2 ], [ 3, 4 ] ]
-  !gapprompt@gap>| !gapinput@SortCircle(list);|
-  [ [ 2, 3 ], [ 1, 2 ], [ 1, 4 ], [ 3, 4 ] ]
-  !gapprompt@gap>| !gapinput@list;|
-  [  ]
-  					
-\end{Verbatim}
- }
-
- }
-
- 
-\section{\textcolor{Chapter }{Матрицы}}\logpage{[ 5, 2, 0 ]}
-\hyperdef{L}{X838E89737800BD8B}{}
-{
-  }
-
- }
-
-  \def\bibname{Ссылки\logpage{[ "Bib", 0, 0 ]}
+ \def\bibname{Ссылки\logpage{[ "Bib", 0, 0 ]}
 \hyperdef{L}{X8728A4677F22C580}{}
 }
 

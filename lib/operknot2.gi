@@ -255,7 +255,7 @@ for okr in underZ do
 
    Add(underD, StructuralCopy(diski));
 od;
-#-----------------------------------------------------------------------------------
+#------------------------------------------------------------------------------
 
 # выделяем поверхность Зейферта
 
@@ -573,9 +573,9 @@ end );
 # тот же коэффициент зацепления). Сводим границу полученного многообразия к
 # четырем прямоугольникам (граница is тор).
 
-#-------------------------------------------------------------------------------------------------#
-#                        нарисуй рисунки к пояснениям алгоритма                                   #
-#-------------------------------------------------------------------------------------------------#
+#------------------------------------------------------------------------------#
+#                        нарисуй рисунки к пояснениям алгоритма
+#------------------------------------------------------------------------------#
 
 # ЗАМЕЧАНИЕ: 
 # входные данные: knot - диаграмма узла
@@ -1278,7 +1278,7 @@ InstallGlobalFunction(PolSimplifyWith2Knot, function(pol0)
 		pos:=Positions(where, true);
 		2kl:=Intersection(pol.faces[3]{pos});
 		l3:=Length(pol.faces[3]);
-		pol:=UnionFace(pol,[3,pos[1]], [3,pos[2]]);
+		pol:=UnionFaces(pol,[3,pos[1]], [3,pos[2]]);
 		if l3 > Length(pol.faces[3]) then
 			pol:=wasDelFace(pol, [2,2kl[1]] );
 		fi;
@@ -1307,7 +1307,7 @@ InstallGlobalFunction(PolSimplifyWith2Knot, function(pol0)
 		pos:=Positions(pos,true);
 		may:=Intersection(pos,pol.2knot.sheets);
 		if Length(may) in [0,2] then
-			pol:=UnionFace(pol,[2,pos[1]],[2,pos[2]]);
+			pol:=UnionFaces(pol,[2,pos[1]],[2,pos[2]]);
 			l2new:=Length(pol.faces[2]);
 			if l2 > l2new then
 				pol:=wasDelFace(pol,[1,1kl]);
@@ -1342,7 +1342,7 @@ InstallGlobalFunction(PolSimplifyWith2Knot, function(pol0)
 		pos:=Positions(pos, true);
 		may:=Intersection(pos, 1klknot);
 		if Length(may) in [0,2] then
-			pol:=UnionFace(pol,[1,pos[1]],[1,pos[2]]);
+			pol:=UnionFaces(pol,[1,pos[1]],[1,pos[2]]);
 			l1new:=Length(pol.faces[1]);
 			if l1 > l1new then
 				pol:=wasDelFace(pol,[1,pos[2]]);
@@ -2355,64 +2355,64 @@ end);
 
 ################################################################################
 
-# <ManSection><Func Name="Preimage2Knot" Arg="pol" />
-# 	<Description>
-#	 	Построение прообраза заузленной поверхности по диаграмме.
-#		<Example>
-#gap> pol:=TurnKnot(Trefoil,0);;
-# ...
-#gap> sp:=Preimage2Knot(pol);
-#rec(
-#  faces :=
-#    [ [ [ 2, 3 ], [ 2, 7 ], [ 7, 9 ], [ 8, 9 ], [ 1, 8 ], [ 5, 6 ], [ 5, 10 ],
-#          [ 10, 12 ], [ 11, 12 ], [ 4, 11 ], [ 7, 10 ], [ 8, 11 ], [ 3, 6 ],
-#          [ 7, 10 ], [ 8, 11 ], [ 3, 6 ], [ 9, 12 ], [ 2, 5 ], [ 9, 12 ],
-#          [ 1, 4 ], [ 1, 4 ], [ 2, 5 ] ],
-#      [ [ 20, 21 ], [ 1, 6, 13, 22 ], [ 2, 7, 11, 22 ], [ 3, 8, 11, 17 ],
-#          [ 4, 9, 12, 17 ], [ 5, 10, 12, 20 ], [ 13, 16 ], [ 1, 6, 16, 18 ],
-#          [ 2, 7, 14, 18 ], [ 3, 8, 14, 19 ], [ 4, 9, 15, 19 ],
-#          [ 5, 10, 15, 21 ] ] ],
-#  vertices := [ [ 1, "a" ], [ 1, "b" ], [ 1, "c" ], [ 2, "a" ], [ 2, "b" ],
-#      [ 2, "c" ], 7, 8, 9, 10, 11, 12 ] )
-#gap> PolSimplify(sp);
-#...
-#rec( faces := [ [ [ 1, 2 ], [ 1, 2 ] ], [ [ 1, 2 ], [ 1, 2 ] ] ],
-#  vertices := [ [ 1, "a" ], [ 1, "b" ] ] )
-#		</Example>
-#	</Description>
-# </ManSection>
-
-InstallGlobalFunction(Preimage2Knot, function(pol1)
-	local	pol, 1kl, vert, l1, i, sost, 2kl, j, v, ordver;
-
-	pol:=StructuralCopy(pol1);
-	#--- дублирование двойных ребер --------------------------------------------
-	1kl:=List(RecNames(pol.2knot.dpoints), x -> Int(x));
-	vert:=Set(Concatenation(pol.faces[1]{1kl}));
-	ordver:=List(pol.2knot.sheets,x->FaceComp(pol,[2,x]).0);
-	ordver:=Set(Concatenation(ordver));
-	l1:=Length(pol.faces[1]);
- 	for i in 1kl do
-		sost:=pol.faces[1][i];
-		# верхняя клетка будет иметь больший индекс
-		Add(pol.faces[1],sost);
-		l1:=l1+1;
-		2kl:=pol.2knot.dpoints.(i){[1,2]};
-		for j in 2kl do
-			pol.faces[2][j]:=Difference(pol.faces[2][j], [i]);
-			Add(pol.faces[2][j],l1);
-		od;
-	od;
-
-	#--- выделение подполитопа и разрезание в вершинах -------------------------
-	pol:=SubPolytope(pol,pol.2knot.sheets,2);
-	for i in vert do
-		v:=Position(ordver,i);
-		pol:=PolMinusFaceDoublingMethod(pol,[0,v]);
-	od;
-	
-return rec(vertices:=pol.vertices, faces:=pol.faces);
-end);
+##  # <ManSection><Func Name="Preimage2Knot" Arg="pol" />
+##  # 	<Description>
+##  #	 	Построение прообраза заузленной поверхности по диаграмме.
+##  #		<Example>
+##  #gap> pol:=TurnKnot(Trefoil,0);;
+##  # ...
+##  #gap> sp:=Preimage2Knot(pol);
+##  #rec(
+##  #  faces :=
+##  #    [ [ [ 2, 3 ], [ 2, 7 ], [ 7, 9 ], [ 8, 9 ], [ 1, 8 ], [ 5, 6 ], [ 5, 10 ],
+##  #          [ 10, 12 ], [ 11, 12 ], [ 4, 11 ], [ 7, 10 ], [ 8, 11 ], [ 3, 6 ],
+##  #          [ 7, 10 ], [ 8, 11 ], [ 3, 6 ], [ 9, 12 ], [ 2, 5 ], [ 9, 12 ],
+##  #          [ 1, 4 ], [ 1, 4 ], [ 2, 5 ] ],
+##  #      [ [ 20, 21 ], [ 1, 6, 13, 22 ], [ 2, 7, 11, 22 ], [ 3, 8, 11, 17 ],
+##  #          [ 4, 9, 12, 17 ], [ 5, 10, 12, 20 ], [ 13, 16 ], [ 1, 6, 16, 18 ],
+##  #          [ 2, 7, 14, 18 ], [ 3, 8, 14, 19 ], [ 4, 9, 15, 19 ],
+##  #          [ 5, 10, 15, 21 ] ] ],
+##  #  vertices := [ [ 1, "a" ], [ 1, "b" ], [ 1, "c" ], [ 2, "a" ], [ 2, "b" ],
+##  #      [ 2, "c" ], 7, 8, 9, 10, 11, 12 ] )
+##  #gap> PolSimplify(sp);
+##  #...
+##  #rec( faces := [ [ [ 1, 2 ], [ 1, 2 ] ], [ [ 1, 2 ], [ 1, 2 ] ] ],
+##  #  vertices := [ [ 1, "a" ], [ 1, "b" ] ] )
+##  #		</Example>
+##  #	</Description>
+##  # </ManSection>
+##  
+##  InstallGlobalFunction(Preimage2Knot, function(pol1)
+##  	local	pol, 1kl, vert, l1, i, sost, 2kl, j, v, ordver;
+##  
+##  	pol:=StructuralCopy(pol1);
+##  	#--- дублирование двойных ребер --------------------------------------------
+##  	1kl:=List(RecNames(pol.2knot.dpoints), x -> Int(x));
+##  	vert:=Set(Concatenation(pol.faces[1]{1kl}));
+##  	ordver:=List(pol.2knot.sheets,x->FaceComp(pol,[2,x]).0);
+##  	ordver:=Set(Concatenation(ordver));
+##  	l1:=Length(pol.faces[1]);
+##   	for i in 1kl do
+##  		sost:=pol.faces[1][i];
+##  		# верхняя клетка будет иметь больший индекс
+##  		Add(pol.faces[1],sost);
+##  		l1:=l1+1;
+##  		2kl:=pol.2knot.dpoints.(i){[1,2]};
+##  		for j in 2kl do
+##  			pol.faces[2][j]:=Difference(pol.faces[2][j], [i]);
+##  			Add(pol.faces[2][j],l1);
+##  		od;
+##  	od;
+##  
+##  	#--- выделение подполитопа и разрезание в вершинах -------------------------
+##  	pol:=SubPolytope(pol,pol.2knot.sheets,2);
+##  	for i in vert do
+##  		v:=Position(ordver,i);
+##  		pol:=PolMinusFaceDoublingMethod(pol,[0,v]);
+##  	od;
+##  	
+##  return rec(vertices:=pol.vertices, faces:=pol.faces);
+##  end);
 
 ################################################################################
 
@@ -2502,7 +2502,8 @@ InstallGlobalFunction(IsDiagrammOf2Kont, function(pol)
 	fi;
 
 	if verify then
-		knot:=Preimage2Knot(pol);
+##  		knot:=Preimage2Knot(pol);
+		knot:=SurfaceOf2Knot(pol);
 		for v in [1 .. Length(knot.vertices)] do
 			star:=StarFace(knot,[0,v]).2;
 			star:=knot.faces[2]{star};
@@ -2512,7 +2513,8 @@ InstallGlobalFunction(IsDiagrammOf2Kont, function(pol)
 				verify:=false;
 			fi;
 		od;
-		verify:=(knot = Preimage2Knot(pol));
+##  		verify:=(knot = Preimage2Knot(pol));
+		verify:=(knot = SurfaceOf2Knot(pol));
 	fi;
 	if not verify then
 		Print("В диаграмме есть недопустимые точки (самокасание).\n");
@@ -2520,3 +2522,255 @@ InstallGlobalFunction(IsDiagrammOf2Kont, function(pol)
 
 return verify;
 end);
+
+###############################################################################
+#### PL-2.4
+###############################################################################
+
+#			<ManSection><Func Name="KnotGroup" Arg="knot" />
+#				<Description>
+#					Вычисляется фундаментальная группа узла, которая
+#					определяется как фундаментальная группа дополнения узла в
+#					трехмерной сфере <M>S^3.</M> Для создания группы
+#					используются соотношения Виртингера.
+#					<Example>
+#					</Example>
+#				</Description>
+#			</ManSection>
+
+InstallGlobalFunction(KnotGroup, function(knot)
+	local	n, genf, lgenf, i, gr, generators, relators, namepoint, slovo, fg,
+	lr, r;
+
+	# создание свободной группы
+	n:=Length(knot.kod);
+	r:=n/2;
+	genf:=[1];
+	lgenf:=1;
+	for i in [2 .. n-1] do
+		if knot.kod[i][2] = -1 then
+			lgenf:=lgenf+1;
+		fi;
+		Add(genf,lgenf);
+	od;
+	if knot.kod[n][2] = -1 then
+		Add(genf, 1);
+	else
+		Add(genf,lgenf);
+	fi;
+	gr:=FreeGroup(r);
+	generators:=GeneratorsOfGroup(gr);
+
+	# создание соотношений группы
+	relators:=[];
+	for i in [1 .. n] do
+		if knot.kod[i][2] = 1 then
+			namepoint:=knot.kod[i][1];
+			lr:=LeftRight(knot,i,namepoint);
+			Add(relators, [ i, lr.right, i, lr.left ]);
+			# степени у соответствующих образующих [1,1,-1,-1]
+		fi;
+	od;
+
+	for i in [1 .. r] do
+		slovo:=genf{relators[i]};
+		slovo:=generators{slovo};
+		slovo[3]:=slovo[3]^(-1);
+		slovo[4]:=slovo[4]^(-1);
+		relators[i]:=Product(slovo);
+	od;
+
+	# факторизация и упрощение
+	gr:=gr/relators;
+	fg:=PresentationFpGroup(gr);
+	TzGo(fg);
+
+return FpGroupPresentation(fg);
+end);
+
+################################################################################
+
+#			<ManSection><Func Name="TorusKnot" Arg="q,p" />
+#				Создается диаграмма торического узла <M>(q,p),</M> если <M>q</M>
+#				и <M>p</M> взаимнопростые, если это не так, то будет создано
+#				соответствующее зацепление. Параметр <M>q > 0</M> соответствует
+#				количеству нитей, а параметр <M>p</M> соответствует количеству
+#				оборотов. 
+#				<Description>
+#					<Example>
+#					</Example>
+#				</Description>
+#			</ManSection>
+
+InstallGlobalFunction(TorusKnot, function(q,p1)
+	local	t, name, i, ind, next, l, d, h, exit, p, ij, j, orient, kod, sgn;
+	
+	p:=AbsInt(p1);
+	t:=List([1 .. p], i -> []);
+	name:=1;
+	for i in [1 .. p] do
+		t[i][1]:=[];
+		for j in [2 .. q] do
+			Add(t[i][1], [name,1]);
+			t[i][j]:=[[name, -1]];
+			name:=name+1;
+		od;
+	od;
+
+	# Вычислим все траектории по которым будет гулять торический узел
+	ind:=[ [0,0] ];
+	next:= [1, -1] mod [p,q];
+	l:=1;
+	while not next = ind[1] do
+		Add(ind, next);
+		l:=l+1;
+		next:=(ind[l] + [1,-1]) mod [p,q];
+	od;
+	sgn:=SignInt(p1);
+	orient:=List([1 .. (q-1)*p], i -> [i, sgn]);
+	if l = p*q then # тогда это узел
+		kod:=[];
+		for ij in ind do
+			i:=ij[1]+1;
+			j:=ij[2]+1;
+			Append(kod, t[i][j]);
+		od;
+	else # тогда это зацепление
+		d:=p*q/l;
+		h:=0;
+		kod:=rec();
+		while h < d do
+			h:=h+1;
+			kod.(h):=[];
+			for ij in ind do
+				i:=ij[1]+1;
+				j:=ij[2]+1;
+				Append(kod.(h), t[i][j]);
+			od;
+			ind:=List(ind, x -> [x[1], (x[2]+1) mod q]);
+		od;
+	fi;
+
+return rec(kod:=kod, orient:=orient);
+end);
+
+################################################################################
+
+#			<ManSection><Func Name="SurfaceOf2Knot" Arg="M3" />
+#				<Description>
+#					Для заузленной поверхности указанной внутри некоторого
+#					3-многообразия <M>M3</M> создается прообраз этой поверхности
+#					с указанием прообразов двойных ребер, тройных точек и точек
+#					ветвления. Прообраз создается как pl-комплекс, к которому
+#					прикреплена дополнительная информация содеражащаяся в
+#					именнованном списке <M>.preimage.</M> <M>Preimage</M>
+#					является списком дублированных прообразов. В него входят
+#					список <M>.rebras</M> и <M>.points.</M> Список
+#					<M>.rebras</M> содержит прообразы для каждого двойного
+#					ребра, первым элементом пары является ребро-прообраз лежащее
+#					на нижнем листе, вторым, соответственно ребро-прообраз
+#					лежащее на верхнем листе образа в диаграмме. Список
+#					<M>.points</M> содержит состоит из списков длины 1 и 3,
+#					которые является списками прообразов точек ветвления и
+#					тройных точек, соответственно. Причем, для тройных точек
+#					прообраз тройной точки, лежащий на верхнем листе будет
+#					третьим в списке, на среднем - вторым и на нижнем,
+#					соответственно, первым.
+#					<Example>
+#					</Example>
+#				</Description>
+#			</ManSection>
+
+InstallGlobalFunction(SurfaceOf2Knot, function(s3)
+	local	pol, preimage, 2kl, sost, dpoints, l1, vert, r, ind, order,
+	sost1kl, i, heits, l0, v, triple, list, s, j, k, kl;
+
+	pol:=SubPolytope(s3,s3.2knot.sheets,2);
+	# После такого выделения внутренний порядок в подмножестве клеток, которые
+	# образуют заузленную диаграмму сохраняется. Сейчас нужно добавить дубликаты
+	# для двойных ребер и тройных точек.
+	preimage:=rec(points:=[], rebras:=[]);
+
+	#--- создание прообраза ----------------------------------------------------
+	2kl:=s3.2knot.sheets;
+	sost:=List(2kl, x -> FaceComp(s3,[2,x]).1);
+	sost:=Set(Concatenation(sost));
+	#... дублирование ребер ....................................................
+	dpoints:=List(RecNames(s3.2knot.dpoints), x -> Int(x));
+	l1:=Length(sost);
+	vert:=[];
+	for r in dpoints do
+		ind:=Position(sost, r);
+		order:=List(s3.2knot.dpoints.(r){[1,2]}, x -> Position(2kl, x));
+		# Мы нашли двойное ребро на поверхности, теперь его надо продублировать
+		# и верхнюю часть поверхности пустить по дубликату. В графе будем
+		# указывать именно пару ребер на поверхности, которые образуют одно
+		# двойное ребро как пару, первым элементом которой идет прообраз нижнего
+		# ребра, вторым прообраз верхнего ребра.
+		sost1kl:=pol.faces[1][ind];
+		Add(pol.faces[1],sost1kl);
+		Append(vert, sost1kl);
+		l1:=l1+1;
+		for i in order do
+			kl:=Difference(pol.faces[2][i], [ind]);
+			Add(kl, l1);
+			pol.faces[2][i]:=StructuralCopy(kl);
+		od;
+		Add(preimage.rebras, [ind, l1]);
+	od;
+	#... дублирование тройных точек ............................................
+	heits:=[];
+	for r in preimage.rebras do
+		for i in [1,2] do
+			heits[r[i]]:=i;
+		od;
+	od;
+	vert:=Set(vert);
+	l0:=Length(pol.vertices);
+	for v in vert do
+		pol:=PolMinusFaceDoublingMethod(pol,[0,v]);
+		if IsBound(pol.vertices[l0+2]) then # это была тройная точка
+			triple:=[v, l0+1, l0+2];
+			# Получили три прообраза тройной точки, нам надо упорядочить их
+			# относительно того каким листам они принадлежат нижнему, среднему
+			# или верхнему.
+			list:=List(triple, x -> StarFace(pol,[0,x]).1);
+			order:=[];
+			for i in [1,2,3] do
+				s:=[];
+				for j in list[i] do
+					if IsBound(heits[j]) then
+						Add(s,heits[j]);
+					fi;
+				od;
+				s:=Set(s);
+				if s = [2] then
+					order[3]:=i;
+				elif s = [1] then
+					order[1]:=i;
+				else
+					order[2]:=i;
+				fi;
+			od;
+			triple:=triple{order};
+			Add(preimage.points, triple);
+			l0:=l0+2;
+		elif IsBound(pol.vertices[l0+1]) then # это была двойная точка
+			l0:=l0+1;
+		else	# это может быть только точка ветвления
+			Add(preimage.points, [v]);
+		fi;
+		# Список preimage.points будет состоять только из списков длины 1 и 3,
+		# которые отвечают точкам ветвления и тройным точкам, соответственно.
+		# Причем для прообразов тройных точек, порядок соответствует высоте
+		# листа в тройной точке, чем выше порядок, тем выше лист.
+	od;
+	
+	pol.preimage:=preimage;
+
+return pol;
+end);
+# Было проверенно, что прообраз является многообразием. Для spun трилистника и
+# для 2-twist трилистника было показано, что эти прообразы сферы. Было проверено
+# количество тройных точек и точек ветвления, так же для одной из тройных точек
+# проверялось корректность упорядочения по принадлежности высотам.

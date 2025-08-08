@@ -73,6 +73,7 @@ sed -i_save "s/Unicode(1105)/е/g" manPL.tex
 
 # для корректной компиляции tex-файла на русском языке
 sed -i_save "s/latin1/utf8/g" manPL.tex
+# эту замену нужно сделать более аккуратной
 sed -i_save "s/T1/T2A/g" manPL.tex
 
 rm -rf manPL.tex_save

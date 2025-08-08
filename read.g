@@ -10,3 +10,5 @@ ReadPackage( "PL", "lib/grassmann.gi" );
 ReadPackage( "PL", "lib/operpol2.gi" );
 ReadPackage( "PL", "lib/operlist.gi" );
 ReadPackage( "PL", "lib/operknot2.gi" );
+ReadPackage( "PL", "lib/ratfunc.gi" );
+ReadPackage( "PL", "lib/opermat.gi" );
