@@ -95,8 +95,8 @@
 
 \hypersetup{pdftitle= The \textsf{PL} package }
 \markright{\scriptsize \mbox{}\hfill  The \textsf{PL} package  \hfill\mbox{}}
-{\Huge  Version 2.4.2 \mbox{}}\\[1cm]
-{July 2014\mbox{}}\\[1cm]
+{\Huge  Version 2.5.0 \mbox{}}\\[1cm]
+{February, 2015\mbox{}}\\[1cm]
 \mbox{}\\[2cm]
 {\Large \textbf{ Igor G. Korepanov \mbox{}}}\\
 {\Large \textbf{ Alex I. Korepanov \mbox{}}}\\
@@ -121,7 +121,7 @@ under the terms of the \href{ http://www.fsf.org/licenses/gpl.html } {GNU Genera
 (at any your options) any later version. \mbox{}}\\[1cm]
 \newpage
 
-\def\contentsname{Contents\logpage{[ 0, 0, 2 ]}}
+\def\contentsname{Содержание\logpage{[ 0, 0, 2 ]}}
 
 \tableofcontents
 \newpage
@@ -149,7 +149,7 @@ this, we represent them combinatorially in the following way. First, we assume
 that all vertices in the complex are numbered from 1 to their total number $N_0$. Hence, in this sense, the 0-skeleton of the complex is described. Next,
 assuming that the $k$-skeleton is already given, which implies (in particular) the numeration of
 all $k$-cells, we describe the $(k+1)$-skeleton as the list of all $(k+1)$-cells, each of which, in its turn, is the set of numbers of $k$-cells in its boundary. Then we compose the list of length $n$, where $n$ is the dimension of the complex, whose elements are lists of 1-,..., $n$-cells. Thus, a three-dimensional ball $B^3$ can be represented by the following $PL$ ball complex with two vertices 1 and 2: 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   [
     [ [1,2], [1,2] ], # two one-dimensional simplexes, each with
                       # ends 1 and 2, of which the first is referred to
@@ -169,7 +169,7 @@ the beginning of the above ball complex representation. For instance, our
 function \texttt{ballAB}$(n)$ calls them \texttt{"A"} and \texttt{"B"}. So, our \textsf{GAP} representation of the ball in
 Figure\texttt{\symbol{126}}\texttt{\symbol{92}}ref\texttt{\symbol{123}}fig:B3\texttt{\symbol{125}}
 is the following record: 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@ballAB(3);  |
   rec( vertices := [ "A", "B" ], 
     faces := [ [ [ 1, 2 ], [ 1, 2 ] ], [ [ 1, 2 ], [ 1, 2 ] ], [ [ 1, 2 ] ] ] 
@@ -183,7 +183,7 @@ is the following record:
 \hyperdef{L}{X81EA74AA7B4B6DDB}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{IsPolytope({\mdseries\slshape pol})\index{IsPolytope@\texttt{IsPolytope}}
 \label{IsPolytope}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Функция
@@ -206,7 +206,7 @@ is the following record:
 выдаст $true$ и $false$ в
 противном
 случае. 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@IsPolytope(T2);|
   true
   				
@@ -280,7 +280,7 @@ is the following record:
 \hyperdef{L}{X7F2B23508384AD56}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{EulerNumber({\mdseries\slshape pol})\index{EulerNumber@\texttt{EulerNumber}}
 \label{EulerNumber}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  функция
@@ -324,7 +324,7 @@ is the following record:
 клеток
 определенной
 размерности. 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@EulerNumber(T2);|
   0
   !gapprompt@gap>| !gapinput@EulerNumber(sphereAB(4));|
@@ -342,7 +342,7 @@ is the following record:
 \hyperdef{L}{X7E2C717A7CE81114}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{FundGroup({\mdseries\slshape pol})\index{FundGroup@\texttt{FundGroup}}
 \label{FundGroup}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Computes the fundamental group of the given polytope. }
@@ -364,7 +364,7 @@ is the following record:
 \hyperdef{L}{X82674C6C7C537F9E}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{LengthPol({\mdseries\slshape pol})\index{LengthPol@\texttt{LengthPol}}
 \label{LengthPol}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  В $resul.d$ указывается
@@ -372,7 +372,7 @@ is the following record:
 остова
 в
 политопе $pol.$ 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@LengthPol(T2);|
   total16
   rec( 0 := 4, 1 := 8, 2 := 4 )
@@ -387,7 +387,7 @@ is the following record:
 \hyperdef{L}{X7826D40B82C44A08}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{PolBoundary({\mdseries\slshape pol})\index{PolBoundary@\texttt{PolBoundary}}
 \label{PolBoundary}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  вычисляет
@@ -404,7 +404,7 @@ is the following record:
 клетки
 размерности $(n-1)$ составляющие
 границу. 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@PolBoundary(T2);|
   [ ]
   !gapprompt@gap>| !gapinput@s1:=sphereAB(1);;|
@@ -438,13 +438,13 @@ is the following record:
 \hyperdef{L}{X7DF0C625871788B7}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{PolInnerFaces({\mdseries\slshape pol})\index{PolInnerFaces@\texttt{PolInnerFaces}}
 \label{PolInnerFaces}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Build index of inner faces of given polytope complex $returned[i]$ - set of inner faces of dimensions (i-1). Any face is outer if it has at most
 1 adjacent face of higher dimension of if it lies in the boundary of such a
 face. And inner faces are not outer faces. 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@PolInnerFaces(T2);|
   [ [ 1 .. 4 ], [ 1 .. 8 ] ]
   !gapprompt@gap>| !gapinput@PolInnerFaces(ft2);|
@@ -460,7 +460,7 @@ face. And inner faces are not outer faces.
 \hyperdef{L}{X7DDF02FE8581EF3D}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{MaxTree({\mdseries\slshape pol})\index{MaxTree@\texttt{MaxTree}}
 \label{MaxTree}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  finds a maximal tree in the 1-skeleton of a polytope as a list of edges. }
@@ -508,7 +508,7 @@ face. And inner faces are not outer faces.
 \hyperdef{L}{X82CF2896859B26C6}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{CellOrient({\mdseries\slshape pol})\index{CellOrient@\texttt{CellOrient}}
 \label{CellOrient}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Вычисляются
@@ -517,7 +517,7 @@ face. And inner faces are not outer faces.
 для
 клеток.
 Provides inductively some orientations for cells of dimensions $1..n=dim(pol)$ 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@dd;|
   rec(
     faces := [ [ [ 1, 3 ], [ 2, 3 ], [ 2, 4 ], [ 1, 4 ] ], [ [ 1, 2, 3, 4 ] ] ],
@@ -535,7 +535,7 @@ Provides inductively some orientations for cells of dimensions $1..n=dim(pol)$
 \hyperdef{L}{X7A1EAA26847A1C43}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{PolOrient({\mdseries\slshape pol})\index{PolOrient@\texttt{PolOrient}}
 \label{PolOrient}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  If $pol$ is orientable, gives a consistent orientation of $n-$faces ($n=dim(pol)$), otherwise returns $fail.$ Причем,
@@ -553,7 +553,7 @@ Provides inductively some orientations for cells of dimensions $1..n=dim(pol)$
 \hyperdef{L}{X81AE197083B0A56A}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{OrientTriangulated({\mdseries\slshape pol})\index{OrientTriangulated@\texttt{OrientTriangulated}}
 \label{OrientTriangulated}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Function computes consistent orientation on simpleces of greatest dimension on
@@ -567,7 +567,7 @@ greatest dimension of $pol.$ }
 \hyperdef{L}{X83986ED47DDF8E20}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{dataPachner({\mdseries\slshape dim, k})\index{dataPachner@\texttt{dataPachner}}
 \label{dataPachner}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Выводит
@@ -599,7 +599,7 @@ greatest dimension of $pol.$ }
 Пахнера
 обозначен
 буквой $r$ (right). 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@Print(dataPachner(3,2));|
   rec(
     l := rec(
@@ -710,7 +710,7 @@ greatest dimension of $pol.$ }
 быть
 представлена
 как 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@sim:=[ [ 1, 2, 3, 4 ], [ 1, 2, 3, 5 ], [ 1, 2, 4, 5 ],|
   				[ 1, 3, 4, 5 ], [ 2, 3, 4, 5 ] ];
   				
@@ -722,7 +722,7 @@ greatest dimension of $pol.$ }
 \hyperdef{L}{X873915C482448F75}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{FromSimplexToPolytope({\mdseries\slshape simplex})\index{FromSimplexToPolytope@\texttt{FromSimplexToPolytope}}
 \label{FromSimplexToPolytope}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  преобразует
@@ -731,7 +731,7 @@ greatest dimension of $pol.$ }
 в
 шаровой
 комплекс. 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@FromSimplexToPolytope(sim);|
   rec(
     faces :=
@@ -807,11 +807,11 @@ pol.faces[dim].
 \hyperdef{L}{X7AB8BF4E7E72C22D}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{PolBnd({\mdseries\slshape pol, adr})\index{PolBnd@\texttt{PolBnd}}
 \label{PolBnd}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Creating an index of boundary faces of face $adr=[dim,ind]$ of complex $pol$. $result[i]$ - index of (i-1)-dimensional faces of $pol$ which are in the boundary of $adr$. 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@PolBnd(T2,[2,3]);|
   [ [ 1, 2, 3, 4 ], [ 2, 4, 5, 7 ] ]
   						
@@ -825,7 +825,7 @@ pol.faces[dim].
 \hyperdef{L}{X7B4C20C784524379}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{FaceComp({\mdseries\slshape pol, adr})\index{FaceComp@\texttt{FaceComp}}
 \label{FaceComp}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  функция
@@ -848,7 +848,7 @@ pol.faces[dim].
 часть
 самой
 себя. 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@FaceComp(T2,[2,3]);|
   rec( 0 := [ 1, 2, 3, 4 ], 1 := [ 2, 4, 5, 7 ], 2 := [ 3 ] )
   						
@@ -871,7 +871,7 @@ pol.faces[dim].
 \hyperdef{L}{X7E4697E984788243}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{StarFace({\mdseries\slshape pol, adr})\index{StarFace@\texttt{StarFace}}
 \label{StarFace}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Вычисляет
@@ -895,7 +895,7 @@ result.(i)
 в
 состав
 звезды. 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@StarFace(T2,[0,3]);|
   rec( 1 := [ 2, 3, 6, 7 ], 2 := [ 1, 2, 3, 4 ] )
   						
@@ -926,7 +926,7 @@ result.(i)
 \hyperdef{L}{X7BBC530C857D247E}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{PolCheckComb({\mdseries\slshape pol, adr})\index{PolCheckComb@\texttt{PolCheckComb}}
 \label{PolCheckComb}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  check if a face of given complex is combinatorial complex that is, whether
@@ -955,7 +955,7 @@ every its subface of lower dimension is uniquely determined by its vertices
 \hyperdef{L}{X79EBAEC68713D5FE}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{PolTriangulate({\mdseries\slshape pol})\index{PolTriangulate@\texttt{PolTriangulate}}
 \label{PolTriangulate}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  функция
@@ -971,7 +971,7 @@ every its subface of lower dimension is uniquely determined by its vertices
 остаться
 не
 комбинаторным. 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@PolTriangulate(sphereAB(2));|
   rec(
     faces := [ [ [ 1, 2 ], [ 1, 2 ], [ 1, 3 ], [ 2, 3 ], [ 1, 4 ], [ 2, 4 ] ],
@@ -988,7 +988,7 @@ every its subface of lower dimension is uniquely determined by its vertices
 \hyperdef{L}{X7DE97F0184E8F0BE}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{FirstBoundary({\mdseries\slshape pol})\index{FirstBoundary@\texttt{FirstBoundary}}
 \label{FirstBoundary}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  данная
@@ -1032,7 +1032,7 @@ pol.faces[dim].
 \hyperdef{L}{X863CAD14822179DC}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{PermFaces({\mdseries\slshape pol, perm, dim})\index{PermFaces@\texttt{PermFaces}}
 \label{PermFaces}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  производит
@@ -1062,7 +1062,7 @@ pol.faces[dim].
 \hyperdef{L}{X844FBAF17BC1B42B}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{ContractMiniFace({\mdseries\slshape pol, adr})\index{ContractMiniFace@\texttt{ContractMiniFace}}
 \label{ContractMiniFace}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  В
@@ -1078,7 +1078,7 @@ pol.faces[dim].
 с
 меньшим
 индексом. 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@s1:=sphereTriangul(1);|
   rec( faces := [ [ [ 1, 2 ], [ 1, 3 ], [ 2, 3 ] ] ], vertices := [ 1 .. 3 ] )
   !gapprompt@gap>| !gapinput@s1:=ContractMiniFace(s1,[1,1]);|
@@ -1152,7 +1152,7 @@ pol.faces[dim].
 то
 получим
 следующее 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@s1:=ContractMiniFace(s1,[1,1]);|
   rec( faces := [ [ [ 1 ] ] ], vertices := [ 1 ] )
   !gapprompt@gap>| !gapinput@IsPolytope(s1);|
@@ -1183,7 +1183,7 @@ pol.faces[dim].
 \hyperdef{L}{X7AF2A3E286F2E10F}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{DivideFace({\mdseries\slshape pol, adr, set})\index{DivideFace@\texttt{DivideFace}}
 \label{DivideFace}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Пусть
@@ -1204,7 +1204,7 @@ pol.faces[dim].
 на
 сферу $S^{d-2}$ диск $D^{d-1}$ внутри
 клетки $adr$. 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@octahedron;|
   rec(
     faces :=
@@ -1243,7 +1243,7 @@ pol.faces[dim].
 новой
 вершины
 разбиения. 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@s1:=sphereAB(1);|
   rec( faces := [ [ [ 1, 2 ], [ 1, 2 ] ] ], vertices := [ "A", "B" ] )
   !gapprompt@gap>| !gapinput@DivideFace(s1,[1,1],3);|
@@ -1259,7 +1259,7 @@ pol.faces[dim].
 \hyperdef{L}{X8508B54A7A8AC6CB}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{UnionFace({\mdseries\slshape pol, kl1, kl2})\index{UnionFace@\texttt{UnionFace}}
 \label{UnionFace}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  На
@@ -1289,7 +1289,7 @@ pol.faces[dim].
 клетку
 на две
 части. 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@UnionFace(p3,[3,1],[3,2]);|
   rec(
     faces :=
@@ -1360,7 +1360,7 @@ pol.faces[dim].
 функция
 отказывается
 работать. 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@UnionFace(T2,[2,1],[2,3]);;|
   This faces intersected on some balls or not intersected.
   I cannot union the faces in a polytope.
@@ -1375,7 +1375,7 @@ pol.faces[dim].
 \hyperdef{L}{X784F04327D5BD9A8}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{PolSimplify({\mdseries\slshape pol})\index{PolSimplify@\texttt{PolSimplify}}
 \label{PolSimplify}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Проводит
@@ -1411,7 +1411,7 @@ UnionFaces.
 максимально
 упростить
 политоп. 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@a:=ballTriangul(3);;|
   !gapprompt@gap>| !gapinput@PolSimplify(a);|
   rec( faces := [ [ [ 1, 2 ], [ 1, 2 ] ], [ [ 1, 2 ], [ 1, 2 ] ], [ [ 1, 2 ] ]
@@ -1445,7 +1445,7 @@ UnionFaces.
 \hyperdef{L}{X83EC07DE83EC07DE}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{ballAB({\mdseries\slshape dim})\index{ballAB@\texttt{ballAB}}
 \label{ballAB}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Создает
@@ -1463,7 +1463,7 @@ UnionFaces.
 \hyperdef{L}{X791C9DFE87250DEF}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{sphereAB({\mdseries\slshape dim})\index{sphereAB@\texttt{sphereAB}}
 \label{sphereAB}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Создает
@@ -1472,7 +1472,7 @@ UnionFaces.
 pl-разбиение
 сферы
 размерности $dim.$ 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@sphereAB(3);|
   rec(
     faces := [ [ [ 1, 2 ], [ 1, 2 ] ], [ [ 1, 2 ], [ 1, 2 ] ],
@@ -1501,13 +1501,13 @@ pl-разбиение
 \hyperdef{L}{X82DB526A7F364516}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{ballTriangul({\mdseries\slshape dim})\index{ballTriangul@\texttt{ballTriangul}}
 \label{ballTriangul}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Создает
 симплекс
 размерности $dim$ 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@ballTriangul(2);|
   rec( faces := [ [ [ 1, 2 ], [ 1, 3 ], [ 2, 3 ] ], [ [ 1 .. 3 ] ] ],
     vertices := [ 1 .. 3 ] )
@@ -1522,7 +1522,7 @@ pl-разбиение
 \hyperdef{L}{X80EEACD2781E40F7}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{sphereTriangul({\mdseries\slshape dim})\index{sphereTriangul@\texttt{sphereTriangul}}
 \label{sphereTriangul}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Триангулированная
@@ -1531,7 +1531,7 @@ pl-разбиение
 как
 граница $(dim+1)-$мерного
 симплекса 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@sphereTriangul(1);|
   rec( faces := [ [ [ 1, 2 ], [ 1, 3 ], [ 2, 3 ] ] ], vertices := [ 1 .. 3 ] )
   						
@@ -1552,13 +1552,13 @@ pl-разбиение
 \hyperdef{L}{X833B125E832EA5F5}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{FreeUnionPol({\mdseries\slshape pol1, pol2})\index{FreeUnionPol@\texttt{FreeUnionPol}}
 \label{FreeUnionPol}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Свободное
 объединение
 политопов. 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@FreeUnionPol(s1,s1);|
   rec( faces := [ [ [ 1, 2 ], [ 1, 2 ], [ 3, 4 ], [ 3, 4 ] ] ],
     vertices := [ [ 1, "A" ], [ 1, "B" ], [ 2, "A" ], [ 2, "B" ] ] )
@@ -1584,11 +1584,11 @@ pl-разбиение
 \hyperdef{L}{X813B0AA1829E736E}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{PolDoubleCone({\mdseries\slshape pol})\index{PolDoubleCone@\texttt{PolDoubleCone}}
 \label{PolDoubleCone}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Make a double cone with vertices V1 and V2 over the given polytope $pol.$ 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@PolDoubleCone(s1);|
   rec(
     faces := [ [ [ 1, 2 ], [ 1, 2 ], [ 1, 3 ], [ 2, 3 ], [ 1, 4 ], [ 2, 4 ] ],
@@ -1605,7 +1605,7 @@ pl-разбиение
 \hyperdef{L}{X7F680736784EA2B0}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{ConnectedSum({\mdseries\slshape N, M})\index{ConnectedSum@\texttt{ConnectedSum}}
 \label{ConnectedSum}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Фукнция
@@ -1615,7 +1615,7 @@ pl-разбиение
 двух
 политопов $N$ и $M$ одинаковой
 размерности. 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@s2:=sphereAB(2);;|
   !gapprompt@gap>| !gapinput@ConnectedSum(s2,s2);|
   rec(
@@ -1633,7 +1633,7 @@ pl-разбиение
 \hyperdef{L}{X7A9E18837F637D8D}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{PolProduct({\mdseries\slshape pol1, pol2})\index{PolProduct@\texttt{PolProduct}}
 \label{PolProduct}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Функция
@@ -1660,7 +1660,7 @@ pol1 и pol2.
 шаров $D^s_i \times D^t_j$, где $D^s_i$ и $D^t_j$ клетки
 комплексов $M$ и $N$,
 соответственно. 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@PolProduct(s1,s1);|
   rec(
     faces :=
@@ -1679,7 +1679,7 @@ pol1 и pol2.
 \hyperdef{L}{X7F0929CD82A0CE28}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{ImageInPolProduct({\mdseries\slshape pol1, pol2, kl1xkl2})\index{ImageInPolProduct@\texttt{ImageInPolProduct}}
 \label{ImageInPolProduct}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Вспомогательная
@@ -1704,7 +1704,7 @@ pol1 и pol2.
 объединенные
 в
 список. 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@t2:=PolProduct(s1,s1);;|
   !gapprompt@gap>| !gapinput@ImageInPolProduct(s1,s1,[[1,2],[1,1]]);|
   [ 2, 3 ]
@@ -1751,7 +1751,7 @@ k.
 же
 декартова
 произведения. 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@ls1:=rec(0:=2, 1:=2);|
   rec( 0 := 2, 1 := 2 )
   !gapprompt@gap>| !gapinput@ImageInPolProduct(ls1,ls1,[[1,2],[1,1]]);|
@@ -1788,7 +1788,7 @@ PolProduct. Если
 \hyperdef{L}{X7C2DFBEA78356D9D}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{PreimageInPolProduct({\mdseries\slshape pol1, pol2, imageface})\index{PreimageInPolProduct@\texttt{PreimageInPolProduct}}
 \label{PreimageInPolProduct}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  По
@@ -1816,7 +1816,7 @@ imageface. }
 \hyperdef{L}{X7A32AE2D8733963A}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{PolProductSyms({\mdseries\slshape })\index{PolProductSyms@\texttt{PolProductSyms}}
 \label{PolProductSyms}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Cartesian product of two polytopes with symmetries of multipliers transferred
@@ -1829,7 +1829,7 @@ to it. First go the symmetries of the first multiplier, then - the second. }
 \hyperdef{L}{X7B4164647D6C5EC6}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{PolProductSymsDict({\mdseries\slshape })\index{PolProductSymsDict@\texttt{PolProductSymsDict}}
 \label{PolProductSymsDict}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Cartesian product of two polytopes with symmetries of multipliers transferred
@@ -1843,7 +1843,7 @@ Also returns the face dictionary. }
 \hyperdef{L}{X7A3091A38613DA64}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{PolFactorInvolution({\mdseries\slshape pol, invol})\index{PolFactorInvolution@\texttt{PolFactorInvolution}}
 \label{PolFactorInvolution}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  $pol$ is polytope with symmetries, $invol$ is such a list of some of its symmetries (repetitions possible) that it is
@@ -2010,7 +2010,7 @@ pol.faces[k] могут
 \hyperdef{L}{X7F4B33CD85588148}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{DelFace({\mdseries\slshape pol, adr})\index{DelFace@\texttt{DelFace}}
 \label{DelFace}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  клетка $adr$ корректным
@@ -2026,7 +2026,7 @@ pol.faces[k] могут
 может
 быть
 нарушена. 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@pol:=DelFace(t2,[1,2]);;|
   !gapprompt@gap>| !gapinput@IsPolytope(pol);|
   false
@@ -2063,7 +2063,7 @@ pol.faces[k] могут
 \hyperdef{L}{X8371078A7CD87B96}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{wasDelFace({\mdseries\slshape pol, adr})\index{wasDelFace@\texttt{wasDelFace}}
 \label{wasDelFace}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Функция
@@ -2302,7 +2302,7 @@ pol.faces[k] могут
 \hyperdef{L}{X846E72167C7779D2}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{SetOfFacesBoundary({\mdseries\slshape pol, subpol, dim})\index{SetOfFacesBoundary@\texttt{SetOfFacesBoundary}}
 \label{SetOfFacesBoundary}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Функция
@@ -2320,7 +2320,7 @@ pol.faces[k] могут
 указанных
 клеток
 равняется $dim-1.$ 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@SetOfFacesBoundary(t2,[2,1],2);|
   [ 1, 2, 3, 4 ]
   					
@@ -2334,7 +2334,7 @@ pol.faces[k] могут
 \hyperdef{L}{X857F686C8672E246}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{SubPolytope({\mdseries\slshape pol, subpol, dim})\index{SubPolytope@\texttt{SubPolytope}}
 \label{SubPolytope}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  выделяем
@@ -2352,7 +2352,7 @@ pol.faces[k] могут
 из
 объемлющего
 политопа $pol.$ 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@SubPolytope(t2,[1,2],1);|
   rec( faces := [ [ [ 1, 2 ], [ 1, 2 ] ] ],
     vertices := [ [ "A", "A" ], [ "A", "B" ] ] )
@@ -2367,7 +2367,7 @@ pol.faces[k] могут
 \hyperdef{L}{X83D3EDBD86CC8F58}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{ParallelSimplify({\mdseries\slshape pol, subpol, dim})\index{ParallelSimplify@\texttt{ParallelSimplify}}
 \label{ParallelSimplify}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  В
@@ -2418,7 +2418,7 @@ c
 \hyperdef{L}{X80512E7E8394ADDB}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{PolMinusFace({\mdseries\slshape pol, adr})\index{PolMinusFace@\texttt{PolMinusFace}}
 \label{PolMinusFace}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  cuts out a neighborhood of a face with given adress from polytope.
@@ -2445,7 +2445,7 @@ pol.faces[i] и pol.vertices не
 \hyperdef{L}{X7876CF9E8413B6D6}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{PolMinusFaceDoublingMethod({\mdseries\slshape pol, adr})\index{PolMinusFaceDoublingMethod@\texttt{PolMinusFaceDoublingMethod}}
 \label{PolMinusFaceDoublingMethod}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Допустим,
@@ -2488,7 +2488,7 @@ n-диска $D^n_i$ свою
 по
 вершине
 [0,1]. 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@buket:=rec( vertices := [ 1, 2, 3, 4 ],|
   faces := [ [ [ 1, 2 ], [ 1, 3 ], [ 1, 4 ] ] ] );;
   !gapprompt@gap>| !gapinput@PolMinusFaceDoublingMethod(buket,[0,1]);|
@@ -2559,7 +2559,7 @@ pl-комплексе
 \hyperdef{L}{X804271D78379B73C}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{PolMinusPol({\mdseries\slshape pol, subpol, dim})\index{PolMinusPol@\texttt{PolMinusPol}}
 \label{PolMinusPol}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Функция
@@ -2583,7 +2583,7 @@ pl-комплексе
 \hyperdef{L}{X79DD05937B0FD9D2}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{GlueFaces({\mdseries\slshape pol, face1, face2})\index{GlueFaces@\texttt{GlueFaces}}
 \label{GlueFaces}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Склеить
@@ -2623,7 +2623,7 @@ pl-комплексе
 следующем
 случае
 некорректно: 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   gap>d2:=ballAB(2);;
   gap>GlueFaces(d2,[1,2],1);
   rec(faces:=[ [ [1,2] ], [ [1] ] ],
@@ -2646,7 +2646,7 @@ pl-комплексе
 \hyperdef{L}{X7D9ACC967D3ACE2A}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{VerticesRullGlueFace({\mdseries\slshape pol, para, dim})\index{VerticesRullGlueFace@\texttt{VerticesRullGlueFace}}
 \label{VerticesRullGlueFace}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Производится
@@ -2674,7 +2674,7 @@ dim
 \hyperdef{L}{X86C045E57D71AB84}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{VerticesRullGluePol({\mdseries\slshape pol, subpol1, subpol2, dim})\index{VerticesRullGluePol@\texttt{VerticesRullGluePol}}
 \label{VerticesRullGluePol}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  В
@@ -2970,7 +2970,7 @@ PL
 в
 библиотеку
 пакета $PL.$ 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@Trefoil;|
   rec( kod := [ [ "a", 1 ], [ "c", -1 ], [ "b", 1 ],
                 [ "a", -1 ], [ "c", 1 ], [ "b", -1 ] ],
@@ -3196,7 +3196,7 @@ Trefoil.kod.
 выше,
 какая
 ниже. 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   rec(
     1knot :=
       rec(
@@ -3336,7 +3336,7 @@ Trefoil.kod.
 \hyperdef{L}{X7879B1EE80994B6E}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{Knot1OnSphere2({\mdseries\slshape knot})\index{Knot1OnSphere2@\texttt{Knot1OnSphere2}}
 \label{Knot1OnSphere2}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  По
@@ -3366,7 +3366,7 @@ Trefoil.kod.
 двумерных
 заузленных
 поверхностей. 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@Knot1OnSphere2(Figure8);|
   rec(
     1knot :=
@@ -3389,7 +3389,7 @@ Trefoil.kod.
 \hyperdef{L}{X7A626B2A84CAD77E}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{KnotInS3({\mdseries\slshape knot})\index{KnotInS3@\texttt{KnotInS3}}
 \label{KnotInS3}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Создает
@@ -3411,7 +3411,7 @@ Trefoil.kod.
 \hyperdef{L}{X7D7395747EC32627}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{Reidemeister10Everywhere({\mdseries\slshape knot})\index{Reidemeister10Everywhere@\texttt{Reidemeister10Everywhere}}
 \label{Reidemeister10Everywhere}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Проверяет
@@ -3457,7 +3457,7 @@ Trefoil.kod.
 \hyperdef{L}{X7E710DED7C4E5B3A}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{ZeroLinkFromKnot({\mdseries\slshape knot})\index{ZeroLinkFromKnot@\texttt{ZeroLinkFromKnot}}
 \label{ZeroLinkFromKnot}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Не
@@ -3521,7 +3521,7 @@ Trefoil.kod.
 \hyperdef{L}{X797F8D4A848DD9BC}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{KnotGroup({\mdseries\slshape knot})\index{KnotGroup@\texttt{KnotGroup}}
 \label{KnotGroup}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Вычисляется
@@ -3550,7 +3550,7 @@ Trefoil.kod.
 \hyperdef{L}{X7EB8D0A97D7D5E57}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{TorusKnot({\mdseries\slshape q, p})\index{TorusKnot@\texttt{TorusKnot}}
 \label{TorusKnot}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Создается
@@ -3571,7 +3571,7 @@ Trefoil.kod.
 параметр $p$ соответствует
 количеству
 оборотов. 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@k:=TorusKnot(2,3);|
   rec( kod := [ [ 1, 1 ], [ 2, -1 ], [ 3, 1 ], [ 1, -1 ], [ 2, 1 ], [ 3, -1 ] ],
     orient := [ [ 1, 1 ], [ 2, 1 ], [ 3, 1 ] ] )
@@ -3586,7 +3586,7 @@ Trefoil.kod.
 \hyperdef{L}{X8575EC5C7B564A45}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{ZeifertSurface({\mdseries\slshape knot})\index{ZeifertSurface@\texttt{ZeifertSurface}}
 \label{ZeifertSurface}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  создает
@@ -3609,7 +3609,7 @@ Trefoil.kod.
 прикрепленному
 к
 политопу. 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@pol:=ZeifertSurface(Knot7_7);;|
   !gapprompt@gap>| !gapinput@zeif:=SubPolytope(pol, pol.zeifert, 2);;|
   !gapprompt@gap>| !gapinput@PolOrient(zeif);|
@@ -3652,7 +3652,7 @@ Trefoil.kod.
 \hyperdef{L}{X7D8D06467FBEB8CF}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{ZeifertSurfaceWithSimplyBoundary({\mdseries\slshape knot})\index{ZeifertSurfaceWithSimplyBoundary@\texttt{ZeifertSurfaceWithSimplyBoundary}}
 \label{ZeifertSurfaceWithSimplyBoundary}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  создает
@@ -3672,7 +3672,7 @@ Trefoil.kod.
 проходит
 сам
 узел). 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@pol:=ZeifertSurfaceWithSimplyBoundary(Knot7_7);;|
   !gapprompt@gap>| !gapinput@SetOfFacesBoundary(pol,pol.zeifert,2);|
   [ 49, 159 ]
@@ -3944,7 +3944,7 @@ set).
 \hyperdef{L}{X845EC0BA802775BB}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{PolSimplifyWith2Knot({\mdseries\slshape pol})\index{PolSimplifyWith2Knot@\texttt{PolSimplifyWith2Knot}}
 \label{PolSimplifyWith2Knot}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Упрощает
@@ -3996,7 +3996,7 @@ PolSimplify
 \hyperdef{L}{X859D50D9858D5B25}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{SingularitySet2Knot({\mdseries\slshape pol})\index{SingularitySet2Knot@\texttt{SingularitySet2Knot}}
 \label{SingularitySet2Knot}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Singularity set --- граф
@@ -4095,7 +4095,7 @@ PolSimplify
 ветвления
 из
 одного. 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@SingularitySet2Knot(TurnKnot(Trefoil,2));|
   	...
   rec( graf := [ 7, 4, 5, 6, 19, 20, 21, 22, 17, 18, 23, 8, 9, 10, 12, 45, 32,
@@ -4130,7 +4130,7 @@ PolSimplify
 \hyperdef{L}{X81D8934B80A7BE6A}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{TripleDoubleBranchPoints({\mdseries\slshape pol})\index{TripleDoubleBranchPoints@\texttt{TripleDoubleBranchPoints}}
 \label{TripleDoubleBranchPoints}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Для
@@ -4222,7 +4222,7 @@ result.triple
 звезде
 этой
 вершины. 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
    gap> pol:=TurnKnot(Trefoil,1);;
    ...
    gap> TripleDoubleBranchPoints(pol);
@@ -4267,7 +4267,7 @@ result.triple
 \hyperdef{L}{X85C517DC8068D8EF}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{IsDiagrammOf2Kont({\mdseries\slshape pol})\index{IsDiagrammOf2Kont@\texttt{IsDiagrammOf2Kont}}
 \label{IsDiagrammOf2Kont}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Проверяет
@@ -4293,7 +4293,7 @@ result.triple
 отсутствие
 точек
 самокасания. 
-\begin{Verbatim}[commandchars=@|B,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=@|B,fontsize=\small,frame=single,label=Пример]
    gap> pol:=TurnKnot(Figure8,-1);;
   
     All good!
@@ -4311,7 +4311,7 @@ result.triple
 \hyperdef{L}{X870383C87924E495}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{SurfaceOf2Knot({\mdseries\slshape M3})\index{SurfaceOf2Knot@\texttt{SurfaceOf2Knot}}
 \label{SurfaceOf2Knot}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Для
@@ -4419,7 +4419,7 @@ pl-комплекс,
 нижнем,
 соответственно,
 первым. 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   					
 \end{Verbatim}
  }
@@ -4431,7 +4431,7 @@ pl-комплекс,
 \hyperdef{L}{X857BA8697BA2F587}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{TurnKnot({\mdseries\slshape knot, number})\index{TurnKnot@\texttt{TurnKnot}}
 \label{TurnKnot}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Cоздается
@@ -4481,7 +4481,7 @@ twist-оборотов
 получим
 простую
 spun-диаграмму. 
-\begin{Verbatim}[commandchars=@|B,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=@|B,fontsize=\small,frame=single,label=Пример]
   @gapprompt|gap>B @gapinput|TurnKnot(Trefoil,0);B
   I'm trying simplify a polytope.
   
@@ -4520,7 +4520,7 @@ spun-диаграмму.
 \hyperdef{L}{X848FEA1F80CF0734}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{2KnotInS4({\mdseries\slshape pol})\index{2KnotInS4@\texttt{2KnotInS4}}
 \label{2KnotInS4}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  По
@@ -4545,7 +4545,7 @@ spun-диаграмму.
 \hyperdef{L}{X780890177ADEBF2C}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{OrientBrockenDiagramm({\mdseries\slshape s3})\index{OrientBrockenDiagramm@\texttt{OrientBrockenDiagramm}}
 \label{OrientBrockenDiagramm}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Функция
@@ -4557,8 +4557,9 @@ spun-диаграмму.
 линейно
 связной
 заузленной
-поверхности.
-Для
+поверхности. 
+
+ Для
 ориентируемого
 2-узла
 вычисляется
@@ -4578,59 +4579,164 @@ spun-диаграмму.
 выход
 подается
 именованный
-список.
-Список $rez.manifold$ содержит
+список. 
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
+  !gapprompt@gap>| !gapinput@s3:=TurnKnot(Trefoil,2);;|
+  !gapprompt@gap>| !gapinput@rez:=OrientBrockenDiagramm(s3);;|
+  !gapprompt@gap>| !gapinput@RecNames(date);          |
+  [ "images", "preimages", "manifold", "colines", "cosheets", "cofaces", 
+    "coorient" ]
+  					
+\end{Verbatim}
+ 
+
+ Список $rez.manifold$ содержит
+политоп
 прообраз
 двумерной
 заузленной
-поверхности.
-В
-списках
-rez.images и rez.preimages
-содержатся
-образ
-и
-прообраз
-двойных
-линий
-и
+поверхности,
+то
+есть
+2-многообразие. 
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
+  !gapprompt@gap>| !gapinput@RecNames(rez.manifold);  |
+  [ "vertices", "faces" ]
+  					
+\end{Verbatim}
+ 
+
+ Список $rez.images$ содержит
+образы
 сингулярных
 точек
-(тройных
+диаграммы
+заузленной
+поверхности. 
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
+  !gapprompt@gap>| !gapinput@PrintObj(rez.images);|
+  rec(
+    0 := [ 4, 5, 6, 11, 12, 13, 14, 17, 18, 38, 39, 40, 45, 46, 47, 48, 51, 52 
+       ],
+    1 := [ 7, 4, 5, 6, 19, 20, 21, 22, 24, 16, 17, 18, 8, 9, 10, 11, 25, 54, 
+                  . . .
+  					
+\end{Verbatim}
+ В
+списке $rez.images.0$ содержатся
+индексы
+вершин
+из
+политопа $s3$,
+которые
+являются
+тройными
+точками
+или
+точками
+ветвления.
+В
+списоке $rez.images.1$ собраны
+индексы
+ребер
+из $s3$ которые
+являются
+двойными
+линиями
+диаграммы. 
+
+ Список $rez.preimages$ содержит
+прообразы
+сингулярных
+точек
+диаграммы
+заузленной
+поверхности. 
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
+  !gapprompt@gap>| !gapinput@PrintObj(rez.preimages);|
+  rec(
+    0 := [ [ 69, 4, 70 ], [ 71, 5, 72 ], [ 6, 73, 74 ], [ 11 ], 
+                  . . .
+    1 := [ [ 7, 143 ], [ 4, 144 ], [ 5, 145 ], [ 6, 146 ], [ 19, 147 ], 
+                  . . .
+  					
+\end{Verbatim}
+ В
+списки $rez.preimages.0$ и $rez.preimages.1$ включены
+индексы
+прообразов
+тройных
+точек
 и
 точек
-ветвления),
-соответственно.
-Считается,
-что на
-двойных
-ребрах
-введена
-нумерация
-которая
-отображается
-в
-списках $rez.images.1$ и $rez.preimages.1$, то
-есть $rez.images.1[i]$ и $rez.preimages.1[i]$ это
-образ
+ветвления,
 и
-прообраз $i-$того
-двойного
-ребра.
-На
-тройных
-точках
-и на
-точках
-ветвления
-введена
-общая
-нумерация
-которая
-так же
-отображается
+двойных
+линий.
+Индексы
+соответствуют
+клеткам
+политопа $rez.manifold$.
+Нумерация
+внутри
+списков $rez.images.i$ и $rez.preimages.i$ совпадает
+в том
+смысле,
+что
+прообразом
+элемента $rez.images.i[k]$ являются
+элементы
 в
-списках $rez.preimages.0$ и $rez.images.0.$ Граф
+списке $rez.preimages.i[k]$.
+Например,
+прообраз
+вершины
+14,
+которая
+вляется
+точкой
+ветвления
+являются
+три
+точки
+в $rez.manifold$.
+Вершина
+11,
+политопа $s3$ является
+точкой
+ветвления
+в
+диаграмме
+2-узла,
+для
+нее мы
+получим
+ровно
+одну
+точку
+в
+прообразе,
+политопе $rez.manifold$ 
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
+  !gapprompt@gap>| !gapinput@pos:=Position(rez.images.0,14);;|
+  !gapprompt@gap>| !gapinput@rez.preimages.0[pos];|
+  [ 82, 14, 81 ]
+  !gapprompt@gap>| !gapinput@pos:=Position(rez.images.0,11);;|
+  !gapprompt@gap>| !gapinput@rez.preimages.0[pos];          |
+  [ 11 ]
+  					
+\end{Verbatim}
+ И
+наконец,
+каждая
+двойная
+линия
+имеет
+ровно
+два
+прообраза. 
+
+ Граф
 сингулярных
 точек
 заузленной
@@ -4662,13 +4768,14 @@ rez.images и rez.preimages
 двойных
 точек
 введена
+произвольная
 нумерация.
 Список $rez.colines$ $i-$тому
 двойному
 ребру
-сопоставляет
+из
+списка $rez.images.1$ сопоставляет
 дугу
-которая
 графа
 двойных
 точек
@@ -4676,20 +4783,23 @@ rez.images и rez.preimages
 проходит
 по
 данному
-ребру.
-В $rez.cosheets$ для $i-$той
+ребру. 
+
+ В $rez.cosheets$ для $i-$той
 2-клетки
 заузленной
 поверхности
-указывает
+из
+списка $s3.2knot$ указывает
 какому
 листу
 разорванной
 диаграммы
 эта
 2-клетка
-принадлежит.
-Так
+принадлежит. 
+
+ Так
 как по
 условиею
 прообраз
@@ -4711,6 +4821,52 @@ rez.images и rez.preimages
 ориентации
 вершинам
 графа.
+Направление
+на
+двойной
+линии
+является
+положительными,
+если
+вместе
+с
+нормалями
+верхнего
+и
+нижнего
+листа
+этой
+линии,
+выбранное
+направление
+составляет
+положительный
+репер.
+Ориентация
+тройной
+точки
+это
+знак
+репера
+составленный
+из
+трех
+исходящих
+двойных
+линий,
+оринетация
+точки
+ветвления,
+это
+характеристика
+входа
+или
+выхода
+двойно
+линии
+из
+данной
+точки.
 Эти
 ориентации
 содержатся
@@ -4723,11 +4879,31 @@ rez.images и rez.preimages
 дугам
 и по
 двойным
-ребрам.
-Список $rez.cofaces.0$ на $i-$том
+ребрам,
+то
+есть
+двойному
+ребру
+из $rez.images.1$ присваивается
+такая
+ориентация,
+при
+которой
+его
+направление
+совпадало
+бы с
+направлением
+на
+дуге,
+которой
+он
+принадлежит. 
+
+ Список $rez.cofaces.0$ на $i-$том
 месте
 содержит
-списко
+список
 дуг
 графа
 двойных
@@ -4766,7 +4942,42 @@ rez.images и rez.preimages
 из
 указанной
 вершины.
-Список $rez.cofaces.1$ для
+Причем
+в
+списках $rez.cofaces.0$ для
+тройных
+точек
+введено
+жесткое
+упорядочение.
+Первый
+и
+четвертый
+элементы
+списков,
+это
+верхние
+линии,
+второй
+и
+пятный
+это
+средние
+линии,
+и
+оставшиеся,
+третья
+и
+щестая
+это
+нижние
+линии
+в
+данной
+тройной
+точке. 
+
+ Список $rez.cofaces.1$ для
 каждой
 дуги
 графа
@@ -4832,7 +5043,7 @@ rez.images и rez.preimages
 \hyperdef{L}{X7E8931D08158230B}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{ConnectedSubset({\mdseries\slshape lists})\index{ConnectedSubset@\texttt{ConnectedSubset}}
 \label{ConnectedSubset}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Пусть
@@ -4862,7 +5073,7 @@ ConnectedSubset
 элементом
 списка
 lists. 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@ConnectedSubset(T2.faces[1]);|
   [ 1, 4, 5, 8, 2, 6, 3, 7 ]
   					
@@ -4892,7 +5103,7 @@ lists.
 \hyperdef{L}{X81893FB17D432793}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{SortCircle({\mdseries\slshape list})\index{SortCircle@\texttt{SortCircle}}
 \label{SortCircle}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Входной
@@ -4920,7 +5131,7 @@ list
 граф
 является
 циклом. 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@list:=T2.faces[1]{T2.faces[2][3]};|
   [ [ 2, 3 ], [ 1, 4 ], [ 1, 2 ], [ 3, 4 ] ]
   !gapprompt@gap>| !gapinput@SortCircle(list);|
@@ -4938,7 +5149,7 @@ list
 \hyperdef{L}{X7906B3DC7F85CC27}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{LineOrdering({\mdseries\slshape list})\index{LineOrdering@\texttt{LineOrdering}}
 \label{LineOrdering}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Пусть
@@ -4985,7 +5196,7 @@ list
 пары
 под
 именем $.orient.$ 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@list:=[ [ 2, 3 ], [ 4, 1 ], [ 2, 4 ], [ 15, 1 ], [ 15, 5 ] ];;|
   !gapprompt@gap>| !gapinput@LineOrdering(list);|
   rec( order := [ 5, 4, 2, 3, 1 ], orient := [ 1, -1, 1, -1, 1 ] )
@@ -4997,7 +5208,7 @@ list может
 из
 себя
 цикл. 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@circ:=[[1,2],[3,4],[4,2],[1,3]];;|
   !gapprompt@gap>| !gapinput@LineOrdering(circ);|
   rec( order := [ 3, 1, 4, 2 ], orient := [ 1, -1, 1, 1 ] )
@@ -5082,7 +5293,7 @@ list может
 функции $f = \frac{2x^2-8y^2}{3x^2+2y^3}$ получим
 следующее
 представление 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@SimplifyRationalFunction(f);|
   rec( coef := 2/3, denominator := [ x_1^2+2/3*x_2^2 ],
     numerator := [ x_1-2*x_2, x_1+2*x_2 ] )
@@ -5147,7 +5358,7 @@ list может
 \hyperdef{L}{X7BACF0CC7BB23267}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{SimplifyRationalFunction({\mdseries\slshape f})\index{SimplifyRationalFunction@\texttt{SimplifyRationalFunction}}
 \label{SimplifyRationalFunction}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Функция
@@ -5168,7 +5379,7 @@ list может
 \hyperdef{L}{X8500B73B8429F14B}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{GcdPolynomial({\mdseries\slshape f, g})\index{GcdPolynomial@\texttt{GcdPolynomial}}
 \label{GcdPolynomial}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Находится
@@ -5184,7 +5395,7 @@ list может
 списка
 неприводимых
 многочленов. 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@a:=x^5+y^5;;|
   !gapprompt@gap>| !gapinput@b:=(x^7+y^7)*(x+y)^2;;|
   !gapprompt@gap>| !gapinput@GcdPolynomial(a,b);|
@@ -5200,7 +5411,7 @@ list может
 \hyperdef{L}{X7CC8FF297DA9CF6B}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{LcmPolynomial({\mdseries\slshape f, g})\index{LcmPolynomial@\texttt{LcmPolynomial}}
 \label{LcmPolynomial}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Находится
@@ -5216,7 +5427,7 @@ list может
 списка
 неприводимых
 многочленов. 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@a:=x^5+y^5;;|
   !gapprompt@gap>| !gapinput@b:=(x^7+y^7)*(x+y)^2;;|
   !gapprompt@gap>| !gapinput@LcmPolynomial(a,b);|
@@ -5233,10 +5444,10 @@ list может
 \hyperdef{L}{X79D5A7157856DB6A}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{ProductRationalFunctions({\mdseries\slshape f, g})\index{ProductRationalFunctions@\texttt{ProductRationalFunctions}}
 \label{ProductRationalFunctions}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 \noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{DivideRationalFunction({\mdseries\slshape f, g})\index{DivideRationalFunction@\texttt{DivideRationalFunction}}
 \label{DivideRationalFunction}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
   Операции
@@ -5260,7 +5471,7 @@ list может
 \hyperdef{L}{X7A4302F685FA84A8}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{Pfaffian({\mdseries\slshape mat})\index{Pfaffian@\texttt{Pfaffian}}
 \label{Pfaffian}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Вычисляется
@@ -5273,7 +5484,7 @@ list может
 аналог
 алгоритма
 Гаусса. 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@PrintArray(mat);|
   [ [   0,  -3,  -1,   1 ],
     [   3,   0,  -1,   2 ],
@@ -5401,7 +5612,7 @@ f.monomials[j].
 \hyperdef{L}{X860AA41783165689}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{GrassmannMonomialsProduct({\mdseries\slshape mon1, mon2})\index{GrassmannMonomialsProduct@\texttt{GrassmannMonomialsProduct}}
 \label{GrassmannMonomialsProduct}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Вычисляется
@@ -5414,7 +5625,7 @@ f.monomials[j].
 на
 следующих
 примерах. $ (2\ a_1a_2) * (3\ a_5a_4a_6)=-6\ a_1a_2a_3a_4a_5 a_6$ и $(2\ a_1 a_2) * ( 3\ a_5 a_2 a_6) = 0.$ 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
   !gapprompt@gap>| !gapinput@GrassmannMonomialsProduct([[1,2],2],[[5,4,6],3]);|
   [ [ 1, 2, 4, 5, 6 ], -6 ]
   !gapprompt@gap>| !gapinput@GrassmannMonomialsProduct([[1,2],2],[[5,2,6],3]);|
@@ -5430,7 +5641,7 @@ f.monomials[j].
 \hyperdef{L}{X7F3EE70681C3D8C0}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{GrassmannProduct({\mdseries\slshape f, g})\index{GrassmannProduct@\texttt{GrassmannProduct}}
 \label{GrassmannProduct}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Произведение
@@ -5444,7 +5655,7 @@ f.monomials[j].
 \hyperdef{L}{X87E817917E35EBA6}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{GrassmanSum({\mdseries\slshape f, g})\index{GrassmanSum@\texttt{GrassmanSum}}
 \label{GrassmanSum}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Сложение
@@ -5458,7 +5669,7 @@ f.monomials[j].
 \hyperdef{L}{X80094E517830BE72}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{BerezinIntegral({\mdseries\slshape f, a})\index{BerezinIntegral@\texttt{BerezinIntegral}}
 \label{BerezinIntegral}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Вычисляется
@@ -5483,7 +5694,7 @@ f.monomials[j].
 \hyperdef{L}{X7A3ACABF7E9F9F6D}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{BerezinMultipleIntegral({\mdseries\slshape f, list})\index{BerezinMultipleIntegral@\texttt{BerezinMultipleIntegral}}
 \label{BerezinMultipleIntegral}
-}\hfill{\scriptsize (function)}}\\
+}\hfill{\scriptsize (функция)}}\\
 
 
  Вычисляется
@@ -5512,22 +5723,22 @@ f.monomials[j].
 
  }
 
- \def\bibname{References\logpage{[ "Bib", 0, 0 ]}
-\hyperdef{L}{X7A6F98FD85F02BFE}{}
+ \def\bibname{Ссылки\logpage{[ "Bib", 0, 0 ]}
+\hyperdef{L}{X8728A4677F22C580}{}
 }
 
 \bibliographystyle{alpha}
 \bibliography{PL-manual}
 
-\addcontentsline{toc}{chapter}{References}
+\addcontentsline{toc}{chapter}{Ссылки}
 
-\def\indexname{Index\logpage{[ "Ind", 0, 0 ]}
-\hyperdef{L}{X83A0356F839C696F}{}
+\def\indexname{Индекс\logpage{[ "Ind", 0, 0 ]}
+\hyperdef{L}{X797DCB1687DCA32E}{}
 }
 
 \cleardoublepage
 \phantomsection
-\addcontentsline{toc}{chapter}{Index}
+\addcontentsline{toc}{chapter}{Индекс}
 
 
 \printindex

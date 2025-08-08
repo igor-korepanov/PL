@@ -1958,19 +1958,19 @@ InstallGlobalFunction(TurnKnot, function(knot,number)
 	bord:=PolBoundary(pol);
 	Add(pol.faces[3], bord);
 
-##  	#--- урощение полученного политопа -----------------------------------------
-##  	Print("I'm trying simplify a polytope.\n\n");
-##  	massa:=Length(pol.vertices)+Sum(List([1..3], x->Length(pol.faces[x])));
-##  	a:=StructuralCopy(massa);
-##  	verify:=false;
-##  	while not verify do
-##  		pol:=PolSimplifyWith2Knot(pol);
-##  		newmassa:=Length(pol.vertices)+Sum(List([1..3],
-##  			 x->Length(pol.faces[x])));
-##  		verify := massa = newmassa;
-##  		massa:=newmassa;
-##  	od;
-## 
+	#--- урощение полученного политопа -----------------------------------------
+	Print("I'm trying simplify a polytope.\n\n");
+	massa:=Length(pol.vertices)+Sum(List([1..3], x->Length(pol.faces[x])));
+	a:=StructuralCopy(massa);
+	verify:=false;
+	while not verify do
+		pol:=PolSimplifyWith2Knot(pol);
+		newmassa:=Length(pol.vertices)+Sum(List([1..3],
+			 x->Length(pol.faces[x])));
+		verify := massa = newmassa;
+		massa:=newmassa;
+	od;
+
 
 ##  	Print("\n All good!\n\n");
 
@@ -2981,7 +2981,8 @@ InstallGlobalFunction(OrientBrockenDiagramm, function(s3)
 			height:=[];
 			1kls:=List(["d","m","u"],
 				x->Concatenation(s3.faces[2]{tdbp.(v).(x)}));
-			for j in [[1,2],[1,3],[2,3]] do
+##  			for j in [[1,2],[1,3],[2,3]] do # [md, ud, um, md, ud, um]
+			for j in [[2,3],[1,3],[1,2]] do # [um, ud, md, um, ud, md]
 				1kl:=Intersection(1kls{j});
 				1kl:=Intersection(1kl, star.1);
 				1kl:=List(1kl, x -> Position(dpoints, x));

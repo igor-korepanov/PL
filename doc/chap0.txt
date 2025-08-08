@@ -3,10 +3,10 @@
                                 [1X The [5XPL[105X package [101X
   
   
-                                 Version 2.4.2
+                                 Version 2.5.0
   
   
-                                   July 2014
+                                 February, 2015
   
   
                                Igor G. Korepanov
@@ -34,7 +34,7 @@
   -------------------------------------------------------
   
   
-  [1XContents (PL-manual)[101X
+  [1XСодержание (PL-manual)[101X
   
   1 [33X[0;0YШаровые комплексы.[133X
     1.1 [33X[0;0YRepresentation of a PL ball complex[133X

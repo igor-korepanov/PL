@@ -12,8 +12,8 @@ SetPackageInfo( rec(
 
 PackageName := "PL",
 Subtitle := "PL: We gonna eat your brain.",
-Version := "2.4.2",
-Date := "1/01/2015",
+Version := "2.5.0",
+Date := "23/02/2015",
 PackageWWWHome :=
   Concatenation( "http://sourceforge.net/projects/plgap",
       LowercaseString( ~.PackageName ), "/" ),

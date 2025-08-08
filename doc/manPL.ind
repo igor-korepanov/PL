@@ -1,139 +1,139 @@
 \begin{theindex}
 
-  \item \texttt  {2KnotInS4}, \hyperpage{80}
+  \item \texttt  {2KnotInS4}, \hyperpage{72}
 
   \indexspace
 
-  \item \texttt  {ballAB}, \hyperpage{27}
-  \item \texttt  {ballTriangul}, \hyperpage{28}
-  \item \texttt  {BerezinIntegral}, \hyperpage{96}
-  \item \texttt  {BerezinMultipleIntegral}, \hyperpage{97}
+  \item \texttt  {ballAB}, \hyperpage{23}
+  \item \texttt  {ballTriangul}, \hyperpage{24}
+  \item \texttt  {BerezinIntegral}, \hyperpage{90}
+  \item \texttt  {BerezinMultipleIntegral}, \hyperpage{90}
 
   \indexspace
 
-  \item \texttt  {CellOrient}, \hyperpage{11}
-  \item \texttt  {ConnectedSubset}, \hyperpage{86}
-  \item \texttt  {ConnectedSum}, \hyperpage{29}
-  \item \texttt  {ContractMiniFace}, \hyperpage{20}
+  \item \texttt  {CellOrient}, \hyperpage{10}
+  \item \texttt  {ConnectedSubset}, \hyperpage{81}
+  \item \texttt  {ConnectedSum}, \hyperpage{25}
+  \item \texttt  {ContractMiniFace}, \hyperpage{18}
 
   \indexspace
 
-  \item \texttt  {dataPachner}, \hyperpage{12}
-  \item \texttt  {DelFace}, \hyperpage{36}
-  \item \texttt  {DivideFace}, \hyperpage{22}
-  \item \texttt  {DivideRationalFunction}, \hyperpage{93}
+  \item \texttt  {dataPachner}, \hyperpage{11}
+  \item \texttt  {DelFace}, \hyperpage{31}
+  \item \texttt  {DivideFace}, \hyperpage{20}
+  \item \texttt  {DivideRationalFunction}, \hyperpage{87}
 
   \indexspace
 
-  \item \texttt  {EulerNumber}, \hyperpage{8}
+  \item \texttt  {EulerNumber}, \hyperpage{7}
 
   \indexspace
 
-  \item \texttt  {FaceComp}, \hyperpage{16}
-  \item \texttt  {FirstBoundary}, \hyperpage{19}
-  \item \texttt  {FreeUnionPol}, \hyperpage{28}
-  \item \texttt  {FromSimplexToPolytope}, \hyperpage{15}
-  \item \texttt  {FundGroup}, \hyperpage{9}
+  \item \texttt  {FaceComp}, \hyperpage{14}
+  \item \texttt  {FirstBoundary}, \hyperpage{17}
+  \item \texttt  {FreeUnionPol}, \hyperpage{25}
+  \item \texttt  {FromSimplexToPolytope}, \hyperpage{13}
+  \item \texttt  {FundGroup}, \hyperpage{8}
 
   \indexspace
 
-  \item \texttt  {GcdPolynomial}, \hyperpage{92}
-  \item \texttt  {GlueFaces}, \hyperpage{47}
-  \item \texttt  {GrassmannMonomialsProduct}, \hyperpage{95}
-  \item \texttt  {GrassmannProduct}, \hyperpage{96}
-  \item \texttt  {GrassmanSum}, \hyperpage{96}
+  \item \texttt  {GcdPolynomial}, \hyperpage{86}
+  \item \texttt  {GlueFaces}, \hyperpage{41}
+  \item \texttt  {GrassmannMonomialsProduct}, \hyperpage{89}
+  \item \texttt  {GrassmannProduct}, \hyperpage{90}
+  \item \texttt  {GrassmanSum}, \hyperpage{90}
 
   \indexspace
 
-  \item \texttt  {ImageInPolProduct}, \hyperpage{30}
-  \item \texttt  {IsDiagrammOf2Kont}, \hyperpage{75}
+  \item \texttt  {ImageInPolProduct}, \hyperpage{26}
+  \item \texttt  {IsDiagrammOf2Kont}, \hyperpage{68}
   \item \texttt  {IsPolytope}, \hyperpage{6}
 
   \indexspace
 
-  \item \texttt  {Knot1OnSphere2}, \hyperpage{60}
-  \item \texttt  {KnotGroup}, \hyperpage{63}
-  \item \texttt  {KnotInS3}, \hyperpage{61}
+  \item \texttt  {Knot1OnSphere2}, \hyperpage{55}
+  \item \texttt  {KnotGroup}, \hyperpage{57}
+  \item \texttt  {KnotInS3}, \hyperpage{55}
 
   \indexspace
 
-  \item \texttt  {LcmPolynomial}, \hyperpage{92}
-  \item \texttt  {LengthPol}, \hyperpage{9}
+  \item \texttt  {LcmPolynomial}, \hyperpage{87}
+  \item \texttt  {LengthPol}, \hyperpage{8}
   \item License, \hyperpage{2}
-  \item \texttt  {LineOrdering}, \hyperpage{88}
+  \item \texttt  {LineOrdering}, \hyperpage{83}
 
   \indexspace
 
-  \item \texttt  {MaxTree}, \hyperpage{10}
+  \item \texttt  {MaxTree}, \hyperpage{9}
 
   \indexspace
 
-  \item \texttt  {OrientBrockenDiagramm}, \hyperpage{80}
-  \item \texttt  {OrientTriangulated}, \hyperpage{12}
+  \item \texttt  {OrientBrockenDiagramm}, \hyperpage{72}
+  \item \texttt  {OrientTriangulated}, \hyperpage{11}
 
   \indexspace
 
-  \item \texttt  {ParallelSimplify}, \hyperpage{43}
-  \item \texttt  {PermFaces}, \hyperpage{20}
-  \item \texttt  {Pfaffian}, \hyperpage{93}
-  \item \texttt  {PolBnd}, \hyperpage{16}
+  \item \texttt  {ParallelSimplify}, \hyperpage{38}
+  \item \texttt  {PermFaces}, \hyperpage{17}
+  \item \texttt  {Pfaffian}, \hyperpage{87}
+  \item \texttt  {PolBnd}, \hyperpage{14}
   \item \texttt  {PolBoundary}, \hyperpage{9}
-  \item \texttt  {PolCheckComb}, \hyperpage{18}
-  \item \texttt  {PolDoubleCone}, \hyperpage{29}
-  \item \texttt  {PolFactorInvolution}, \hyperpage{33}
-  \item \texttt  {PolInnerFaces}, \hyperpage{10}
-  \item \texttt  {PolMinusFace}, \hyperpage{44}
-  \item \texttt  {PolMinusFaceDoublingMethod}, \hyperpage{44}
-  \item \texttt  {PolMinusPol}, \hyperpage{46}
-  \item \texttt  {PolOrient}, \hyperpage{12}
-  \item \texttt  {PolProduct}, \hyperpage{30}
-  \item \texttt  {PolProductSyms}, \hyperpage{33}
-  \item \texttt  {PolProductSymsDict}, \hyperpage{33}
-  \item \texttt  {PolSimplify}, \hyperpage{26}
-  \item \texttt  {PolSimplifyWith2Knot}, \hyperpage{70}
-  \item \texttt  {PolTriangulate}, \hyperpage{18}
-  \item \texttt  {PreimageInPolProduct}, \hyperpage{32}
-  \item \texttt  {ProductRationalFunctions}, \hyperpage{93}
+  \item \texttt  {PolCheckComb}, \hyperpage{16}
+  \item \texttt  {PolDoubleCone}, \hyperpage{25}
+  \item \texttt  {PolFactorInvolution}, \hyperpage{28}
+  \item \texttt  {PolInnerFaces}, \hyperpage{9}
+  \item \texttt  {PolMinusFace}, \hyperpage{39}
+  \item \texttt  {PolMinusFaceDoublingMethod}, \hyperpage{39}
+  \item \texttt  {PolMinusPol}, \hyperpage{41}
+  \item \texttt  {PolOrient}, \hyperpage{11}
+  \item \texttt  {PolProduct}, \hyperpage{26}
+  \item \texttt  {PolProductSyms}, \hyperpage{28}
+  \item \texttt  {PolProductSymsDict}, \hyperpage{28}
+  \item \texttt  {PolSimplify}, \hyperpage{22}
+  \item \texttt  {PolSimplifyWith2Knot}, \hyperpage{64}
+  \item \texttt  {PolTriangulate}, \hyperpage{16}
+  \item \texttt  {PreimageInPolProduct}, \hyperpage{28}
+  \item \texttt  {ProductRationalFunctions}, \hyperpage{87}
 
   \indexspace
 
-  \item \texttt  {Reidemeister10Everywhere}, \hyperpage{61}
+  \item \texttt  {Reidemeister10Everywhere}, \hyperpage{56}
 
   \indexspace
 
-  \item \texttt  {SetOfFacesBoundary}, \hyperpage{42}
-  \item \texttt  {SimplifyRationalFunction}, \hyperpage{91}
-  \item \texttt  {SingularitySet2Knot}, \hyperpage{71}
-  \item \texttt  {SortCircle}, \hyperpage{87}
-  \item \texttt  {sphereAB}, \hyperpage{27}
-  \item \texttt  {sphereTriangul}, \hyperpage{28}
-  \item \texttt  {StarFace}, \hyperpage{17}
-  \item \texttt  {SubPolytope}, \hyperpage{42}
-  \item \texttt  {SurfaceOf2Knot}, \hyperpage{76}
+  \item \texttt  {SetOfFacesBoundary}, \hyperpage{37}
+  \item \texttt  {SimplifyRationalFunction}, \hyperpage{86}
+  \item \texttt  {SingularitySet2Knot}, \hyperpage{65}
+  \item \texttt  {SortCircle}, \hyperpage{82}
+  \item \texttt  {sphereAB}, \hyperpage{24}
+  \item \texttt  {sphereTriangul}, \hyperpage{24}
+  \item \texttt  {StarFace}, \hyperpage{15}
+  \item \texttt  {SubPolytope}, \hyperpage{37}
+  \item \texttt  {SurfaceOf2Knot}, \hyperpage{69}
 
   \indexspace
 
-  \item \texttt  {TorusKnot}, \hyperpage{63}
-  \item \texttt  {TripleDoubleBranchPoints}, \hyperpage{73}
-  \item \texttt  {TurnKnot}, \hyperpage{78}
+  \item \texttt  {TorusKnot}, \hyperpage{58}
+  \item \texttt  {TripleDoubleBranchPoints}, \hyperpage{67}
+  \item \texttt  {TurnKnot}, \hyperpage{71}
 
   \indexspace
 
-  \item \texttt  {UnionFace}, \hyperpage{24}
+  \item \texttt  {UnionFace}, \hyperpage{21}
 
   \indexspace
 
-  \item \texttt  {VerticesRullGlueFace}, \hyperpage{48}
-  \item \texttt  {VerticesRullGluePol}, \hyperpage{48}
+  \item \texttt  {VerticesRullGlueFace}, \hyperpage{42}
+  \item \texttt  {VerticesRullGluePol}, \hyperpage{43}
 
   \indexspace
 
-  \item \texttt  {wasDelFace}, \hyperpage{37}
+  \item \texttt  {wasDelFace}, \hyperpage{32}
 
   \indexspace
 
-  \item \texttt  {ZeifertSurface}, \hyperpage{64}
-  \item \texttt  {ZeifertSurfaceWithSimplyBoundary}, \hyperpage{65}
-  \item \texttt  {ZeroLinkFromKnot}, \hyperpage{62}
+  \item \texttt  {ZeifertSurface}, \hyperpage{58}
+  \item \texttt  {ZeifertSurfaceWithSimplyBoundary}, \hyperpage{59}
+  \item \texttt  {ZeroLinkFromKnot}, \hyperpage{56}
 
 \end{theindex}

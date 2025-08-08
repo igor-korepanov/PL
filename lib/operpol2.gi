@@ -1249,7 +1249,7 @@ InstallGlobalFunction(UnionFaces, function(pol0, adr1, adr2)
 	if adr1[1] = adr2[1] then
 		dim:=adr1[1];
 	else
-		Print("Dimensions of both faces must be equal. \n");
+##  		Print("Dimensions of both faces must be equal. \n");
 		verify:=false;
 	fi;
 	sost1:=FaceComp(pol,adr1);
@@ -1265,7 +1265,7 @@ InstallGlobalFunction(UnionFaces, function(pol0, adr1, adr2)
 		disk:=[dim-1, int.(dim-1)[1]];
 	else
 		# Пересечение указанных клеток не является диском
-		Print("The intersection of the cells isn't a ball.\n");
+##  		Print("The intersection of the cells isn't a ball.\n");
 		verify:=false;
 		disk:=[];
 	fi;
@@ -1278,8 +1278,8 @@ InstallGlobalFunction(UnionFaces, function(pol0, adr1, adr2)
 			generalsost:=FaceComp(pol,disk);
 		else
 			# звезда клетки diski имеет более чем две (dim+1)-клетки
-			Print("The star the face ", disk, " have more then two (", dim,
-			")-balls.\n");
+##  			Print("The star the face ", disk, " have more then two (", dim,
+##  			")-balls.\n");
 			verify:=false;
 			generalsost:=rec();
 		fi;
@@ -1309,9 +1309,9 @@ InstallGlobalFunction(UnionFaces, function(pol0, adr1, adr2)
 			fi;
 		od;
 		pol:=DelFace(pol,[dim,max]);
-		Print("\t\t were unite \n");
+##  		Print("\t\t were unite \n");
 	else
-		Print("I cannot union the faces in a polytope. \n");
+##  		Print("I cannot union the faces in a polytope. \n");
 	fi;
 
 return pol;
@@ -1649,7 +1649,7 @@ end);
 
 
 InstallGlobalFunction(LengthPol, function(pol)
-	local	l, dim, i, total;
+	local	l, dim, i; # total;
 	
 	l:=rec();
 	l.0:=Length(pol.vertices);
@@ -1658,8 +1658,8 @@ InstallGlobalFunction(LengthPol, function(pol)
 		l.(i):=Length(pol.faces[i]);
 	od;
 	
-	total:=List([0 .. dim], x -> l.(x));
-	Print("total: ", Sum(total),"\n");
+##  	total:=List([0 .. dim], x -> l.(x));
+##  	Print("total: ", Sum(total),"\n");
 
 return l;
 end);
