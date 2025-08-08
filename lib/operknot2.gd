@@ -12,7 +12,7 @@ DeclareGlobalFunction( "TurnKnot" );
 DeclareGlobalFunction( "TripleDoubleBranchPoints" );
 DeclareGlobalFunction( "2KnotInS4" );
 ##  DeclareGlobalFunction( "Preimage2Knot" );
-DeclareGlobalFunction( "IsDiagrammOf2Kont" );
+DeclareGlobalFunction( "IsDiagrammOf2Knot" );
 ################################################################################
 DeclareGlobalFunction( "KnotGroup" );
 DeclareGlobalFunction( "TorusKnot" );

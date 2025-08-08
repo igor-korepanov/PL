@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-
 <!DOCTYPE BOOK SYSTEM "gapdoc.dtd">
 <Book Name="PL-manual">
 
@@ -7,7 +6,7 @@
 	<Title>
 		The <Package>PL</Package> package
 	</Title>
-	<Version> Version 2.5.0 </Version>
+	<Version> Version 2.6.0 </Version>
 	<Author> Igor G. Korepanov </Author>
 	<Author> Alex I. Korepanov </Author>
 	<Author> Nurlan M. Sadikov <Email>ancleCharly@gmail.com</Email></Author>
@@ -24,7 +23,6 @@
 		any your options) any later version.
 	</Copyright>
 </TitlePage>
-
 
 <TableOfContents/>
 <Body>
@@ -929,7 +927,7 @@ rec(faces:=[ [ [1,2] ], [ [1] ] ],
 	vertices:= ["A","B"]
 					</Example>
 					Как мы видим из примера полученные данные уже не являются
-					<M>pl-</M>разбиением.
+					<M>pl</M>-разбиением.
 				</Description>
 			</ManSection>
  			<ManSection><Func Name="VerticesRullGlueFace" Arg="pol,para,dim" />
@@ -940,7 +938,28 @@ rec(faces:=[ [ [1,2] ], [ [1] ] ],
  			   </Description>
  			</ManSection>
 			<ManSection><Func Name="VerticesRullGluePol" Arg="pol,subpol1,subpol2,dim" />
-	 			   <Description>
+	 			<Description>
+					Функция предоставляет возможность провести склейку
+					внутри политопа.В политопе должны быть указаны два
+					подполитопа размерности <M>k</M>, причем их разбиения
+					должны быть одинаковыми, так же эти разбения должны
+					обладать хотябы одной <M>k</M>-клеткой с <M>k+1</M>
+					вершиной или более.
+				</Description>
+				<Description>
+					Правила склейки задаются заранее в списке имен вершин
+					политопа, то есть в <M>pol.veritces</M>. Функция ищет все
+					вершины с одинаковыми именами и склеивает их в одну. Далее
+					весь процесс продолжается по индукции на клетки subpol1 и
+					subpol2 более высоких размерностей. Наличием <M>k</M>-клетки
+					хотябы c <M>k+1</M> вершиной обеспечивается однозначность
+					склейки. 
+				</Description>
+				<Description>
+					Для склейки двух политопов с помощью данной функции можно
+					воспользоваться свободным объединением FreeUnionPol.
+				</Description>
+					<!--
 					В политопе указывается два набора связных подполитопов,
 					которые необходимо склеить. Правила склеики подполитопов
 					указываются в именах вершин (вершины с одинаковыми именами
@@ -949,8 +968,8 @@ rec(faces:=[ [ [1,2] ], [ [1] ] ],
 					необходимо, что бы у подполитопов были одинаковые
 					pl-разбиения, а также, что бы в этом pl-разбиении
 					содержалась хоть одна n-клетка натянутая на хотябы на (n+1)
-					вершин.
-  	 	 		  </Description>
+					вершин. 
+  	 	 		  </Description>-->
 			</ManSection>
 
 		</Section>
@@ -1353,7 +1372,7 @@ rec( branch := rec( 13 := [ 2, 6, 22, 30 ], 19 := [ 13, 16, 37, 44 ] ),
 					</Example>
 				</Description>
 			</ManSection>
-			<ManSection><Func Name="IsDiagrammOf2Kont" Arg="pol" />
+			<ManSection><Func Name="IsDiagrammOf2Knot" Arg="pol" />
 				<Description>
  					Проверяет диаграмму 2-узла вложенную в трехмерное
 					многообразие. Для этого проверяются: 1) корректность всех
@@ -1364,7 +1383,7 @@ rec( branch := rec( 13 := [ 2, 6, 22, 30 ], 19 := [ 13, 16, 37, 44 ] ),
 
   All good!
 
- gap> IsDiagrammOf2Kont(pol);
+ gap> IsDiagrammOf2Knot(pol);
  true
 					</Example>
 				</Description>
@@ -1665,82 +1684,111 @@ rec( order := [ 3, 1, 4, 2 ], orient := [ 1, -1, 1, 1 ] )
 
 		</Section>
 		<Section><Heading>Рациональные функции</Heading>
-			Для удобств преобразований было решено рациональные функции хранить
-			в виде именованного списка содержащего три поля. Первые два поля
-			для рациональной функции <M>f</M> это поля <M>f.numerator</M> и
-			<M>f.denominator</M> соответствующие числителю и знаменателю
-			рациональной фукции. Каждое из этих полей является разложением на
-			неприводимые множители числителя и знаменателя соответственно.
-			Третье поле это <M>f.coef</M> которое содержит числовой коэффициент
-			рациональной функции составленный как отношение коэффициента при
-			старшей степени числителя к коэффициенту при старшей степени
-			знаменателя. Для неизвестных <M>x,y, \dots</M> используется
-			лексикографическое упорядочение.
+		Полином <M>f</M> можно разложить на множители <M>f = a f_1^{k_1} \dots
+		f_n^{k_n}</M>. Это дает возможность задать функцию <M>f</M> в электронном виде
+		более экономично. А именно функция будет записана так
+		[a, f_1, k_1, ... , f_n, k_n].
+		Как видно первый элемент списка является коэффициентом функции при старшей
+		степени, затем каждый четный элемент списка объявляет множители функции, а
+		каждый нечетный кратности множителей стоящих перед ним. Такую запись полинома
+		будем называть форматом RatFunc.
 
-			Например, для функции <M>f = \frac{2x^2-8y^2}{3x^2+2y^3}</M>
-			получим следующее представление
-			<Example>
-gap> SimplifyRationalFunction(f);
-rec( coef := 2/3, denominator := [ x_1^2+2/3*x_2^2 ],
-  numerator := [ x_1-2*x_2, x_1+2*x_2 ] )
-			</Example>
-
-			Для работы с данным форматом рациональных функций реализованы
-			основные арифметические операции с использованием следующего
-			приципа. Функции могут примать на вход как стандартный формат
-			записи функций, так и разложенный на неприводимые множители, на
-			выход будет подан только формат предлагаемый нами. Так как такое
-			представление потенциально занимает много компьютерной помяти по
-			возможности все данные всегда упрощаются.
-			<ManSection><Func Name="SimplifyRationalFunction" Arg="f" />
+		В формате RatFunc рациональная функция <M>r</M> представляется в виде
+		двухэлементного списка. Первый и второй элементы этого списка это числитель и
+		знаменатель рациональной функции <M>r</M>. Если вместо числителя(знаменателя) стоит
+		пустое множество, считаем, что числитель(знаменатель) равен единице.
+			<ManSection><Func Name="ConvertPolynomeToRatFunc" Arg="f" />
 				<Description>
-					Функция переводит в формат неприводимых множителей и
-					одновремено упрощает функцию <M>f</M>.
+					преобразует полином <M>f</M> в формат RatFunc
+				</Description>
+			</ManSection>
+			<ManSection><Func Name="ConvertToRatFunc" Arg="f" />
+				<Description>
+					преобразует рациональную функцию <M>f</M> в формат RatFunc.
+				</Description>
+			</ManSection>
+			<ManSection><Func Name="ConvertFromRatFuncToPolynom" Arg="f" />
+				<Description>
+					преобразует полином <M>f</M> из формата RatFunc в обычный формат
+				</Description>
+			</ManSection>
+			<ManSection><Func Name="ConvertFromRatFunc" Arg="f" />
+				<Description>
+					преобразует рациональную функцию <M>f</M> из формата RatFunc в
+					обычный формат.
+				</Description>
+			</ManSection>
+			<ManSection><Func Name="SimplifyRatFunc" Arg="f" />
+				<Description>
+					упрощение рациональной функции.
+					<Example>
+gap> f:=(x^2-y^2)/(x+y)^2;;
+gap> f1:=ConvertToRatFunc(f);
+[ [ 1, x-y, 1, x+y, 1 ], [ 1, x+y, 2 ] ]
+gap> SimplifyRatFunc(f1);
+[ [ 1, x-y, 1 ], [ 1, x+y, 1 ] ]
+gap> g:=[[2,x-y^2,0],[]];;
+gap> SimplifyRatFunc(g);
+[ [ 2 ], [ 1 ] ]
+					</Example>
+				</Description>
+			</ManSection>
+			<ManSection><Func Name="SumRatFunc" Arg="f,g" />
+				<Description>
+					Суммируем рациональные функции заданные в формате RatFunc
+				</Description>
+			</ManSection>
+			<ManSection><Func Name="ProdRatFunc" Arg="f,g" />
+				<Description>
+					функция произведения двух рациональных функций формата
+					RatFunc
 				</Description>
 			</ManSection>
 			<ManSection><Func Name="GcdPolynomial" Arg="f,g" />
 				<Description>
-					Находится наибольший общий делитель для двух полиномов.
-					Результат выдается в виде списка неприводимых многочленов.
-					<Example>
-gap> a:=x^5+y^5;;
-gap> b:=(x^7+y^7)*(x+y)^2;;
-gap> GcdPolynomial(a,b);
-[ x_1+x_2 ]
-					</Example>
+					вычисляется наибольший общий делитель полиномов <M>f</M> и
+					<M>g</M>. Входящие данные могут быть как в формате RatFunc,
+					так и в виде полиномов, ответ будет создан только в формате
+					RatFunc.
+				</Description>
+				<Description>
+					В вычислении наибольшего общего делителя не участвуют
+					коэффициенты фукнций <M>f</M> и <M>g</M>, их следует
+					вычислять отдельно.
 				</Description>
 			</ManSection>
 			<ManSection><Func Name="LcmPolynomial" Arg="f,g" />
 				<Description>
-					Находится наименьшее общее кратное для двух полиномов.
-					Результат выдается в виде списка неприводимых многочленов.
-					<Example>
-gap> a:=x^5+y^5;;
-gap> b:=(x^7+y^7)*(x+y)^2;;
-gap> LcmPolynomial(a,b);
-[ x_1+x_2, x_1+x_2, x_1+x_2, x_1^4-x_1^3*x_2+x_1^2*x_2^2-x_1*x_2^3+x_2^4,
-  x_1^6-x_1^5*x_2+x_1^4*x_2^2-x_1^3*x_2^3+x_1^2*x_2^4-x_1*x_2^5+x_2^6 ]
-					</Example>
+					вычисляется наименьшее общее кратное полиномов <M>f</M> и
+					<M>g</M>. Входящие данные могут быть как в формате RatFunc,
+					так и в виде полиномов, ответ будет создан в формате
+					RatFunc.
+				</Description>
+				<Description>
+					В вычислении наименьшего общего кратного не участвуют
+					коэффициенты фукнций <M>f</M> и <M>g</M>, их следует
+					вычислять отдельно.
 				</Description>
 			</ManSection>
-			<ManSection><Func Name="ProductRationalFunctions" Arg="f,g" />
-						<Func Name="DivideRationalFunction" Arg="f,g" />
+			<ManSection><Func Name="DerivativePolynomRatFunc" Arg="f,x" />
 				<Description>
-			<!--			Функция проводит умножение двух рациональных функций
-					заданных в формате неприводимых многочленов. 
-					<Example>
-					</Example> -->
-					Операции умножения и деления над рациональными функциями.
+					вычисляется производная полинома заданной в формате RatFunc
 				</Description>
 			</ManSection>
-			<!--			<ManSection><Func Name="DivideRationalFunction" Arg="f,g" />
+			<ManSection><Func Name="DerivativeRatFunc" Arg="f,x" />
 				<Description>
-					Осуществляется деление двух рациональных функций заданных в
-					формате неприводимых множителей.
-					<Example>
-					</Example>
+					вычисляется производная рациональной функции заданной в формате RatFunc
 				</Description>
-			</ManSection>	-->
+			</ManSection>
+			<ManSection><Func Name="JacobiMatRatFunc" Arg="listf,listx" />
+				<Description>
+					Для системы рациональных фукнций listf вычисляется матрица
+					якоби по переменным listx. Формат записи данных в список
+					listf может быть смешанным, то есть в список могут входить
+					как обычные функции, так и функции заданные в формате
+					RatFunc.
+				</Description>
+			</ManSection>
 		</Section>
 		<Section><Heading>Матрицы</Heading>
 			<ManSection><Func Name="Pfaffian" Arg="mat" />

@@ -43,7 +43,7 @@
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X845EC0BA802775BB">3.2-2 PolSimplifyWith2Knot</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X859D50D9858D5B25">3.2-3 SingularitySet2Knot</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X81D8934B80A7BE6A">3.2-4 TripleDoubleBranchPoints</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X85C517DC8068D8EF">3.2-5 IsDiagrammOf2Kont</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8448826B8111EC48">3.2-5 IsDiagrammOf2Knot</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X870383C87924E495">3.2-6 SurfaceOf2Knot</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X857BA8697BA2F587">3.2-7 TurnKnot</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X848FEA1F80CF0734">3.2-8 2KnotInS4</a></span>
@@ -283,11 +283,11 @@ rec( branch := rec( 13 := [ 2, 6, 22, 30 ], 19 := [ 13, 16, 37, 44 ] ),
           u := [ 2, 3, 4, 6 ] ) ) )
 					</pre></div>
 
-<p><a id="X85C517DC8068D8EF" name="X85C517DC8068D8EF"></a></p>
+<p><a id="X8448826B8111EC48" name="X8448826B8111EC48"></a></p>
 
-<h5>3.2-5 IsDiagrammOf2Kont</h5>
+<h5>3.2-5 IsDiagrammOf2Knot</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsDiagrammOf2Kont</code>( <var class="Arg">pol</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsDiagrammOf2Knot</code>( <var class="Arg">pol</var> )</td><td class="tdright">( функция )</td></tr></table></div>
 <p>Проверяет диаграмму 2-узла вложенную в трехмерное многообразие. Для этого проверяются: 1) корректность всех ссылок на клетки политопа, 2) граф двойных точек, 3) отсутствие точек самокасания.</p>
 
 
@@ -296,7 +296,7 @@ rec( branch := rec( 13 := [ 2, 6, 22, 30 ], 19 := [ 13, 16, 37, 44 ] ),
 
   All good!
 
- gap&gt; IsDiagrammOf2Kont(pol);
+ gap&gt; IsDiagrammOf2Knot(pol);
  true
 					</pre></div>
 

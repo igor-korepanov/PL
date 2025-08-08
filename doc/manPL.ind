@@ -6,8 +6,8 @@
 
   \item \texttt  {ballAB}, \hyperpage{23}
   \item \texttt  {ballTriangul}, \hyperpage{24}
-  \item \texttt  {BerezinIntegral}, \hyperpage{90}
-  \item \texttt  {BerezinMultipleIntegral}, \hyperpage{90}
+  \item \texttt  {BerezinIntegral}, \hyperpage{92}
+  \item \texttt  {BerezinMultipleIntegral}, \hyperpage{93}
 
   \indexspace
 
@@ -15,13 +15,18 @@
   \item \texttt  {ConnectedSubset}, \hyperpage{81}
   \item \texttt  {ConnectedSum}, \hyperpage{25}
   \item \texttt  {ContractMiniFace}, \hyperpage{18}
+  \item \texttt  {ConvertFromRatFunc}, \hyperpage{86}
+  \item \texttt  {ConvertFromRatFuncToPolynom}, \hyperpage{86}
+  \item \texttt  {ConvertPolynomeToRatFunc}, \hyperpage{85}
+  \item \texttt  {ConvertToRatFunc}, \hyperpage{85}
 
   \indexspace
 
   \item \texttt  {dataPachner}, \hyperpage{11}
   \item \texttt  {DelFace}, \hyperpage{31}
+  \item \texttt  {DerivativePolynomRatFunc}, \hyperpage{88}
+  \item \texttt  {DerivativeRatFunc}, \hyperpage{89}
   \item \texttt  {DivideFace}, \hyperpage{20}
-  \item \texttt  {DivideRationalFunction}, \hyperpage{87}
 
   \indexspace
 
@@ -37,17 +42,21 @@
 
   \indexspace
 
-  \item \texttt  {GcdPolynomial}, \hyperpage{86}
+  \item \texttt  {GcdPolynomial}, \hyperpage{87}
   \item \texttt  {GlueFaces}, \hyperpage{41}
-  \item \texttt  {GrassmannMonomialsProduct}, \hyperpage{89}
-  \item \texttt  {GrassmannProduct}, \hyperpage{90}
-  \item \texttt  {GrassmanSum}, \hyperpage{90}
+  \item \texttt  {GrassmannMonomialsProduct}, \hyperpage{92}
+  \item \texttt  {GrassmannProduct}, \hyperpage{92}
+  \item \texttt  {GrassmanSum}, \hyperpage{92}
 
   \indexspace
 
   \item \texttt  {ImageInPolProduct}, \hyperpage{26}
-  \item \texttt  {IsDiagrammOf2Kont}, \hyperpage{68}
+  \item \texttt  {IsDiagrammOf2Knot}, \hyperpage{68}
   \item \texttt  {IsPolytope}, \hyperpage{6}
+
+  \indexspace
+
+  \item \texttt  {JacobiMatRatFunc}, \hyperpage{89}
 
   \indexspace
 
@@ -57,7 +66,7 @@
 
   \indexspace
 
-  \item \texttt  {LcmPolynomial}, \hyperpage{87}
+  \item \texttt  {LcmPolynomial}, \hyperpage{88}
   \item \texttt  {LengthPol}, \hyperpage{8}
   \item License, \hyperpage{2}
   \item \texttt  {LineOrdering}, \hyperpage{83}
@@ -75,7 +84,7 @@
 
   \item \texttt  {ParallelSimplify}, \hyperpage{38}
   \item \texttt  {PermFaces}, \hyperpage{17}
-  \item \texttt  {Pfaffian}, \hyperpage{87}
+  \item \texttt  {Pfaffian}, \hyperpage{89}
   \item \texttt  {PolBnd}, \hyperpage{14}
   \item \texttt  {PolBoundary}, \hyperpage{9}
   \item \texttt  {PolCheckComb}, \hyperpage{16}
@@ -93,7 +102,7 @@
   \item \texttt  {PolSimplifyWith2Knot}, \hyperpage{64}
   \item \texttt  {PolTriangulate}, \hyperpage{16}
   \item \texttt  {PreimageInPolProduct}, \hyperpage{28}
-  \item \texttt  {ProductRationalFunctions}, \hyperpage{87}
+  \item \texttt  {ProdRatFunc}, \hyperpage{87}
 
   \indexspace
 
@@ -102,13 +111,14 @@
   \indexspace
 
   \item \texttt  {SetOfFacesBoundary}, \hyperpage{37}
-  \item \texttt  {SimplifyRationalFunction}, \hyperpage{86}
+  \item \texttt  {SimplifyRatFunc}, \hyperpage{86}
   \item \texttt  {SingularitySet2Knot}, \hyperpage{65}
   \item \texttt  {SortCircle}, \hyperpage{82}
   \item \texttt  {sphereAB}, \hyperpage{24}
   \item \texttt  {sphereTriangul}, \hyperpage{24}
   \item \texttt  {StarFace}, \hyperpage{15}
   \item \texttt  {SubPolytope}, \hyperpage{37}
+  \item \texttt  {SumRatFunc}, \hyperpage{86}
   \item \texttt  {SurfaceOf2Knot}, \hyperpage{69}
 
   \indexspace

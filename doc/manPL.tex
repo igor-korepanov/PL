@@ -95,7 +95,7 @@
 
 \hypersetup{pdftitle= The \textsf{PL} package }
 \markright{\scriptsize \mbox{}\hfill  The \textsf{PL} package  \hfill\mbox{}}
-{\Huge  Version 2.5.0 \mbox{}}\\[1cm]
+{\Huge  Version 2.6.0 \mbox{}}\\[1cm]
 {February, 2015\mbox{}}\\[1cm]
 \mbox{}\\[2cm]
 {\Large \textbf{ Igor G. Korepanov \mbox{}}}\\
@@ -2637,7 +2637,7 @@ pl-комплексе
 полученные
 данные
 уже не
-являются $pl-$разбиением. }
+являются $pl$-разбиением. }
 
  
 
@@ -2677,62 +2677,91 @@ dim
 }\hfill{\scriptsize (функция)}}\\
 
 
- В
+ Функция
+предоставляет
+возможность
+провести
+склейку
+внутри
+политопа.В
 политопе
-указывается
+должны
+быть
+указаны
 два
-набора
-связных
-подполитопов,
-которые
-необходимо
-склеить.
-Правила
-склеики
-подполитопов
-указываются
+подполитопа
+размерности $k$,
+причем
+их
+разбиения
+должны
+быть
+одинаковыми,
+так же
+эти
+разбения
+должны
+обладать
+хотябы
+одной $k$-клеткой
+с $k+1$ вершиной
+или
+более. 
+
+ Правила
+склейки
+задаются
+заранее
 в
-именах
+списке
+имен
 вершин
-(вершины
+политопа,
+то
+есть в $pol.veritces$.
+Функция
+ищет
+все
+вершины
 с
 одинаковыми
 именами
-склеиваются
-в одну),
-далее
-все
-это
-индуцируется
+и
+склеивает
+их в
+одну.
+Далее
+весь
+процесс
+продолжается
+по
+индукции
 на
 клетки
-большей
-размерности.
-Для
-работы
-данного
-алгоритма
-необходимо,
-что бы
-у
-подполитопов
-были
-одинаковые
-pl-разбиения,
-а
-также,
-что бы
-в этом
-pl-разбиении
-содержалась
-хоть
-одна
-n-клетка
-натянутая
-на
+subpol1 и subpol2
+более
+высоких
+размерностей.
+Наличием $k$-клетки
 хотябы
-на (n+1)
-вершин. }
+c $k+1$ вершиной
+обеспечивается
+однозначность
+склейки. 
+
+ Для
+склейки
+двух
+политопов
+с
+помощью
+данной
+функции
+можно
+воспользоваться
+свободным
+объединением
+FreeUnionPol. }
 
  }
 
@@ -4262,11 +4291,11 @@ result.triple
 
  
 
-\subsection{\textcolor{Chapter }{IsDiagrammOf2Kont}}
+\subsection{\textcolor{Chapter }{IsDiagrammOf2Knot}}
 \logpage{[ 3, 2, 5 ]}\nobreak
-\hyperdef{L}{X85C517DC8068D8EF}{}
-{\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{IsDiagrammOf2Kont({\mdseries\slshape pol})\index{IsDiagrammOf2Kont@\texttt{IsDiagrammOf2Kont}}
-\label{IsDiagrammOf2Kont}
+\hyperdef{L}{X8448826B8111EC48}{}
+{\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{IsDiagrammOf2Knot({\mdseries\slshape pol})\index{IsDiagrammOf2Knot@\texttt{IsDiagrammOf2Knot}}
+\label{IsDiagrammOf2Knot}
 }\hfill{\scriptsize (функция)}}\\
 
 
@@ -4298,7 +4327,7 @@ result.triple
   
     All good!
   
-   gap> IsDiagrammOf2Kont(pol);
+   gap> IsDiagrammOf2Knot(pol);
    true
   					
 \end{Verbatim}
@@ -5223,242 +5252,386 @@ list может
 функции}}\logpage{[ 4, 2, 0 ]}
 \hyperdef{L}{X7E0B26D57EB7AC25}{}
 {
- Для
-удобств
-преобразований
-было
-решено
-рациональные
-функции
-хранить
-в виде
-именованного
-списка
-содержащего
-три
-поля.
-Первые
-два
-поля
-для
-рациональной
-функции $f$ это
-поля $f.numerator$ и $f.denominator$ соответствующие
-числителю
-и
-знаменателю
-рациональной
-фукции.
-Каждое
-из
-этих
-полей
-является
-разложением
+ Полином $f$ можно
+разложить
 на
-неприводимые
-множители
-числителя
-и
-знаменателя
-соответственно.
-Третье
-поле
-это $f.coef$ которое
-содержит
-числовой
-коэффициент
-рациональной
-функции
-составленный
-как
-отношение
-коэффициента
-при
-старшей
-степени
-числителя
-к
-коэффициенту
-при
-старшей
-степени
-знаменателя.
-Для
-неизвестных $x,y, \dots$ используется
-лексикографическое
-упорядочение.
-Например,
-для
-функции $f = \frac{2x^2-8y^2}{3x^2+2y^3}$ получим
-следующее
-представление 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
-  !gapprompt@gap>| !gapinput@SimplifyRationalFunction(f);|
-  rec( coef := 2/3, denominator := [ x_1^2+2/3*x_2^2 ],
-    numerator := [ x_1-2*x_2, x_1+2*x_2 ] )
-  			
-\end{Verbatim}
- Для
-работы
-с
-данным
-форматом
-рациональных
-функций
-реализованы
-основные
-арифметические
-операции
-с
-использованием
-следующего
-приципа.
-Функции
-могут
-примать
-на
-вход
-как
-стандартный
-формат
-записи
-функций,
-так и
-разложенный
-на
-неприводимые
-множители,
-на
-выход
+множители $f = a f_1^{k_1} \dots f_n^{k_n}$. Это
+дает
+возможность
+задать
+функцию $f$ в
+электронном
+виде
+более
+экономично.
+А
+именно
+функция
 будет
-подан
-только
-формат
-предлагаемый
-нами.
-Так
-как
-такое
-представление
-потенциально
-занимает
-много
-компьютерной
-помяти
-по
-возможности
-все
-данные
-всегда
-упрощаются. 
+записана
+так [a, f{\textunderscore}1,
+k{\textunderscore}1, ... , f{\textunderscore}n, k{\textunderscore}n].
+Как
+видно
+первый
+элемент
+списка
+является
+коэффициентом
+функции
+при
+старшей
+степени,
+затем
+каждый
+четный
+элемент
+списка
+объявляет
+множители
+функции,
+а
+каждый
+нечетный
+кратности
+множителей
+стоящих
+перед
+ним.
+Такую
+запись
+полинома
+будем
+называть
+форматом
+RatFunc. В
+формате
+RatFunc
+рациональная
+функция $r$ представляется
+в виде
+двухэлементного
+списка.
+Первый
+и
+второй
+элементы
+этого
+списка
+это
+числитель
+и
+знаменатель
+рациональной
+функции $r$. Если
+вместо
+числителя(знаменателя)
+стоит
+пустое
+множество,
+считаем,
+что
+числитель(знаменатель)
+равен
+единице. 
 
-\subsection{\textcolor{Chapter }{SimplifyRationalFunction}}
+\subsection{\textcolor{Chapter }{ConvertPolynomeToRatFunc}}
 \logpage{[ 4, 2, 1 ]}\nobreak
-\hyperdef{L}{X7BACF0CC7BB23267}{}
-{\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{SimplifyRationalFunction({\mdseries\slshape f})\index{SimplifyRationalFunction@\texttt{SimplifyRationalFunction}}
-\label{SimplifyRationalFunction}
+\hyperdef{L}{X7C3E05D57A855C98}{}
+{\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{ConvertPolynomeToRatFunc({\mdseries\slshape f})\index{ConvertPolynomeToRatFunc@\texttt{ConvertPolynomeToRatFunc}}
+\label{ConvertPolynomeToRatFunc}
 }\hfill{\scriptsize (функция)}}\\
 
 
- Функция
-переводит
-в
+ преобразует
+полином $f$ в
 формат
-неприводимых
-множителей
-и
-одновремено
-упрощает
-функцию $f$. }
+RatFunc }
+
+ 
+
+\subsection{\textcolor{Chapter }{ConvertToRatFunc}}
+\logpage{[ 4, 2, 2 ]}\nobreak
+\hyperdef{L}{X7A779D807C39FF10}{}
+{\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{ConvertToRatFunc({\mdseries\slshape f})\index{ConvertToRatFunc@\texttt{ConvertToRatFunc}}
+\label{ConvertToRatFunc}
+}\hfill{\scriptsize (функция)}}\\
+
+
+ преобразует
+рациональную
+функцию $f$ в
+формат
+RatFunc. }
+
+ 
+
+\subsection{\textcolor{Chapter }{ConvertFromRatFuncToPolynom}}
+\logpage{[ 4, 2, 3 ]}\nobreak
+\hyperdef{L}{X7F0A392F7EC34763}{}
+{\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{ConvertFromRatFuncToPolynom({\mdseries\slshape f})\index{ConvertFromRatFuncToPolynom@\texttt{ConvertFromRatFuncToPolynom}}
+\label{ConvertFromRatFuncToPolynom}
+}\hfill{\scriptsize (функция)}}\\
+
+
+ преобразует
+полином $f$ из
+формата
+RatFunc в
+обычный
+формат }
+
+ 
+
+\subsection{\textcolor{Chapter }{ConvertFromRatFunc}}
+\logpage{[ 4, 2, 4 ]}\nobreak
+\hyperdef{L}{X7DF541D77AED60BA}{}
+{\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{ConvertFromRatFunc({\mdseries\slshape f})\index{ConvertFromRatFunc@\texttt{ConvertFromRatFunc}}
+\label{ConvertFromRatFunc}
+}\hfill{\scriptsize (функция)}}\\
+
+
+ преобразует
+рациональную
+функцию $f$ из
+формата
+RatFunc в
+обычный
+формат. }
+
+ 
+
+\subsection{\textcolor{Chapter }{SimplifyRatFunc}}
+\logpage{[ 4, 2, 5 ]}\nobreak
+\hyperdef{L}{X85525EF3795860BC}{}
+{\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{SimplifyRatFunc({\mdseries\slshape f})\index{SimplifyRatFunc@\texttt{SimplifyRatFunc}}
+\label{SimplifyRatFunc}
+}\hfill{\scriptsize (функция)}}\\
+
+
+ упрощение
+рациональной
+функции. 
+\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
+  !gapprompt@gap>| !gapinput@f:=(x^2-y^2)/(x+y)^2;;|
+  !gapprompt@gap>| !gapinput@f1:=ConvertToRatFunc(f);|
+  [ [ 1, x-y, 1, x+y, 1 ], [ 1, x+y, 2 ] ]
+  !gapprompt@gap>| !gapinput@SimplifyRatFunc(f1);|
+  [ [ 1, x-y, 1 ], [ 1, x+y, 1 ] ]
+  !gapprompt@gap>| !gapinput@g:=[[2,x-y^2,0],[]];;|
+  !gapprompt@gap>| !gapinput@SimplifyRatFunc(g);|
+  [ [ 2 ], [ 1 ] ]
+  					
+\end{Verbatim}
+ }
+
+ 
+
+\subsection{\textcolor{Chapter }{SumRatFunc}}
+\logpage{[ 4, 2, 6 ]}\nobreak
+\hyperdef{L}{X82E0B0FC7992BA2E}{}
+{\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{SumRatFunc({\mdseries\slshape f, g})\index{SumRatFunc@\texttt{SumRatFunc}}
+\label{SumRatFunc}
+}\hfill{\scriptsize (функция)}}\\
+
+
+ Суммируем
+рациональные
+функции
+заданные
+в
+формате
+RatFunc }
+
+ 
+
+\subsection{\textcolor{Chapter }{ProdRatFunc}}
+\logpage{[ 4, 2, 7 ]}\nobreak
+\hyperdef{L}{X7B1F22A07F55E140}{}
+{\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{ProdRatFunc({\mdseries\slshape f, g})\index{ProdRatFunc@\texttt{ProdRatFunc}}
+\label{ProdRatFunc}
+}\hfill{\scriptsize (функция)}}\\
+
+
+ функция
+произведения
+двух
+рациональных
+функций
+формата
+RatFunc }
 
  
 
 \subsection{\textcolor{Chapter }{GcdPolynomial}}
-\logpage{[ 4, 2, 2 ]}\nobreak
+\logpage{[ 4, 2, 8 ]}\nobreak
 \hyperdef{L}{X8500B73B8429F14B}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{GcdPolynomial({\mdseries\slshape f, g})\index{GcdPolynomial@\texttt{GcdPolynomial}}
 \label{GcdPolynomial}
 }\hfill{\scriptsize (функция)}}\\
 
 
- Находится
+ вычисляется
 наибольший
 общий
 делитель
-для
-двух
-полиномов.
-Результат
-выдается
-в виде
-списка
-неприводимых
-многочленов. 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
-  !gapprompt@gap>| !gapinput@a:=x^5+y^5;;|
-  !gapprompt@gap>| !gapinput@b:=(x^7+y^7)*(x+y)^2;;|
-  !gapprompt@gap>| !gapinput@GcdPolynomial(a,b);|
-  [ x_1+x_2 ]
-  					
-\end{Verbatim}
- }
+полиномов $f$ и $g$.
+Входящие
+данные
+могут
+быть
+как в
+формате
+RatFunc, так и в
+виде
+полиномов,
+ответ
+будет
+создан
+только
+в
+формате
+RatFunc. 
+
+ В
+вычислении
+наибольшего
+общего
+делителя
+не
+участвуют
+коэффициенты
+фукнций $f$ и $g$, их
+следует
+вычислять
+отдельно. }
 
  
 
 \subsection{\textcolor{Chapter }{LcmPolynomial}}
-\logpage{[ 4, 2, 3 ]}\nobreak
+\logpage{[ 4, 2, 9 ]}\nobreak
 \hyperdef{L}{X7CC8FF297DA9CF6B}{}
 {\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{LcmPolynomial({\mdseries\slshape f, g})\index{LcmPolynomial@\texttt{LcmPolynomial}}
 \label{LcmPolynomial}
 }\hfill{\scriptsize (функция)}}\\
 
 
- Находится
+ вычисляется
 наименьшее
 общее
 кратное
-для
-двух
-полиномов.
-Результат
-выдается
-в виде
-списка
-неприводимых
-многочленов. 
-\begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Пример]
-  !gapprompt@gap>| !gapinput@a:=x^5+y^5;;|
-  !gapprompt@gap>| !gapinput@b:=(x^7+y^7)*(x+y)^2;;|
-  !gapprompt@gap>| !gapinput@LcmPolynomial(a,b);|
-  [ x_1+x_2, x_1+x_2, x_1+x_2, x_1^4-x_1^3*x_2+x_1^2*x_2^2-x_1*x_2^3+x_2^4,
-    x_1^6-x_1^5*x_2+x_1^4*x_2^2-x_1^3*x_2^3+x_1^2*x_2^4-x_1*x_2^5+x_2^6 ]
-  					
-\end{Verbatim}
- }
+полиномов $f$ и $g$.
+Входящие
+данные
+могут
+быть
+как в
+формате
+RatFunc, так и в
+виде
+полиномов,
+ответ
+будет
+создан
+в
+формате
+RatFunc. 
+
+ В
+вычислении
+наименьшего
+общего
+кратного
+не
+участвуют
+коэффициенты
+фукнций $f$ и $g$, их
+следует
+вычислять
+отдельно. }
 
  
 
-\subsection{\textcolor{Chapter }{ProductRationalFunctions}}
-\logpage{[ 4, 2, 4 ]}\nobreak
-\hyperdef{L}{X79D5A7157856DB6A}{}
-{\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{ProductRationalFunctions({\mdseries\slshape f, g})\index{ProductRationalFunctions@\texttt{ProductRationalFunctions}}
-\label{ProductRationalFunctions}
-}\hfill{\scriptsize (функция)}}\\
-\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{DivideRationalFunction({\mdseries\slshape f, g})\index{DivideRationalFunction@\texttt{DivideRationalFunction}}
-\label{DivideRationalFunction}
+\subsection{\textcolor{Chapter }{DerivativePolynomRatFunc}}
+\logpage{[ 4, 2, 10 ]}\nobreak
+\hyperdef{L}{X81EA09AF878104FB}{}
+{\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{DerivativePolynomRatFunc({\mdseries\slshape f, x})\index{DerivativePolynomRatFunc@\texttt{DerivativePolynomRatFunc}}
+\label{DerivativePolynomRatFunc}
 }\hfill{\scriptsize (функция)}}\\
 
 
-  Операции
-умножения
-и
-деления
-над
-рациональными
-функциями. }
+ вычисляется
+производная
+полинома
+заданной
+в
+формате
+RatFunc }
 
-  }
+ 
+
+\subsection{\textcolor{Chapter }{DerivativeRatFunc}}
+\logpage{[ 4, 2, 11 ]}\nobreak
+\hyperdef{L}{X8112D91385A27DB0}{}
+{\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{DerivativeRatFunc({\mdseries\slshape f, x})\index{DerivativeRatFunc@\texttt{DerivativeRatFunc}}
+\label{DerivativeRatFunc}
+}\hfill{\scriptsize (функция)}}\\
+
+
+ вычисляется
+производная
+рациональной
+функции
+заданной
+в
+формате
+RatFunc }
+
+ 
+
+\subsection{\textcolor{Chapter }{JacobiMatRatFunc}}
+\logpage{[ 4, 2, 12 ]}\nobreak
+\hyperdef{L}{X7F66B38A832B0FBD}{}
+{\noindent\textcolor{FuncColor}{$\triangleright$\ \ \texttt{JacobiMatRatFunc({\mdseries\slshape listf, listx})\index{JacobiMatRatFunc@\texttt{JacobiMatRatFunc}}
+\label{JacobiMatRatFunc}
+}\hfill{\scriptsize (функция)}}\\
+
+
+ Для
+системы
+рациональных
+фукнций
+listf
+вычисляется
+матрица
+якоби
+по
+переменным
+listx.
+Формат
+записи
+данных
+в
+список
+listf может
+быть
+смешанным,
+то
+есть в
+список
+могут
+входить
+как
+обычные
+функции,
+так и
+функции
+заданные
+в
+формате
+RatFunc. }
+
+ }
 
  
 \section{\textcolor{Chapter }{Матрицы}}\logpage{[ 4, 3, 0 ]}

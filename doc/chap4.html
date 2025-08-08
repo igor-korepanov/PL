@@ -31,10 +31,18 @@
 <div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X7E0B26D57EB7AC25">4.2 <span class="Heading">Рациональные функции</span></a>
 </span>
 <div class="ContSSBlock">
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7BACF0CC7BB23267">4.2-1 SimplifyRationalFunction</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X8500B73B8429F14B">4.2-2 GcdPolynomial</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7CC8FF297DA9CF6B">4.2-3 LcmPolynomial</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X79D5A7157856DB6A">4.2-4 ProductRationalFunctions</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7C3E05D57A855C98">4.2-1 ConvertPolynomeToRatFunc</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7A779D807C39FF10">4.2-2 ConvertToRatFunc</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7F0A392F7EC34763">4.2-3 ConvertFromRatFuncToPolynom</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7DF541D77AED60BA">4.2-4 ConvertFromRatFunc</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X85525EF3795860BC">4.2-5 SimplifyRatFunc</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X82E0B0FC7992BA2E">4.2-6 SumRatFunc</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7B1F22A07F55E140">4.2-7 ProdRatFunc</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X8500B73B8429F14B">4.2-8 GcdPolynomial</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7CC8FF297DA9CF6B">4.2-9 LcmPolynomial</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X81EA09AF878104FB">4.2-10 DerivativePolynomRatFunc</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X8112D91385A27DB0">4.2-11 DerivativeRatFunc</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap4.html#X7F66B38A832B0FBD">4.2-12 JacobiMatRatFunc</a></span>
 </div></div>
 <div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4.html#X838E89737800BD8B">4.3 <span class="Heading">Матрицы</span></a>
 </span>
@@ -119,62 +127,107 @@ rec( order := [ 3, 1, 4, 2 ], orient := [ 1, -1, 1, 1 ] )
 
 <h4>4.2 <span class="Heading">Рациональные функции</span></h4>
 
-<p>Для удобств преобразований было решено рациональные функции хранить в виде именованного списка содержащего три поля. Первые два поля для рациональной функции <span class="SimpleMath">f</span> это поля <span class="SimpleMath">f.numerator</span> и <span class="SimpleMath">f.denominator</span> соответствующие числителю и знаменателю рациональной фукции. Каждое из этих полей является разложением на неприводимые множители числителя и знаменателя соответственно. Третье поле это <span class="SimpleMath">f.coef</span> которое содержит числовой коэффициент рациональной функции составленный как отношение коэффициента при старшей степени числителя к коэффициенту при старшей степени знаменателя. Для неизвестных <span class="SimpleMath">x,y, dots</span> используется лексикографическое упорядочение. Например, для функции <span class="SimpleMath">f = frac2x^2-8y^23x^2+2y^3</span> получим следующее представление</p>
+<p>Полином <span class="SimpleMath">f</span> можно разложить на множители <span class="SimpleMath">f = a f_1^k_1 dots f_n^k_n</span>. Это дает возможность задать функцию <span class="SimpleMath">f</span> в электронном виде более экономично. А именно функция будет записана так [a, f_1, k_1, ... , f_n, k_n]. Как видно первый элемент списка является коэффициентом функции при старшей степени, затем каждый четный элемент списка объявляет множители функции, а каждый нечетный кратности множителей стоящих перед ним. Такую запись полинома будем называть форматом RatFunc. В формате RatFunc рациональная функция <span class="SimpleMath">r</span> представляется в виде двухэлементного списка. Первый и второй элементы этого списка это числитель и знаменатель рациональной функции <span class="SimpleMath">r</span>. Если вместо числителя(знаменателя) стоит пустое множество, считаем, что числитель(знаменатель) равен единице.</p>
+
+<p><a id="X7C3E05D57A855C98" name="X7C3E05D57A855C98"></a></p>
+
+<h5>4.2-1 ConvertPolynomeToRatFunc</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ConvertPolynomeToRatFunc</code>( <var class="Arg">f</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<p>преобразует полином <span class="SimpleMath">f</span> в формат RatFunc</p>
+
+<p><a id="X7A779D807C39FF10" name="X7A779D807C39FF10"></a></p>
+
+<h5>4.2-2 ConvertToRatFunc</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ConvertToRatFunc</code>( <var class="Arg">f</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<p>преобразует рациональную функцию <span class="SimpleMath">f</span> в формат RatFunc.</p>
+
+<p><a id="X7F0A392F7EC34763" name="X7F0A392F7EC34763"></a></p>
+
+<h5>4.2-3 ConvertFromRatFuncToPolynom</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ConvertFromRatFuncToPolynom</code>( <var class="Arg">f</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<p>преобразует полином <span class="SimpleMath">f</span> из формата RatFunc в обычный формат</p>
+
+<p><a id="X7DF541D77AED60BA" name="X7DF541D77AED60BA"></a></p>
+
+<h5>4.2-4 ConvertFromRatFunc</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ConvertFromRatFunc</code>( <var class="Arg">f</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<p>преобразует рациональную функцию <span class="SimpleMath">f</span> из формата RatFunc в обычный формат.</p>
+
+<p><a id="X85525EF3795860BC" name="X85525EF3795860BC"></a></p>
+
+<h5>4.2-5 SimplifyRatFunc</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SimplifyRatFunc</code>( <var class="Arg">f</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<p>упрощение рациональной функции.</p>
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SimplifyRationalFunction(f);</span>
-rec( coef := 2/3, denominator := [ x_1^2+2/3*x_2^2 ],
-  numerator := [ x_1-2*x_2, x_1+2*x_2 ] )
-			</pre></div>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f:=(x^2-y^2)/(x+y)^2;;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">f1:=ConvertToRatFunc(f);</span>
+[ [ 1, x-y, 1, x+y, 1 ], [ 1, x+y, 2 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SimplifyRatFunc(f1);</span>
+[ [ 1, x-y, 1 ], [ 1, x+y, 1 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">g:=[[2,x-y^2,0],[]];;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SimplifyRatFunc(g);</span>
+[ [ 2 ], [ 1 ] ]
+					</pre></div>
 
-<p>Для работы с данным форматом рациональных функций реализованы основные арифметические операции с использованием следующего приципа. Функции могут примать на вход как стандартный формат записи функций, так и разложенный на неприводимые множители, на выход будет подан только формат предлагаемый нами. Так как такое представление потенциально занимает много компьютерной помяти по возможности все данные всегда упрощаются.</p>
+<p><a id="X82E0B0FC7992BA2E" name="X82E0B0FC7992BA2E"></a></p>
 
-<p><a id="X7BACF0CC7BB23267" name="X7BACF0CC7BB23267"></a></p>
+<h5>4.2-6 SumRatFunc</h5>
 
-<h5>4.2-1 SimplifyRationalFunction</h5>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SumRatFunc</code>( <var class="Arg">f</var>, <var class="Arg">g</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<p>Суммируем рациональные функции заданные в формате RatFunc</p>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SimplifyRationalFunction</code>( <var class="Arg">f</var> )</td><td class="tdright">( функция )</td></tr></table></div>
-<p>Функция переводит в формат неприводимых множителей и одновремено упрощает функцию <span class="SimpleMath">f</span>.</p>
+<p><a id="X7B1F22A07F55E140" name="X7B1F22A07F55E140"></a></p>
+
+<h5>4.2-7 ProdRatFunc</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ProdRatFunc</code>( <var class="Arg">f</var>, <var class="Arg">g</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<p>функция произведения двух рациональных функций формата RatFunc</p>
 
 <p><a id="X8500B73B8429F14B" name="X8500B73B8429F14B"></a></p>
 
-<h5>4.2-2 GcdPolynomial</h5>
+<h5>4.2-8 GcdPolynomial</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GcdPolynomial</code>( <var class="Arg">f</var>, <var class="Arg">g</var> )</td><td class="tdright">( функция )</td></tr></table></div>
-<p>Находится наибольший общий делитель для двух полиномов. Результат выдается в виде списка неприводимых многочленов.</p>
+<p>вычисляется наибольший общий делитель полиномов <span class="SimpleMath">f</span> и <span class="SimpleMath">g</span>. Входящие данные могут быть как в формате RatFunc, так и в виде полиномов, ответ будет создан только в формате RatFunc.</p>
 
-
-<div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a:=x^5+y^5;;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">b:=(x^7+y^7)*(x+y)^2;;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GcdPolynomial(a,b);</span>
-[ x_1+x_2 ]
-					</pre></div>
+<p>В вычислении наибольшего общего делителя не участвуют коэффициенты фукнций <span class="SimpleMath">f</span> и <span class="SimpleMath">g</span>, их следует вычислять отдельно.</p>
 
 <p><a id="X7CC8FF297DA9CF6B" name="X7CC8FF297DA9CF6B"></a></p>
 
-<h5>4.2-3 LcmPolynomial</h5>
+<h5>4.2-9 LcmPolynomial</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LcmPolynomial</code>( <var class="Arg">f</var>, <var class="Arg">g</var> )</td><td class="tdright">( функция )</td></tr></table></div>
-<p>Находится наименьшее общее кратное для двух полиномов. Результат выдается в виде списка неприводимых многочленов.</p>
+<p>вычисляется наименьшее общее кратное полиномов <span class="SimpleMath">f</span> и <span class="SimpleMath">g</span>. Входящие данные могут быть как в формате RatFunc, так и в виде полиномов, ответ будет создан в формате RatFunc.</p>
 
+<p>В вычислении наименьшего общего кратного не участвуют коэффициенты фукнций <span class="SimpleMath">f</span> и <span class="SimpleMath">g</span>, их следует вычислять отдельно.</p>
 
-<div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">a:=x^5+y^5;;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">b:=(x^7+y^7)*(x+y)^2;;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">LcmPolynomial(a,b);</span>
-[ x_1+x_2, x_1+x_2, x_1+x_2, x_1^4-x_1^3*x_2+x_1^2*x_2^2-x_1*x_2^3+x_2^4,
-  x_1^6-x_1^5*x_2+x_1^4*x_2^2-x_1^3*x_2^3+x_1^2*x_2^4-x_1*x_2^5+x_2^6 ]
-					</pre></div>
+<p><a id="X81EA09AF878104FB" name="X81EA09AF878104FB"></a></p>
 
-<p><a id="X79D5A7157856DB6A" name="X79D5A7157856DB6A"></a></p>
+<h5>4.2-10 DerivativePolynomRatFunc</h5>
 
-<h5>4.2-4 ProductRationalFunctions</h5>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DerivativePolynomRatFunc</code>( <var class="Arg">f</var>, <var class="Arg">x</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<p>вычисляется производная полинома заданной в формате RatFunc</p>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ProductRationalFunctions</code>( <var class="Arg">f</var>, <var class="Arg">g</var> )</td><td class="tdright">( функция )</td></tr></table></div>
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DivideRationalFunction</code>( <var class="Arg">f</var>, <var class="Arg">g</var> )</td><td class="tdright">( функция )</td></tr></table></div>
-<p>Операции умножения и деления над рациональными функциями.</p>
+<p><a id="X8112D91385A27DB0" name="X8112D91385A27DB0"></a></p>
+
+<h5>4.2-11 DerivativeRatFunc</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DerivativeRatFunc</code>( <var class="Arg">f</var>, <var class="Arg">x</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<p>вычисляется производная рациональной функции заданной в формате RatFunc</p>
+
+<p><a id="X7F66B38A832B0FBD" name="X7F66B38A832B0FBD"></a></p>
+
+<h5>4.2-12 JacobiMatRatFunc</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; JacobiMatRatFunc</code>( <var class="Arg">listf</var>, <var class="Arg">listx</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<p>Для системы рациональных фукнций listf вычисляется матрица якоби по переменным listx. Формат записи данных в список listf может быть смешанным, то есть в список могут входить как обычные функции, так и функции заданные в формате RatFunc.</p>
 
 <p><a id="X838E89737800BD8B" name="X838E89737800BD8B"></a></p>
 

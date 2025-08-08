@@ -1,228 +1,477 @@
-################################################################################
+# Формат данных RatFunc.
+# Полином <M>f</M> можно разложить на множители <M>f = a f_1^{k_1} \dots
+# f_n^{k_n}</M>. Это дает возможность задать функцию <M>f</M> в электронном виде
+# более экономично. А именно функция будет записана так
+# [a, f_1, k_1, ... , f_n, k_n].
+# Как видно первый элемент списка является коэффициентом функции при старшей
+# степени, затем каждый четный элемент списка объявляет множители функции, а
+# каждый нечетный кратности множителей стоящих перед ним. Такую запись полинома
+# будем называть форматом RatFunc.
 
-#			<ManSection><Func Name="DivideRationalFunction" Arg="f,g" />
+# В формате RatFunc рациональная функция <M>r</M> представляется в виде
+# двухэлементного списка. Первый и второй элементы этого списка это числитель и
+# знаменатель рациональной функции <M>r</M>. Если вместо числителя(знаменателя) стоит
+# пустое множество, считаем, что числитель(знаменатель) равен единице.
+
+#------------------------------------------------------------------------------
+#			<ManSection><Func Name="ConvertPolynomeToRatFunc" Arg="f" />
 #				<Description>
-#					Осуществляется деление двух рациональных функций заданных в
-#					формате неприводимых множителей.
-#					<Example>
-#					</Example>
+#					преобразует полином <M>f</M> в формат RatFunc
 #				</Description>
 #			</ManSection>
 
-InstallGlobalFunction( DivideRationalFunction,
-function(f1,g1)
-	local	f, g, h;
+InstallGlobalFunction( ConvertPolynomeToRatFunc,function(f0)
+	local coef, list, f;
 
-	f:=SimplifyRationalFunction(f1);
-	g:=SimplifyRationalFunction(g1);
+	if IsPolynomial(f0) then
+		coef:=LeadingCoefficient(f0);
+		if IsZero(coef) then
+			list:=[0];
+		else
+			f:=f0/coef;
+			if IsOne(f) then
+				f:=[];
+			else
+				f:=Factors(f);
+			fi;
+			list:=Collected(f);
+			list:=Concatenation(list);
+			Add(list,coef,1);
+		fi;
+	else
+		list:=[f0];
+	fi;
 
-	f.numerator:=Append(f.numerator, g.denominator);
-	f.denominator:=Append(f.denominator, g.numerator);
-
-	h:=rec(	coef:=f.coef/g.coef, 
-	 		numerator:=f.numerator,
-	 		denominator:=f.denominator);
-
-return SimplifyRationalFunction(h);
+	return list;
 end);
-################################################################################
 
+#------------------------------------------------------------------------------
+#			<ManSection><Func Name="ConvertToRatFunc" Arg="f" />
+#				<Description>
+#					преобразует рациональную функцию <M>f</M> в формат RatFunc.
+#				</Description>
+#			</ManSection>
+
+InstallGlobalFunction( ConvertToRatFunc,function(f)
+	local numerator, denominator;
+
+	numerator:=NumeratorOfRationalFunction(f);
+	numerator:=ConvertPolynomeToRatFunc(numerator);
+	denominator:=DenominatorOfRationalFunction(f);
+	denominator:=ConvertPolynomeToRatFunc(denominator);
+
+	return [numerator, denominator];
+end);
+
+#------------------------------------------------------------------------------
 #			<ManSection><Func Name="GcdPolynomial" Arg="f,g" />
 #				<Description>
-#					Находится наибольший общий делитель для двух полиномов.
-#					Результат выдается в виде списка неприводимых многочленов.
-#					<Example>
-#gap> a:=x^5+y^5;;
-#gap> b:=(x^7+y^7)*(x+y)^2;;
-#gap> GcdPolynomial(a,b);
-#[ x_1+x_2 ]
-#					</Example>
+#					вычисляется наибольший общий делитель полиномов <M>f</M> и
+#					<M>g</M>. Входящие данные могут быть как в формате RatFunc,
+#					так и в виде полиномов, ответ будет создан только в формате
+#					RatFunc.
 #				</Description>
-#			</ManSection>
-
-InstallGlobalFunction(GcdPolynomial,
-function(f,g)
-	local	coef_f, coef_g, list_f, list_g, i, p, pos, gcd, ind;
-
-	if IsPolynomial(f) then
-		coef_f:=LeadingCoefficient(f);
-		list_f:=Factors(f/coef_f);
-	elif IsRecord(f) then
-		list_f:=StructuralCopy(f.numerator);
-	fi;
-	if IsPolynomial(g) then
-		coef_g:=LeadingCoefficient(g);
-		list_g:=Factors(g/coef_g);
-	elif IsRecord(g) then
-		list_g:=StructuralCopy(g.numerator);
-	fi;
-
-	i:=1;
-	ind:=[];
-	for p in list_f do
-		pos:=Position(list_g, p);
-		if pos=fail then
-		else
-			Remove(list_g,pos);
-			Add(ind,i);
-		fi;
-		i:=i+1;
-	od;
-	gcd:=[];
-	while not IsEmpty(ind) do
-		Add(gcd,Remove(list_f, Remove(ind)));
-	od;
-
-return gcd;
-end);
-################################################################################
-
-#			<ManSection><Func Name="LcmPolynomial" Arg="f,g" />
 #				<Description>
-#					Находится наименьшее общее кратное для двух полиномов.
-#					Результат выдается в виде списка неприводимых многочленов.
-#					<Example>
-#gap> a:=x^5+y^5;;
-#gap> b:=(x^7+y^7)*(x+y)^2;;
-#gap> LcmPolynomial(a,b);
-#[ x_1+x_2, x_1+x_2, x_1+x_2, x_1^4-x_1^3*x_2+x_1^2*x_2^2-x_1*x_2^3+x_2^4,
-#  x_1^6-x_1^5*x_2+x_1^4*x_2^2-x_1^3*x_2^3+x_1^2*x_2^4-x_1*x_2^5+x_2^6 ]
-#					</Example>
+#					В вычислении наибольшего общего делителя не участвуют
+#					коэффициенты фукнций <M>f</M> и <M>g</M>, их следует
+#					вычислять отдельно.
 #				</Description>
 #			</ManSection>
 
-InstallGlobalFunction(LcmPolynomial,
-function(f,g)
-	local	coef_f, coef_g, list_f, list_g, i, ind, lcm, common, chastots;
+InstallGlobalFunction( GcdPolynomial,function(f0,g0)
+	local f, g, gcd, gk, deg, pos;
 
-	if IsPolynomial(f) then
-		coef_f:=LeadingCoefficient(f);
-		list_f:=Factors(f/coef_f);
-	elif IsRecord(f) then
-		list_f:=StructuralCopy(f.numerator);
-	fi;
-	if IsPolynomial(g) then
-		coef_g:=LeadingCoefficient(g);
-		list_g:=Factors(g/coef_g);
-	elif IsRecord(g) then
-		list_g:=StructuralCopy(g.numerator);
-	fi;
-
-	common:=Union(list_f,list_g);
-	chastots:=List(common, 
-		x -> Maximum(Length(Positions(list_f,x)),Length(Positions(list_g,x))));
-	ind:=[1 .. Length(common)];
-	lcm:=List(ind, i -> List([1..chastots[i]], x -> common[i]));
-	lcm:=Concatenation(lcm);
-
-return lcm;
-end);
-################################################################################
-
-#			<ManSection><Func Name="ProductRationalFunctions" Arg="f,g" />
-#				<Description>
-#					Функция проводит умножение двух рациональных функций
-#					заданных в формате неприводимых многочленов.
-#					<Example>
-#					</Example>
-#				</Description>
-#			</ManSection>
-
-InstallGlobalFunction(ProductRationalFunctions,
-function(f1,g1)
-	local	h, f, g;
-
-	f:=SimplifyRationalFunction(f1);
-	g:=SimplifyRationalFunction(g1);
-	h:=f;
-	Append(h.numerator, g.numerator);
-	Append(h.denominator, g.denominator);
-	h.coef:=h.coef * g.coef;
-	h:=SimplifyRationalFunction(h);
-
-return h;
-end);
-
-################################################################################
-#	Упрощение рациональной функции. В GAP рациональные функции либо не
-#	сокращаются (имеется в виду сокращение общих множителей), либо
-#	сокращаются не полностью. Так же могут не сокращаться числовые
-#	коэффициенты. Данная программа обходит это неудобство. (На сколько
-#	позволяет функционал GAP).
-
-InstallGlobalFunction(SimplifyRationalFunction,
-function(ratf)
-	local	numerator, denominator, lcn, lcd, factorN, factorD,
-	commonfactors, element, pos, coef, quastion_record, quastion_rational,
-	s, edinica, ind, i;
-
-
-	quastion_record:=IsRecord(ratf);
-	quastion_rational:=IsRationalFunction(ratf);
-	
-	if quastion_record then 
-		factorN:=StructuralCopy(ratf.numerator);
-		factorD:=StructuralCopy(ratf.denominator);
-		coef:=ratf.coefficient;
-	elif quastion_rational then
-#	 1)-----------------------------------------------------------------------
-		numerator:=NumeratorOfRationalFunction(ratf);
-		denominator:=DenominatorOfRationalFunction(ratf);
-		lcn:=LeadingCoefficient(numerator);	# тип данных - число
-		lcd:=LeadingCoefficient(denominator);	# тип данных - число
-		coef:=lcn/lcd;
-		numerator:=numerator/lcn;
-		denominator:=denominator/lcd;
-		factorN:=Factors(numerator); #Print(" + \n");
-		factorD:=Factors(denominator); #Print(" + \n");
+	if IsPolynomial(f0) then
+		f:=ConvertPolynomeToRatFunc(f0);
 	else
-		Print("Sory, function  \n", ratf, "\n isn't rational function.\n");
+		f:=StructuralCopy(f0);
+	fi;
+	if IsPolynomial(g0) then
+		g:=ConvertPolynomeToRatFunc(g0);
+	else
+		g:=StructuralCopy(g0);
 	fi;
 
-#	 2)-----------------------------------------------------------------------
-	i:=1;
-	ind:=[];
-	for element in factorD do
-		pos:=Position(factorN, element);
+	gcd:=[1];
+	Remove(g,1);
+	Remove(f,1);
+	while (not IsEmpty(g)) and (not IsEmpty(f)) do
+		gk:=Remove(g,1);
+		deg:=Remove(g,1);
+		pos:=Position(f, gk);
 		if pos = fail then
 		else
-			Remove(factorN,pos);
-			Add(ind,i);
+			Remove(f, pos);
+			Add(gcd, gk);
+			Add(gcd, Minimum(deg, Remove(f, pos)));
 		fi;
-		i:=i+1;
 	od;
-	while not IsEmpty(ind) do
-		Remove(factorD, Remove(ind));
-	od;
-#	 3)-----------------------------------------------------------------------
-#	Удаление единиц из списков numerator, denominator.
-	if IsEmpty(factorN) then ;
-		if not IsEmpty(factorD) then
-			edinica:=One(factorD[1]);
-		fi;
+
+	return gcd;
+end);
+
+#------------------------------------------------------------------------------
+#			<ManSection><Func Name="LcmPolynomial" Arg="f,g" />
+#				<Description>
+#					вычисляется наименьшее общее кратное полиномов <M>f</M> и
+#					<M>g</M>. Входящие данные могут быть как в формате RatFunc,
+#					так и в виде полиномов, ответ будет создан в формате
+#					RatFunc.
+#				</Description>
+#				<Description>
+#					В вычислении наименьшего общего кратного не участвуют
+#					коэффициенты фукнций <M>f</M> и <M>g</M>, их следует
+#					вычислять отдельно.
+#				</Description>
+#			</ManSection>
+
+InstallGlobalFunction( LcmPolynomial,function(f0,g0)
+	local f, g, lcm, gk, deg, pos;
+
+	if IsPolynomial(f0) then
+		f:=ConvertPolynomeToRatFunc(f0);
 	else
-		edinica:=One(factorN[1]);
+		f:=StructuralCopy(f0);
+	fi;
+	if IsPolynomial(g0) then
+		g:=ConvertPolynomeToRatFunc(g0);
+	else
+		g:=StructuralCopy(g0);
 	fi;
 
-	s:=1;
-	pos:=[];
-	for element in factorN do
-		if not element = edinica then
-			Add(pos, s);
+	lcm:=[1];
+	Remove(g,1);
+	Remove(f,1);
+	while (not IsEmpty(g)) and (not IsEmpty(f)) do
+		gk:=Remove(g,1);
+		deg:=Remove(g,1);
+		pos:=Position(f, gk);
+		if pos = fail then
+		else
+			Remove(f, pos);
+			Add(lcm, gk);
+			Add(lcm, Maximum(deg, Remove(f, pos)));
 		fi;
-		s:=s+1;
 	od;
-	factorN:=factorN{pos};
+	Append(lcm, g);
+	Append(lcm, f);
 
-	s:=1;
-	pos:=[];
-	for element in factorD do
-		if not element = edinica then
-			Add(pos, s);
-		fi;
-		s:=s+1;
-	od;
-	factorD:=factorD{pos};
-
-return rec(coef:=coef, numerator:=factorN, denominator:=factorD);
+	return lcm;
 end);
+
+#------------------------------------------------------------------------------
+#			<ManSection><Func Name="SimplifyRatFunc" Arg="f" />
+#				<Description>
+#					упрощение рациональной функции.
+#					<Example>
+# gap> f:=(x^2-y^2)/(x+y)^2;;
+# gap> f1:=ConvertToRatFunc(f);
+# [ [ 1, x-y, 1, x+y, 1 ], [ 1, x+y, 2 ] ]
+# gap> SimplifyRatFunc(f1);
+# [ [ 1, x-y, 1 ], [ 1, x+y, 1 ] ]
+# gap> g:=[[2,x-y^2,0],[]];;
+# gap> SimplifyRatFunc(g);
+# [ [ 2 ], [ 1 ] ]
+#					</Example>
+#				</Description>
+#			</ManSection>
+
+InstallGlobalFunction( SimplifyRatFunc,function(f0)
+	local f, l, s, i, j, nechet, chet, gameover, ind, g;
+
+	if IsList(f0) then
+		f:=StructuralCopy(f0);
+	else
+		f:=ConvertToRatFunc(f0);
+	fi;
+	if IsEmpty(f[1]) then f[1]:=[1]; fi;
+	if IsEmpty(f[2]) then f[2]:=[1]; fi;
+
+	# 1) проверяем наличие одинаковых множителей, но записанных по отдельности
+	for g in f do
+		l:=Length(g); # по построению это нечетное число
+		s:=2;
+		for i in [l-1, l-3 .. s+2] do
+			if g[i] = g[s] then
+				Remove(g,i);
+				g[s+1]:=g[s+1] + g[i];
+				Remove(g,i);
+				l:=l-2;
+			fi;
+		od;
+		s:=s+2;
+	od;
+
+	# 2) проводим сокращение числителя и знаменателя
+	# сейчас в l записано значение Length(f[2])
+	i:=2;
+	while i < l do
+		j:=Position(f[1], f[2][i]);
+		if j = fail then
+		else
+			if f[2][i+1] > f[1][j+1] then # остается в знаменателе
+				Remove(f[1], j);
+				f[2][i+1]:=f[2][i+1] - Remove(f[1],j);
+			elif f[2][i+1] < f[1][j+1] then # остается в числителе
+				Remove(f[2], i);
+				f[1][j+1]:=f[1][j+1] - Remove(f[2],i);
+				l:=l-2;
+			else
+				Remove(f[2],i);
+				Remove(f[2],i);
+				Remove(f[1],j);
+				Remove(f[1],j);
+				l:=l-2;
+			fi;
+		fi;
+		i:=i+2;
+	od;
+
+	# 3) ищем нули и единицы
+	for g in f do
+		l:=Length(g);
+		nechet:=List([1..(l-1)/2], x -> 2*x+1);
+		for i in nechet do
+			if IsZero(g[i]) then
+				if not IsZero(g[i-1]) then
+					g[i-1]:=1;
+				else
+					Print("Function f has a 0^0 as a multiplier.\n");
+					Print("I don't know what I have to do.\n");
+					break;
+				fi;
+			fi;
+		od;
+		chet:=nechet - 1;
+		gameover:=false;
+		ind:=[];
+		for i in chet do
+			if IsZero(g[i]) then
+				g[1]:=0;
+				gameover:=true;
+				ind:=[];
+			elif IsOne(g[i]) then
+				Add(ind, i);
+			fi;
+		od;
+		while not IsEmpty(ind) do
+			i:=Remove(ind);
+			Remove(g,i);
+			Remove(g,i);
+		od;
+		if gameover then
+			g:=[0];
+		fi;
+	od;
+	if IsZero(f[1][1]) then f[1]:=[0]; fi;
+	if IsZero(f[2][1]) then f[2]:=[0]; fi;
+
+	return f;
+end);
+
+#------------------------------------------------------------------------------
+#			<ManSection><Func Name="ProdRatFunc" Arg="f,g" />
+#				<Description>
+#					функция произведения двух рациональных функций формата
+#					RatFunc
+#				</Description>
+#			</ManSection>
+
+InstallGlobalFunction( ProdRatFunc,function(f0,g0)
+	local f, g, i;
+
+	f:=StructuralCopy(f0);
+	g:=StructuralCopy(g0);
+	for i in [1,2] do
+		if f[i] = [] then f[i]:=[1]; fi;
+		if g[i] = [] then g[i]:=[1]; fi;
+		f[i][1]:=f[i][1]*g[i][1];
+		Remove(g[i],1);
+		Append(f[i], g[i]);
+	od;
+	f:=SimplifyRatFunc(f);
+
+	return f;
+end);
+
+#------------------------------------------------------------------------------
+#			<ManSection><Func Name="ConvertFromRatFuncToPolynom" Arg="f" />
+#				<Description>
+#					преобразует полином <M>f</M> из формата RatFunc в обычный формат
+#				</Description>
+#			</ManSection>
+
+InstallGlobalFunction( ConvertFromRatFuncToPolynom,function(f0)
+	local f, g, f1, deg;
+
+	f:=StructuralCopy(f0);
+	g:=Remove(f,1);
+	while not IsEmpty(f) do
+		f1:=Remove(f,1);
+		deg:=Remove(f,1);
+		g:=g*f1^deg;
+	od;
+
+	return g;
+end);
+
+#------------------------------------------------------------------------------
+#			<ManSection><Func Name="ConvertFromRatFunc" Arg="f" />
+#				<Description>
+#					преобразует рациональную функцию <M>f</M> из формата RatFunc в
+#					обычный формат.
+#				</Description>
+#			</ManSection>
+
+InstallGlobalFunction( ConvertFromRatFunc,function(f)
+	local numerator, denominator, g;
+
+	numerator:=ConvertFromRatFuncToPolynom(f[1]);
+	denominator:=ConvertFromRatFuncToPolynom(f[2]);
+	g:=numerator/denominator;
+
+	return g;
+end);
+
+
+#------------------------------------------------------------------------------
+#			<ManSection><Func Name="SumRatFunc" Arg="f,g" />
+#				<Description>
+#					Суммируем рациональные функции заданные в формате RatFunc
+#				</Description>
+#			</ManSection>
+
+InstallGlobalFunction( SumRatFunc,function(f,g)
+	local a, b, denominator, left, right, gcd, result;
+
+	a:=[[],f[2]];
+	b:=[[],g[2]];
+	denominator:=ProdRatFunc(a,b)[2];
+	
+	a:=[f[1],[]];
+	b:=[g[2],[]];
+	left:=ProdRatFunc(a,b);
+
+	a:=[g[1],[]];
+	b:=[f[2],[]];
+	right:=ProdRatFunc(a,b);
+
+	gcd:=GcdPolynomial(left[1], right[1]);
+	result:=[gcd, denominator];
+	gcd:=[[],gcd];
+	left:=ProdRatFunc(left, gcd);
+	left:=ConvertFromRatFunc(left);
+	right:=ProdRatFunc(right, gcd);
+	right:=ConvertFromRatFunc(right);
+	g:=left + right;
+	g:=ConvertPolynomeToRatFunc(g);
+	g:=[g,[]];
+	result:=ProdRatFunc(g, result);
+
+	return result;
+end);
+
+#------------------------------------------------------------------------------
+#			<ManSection><Func Name="DerivativePolynomRatFunc" Arg="f,x" />
+#				<Description>
+#					вычисляется производная полинома заданной в формате RatFunc
+#				</Description>
+#			</ManSection>
+
+InstallGlobalFunction( DerivativePolynomRatFunc,function(f,x)
+	local l, nechet, chet, gcd, derivat, shablon, g, d, i;
+
+	# Можно было бы сразу перевести полином из формата RatFunc в обычный, но это
+	# не продуктивно, поскольку производная может иметь часть множителей
+	# изначальной функции. Внесение общих множителей осложнит задачу
+	# факторизации.
+	
+	l:=Length(f);
+	nechet:=List([1..(l-1)/2], i -> 2*i+1);
+	chet:=List([1..(l-1)/2], i -> 2*i);
+	gcd:=StructuralCopy(f);
+	for i in nechet do
+		gcd[i]:=gcd[i]-1;
+	od;
+
+	derivat:=0;
+	shablon:=StructuralCopy(f);
+	shablon[1]:=1;
+	for i in nechet do
+		shablon[i]:=1;
+	od;
+
+	for i in chet do
+		g:=StructuralCopy(shablon);
+		d:=Remove(g,i);
+		Remove(g,i);
+		d:=Derivative(d,x);
+		d:=ConvertPolynomeToRatFunc(d);
+		g:=ProdRatFunc([d,[]],[g,[]]);
+		g:=ConvertFromRatFuncToPolynom(g[1]);
+		derivat:=derivat + f[i+1]*g;
+	od;
+	derivat:=ConvertPolynomeToRatFunc(derivat);
+	derivat:=ProdRatFunc([derivat,[]], [gcd,[]]);
+
+	return derivat[1];
+end);
+
+
+#------------------------------------------------------------------------------
+#			<ManSection><Func Name="DerivativeRatFunc" Arg="f,x" />
+#				<Description>
+#					вычисляется производная рациональной функции заданной в формате RatFunc
+#				</Description>
+#			</ManSection>
+
+InstallGlobalFunction( DerivativeRatFunc,function(f,x)
+	local denominator, dn, dd, left, right, numerator, l, g, i;
+
+	denominator:=[[],f[2]];
+
+	dn:=DerivativePolynomRatFunc(f[1],x);
+	dd:=DerivativePolynomRatFunc(f[2],x);
+	left:=ProdRatFunc([dn,[]], [f[2],[]]);
+	right:=ProdRatFunc([dd,[]],[f[1],[]]);
+	right[1][1]:= - right[1][1];
+	numerator:=SumRatFunc(left, right);
+	denominator:=StructuralCopy(f[2]);
+	denominator[1]:=denominator[1]^2;
+	l:=Length(denominator);
+	for i in [1 .. (l-1)/2] do
+		denominator[2*i +1] := 2*denominator[2*i+1];
+	od;
+	denominator:=[[],denominator];
+	g:=ProdRatFunc(numerator, denominator);
+
+	return g;
+end);
+
+#------------------------------------------------------------------------------
+#			<ManSection><Func Name="JacobiMatRatFunc" Arg="listf,listx" />
+#				<Description>
+#					Для системы рациональных фукнций listf вычисляется матрица
+#					якоби по переменным listx. Формат записи данных в список
+#					listf может быть смешанным, то есть в список могут входить
+#					как обычные функции, так и функции заданные в формате
+#					RatFunc.
+#				</Description>
+#			</ManSection>
+
+InstallGlobalFunction( JacobiMatRatFunc,function(listf,listx)
+	local fk, mat, f;
+
+	fk:=[];
+	for f in listf do
+		if IsRationalFunction(f) then
+			Add(fk, ConvertToRatFunc(f));
+		else
+			Add(fk, f);
+		fi;
+	od;
+	mat:=List(fk,f->List(listx,x->DerivativeRatFunc(f,x)));
+
+	return mat;
+end);
+

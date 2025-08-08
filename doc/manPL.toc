@@ -72,7 +72,7 @@
 \contentsline {subsection}{\numberline {3.2.2}\leavevmode {\color {Chapter }PolSimplifyWith2Knot}}{26}{subsection.3.2.2}
 \contentsline {subsection}{\numberline {3.2.3}\leavevmode {\color {Chapter }SingularitySet2Knot}}{26}{subsection.3.2.3}
 \contentsline {subsection}{\numberline {3.2.4}\leavevmode {\color {Chapter }TripleDoubleBranchPoints}}{27}{subsection.3.2.4}
-\contentsline {subsection}{\numberline {3.2.5}\leavevmode {\color {Chapter }IsDiagrammOf2Kont}}{28}{subsection.3.2.5}
+\contentsline {subsection}{\numberline {3.2.5}\leavevmode {\color {Chapter }IsDiagrammOf2Knot}}{28}{subsection.3.2.5}
 \contentsline {subsection}{\numberline {3.2.6}\leavevmode {\color {Chapter }SurfaceOf2Knot}}{29}{subsection.3.2.6}
 \contentsline {subsection}{\numberline {3.2.7}\leavevmode {\color {Chapter }TurnKnot}}{29}{subsection.3.2.7}
 \contentsline {subsection}{\numberline {3.2.8}\leavevmode {\color {Chapter }2KnotInS4}}{30}{subsection.3.2.8}
@@ -83,17 +83,25 @@
 \contentsline {subsection}{\numberline {4.1.2}\leavevmode {\color {Chapter }SortCircle}}{33}{subsection.4.1.2}
 \contentsline {subsection}{\numberline {4.1.3}\leavevmode {\color {Chapter }LineOrdering}}{34}{subsection.4.1.3}
 \contentsline {section}{\numberline {4.2}\leavevmode {\color {Chapter }\IeC {\CYRR }\IeC {\cyra }\IeC {\cyrc }\IeC {\cyri }\IeC {\cyro }\IeC {\cyrn }\IeC {\cyra }\IeC {\cyrl }\IeC {\cyrsftsn }\IeC {\cyrn }\IeC {\cyrery }\IeC {\cyre } \IeC {\cyrf }\IeC {\cyru }\IeC {\cyrn }\IeC {\cyrk }\IeC {\cyrc }\IeC {\cyri }\IeC {\cyri }}}{34}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}\leavevmode {\color {Chapter }SimplifyRationalFunction}}{35}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}\leavevmode {\color {Chapter }GcdPolynomial}}{35}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}\leavevmode {\color {Chapter }LcmPolynomial}}{35}{subsection.4.2.3}
-\contentsline {subsection}{\numberline {4.2.4}\leavevmode {\color {Chapter }ProductRationalFunctions}}{35}{subsection.4.2.4}
-\contentsline {section}{\numberline {4.3}\leavevmode {\color {Chapter }\IeC {\CYRM }\IeC {\cyra }\IeC {\cyrt }\IeC {\cyrr }\IeC {\cyri }\IeC {\cyrc }\IeC {\cyrery }}}{35}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}\leavevmode {\color {Chapter }Pfaffian}}{35}{subsection.4.3.1}
-\contentsline {section}{\numberline {4.4}\leavevmode {\color {Chapter }\IeC {\CYRG }\IeC {\cyrr }\IeC {\cyra }\IeC {\cyrs }\IeC {\cyrs }\IeC {\cyrm }\IeC {\cyra }\IeC {\cyrn }\IeC {\cyrn }\IeC {\cyro }\IeC {\cyrv }\IeC {\cyra } \IeC {\cyra }\IeC {\cyrl }\IeC {\cyrg }\IeC {\cyre }\IeC {\cyrb }\IeC {\cyrr }\IeC {\cyra }}}{36}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}\leavevmode {\color {Chapter }GrassmannMonomialsProduct}}{36}{subsection.4.4.1}
-\contentsline {subsection}{\numberline {4.4.2}\leavevmode {\color {Chapter }GrassmannProduct}}{36}{subsection.4.4.2}
-\contentsline {subsection}{\numberline {4.4.3}\leavevmode {\color {Chapter }GrassmanSum}}{36}{subsection.4.4.3}
+\contentsline {subsection}{\numberline {4.2.1}\leavevmode {\color {Chapter }ConvertPolynomeToRatFunc}}{34}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}\leavevmode {\color {Chapter }ConvertToRatFunc}}{34}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}\leavevmode {\color {Chapter }ConvertFromRatFuncToPolynom}}{35}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.4}\leavevmode {\color {Chapter }ConvertFromRatFunc}}{35}{subsection.4.2.4}
+\contentsline {subsection}{\numberline {4.2.5}\leavevmode {\color {Chapter }SimplifyRatFunc}}{35}{subsection.4.2.5}
+\contentsline {subsection}{\numberline {4.2.6}\leavevmode {\color {Chapter }SumRatFunc}}{35}{subsection.4.2.6}
+\contentsline {subsection}{\numberline {4.2.7}\leavevmode {\color {Chapter }ProdRatFunc}}{35}{subsection.4.2.7}
+\contentsline {subsection}{\numberline {4.2.8}\leavevmode {\color {Chapter }GcdPolynomial}}{35}{subsection.4.2.8}
+\contentsline {subsection}{\numberline {4.2.9}\leavevmode {\color {Chapter }LcmPolynomial}}{36}{subsection.4.2.9}
+\contentsline {subsection}{\numberline {4.2.10}\leavevmode {\color {Chapter }DerivativePolynomRatFunc}}{36}{subsection.4.2.10}
+\contentsline {subsection}{\numberline {4.2.11}\leavevmode {\color {Chapter }DerivativeRatFunc}}{36}{subsection.4.2.11}
+\contentsline {subsection}{\numberline {4.2.12}\leavevmode {\color {Chapter }JacobiMatRatFunc}}{36}{subsection.4.2.12}
+\contentsline {section}{\numberline {4.3}\leavevmode {\color {Chapter }\IeC {\CYRM }\IeC {\cyra }\IeC {\cyrt }\IeC {\cyrr }\IeC {\cyri }\IeC {\cyrc }\IeC {\cyrery }}}{36}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}\leavevmode {\color {Chapter }Pfaffian}}{36}{subsection.4.3.1}
+\contentsline {section}{\numberline {4.4}\leavevmode {\color {Chapter }\IeC {\CYRG }\IeC {\cyrr }\IeC {\cyra }\IeC {\cyrs }\IeC {\cyrs }\IeC {\cyrm }\IeC {\cyra }\IeC {\cyrn }\IeC {\cyrn }\IeC {\cyro }\IeC {\cyrv }\IeC {\cyra } \IeC {\cyra }\IeC {\cyrl }\IeC {\cyrg }\IeC {\cyre }\IeC {\cyrb }\IeC {\cyrr }\IeC {\cyra }}}{37}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}\leavevmode {\color {Chapter }GrassmannMonomialsProduct}}{37}{subsection.4.4.1}
+\contentsline {subsection}{\numberline {4.4.2}\leavevmode {\color {Chapter }GrassmannProduct}}{37}{subsection.4.4.2}
+\contentsline {subsection}{\numberline {4.4.3}\leavevmode {\color {Chapter }GrassmanSum}}{37}{subsection.4.4.3}
 \contentsline {subsection}{\numberline {4.4.4}\leavevmode {\color {Chapter }BerezinIntegral}}{37}{subsection.4.4.4}
-\contentsline {subsection}{\numberline {4.4.5}\leavevmode {\color {Chapter }BerezinMultipleIntegral}}{37}{subsection.4.4.5}
-\contentsline {chapter}{\IeC {\CYRS }\IeC {\cyrs }\IeC {\cyrery }\IeC {\cyrl }\IeC {\cyrk }\IeC {\cyri }}{38}{chapter*.3}
-\contentsline {chapter}{\IeC {\CYRI }\IeC {\cyrn }\IeC {\cyrd }\IeC {\cyre }\IeC {\cyrk }\IeC {\cyrs }}{39}{section*.4}
+\contentsline {subsection}{\numberline {4.4.5}\leavevmode {\color {Chapter }BerezinMultipleIntegral}}{38}{subsection.4.4.5}
+\contentsline {chapter}{\IeC {\CYRS }\IeC {\cyrs }\IeC {\cyrery }\IeC {\cyrl }\IeC {\cyrk }\IeC {\cyri }}{39}{chapter*.3}
+\contentsline {chapter}{\IeC {\CYRI }\IeC {\cyrn }\IeC {\cyrd }\IeC {\cyre }\IeC {\cyrk }\IeC {\cyrs }}{40}{section*.4}

@@ -3,7 +3,7 @@
                                 [1X The [5XPL[105X package [101X
   
   
-                                 Version 2.5.0
+                                 Version 2.6.0
   
   
                                  February, 2015
@@ -110,7 +110,7 @@
       3.2-2 PolSimplifyWith2Knot
       3.2-3 SingularitySet2Knot
       3.2-4 TripleDoubleBranchPoints
-      3.2-5 IsDiagrammOf2Kont
+      3.2-5 IsDiagrammOf2Knot
       3.2-6 SurfaceOf2Knot
       3.2-7 TurnKnot
       3.2-8 2KnotInS4
@@ -121,10 +121,18 @@
       4.1-2 SortCircle
       4.1-3 LineOrdering
     4.2 [33X[0;0YРациональные функции[133X
-      4.2-1 SimplifyRationalFunction
-      4.2-2 GcdPolynomial
-      4.2-3 LcmPolynomial
-      4.2-4 ProductRationalFunctions
+      4.2-1 ConvertPolynomeToRatFunc
+      4.2-2 ConvertToRatFunc
+      4.2-3 ConvertFromRatFuncToPolynom
+      4.2-4 ConvertFromRatFunc
+      4.2-5 SimplifyRatFunc
+      4.2-6 SumRatFunc
+      4.2-7 ProdRatFunc
+      4.2-8 GcdPolynomial
+      4.2-9 LcmPolynomial
+      4.2-10 DerivativePolynomRatFunc
+      4.2-11 DerivativeRatFunc
+      4.2-12 JacobiMatRatFunc
     4.3 [33X[0;0YМатрицы[133X
       4.3-1 Pfaffian
     4.4 [33X[0;0YГрассманнова алгебра[133X
