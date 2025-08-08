@@ -1,6 +1,3 @@
-
-
-
 InstallGlobalFunction( PolBnd,
 # Creates an index of boundary faces of face [d,fn] of complex s
 # <result>[i] --- index of (i-1)-dimensional faces of s which are in the boundary of [d,fn].
@@ -26,31 +23,6 @@ function (s,adr)
 
 end );
 
-
-##############################################################################
-
-InstallGlobalFunction( PolFaceVertices,
-# function returning set of vertices (as numbers) bounding given face of complex
-# s for complex, d for dimension of the face, f for number of the face
-#function(s, d, f)
-function(s,adr)
-  local v, g, d1, i, d,f;
-
-  d:=adr[1];
-  f:=adr[2];
-  v := StructuralCopy(s.faces[d][f]);
-  # recursively substitute faces
-  for d1 in [d-1,d-2..1] do
-    g := [];
-    for i in [1..Length(v)] do
-      UniteSet(g, s.faces[d1][v[i]]); 
-    od;
-    v := g;
-  od;
-  return v;
-end );
-
-
 ################################################################################
 
 InstallGlobalFunction( PolCheckComb,
@@ -60,15 +32,17 @@ InstallGlobalFunction( PolCheckComb,
 
 # input: complex p, face dimension d and face number fn
 
-function (p, d, fn)
+function (p, adr)
 
   local f_b         # index of boundary faces 
     , d1
     , f1n
     , faces_in_vertices
-    , faces_in_vertices_n
+    , faces_in_vertices_n, d, fn
     ;
 
+	d:=adr[1];
+	fn:=adr[2];
   f_b := PolBnd(p,[d,fn]);
 
   # check that every subface of p which is in the index f_b
@@ -80,7 +54,7 @@ function (p, d, fn)
     faces_in_vertices_n := 0;
     # in a loop over faces
     for f1n in f_b[d1] do
-      AddSet(faces_in_vertices, PolFaceVertices(p,[d1-1,f1n]));
+      AddSet(faces_in_vertices, FaceComp(p,[d1-1,f1n]).0);
       faces_in_vertices_n := faces_in_vertices_n + 1;
       if Length(faces_in_vertices)<>faces_in_vertices_n then
         return false;
@@ -374,7 +348,7 @@ od;
 end );
 
 
-############################################################################################
+################################################################################
 
 InstallGlobalFunction( PolProductSymsDict,
 
@@ -479,11 +453,7 @@ if IsBound(s2.syms) then s2syms := ShallowCopy(s2.syms); else s2syms := []; fi;
     od; 
   od;
 
-
-
-
-#####
-
+# . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 # preparing permuted lists of vertices/faces for complexes  s1  and  s2,
 # for each face dimension  d1  or  d2  and for each face number  i
 # These lists are organized according to the following principle:
@@ -561,20 +531,17 @@ for i in [1..Length(sym_l)] do
 s.syms[i][k] := PermListList( [1..Length(sym_l[i][k])], sym_l[i][k] );
   od;
 od;
-
-#####
+# . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
   # and now adding the dictionary to the record
   s.fd := faces_dict;
 
   return s;
-# end );
-
 end );
 
 
 
-############################################################################################
+################################################################################
 
 
 InstallGlobalFunction( PolTriangulate,
@@ -598,7 +565,7 @@ function (p)
       f := s.faces[d][fn];
       
       # 0. Find mimimal vertex
-      v := Minimum(PolFaceVertices(s,[ d, fn]));
+      v := Minimum(FaceComp(s,[ d, fn]).0);
 
       # compute n_f --- number of faces "against" (i.e., not touching) v
       n_f := 0;
@@ -606,14 +573,14 @@ function (p)
         n_f := Length(f)-1;
       else
         for i in f do
-          if not (v in PolFaceVertices(s,[d-1,i])) then
+          if not (v in FaceComp(s,[d-1,i]).0) then
             n_f := n_f + 1;
           fi;
         od;
       fi;  
 
       # if [d,fn] is not combinatorial complex, add a new vertex in the center
-      if (not PolCheckComb(s,d,fn)) then
+      if (not PolCheckComb(s,[d,fn])) then
         
         # add new vertex
         i := 1;
@@ -684,13 +651,13 @@ function (p)
 	  # In the loop over faces-boundaries of [d,fn] of dimension d1 not touching v
 	  for i in [1..Length(f_b[d1+1])] do
 	    if (d1=0 and f_b[d1+1][i]<>v) or 
-	       (d1>0 and  not ( v in PolFaceVertices(s,[d1,f_b[d1+1][i]]))) then
+	       (d1>0 and  not ( v in FaceComp(s,[d1,f_b[d1+1][i]]).0)) then
 	      # look for face of dimension d1+1, having [d1, f_b[d1+1][i]] and v as boundaries
 	      f_found := false;
 	      # among boundaries of [d,fn] and among newly added faces
 	      for j in Union(f_b[d1+2], new_faces[d1+1]) do
 	      	if (f_b[d1+1][i] in s.faces[d1+1][j])
-		  and (v in PolFaceVertices(s,[d1+1,j])) then
+		  and (v in FaceComp(s,[d1+1,j]).0) then
 
 		  # found!
 		  f_found := true;
@@ -709,7 +676,7 @@ function (p)
 	            # look for face of dimension d1 having [d1-1, k] and [0,v] as boundaries 
 		    for j in Union(f_b[d1+1], new_faces[d1]) do
 	      	      if (k in s.faces[d1][j]) and 
-		         (v in PolFaceVertices(s,[d1,j])) then
+		         (v in FaceComp(s,[d1,j]).0) then
 		        # found!
 		        AddSet(n_a_f, j);
 		      fi;
@@ -768,7 +735,7 @@ function (p)
 end );
 
 
-#########################################################################################
+################################################################################
 
 InstallGlobalFunction( OrientTriangulated,
 # Function computes consistent orientation on simplices of greatest dimension
@@ -804,9 +771,9 @@ function(s)
     for j in [(i+1)..Length(s.faces[d])] do
       for k in Intersection(s.faces[d][i],s.faces[d][j]) do
         # vertices of involved simplices
-        i_v := PolFaceVertices(s,[d,i]);
-        j_v := PolFaceVertices(s,[d,j]);
-        k_v := PolFaceVertices(s,[d-1,k]);
+        i_v := FaceComp(s,[d,i]).0;
+        j_v := FaceComp(s,[d,j]).0;
+        k_v := FaceComp(s,[d-1,k]).0;
         # posisions of removed vertices in i-th and j-th d-faces minus 1 modulo 2 
         i_s := RemInt(Position(i_v,Difference(i_v,k_v)[1])-1,2);
         j_s := RemInt(Position(j_v,Difference(j_v,k_v)[1])-1,2);
@@ -876,7 +843,7 @@ function(s)
 end );
 
 
-##############################################################################################
+################################################################################
 
 
 InstallGlobalFunction( PolInnerFaces,
@@ -950,7 +917,7 @@ function(p)
   return inner_faces;
 end );
 
-################################################################################################
+################################################################################
 
 InstallGlobalFunction( PolDoubleCone,
 # Make a double cone with vertices V1 and V2 over the given polytope p
@@ -1003,69 +970,7 @@ function (p)
 
 end );
 
-
-#######################################################################################################
-
-InstallGlobalFunction( PolCylinder,
-# Maybe not needed in view of the existence of PolProduct(Syms), but anyhow:
-# triangulates a polytope M and creates a triangulated cylinder over it;
-# in the list for faces of any dimensions (including vertices),
-# first go two identical copies of triangulated M -   M x {0}  and  M x {1}.
-# Also, <result>.l[i+1] is the number of i-faces in the triangulated M
-
-function( M )
-
-local i, j, k
-  ,u      # u is the triangulated M
-  ,uu     # uu serves first for the product  u * {0, 1}
-            # and the the same uu becomes the complex to return
-  ,w      # as part of this w
-            # where we also include additional information - the following l
-  ,l      # l[i+1] is the number of i-faces in u
-  ,l0, l1 # auxiliary lists
-;
-
-u := PolTriangulate(M);
-
-l := List( [1..Length(u.faces)+1], i->0 );
-  l[1] := Length(u.vertices);
-  for i in [2..Length(l)] do
-    l[i] := Length(u.faces[i-1]);
-  od;
-
-# uu will be the union of  M x {0}  and  M x {1}
-uu := rec ( vertices:=[], faces:=List([1..Length(u.faces)], i->[]) ); # initiating
-
-l0 := List(u.vertices, i->Concatenation(i,"_0"));
-l1 := List(u.vertices, i->Concatenation(i,"_1"));
-uu.vertices := Concatenation( l0,l1 );
-
-for i in [1..Length(u.faces)] do
-  l0 := u.faces[i];
-  l1 := List(l0, j-> List(j, k->k+l[i]));
-  uu.faces[i] := Concatenation( l0,l1 );
-od;
-# now uu is formed as the product  u * {0, 1}
-
-Append( uu.faces, [[]] );
-
-Append( uu.faces[1], List([1..l[1]], i->[i,i+l[1]]) );
-
-for k in [2..Length(uu.faces)] do
- Append( uu.faces[k], List([1..l[k]], i->Concatenation([i,i+l[k]], List( uu.faces[k-1][i], j -> # всё хорошо, по-моему 
- 2*l[k]+j  ) ) ) );
-od;
-
-uu := PolTriangulate(uu);
-
-w := rec ( vertices:=uu.vertices, faces:=uu.faces, l:=l );
-
-return w;
-
-end );
-
-
-####################################################################################################
+################################################################################
 
 InstallGlobalFunction( MaxTree,
 # finds a maximal tree in the 1-skeleton of a polytope as a list of edges
@@ -1109,7 +1014,7 @@ function(p)
 return rebra;
 end );
 
-#################################################################################################################
+################################################################################
 
 InstallGlobalFunction( CellOrient,
 # ОПИСАНИЕ:
@@ -1174,7 +1079,7 @@ return orient;
 end );
 
 
-#################################################################################################
+################################################################################
 
 InstallGlobalFunction( PolOrient,
 # ОПИСАНИЕ:
@@ -1237,7 +1142,7 @@ return E;
 end );
 
 
-###############################################################################################################
+################################################################################
 
 InstallGlobalFunction( Slovo,
 function( A, B )    # A  is a list of edges surrounding the 2-face, each given as the set of its 2 vertices
@@ -1286,7 +1191,7 @@ function( A, B )    # A  is a list of edges surrounding the 2-face, each given a
    return word;
 end );
 
-##############################################################################################################
+################################################################################
 
 InstallGlobalFunction( FundGroup,
 function(p)
@@ -1337,7 +1242,7 @@ return P;
   
 end );
 
-##############################################################################################################
+################################################################################
 
 InstallGlobalFunction( PolMinusFace,
 # ОПИСАНИЕ:
@@ -1461,62 +1366,7 @@ Unbind(g.fd); # unbinds the face dictionary, if any and if it was called "fd"
 return g; 
 end );
 
-##############################################################################################################
-
-InstallGlobalFunction( PolMinusPol,
-# ОПИСАНИЕ:
-# функция которая из политопа p вырезает подмножество граней, начиная с граней высших размерностей.
-# входные данные: p-политоп, sp=rec(vertices:=[...],faces:=[...])-адресa вырезаемых граней
-# sp.faces[i] - список номеров i-граней, которые надо вырезать.
-# выходные данные: новый политоп
-# зависимости: PolMinusFace
-
-# функция которая из политопа вырезает подполитоп, начиная с граней высших
-# размерностей.
-# входные данные:	pol 	- политопа
-# 			subpol 	- подполитоп, указываются номера клеток по
-# 				которым проходит подполитоп
-# 			dim 	- размерность подполитопа.
-
-function(p,subpol,dim)
-     local g,i,n,j, sp,sost,l;
-
-
-g:=StructuralCopy(p);
-g.syms := [];
-
-# составляем списки тех клеток, которые нужно вырезать
-sp:=rec(vertices:=[], faces:=[]);
-n:=StructuralCopy(dim);
-sost:=List(subpol, i -> FaceComp(p, [dim,i])); 
-l:=Length(subpol);
-
-for j in [1 .. l] do
-	UniteSet(sp.vertices, sost[j].0);
-od;
-
-for i in [1 .. n] do
-	sp.faces[i]:=[];
-	for j in [1 .. l] do
-		UniteSet(sp.faces[i],sost[j].(i));
-	od;
-od;
-
-		
-for i in [n,n-1..1] do             # вырезаем грани, начиная с высших размерностей
-   for j in Reversed( Set( sp.faces[i] )) do # обратный порядок, чтобы не портились номера
-       g:=PolMinusFace(g,[i,j]); # вырезаем грань из списка
-   od;
-od;
-
-for j in Reversed( Set( sp.vertices )) do   # теперь вырезаем вершины, тоже в обратном порядке
-    g:=PolMinusFace(g,[0,j]);
-od;
-
-return g;
-end );
-
-##############################################################################################################
+################################################################################
 
 InstallGlobalFunction( DelFace,
 # ОПИСАНИЕ:
@@ -1565,7 +1415,7 @@ fi;
 return r;
 end );
 
-##############################################################################################################
+################################################################################
 
 InstallGlobalFunction( PolSimplify1,
 # merge k-faces, k = n, n-1, ..., 1
@@ -1641,7 +1491,7 @@ od;
 return g;
 end );
 
-##############################################################################################################
+################################################################################
 
 InstallGlobalFunction( PolFactorInvolution,
 
@@ -1722,5 +1572,5 @@ return(s);
 
 end );
 
-##############################################################################################################
+################################################################################
 

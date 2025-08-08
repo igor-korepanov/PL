@@ -71,3 +71,10 @@ sed -i_save "s/Unicode(1103)/я/g" manPL.tex
 sed -i_save "s/Unicode(1025)/Е/g" manPL.tex
 sed -i_save "s/Unicode(1105)/е/g" manPL.tex
 
+# для корректной компиляции tex-файла на русском языке
+sed -i_save "s/latin1/utf8/g" manPL.tex
+sed -i_save "s/T1/T2A/g" manPL.tex
+
+rm -rf manPL.tex_save
+pdflatex manPL.tex
+pdflatex manPL.tex

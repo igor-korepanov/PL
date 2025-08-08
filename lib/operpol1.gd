@@ -3,9 +3,9 @@ DeclareGlobalFunction( "PolBnd" );
 # <result>[i] --- index of (i-1)-dimensional faces of s which are in the boundary of [d,fn]
 # Input data: polytope, d, fn
 
-DeclareGlobalFunction( "PolFaceVertices" );
-# function returning set of vertices (as numbers) bounding given face of complex
-# s for complex, d for dimension of the face, f for number of the face
+##  DeclareGlobalFunction( "PolFaceVertices" );
+##  # function returning set of vertices (as numbers) bounding given face of complex
+##  # s for complex, d for dimension of the face, f for number of the face
 
 DeclareGlobalFunction( "PolCheckComb" );
 # check if a face of given complex is combinatorial complex
@@ -77,7 +77,7 @@ DeclareGlobalFunction( "PolMinusFace" );
 # cuts out a neighborhood of a face with given address from polytope
 # Arguments: p, [d, fn]
 
-DeclareGlobalFunction( "PolMinusPol" );
+##  DeclareGlobalFunction( "PolMinusPol" );
 # cuts out a neighborhood of a subpolytope from polytope
 # Arguments: p - polytope, sp=rec(vertices:=[...],faces:=[...]) - addresses of cut out faces
 # sp.faces[i] is the list of numbers of i-faces to be removed.

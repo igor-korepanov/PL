@@ -1,4 +1,3 @@
-# DeclareGlobalFunction( "VnutVnesh" );
  DeclareGlobalFunction( "ContractMiniFace" );
  DeclareGlobalFunction( "DivideFace" );
  DeclareGlobalFunction( "FirstBoundary" );
@@ -13,6 +12,18 @@
  DeclareGlobalFunction( "ballTriangul" );
  DeclareGlobalFunction( "StarFace" );
  DeclareGlobalFunction( "SubPolytope" );
-# DeclareGlobalFunction( "TriangulateFace" );
  DeclareGlobalFunction( "dataPachner" );
  DeclareGlobalFunction( "FromSimplexToPolytope" );
+################################################################################
+DeclareGlobalFunction( "GlueFaces" );
+DeclareGlobalFunction( "ImageInPolProduct" );
+DeclareGlobalFunction( "VerticesRullGlueFace" );
+DeclareGlobalFunction( "VerticesRullGluePol" );
+DeclareGlobalFunction( "PreimageInPolProduct" );
+DeclareGlobalFunction( "EulerNumber" );
+DeclareGlobalFunction( "UnionFace" );
+DeclareGlobalFunction( "wasDelFace" );
+DeclareGlobalFunction( "PolMinusPol" );
+DeclareGlobalFunction( "PolSimplify" );
+DeclareGlobalFunction( "ParallelSimplify" );
+DeclareGlobalFunction( "LengthPol" );

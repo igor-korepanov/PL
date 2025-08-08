@@ -209,7 +209,7 @@ function(p, num, f)
   for i in [1..Length(inner_faces[1])] do
     # loop over all 4-simplices having inner_faces[1][i] as vertex
     for j in [1..Length(s.faces[4])] do
-      j_v := PolFaceVertices(s,4,j);
+      j_v := FaceComp(s,[4,j]).0;
       if inner_faces[1][i] in j_v then
         k := Position(j_v, inner_faces[1][i]);
         if k=1 then

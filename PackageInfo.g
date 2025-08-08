@@ -12,7 +12,7 @@ SetPackageInfo( rec(
 
 PackageName := "PL",
 Subtitle := "PL: We gonna eat your brain.",
-Version := "2.0",
+Version := "2.3",
 Date := "27/06/2013",
 PackageWWWHome :=
   Concatenation( "http://sourceforge.net/projects/plgap",
@@ -215,7 +215,7 @@ BannerString := Concatenation(
     JoinStringsWithSeparator( List( Filtered( ~.Persons, r -> r.IsAuthor ),
                                     r -> Concatenation(
         r.FirstNames, " ", r.LastName, " (", r.WWWHome, ")\n" ) ), "   " ),
-    "При поддрежке гранта МГУПИ \n",
+    "При поддрежке гранта МГУПИ ИТГ-107\n",
     "----------------------------------------------------------------\n" ),
 
 ##  *Optional*, but recommended: path relative to package root to a file which 
@@ -230,7 +230,8 @@ TestFile := "tst/testall.tst",
 ##  *Optional*: Here you can list some keyword related to the topic 
 ##  of the package.
 # Keywords := ["Smith normal form", "p-adic", "rational matrix inversion"]
-Keywords := ["PL", "piecewise complex", "Grassmann variables"]
+Keywords := ["PL manifolds", "piecewise complex", "Grassmann variables",
+			"ball complexes"]
 
 ));
 

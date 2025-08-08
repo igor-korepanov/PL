@@ -1,57 +1,4 @@
-
-################################################################################
-## ОПИСАНИЕ
-## Программа вычисляет индексы внутренних клеток и индексы граничных клеток. 
-## ЗАМЕЧАНИЕ:
-## входные данные: pol - политоп
-## выходные данные:
-# зависимости:
-#
-# InstallGlobalFunction(VnutVnesh, function(pol)
-#     local dim,l,i,j,s,ind,vnut,k,gr,border;
-#
-#dim:=Length(pol.faces);
-#
-## определяем индексы внешних (dim-1)-клеток (при необходимости можно 
-#l:=Length(pol.faces[dim-1]);
-#border:=[]; # список индексов внешних 2-клеток
-#for i in [1..l] do
-#   s:=0;
-#   for j in pol.faces[dim] do
-#      if i in j then s:=s+1; fi;
-#   od;
-#   if s=1 then Add(border,i); fi;
-#od;
-#
-## указываем на какие симплексы натянуты (dim-1)-клетки на границе
-#ind:=List(border, x -> PolBnd(pol,[dim-1,x]));
-#
-#vnut:=rec();
-#for k in [0,1 .. dim-2] do
-#
-#   gr:=[];
-#   for i in ind do
-#      Add(gr, i[k+1]);
-#   od;
-#   gr:=Concatenation(gr); # нашли индексы k-клеток лежащих на грнице
-#
-#   # вычисляем индексы внутренних k-клеток
-#   if k>0 then
-#      vnut.(k):=Difference([1..Length(pol.faces[k])],gr);
-#   else 
-#      vnut.(k):=Difference([1..Length(pol.vertices)],gr);
-#   fi;
-#
-#od;
-#vnut.(dim-1):=Difference([1..l],border);
-#
-#
-#return rec(border:=border,vnut:=vnut);
-#end);
-
-
 ###############################################################################
-
 
 # ОПИСАНИЕ
 # Стягивание k-клетки которая состоит из двух вершин, дву 1-клеток, двух
@@ -63,41 +10,42 @@
 # выходные данные: политоп
 # зависимости:
 
- InstallGlobalFunction(ContractMiniFace, function(pol1,adr)
+InstallGlobalFunction(ContractMiniFace, function(pol1,adr)
      local pol,ind,s,i;
 
+	 pol:=StructuralCopy(pol1);
+	if Length(pol.faces[adr[1]][adr[2]])=2 then
+##  		pol:=StructuralCopy(pol1);
+		pol:=DelFace(pol,adr);
+		ind:=pol1.faces[adr[1]][adr[2]]; # узнаем (k-1)-клетки которые нужно склеить
+		ind:=Set(ind); # вообще это множество должно уже быть сортированным
 
-pol:=StructuralCopy(pol1);
-pol:=DelFace(pol,adr);
-ind:=pol1.faces[adr[1]][adr[2]]; # узнаем (k-1)-клетки которые нужно склеить
-ind:=Set(ind); # вообще это множество должно уже быть сортированным
+		# Во все клетки размерности adr[1] добавляем клетку ind[2].
+		s:=1;
+		for i in pol.faces[adr[1]] do
+		  	if ind[2] in i then 
+				Add(i,ind[1]);
+				pol.faces[adr[1]][s]:=Set(i);
+   			fi; 
+   		s:=s+1;
+		od;
 
-# Во все клетки размерности adr[1] добавляем клетку ind[2].
-s:=1;
-for i in pol.faces[adr[1]] do
-   if ind[2] in i then 
-      Add(i,ind[1]);
-      pol.faces[adr[1]][s]:=Set(i);
-   fi; 
-   s:=s+1;
-od;
-
-pol:=DelFace(pol,[adr[1]-1, ind[2]]); # удаление лишней клетки ind[2]
+		pol:=DelFace(pol,[adr[1]-1, ind[2]]); # удаление лишней клетки ind[2]
+	else
+		Print("It isn't a minimal face.\n");
+		s:=s.stop;
+	fi;
 
 
 return pol;
 end);
 
-# ПОЯСНЕНИЕ:
-#
-
 ###############################################################################
-
-
 
 # ОПИСАНИЕ
 # Дробим выбранную k-клетку (k-1)-клеткой. 
-# ЗАМЕЧАНИЕ: Проверку того, что данную клетку можно подразбить выбранным образом оставляем пользователю.
+# ЗАМЕЧАНИЕ: Проверку того, что данную клетку можно подразбить выбранным образом
+# оставляем пользователю.
 # входные данные: pol - политоп
 #                 adr - адрес k-клетки которую будем дробить
 #                 nabor - индексы (k-2)-клеток на которые будет натянута дробящая (k-1)-клетка
@@ -151,7 +99,7 @@ if adr[1]>1 then
 	fi;
 
 else
-#-----------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------
 #                         если дробится ребро
 
    v:=StructuralCopy(pol.faces[1][adr[2]][2]);
@@ -162,14 +110,16 @@ else
    pol.faces[1][adr[2]][2]:=StructuralCopy(l);
    Add(pol.faces[1],[v,l]);
    # отражаем дробление ребра на 2-клетках
-   l:=Length(pol.faces[1]);
-   s:=1;
-   for i in pol.faces[2] do
-      if adr[2] in i then
-         Add(pol.faces[2][s], l);
-      fi;
-      s:=s+1;
-   od;
+   if Length(pol.faces)>1 then
+		l:=Length(pol.faces[1]);
+		s:=1;
+		for i in pol.faces[2] do
+			if adr[2] in i then
+				Add(pol.faces[2][s], l);
+			fi;
+			s:=s+1;
+		od;
+	fi;
 fi;
 
 return pol;
@@ -316,23 +266,12 @@ if verify then
 fi;
 if verify then
 else
-	Print("В политопе имеются битые ссылки\n");
+	Print("В политопе имеются не корректные ссылки\n");
 fi;
 
 # 3)---------------------------------------------------------------------------
 
 if verify then
-#	odnorodnost:=List([1..dim], i->[]); # цепляем данные для 4-го шага
-#
-#	n:=1;
-#	repeat
-#		sostav:=FaceComp(pol,[dim,n]);
-#		invEuler:=List([0..dim-1], i-> (-1)^i * Length(sostav.(i)));
-#		verify:= (Sum(invEuler)=2);
-#		odnorodnost:=List([1..dim]-1, i->Union(sostav.(i),odnorodnost[i+1]));
-#		n:=n+1;
-#	until n>kolichestvo or (verify=false);
-
 	n:=1;
 	repeat
 		length:=Length(pol.faces[n]);
@@ -350,43 +289,7 @@ if verify then
 		n:=n+1;
 	until
 		(n>dim) or (verify=false);
-
-	# в будущем этот участок надо будет заменить на участок с EulerNumber
-	# n:=1;
-	# while verify and (n<dim) do
-	# 	list:=[1..Length(pol.faces[n])];
-	# 	while verify and not IsEmpty(list) do
-	# 		i:=Remove(list);
-	# 		sost:=FaceComp(pol,[n,i]);
-	# 		en:=EulerNumber(sost);
-	# 		if en = 1 then
-	# 		else
-	# 			verify:=false;
-	# 			Print("The cell ", [n,i], "isn't a ball.\n");
-	#		fi;
-	#	od;
-	#	n:=n+1;
-	# od;
 fi;
-
-# 4)---------------------------------------------------------------------------
-# Этот пункт лишний
-
-##  if verify then
-##  #	odnorodnost:=List(odnorodnost, i -> Length(i));
-##  	odnorodnost:=List([1 .. dim], x->Set(Concatenation(pol.faces[x])));
-##  	odnorodnost:=List(odnorodnost, x->Length(x));
-##  	verify:=(odnorodnost[1] = Length(pol.vertices));
-##  
-##  	n:=2;
-##  	repeat
-##  		verify:=(odnorodnost[n] = Length(pol.faces[n-1]));
-##  		n:=n+1;
-##  	until
-##  		(n>dim) or verify=false;
-##  fi;
-
-
 
 return verify;
 end);
@@ -484,14 +387,9 @@ end);
 # входные данные: pol - политоп
 #                 adr - адрес клетки которую удаляем
 # выходные данные: политоп
-#
-# зависимости:
-#
 
  InstallGlobalFunction(PolMinusFaceDoublingMethod, function(pol1,adr)
          local pol,n,clas,dim,pos,lc,star,clasters,ldim,ind,i,name;
-
-
 
 pol:=StructuralCopy(pol1);
 n:=Length(pol.faces); # размерность политопа
@@ -741,7 +639,10 @@ end);
 # Основная идея заклучается в следующем: 
 # Все клетки принадлежашиее клеткам ind перегоняем в начало списков. В таком случае первые (для каждой размерности разное количество) клетки в данной размерности будут образовывать интересующий нас подполитоп и нам не нужно будет возиться с определением того, какой индекс будет иметь та или иная клетка в новом политопе.
 
-pol:=StructuralCopy(pol1);
+##  pol:=StructuralCopy(pol1);
+pol:=rec();
+pol.vertices:=StructuralCopy(pol1.vertices);
+pol.faces:=StructuralCopy(pol1.faces);
 
 # выделяем состав каждой отдельной клетки
 Isost:=List(ind, i -> PolBnd(pol, [dim , i]));
@@ -789,66 +690,6 @@ pol.faces:=pol.faces{[1 .. dim]};
 
 return pol;
 end);
-
-
-###############################################################################
-
-# ОПИСАНИЕ
-#	Операция триангулирующая заданную клетку в политопе. Граница клетки
-#	должна быть уже триангулированна.
-# ЗАМЕЧАНИЕ: Граница клетки должна быть уже триагулированна.
-# входные данные:	pol - политоп
-#			adr - адрек триангулируемой клетки
-# выходные данные:	политоп
-# зависимости:
-
-# InstallGlobalFunction(TriangulateFace, function(pol,adr)
-#		local	l2_before,l2,kolco,porydok,rebro,koren,vetki,drobim_tyt,vetka,new_ind,newver;
-#
-#
-## 1)---------------------------------------------------------------------------
-#
-#if adr[1] = 2 then
-#	l2_before:=Length(pol.faces[2]);
-#	l2:=StructuralCopy(l2_before);
-#	if Length(pol.faces[2][adr[2]]) = 3 then ;
-#	elif Length(pol.faces[2][adr[2]])=2 then
-#		rebro:=pol.faces[1][pol.faces[2][adr[2]][1]];
-#		pol:=DivideFace(pol,adr,rebro);
-#		newver:=Length(pol.vertices);
-#		repeat newver:=newver+1;
-#		until (newver in pol.vertices) = false;
-#		pol:=DivideFace(pol,[1,Length(pol.faces[1])], newver);
-#	else
-#		kolco:=pol.faces[1]{pol.faces[2][adr[2]]};
-#		kolco:=SortCircle(kolco);
-#		drobim_tyt:=StructuralCopy(adr[2]);
-#		while Length(kolco)>3 do
-#			vetki:=Difference(Union(kolco{[1,2]}),Intersection(kolco{[1,2]}));
-#			pol:=DivideFace(pol,[2,drobim_tyt],vetki);
-#			l2:=l2+1;
-#			Add(kolco, StructuralCopy(vetki));
-#			Remove(kolco,1);
-#			Remove(kolco,1);
-#			if Length(pol.faces[2][drobim_tyt])=3 then
-#				drobim_tyt:=StructuralCopy(l2);
-#			fi;
-#		od;
-#
-#	fi;
-#
-## 2)---------------------------------------------------------------------------
-#
-#else 
-#	Print("\n Sorry. This part of a program TriangulateFace didn't write. You can write it. \n\n");
-#fi;
-#
-## 3)---------------------------------------------------------------------------
-#
-#
-#return pol;
-#end);
-#
 
 ###############################################################################
 
@@ -898,7 +739,11 @@ for e in [1,2] do
    od; # вычислили индексы внутренних (n-1)-клеток в политопе pol
    # теперь эти индексы нужно перевести в индексы которым они соответсвуют столбцам в матрице (саму матрицу можно создать программой MatrixFkTriangulPol).
 
-# Будет удобно если внутренние (n-1)-грани будут стоять на последних местах, а для одинаковых внешних (n-1)-граней слева и справа натянутых на одни и теже вершины индексы совпадали. Граням как внутренним так и внешним присваивается естественный порядок по упорядоваченному множеству вершин на которые грань натянута.
+# Будет удобно если внутренние (n-1)-грани будут стоять на последних местах, а
+# для одинаковых внешних (n-1)-граней слева и справа натянутых на одни и теже
+# вершины индексы совпадали. Граням как внутренним так и внешним присваивается
+# естественный порядок по упорядоваченному множеству вершин на которые грань
+# натянута.
 l:=Length(pol.faces[n-1]);
 real:=List([1..l],x->PolBnd(pol,[n-1,x])[1]);
 future:=Difference([1..l],vnut);
@@ -973,3 +818,846 @@ od;
 return p;
 end);
 
+################################################################################
+# version PL-2.3
+################################################################################
+
+
+# <ManSection><Func Name="GlueFaces" Arg="pol, face1, face2" />
+# 	<Description>
+# 		Склеить две клетки в многообразие у которых общая граница.
+# 		Замечание: функция не проверяет действительно ли у клеток
+# 		одинаковая граница. Так же проверку, что после склейки
+# 		получаются корректные данные возлагаем на пользователя.
+# 		Например, функнция будет работать в следующем случае некорректно:
+#		<Example>
+# gap>d2:=ballAB(2);;
+# gap>GlueFaces(d2,[1,2],1);
+# rec(faces:=[ [ [1,2] ], [ [1] ] ],
+# 	vertices:= ["A","B"]
+#		</Example>
+#		Как мы видим из примера полученные данные уже не являются
+#		<M>pl-<M>разбиением.
+#	</Description>
+# </ManSection>
+
+InstallGlobalFunction(GlueFaces, function(pol1, pos, dim)
+	local	ab, N, ind, pol;
+
+
+	pol:=StructuralCopy(pol1);
+if pos[1]=pos[2] then
+else
+	# идяе такая: добавляем "минимальную" клетку граница которой состоит из
+	# face1 и face2, которые мы хотим склеить. Так как у этих клеток
+	# одинаковая граница, то эта операция корректна и мы получаем клетку
+	# размерности dim+1. После этого мы стягиваем минимальную клетку на
+	# своию границу, такая функция нами уже была организована.
+	ab:=Set([pos[1],pos[2]]);
+	N := Length(pol.faces);
+	if dim < N then
+		Add(pol.faces[dim+1], ab);
+	else
+		Add(pol.faces, [ ab ]);
+	fi;
+	ind:=Length(pol.faces[dim+1]);
+	pol:=ContractMiniFace(pol,[dim+1,ind]);
+	pol.faces:=pol.faces{[1..N]};
+fi;
+
+
+return pol;
+end);
+
+################################################################################
+
+# <ManSection><Func Name="ImageInPolProduct" Arg="pol1, pol2, d1xd2" />
+# 	<Description>
+# 	Фукнция указывает клеку которую образует декартово произведение двух
+# 	клеток [adr1,pos1] и [adr2,pos2] из политопов pol1 и pol2,
+# 	соответственно. На вход функции можно положить либо сами политопы которые
+# 	участвовали в произведении, либо списки количества клеток каждой размерности
+# 	для каждого из политопов.
+#		<Example>
+#gap> s1:=sphereAB(1);;
+#gap> t2:=PolProduct(s1,s1);;
+#gap> ImageInPolProduct(s1,s1,[[1,1],[1,2]]);
+#gap> [2,2]
+#gap> len:=rec(0:=Lenght(s1.vertices), 1:=Length(s1.faces[1]));
+#gap> ImageInPolProduct(len,len,[[1,1],[1,2]]);
+#gap> [2,2]
+#		</Example>
+#	</Description>
+# </ManSection>
+
+InstallGlobalFunction(ImageInPolProduct, function(pol1,pol2,d1xd2)
+	local	d1, d2, k1, k2, dimpol1, dimpol2, l, i, adr, n;
+
+
+
+	d1:=d1xd2[1][1];	# размерность первого диска
+	d2:=d1xd2[2][1];	# размерность второго диска
+	k1:=d1xd2[1][2];	# позиция первого диска в pol1
+	k2:=d1xd2[2][2];	# позиция второго диска в pol2
+
+	# Создаем возможность выбора данных.
+	l:=rec(1:=rec(), 2:=rec());
+	if ("vertices" in RecNames(pol1)) and ("faces" in RecNames(pol1)) then
+		dimpol1:=Length(pol1.faces);
+		l.1.0:=Length(pol1.vertices);
+		for i in [1 .. d1+d2] do
+			if i<= dimpol1 then
+				l.1.(i):=Length(pol1.faces[i]);
+			fi;
+		od;
+	else
+		l.1:=pol1;
+	fi;
+	if ("vertices" in RecNames(pol2)) and ("faces" in RecNames(pol2)) then
+		dimpol2:=Length(pol2.faces);
+		l.2.0:=Length(pol2.vertices);
+		for i in [1 .. d1+d2] do
+			if i<= dimpol2 then
+				l.2.(i):=Length(pol2.faces[i]);
+			fi;
+		od;
+	else
+		l.2:=pol2;
+	fi;
+	for i in [Length(RecNames(l.1)) .. d1+d2] do
+		l.1.(i):=0;
+	od;
+	for i in [Length(RecNames(l.2)) .. d1+d2] do
+		l.2.(i):=0;
+	od;
+
+	adr:=0;
+	n:=d1+d2;
+	for i in [0 .. d1-1] do
+		adr:=adr + l.1.(i) * l.2.(n-i);
+	od;
+	adr:=adr + (k1 - 1)*l.2.(d2) + k2;
+
+	
+return [n, adr];
+end);
+
+################################################################################
+
+# <ManSection><Func Name="VerticesRullGlueFace" Arg="pol,para,dim" />
+# 	<Description>
+# 		Производится склейка двух клеток политопа. Клетки индексы клеток
+# 		помещаются в список para, размерность dim клеток указывается отдельно.
+#		<Example>
+#		</Example>
+#	</Description>
+# </ManSection>
+
+InstallGlobalFunction(VerticesRullGlueFace, function(pol0, ab, dim)
+	local	pol, sost_a, sost_b, namespace, set, pairs, kl, name, pos, kl2, p,
+	d;
+
+	pol:=StructuralCopy(pol0);
+	sost_a:=FaceComp(pol,[dim,ab[1]]);
+	sost_b:=FaceComp(pol,[dim,ab[2]]);
+	namespace:=pol.vertices{sost_b.0};
+	
+	#--- нулевая итерация ------------------------------------------------------
+	set:=Difference(sost_a.0,sost_b.0);
+	pairs:=[];
+	for kl in set do
+		name:=pol.vertices[kl];
+		pos:=Position(namespace,name);
+		kl2:=Remove(sost_b.0,pos);
+		Remove(namespace,pos);
+		Add(pairs, Set([kl,kl2]));
+	od;
+	Sort(pairs, function(u,v) return u[2]>v[2]; end);
+	for p in pairs do
+		pol:=GlueFaces(pol,p,0);
+	od;
+
+	#--- запуск цикла ----------------------------------------------------------
+	for d in [1 .. dim-1] do
+		namespace:=pol.faces[d]{sost_b.(d)};
+		set:=Difference(sost_a.(d),sost_b.(d));
+		pairs:=[];
+		for kl in set do
+			name:=pol.faces[d][kl];
+			pos:=Position(namespace,name);
+			kl2:=Remove(sost_b.(d),pos);
+			Remove(namespace,pos);
+			Add(pairs, Set([kl,kl2]));
+		od;
+		Sort(pairs, function(u,v) return u[2]>v[2]; end);
+		for p in pairs do
+			pol:=GlueFaces(pol,p,d);
+		od;
+	od;
+
+	#--- последняя итерация ----------------------------------------------------
+	pol:=GlueFaces(pol,ab,dim);
+
+
+return pol;
+end);
+
+################################################################################
+
+# <ManSection><Func Name="VerticesRullGluePol" Arg="pol,subpol1,subpol2,dim" />
+# 	<Description>
+# 	В политопе указывается два набора связных подполитопов, которые необходимо
+# 	склеить. Правила склеики подполитопов указываются в именах вершин (вершины с
+# 	одинаковыми именами склеиваются в одну), далее все это индуцируется на
+# 	клетки большей размерности. Для работы данного алгоритма необходимо, что бы
+# 	у подполитопов были одинаковые pl-разбиения, а также, что бы в этом
+# 	pl-разбиении содержалась хоть одна n-клетка натянутая на хотябы на (n+1)
+# 	вершин.
+#		<Example>
+#		</Example>
+#	</Description>
+# </ManSection>
+
+# TODO: учесть смену индексации в списке sp2 при проведении склейки
+
+InstallGlobalFunction(VerticesRullGluePol, function(pol1,subpol1,subpol2,dim)
+	local	pol, sp1, sp2, s, l, sostav, verify, pairs, kl, name, namespace,
+	pos, i2, i, para, normal;
+
+	pol:=StructuralCopy(pol1);
+	sp1:=Difference(subpol1,subpol2);
+	sp2:=Difference(subpol2,subpol1);
+
+	#--- нахождение комбинаторной клетки ---------------------------------------
+	s:=1;
+	verify:=false;
+	normal:=List(sp1,x->FaceComp(pol,[dim,x]).0);
+	normal:=List(normal,x->Length(Positions(normal,x)));
+	normal:=Positions(normal,1);
+	normal:=sp1{normal};
+	l:=Length(normal);
+	while s<=l and verify=false do
+		sostav:=FaceComp(pol,[dim,normal[s]]);
+		verify:=List([1..dim-1],x->pol.faces[x]{sostav.(x)});
+		verify:=List([1..dim-1],x->Length(Set(verify[x]))=Length(verify[x]));
+		verify:=Set(verify);
+		verify:=(verify=[true]);
+		s:=s+1;
+	od;
+	s:=s-1;
+	if verify=false then
+		Print("Sorry, all faces is not combinatorial.\n");
+		break;
+	fi;
+	# На клетках sp1 необходимо содать упорядочение таким образом, что бы каждая
+	# следующая клетка в подмногообразии имела общую грань хотябы с одной
+	# клеткой которая уже была склеена.
+	s:=Remove(sp1,s);
+	Add(sp1,s,1);
+
+	#--- запуск основного цикала -----------------------------------------------
+	pairs:=[];
+	namespace:=List(sp2, x -> FaceComp(pol,[dim,x]).0);
+	namespace:=List(namespace, x -> pol.vertices{x});
+	for i in sp1 do
+		kl:=[dim,i];
+		name:=FaceComp(pol,kl).0;
+		name:=pol.vertices{name};
+		pos:=Position(namespace,name);
+		i2:=Remove(sp2,pos);
+		Add(pairs,Set([i,i2]));
+		Remove(namespace,pos);
+	od;
+	Sort(pairs, function(u,v) return u[2]>v[2]; end);
+	for para in pairs do
+		pol:=VerticesRullGlueFace(pol,para,dim);
+	od;
+
+return pol;
+end);
+
+################################################################################
+
+# <ManSection><Func Name="PreimageInPolProduct" Arg="pol1, pol2, imageface" />
+# 	<Description>
+# 		По заданному образу в декартовом произведении политопов pol1 и pol2
+# 		указываем из каких клеток была составлена данная клетка imageface.
+#		<Example>
+#		</Example>
+#	</Description>
+# </ManSection>
+
+InstallGlobalFunction(PreimageInPolProduct, function(pol1,pol2, imageface)
+	local	dim, k, pol, l, verify, d, ind, b, a, i;
+
+	dim:=imageface[1];
+	l:=rec();
+	#--- различные возможности -------------------------------------------------
+	k:=1;
+	for pol in [pol1,pol2] do
+		if IsSubset(RecNames(pol),["vertices","faces"]) then
+			l.(k):=rec();
+			l.(k).0:=Length(pol.vertices);
+			for i in [1 .. Length(pol.faces)] do
+				l.(k).(i):=Length(pol.faces[i]);
+			od;
+		elif "0" in RecNames(pol) then
+			l.(k):=pol;
+		else
+			Print("Data isn't correct in function PreimageInPolProduct\n");
+			break;
+		fi;
+		for i in [Length(RecNames(l.(k))) .. dim] do
+			l.(k).(i):=0;
+		od;
+		k:=k+1;
+	od;
+
+	#--- запуск цикла ----------------------------------------------------------
+	verify:=true;
+	d:=-1;
+	ind:=StructuralCopy(imageface[2]);
+	while verify do
+		d:=d+1;
+		ind:=ind - l.1.(d)*l.2.(dim-d);
+		verify := (ind > 0);
+	od;
+	b:= ind + l.1.(d)*l.2.(dim-d);
+	a:=1;
+	verify:=true;
+	while verify do
+		b:= b - l.2.(dim-d);
+		verify:= b > 0;
+		a:=a+1;
+	od;
+	a:=a-1;
+	b:=b + l.2.(dim-d);
+
+return [[d,a],[dim-d,b]];
+end);
+
+################################################################################
+
+# <ManSection><Func Name="EulerNumber" Arg="pol" />
+# 	<Description>
+# 		функция вычисляет число Эйлера для шарового комплекса. Данная функция
+# 		полиморфна и способна принимать для вычислений данные типа политоп
+# 		(IsPolytope), именнованные списки по размерностям в котором содержится
+# 		структура политопа и именованный список по размерностям элементами
+# 		которого могут выступать количества клеток определенной размерности. 
+#		<Example>
+# gap> EulerNumber(T2);
+# 0
+# gap> EulerNumber(sphereAB(4));
+# 2
+# gap> EulerNumber(sphereAB(3));
+# 0
+#		</Example>
+#	</Description>
+# </ManSection>
+
+# зависимости:
+# Read("~/ProgGAP/***.g");
+
+
+
+InstallGlobalFunction(EulerNumber, function(data)
+	local	namespace, ln, l, i, en;
+
+	namespace:=RecNames(data);
+	ln:=Length(namespace);
+	if "vertices" in namespace then
+		l:=rec(0:=Length(data.vertices));
+		for i in [1 .. Length(data.faces)] do
+			l.(i):=Length(data.faces[i]);
+		od;
+	elif "0" in namespace then
+		l:=rec();
+		if IsList(data.0) then
+			l.0:=Length(data.0);
+			for i in [1..ln] do
+				if String(i) in namespace then
+					l.(i):=Length(data.(i));
+				fi;
+			od;
+		elif IsInt(data.0) then
+			l.0:=data.0;
+			for i in [1 .. ln] do
+				if String(i) in namespace then
+					l.(i):=data.(i);
+				fi;
+			od;
+		fi;
+	fi;
+
+	en:=0;
+	for i in RecNames(l) do
+		en:=en + (-1)^(Int(i))*l.(i);
+	od;
+
+return en;
+end);
+
+################################################################################
+
+# <ManSection><Func Name="UnionFace" Arg="pol, kl1, kl2" />
+# 	<Description>
+# 		на вход функции посылаются две клетки одной и той же размерности для
+# 		объединения их в одну клетку. По сути данной функцией реализуется
+# 		обратная операция к функции <M>DivideFace</M> разбивающей клетку на две
+# 		части.
+# 		<Example>
+# gap> UnionFace(p3,[3,1],[3,2]);
+# rec(
+#   faces :=
+#     [ [ [ 1, 2 ], [ 1, 3 ], [ 2, 3 ], [ 1, 4 ], [ 2, 4 ], [ 3, 4 ], [ 1, 5 ],
+#           [ 2, 5 ], [ 3, 5 ], [ 4, 5 ] ],
+#       [ [ 2, 4, 6 ], [ 2, 7, 9 ], [ 4, 7, 10 ], [ 3, 5, 6 ], [ 3, 8, 9 ],
+#           [ 5, 8, 10 ], [ 1, 4, 5 ], [ 1, 7, 8 ] ],
+#       [ [ 1, 2, 4, 5, 7, 8 ], [ 3, 6, 7, 8 ] ] ],
+#   vertices := [ 1, 2, 3, 4, 5 ] )
+# 		</Example>
+#
+# 		Объединение двух клеток <M>D^k_1</M> и <M>D^k_2</M> в одну в политопе
+# 		<M>pol</M> можно провести только в том случае если звезда пересечения
+# 		этих клеток состоит только из <M>D^k_1</M> и <M>D^k_2</M>.
+#
+#		Для проведения объединения функция проверяет, что
+# 		данные клетки пересекаются по одному диску. Если после объединения
+# 		указанных клеток комплекс перестанет быть шаровым разбиением, то функция
+# 		не будет проводить объединение, на выход будет подан начальный политоп и
+# 		информационная строка с пояснением почему функция отказывается работать.
+#		<Example>
+# gap> UnionFace(T2,[2,1],[2,3]);;
+# This faces intersected on some balls or not intersected.
+# I cannot union the faces in a polytope.
+#		</Example>
+#	</Description>
+# </ManSection>
+
+
+InstallGlobalFunction(UnionFace, function(pol0, adr1, adr2)
+	local	pol, dim, sost1, sost2, i, int, disk, generalsost, max, min, l,
+	verify, ssilki;
+
+	
+	pol:=StructuralCopy(pol0);
+	verify:=true;
+	# первый критерий корректности совпадение размерностей шаров
+	if adr1[1] = adr2[1] then
+		dim:=adr1[1];
+	else
+		Print("Dimensions of both faces must be equal. \n");
+		verify:=false;
+	fi;
+	sost1:=FaceComp(pol,adr1);
+	sost2:=FaceComp(pol,adr2);
+	int:=rec();
+	for i in [0 .. dim-1] do
+		# так как клетки не пересекаются по размерности dim, то мы ее исключим
+		int.(i):=Intersection(sost1.(i), sost2.(i));
+	od;
+
+	# второй критерий корректности единственность в int.(dim-1)
+	if Length(int.(dim-1)) = 1 then
+		disk:=[dim-1, int.(dim-1)[1]];
+	else
+		# Пересечение указанных клеток не является диском
+		Print("The intersection of the cells isn't a ball.\n");
+		verify:=false;
+		disk:=[];
+	fi;
+
+	# проверка на звезду
+	if verify then
+		ssilki:=Concatenation(pol.faces[dim]);
+		ssilki:=Positions(ssilki,disk[2]);
+		if Length(ssilki)=2 then
+			generalsost:=FaceComp(pol,disk);
+		else
+			# звезда клетки diski имеет более чем две (dim+1)-клетки
+			Print("The star the face ", disk, " have more then two (", dim,
+			")-balls.\n");
+			verify:=false;
+			generalsost:=rec();
+		fi;
+	fi;
+
+
+
+	# объединение двух клеток можно проводить если списки ind и generalsost
+	# совпадают, это обусловлено тем, что если это так, то выбранные клетки
+	# пересекаются только по одному однородному пространству, а для дисков это
+	# может быть только диск размерность меньше.
+	if verify and generalsost=int then
+		pol:=DelFace(pol,disk);
+		max:=Maximum(adr1[2],adr2[2]);
+		min:=Minimum(adr1[2],adr2[2]);
+		UniteSet(pol.faces[dim][min], pol.faces[dim][max]);
+		# нужно во всех клетках размерности dim+1 перенаправить ссылки
+		if Length(pol.faces) >= dim then
+			l:=0;
+		else
+			l:=pol.faces[dim+1];
+		fi;
+		for i in [1 .. l] do
+			if max in pol.faces[dim+1][i] then
+				pol.faces[dim+1][i]:=Difference(pol.faces[dim+1][i],[max]);
+				UniteSet(pol.faces[dim+1][i],[min]);
+			fi;
+		od;
+		pol:=DelFace(pol,[dim,max]);
+		Print("\t\t were unite \n");
+	else
+		Print("I cannot union the faces in a polytope. \n");
+	fi;
+
+return pol;
+end);
+
+################################################################################
+
+# <ManSection><Func Name="wasDelFace" Arg="pol, adr" />
+# 	<Description>
+# 		функция корректирует сопуствующую информацию прикрепленную к политопу
+# 		<M>pol</M> которая должна была измениться после удаления одной из
+# 		клеток. На вход функции подается политоп и адрес той клетки которая
+# 		была удалена. Напомним, что после удаления клетки индексы больших клеток
+# 		данной размерности понижаются на едининцу, это изменение индексации
+# 		должно быть отображено в той информации которая сопутствует данному
+# 		шаровому комплексу.
+#
+#		Если из какой-либо сопуствующей информации была удалена клетка, то будет
+#		выведено соответствующее сообщение, но изменения будут проведены.
+#		
+#		При обработке информации по 2-узле в политопе будет, в случае если
+#		удаляется 2-клетка, будет выведено соответствующее сообщение, индекс
+#		2-клетки будет удален из списка .2knot.sheets, если на данную 2-клетку
+#		есть ссылка в .2knot.dpoints.(1kl), то соответсвующая позиция будет
+#		очищена
+#		<Example>
+#		</Example>
+#	</Description>
+# </ManSection>
+
+InstallGlobalFunction(wasDelFace, function(pol0,adr)
+	local	namespace, pol, i, kl, names1kl, newdpoints, 1kl, r, list;
+
+	namespace:=RecNames(pol0);
+	pol:=StructuralCopy(pol0);
+	
+#--- корректрировка 2-узла -----------------------------------------------------
+	if "2knot" in namespace then
+		if adr[1] = 2 then
+			i:=1;
+			r:=0;
+			for kl in pol.2knot.sheets do
+				if kl > adr[2] then
+					pol.2knot.sheets[i] := kl - 1;
+				elif kl = adr[2] then
+					Print("Attention.\t The 2-face of the 2-knot was delite.\n");
+					r:=StructuralCopy(i);
+				else
+					pol.2knot.sheets[i] := kl;
+				fi;
+				i := i + 1;
+			od;
+			if r > 0 then
+				Remove(pol.2knot.sheets,r);
+			fi;
+
+			for 1kl in RecNames(pol.2knot.dpoints) do
+				i := 1;
+				list:=[];
+				for kl in pol.2knot.dpoints.(1kl) do
+					if kl > adr[2] then
+						list[i] := kl - 1;
+					elif kl < adr[2] then
+						list[i] := kl;
+					fi;
+					i := i + 1;
+				od;
+				pol.2knot.dpoints.(1kl):=list;
+			od;
+		fi;
+
+		if adr[1] = 1 then
+			names1kl:=List(RecNames(pol.2knot.dpoints), x->Int(x));
+			i:=1;
+			newdpoints:=rec();
+			for 1kl in names1kl do
+				if 1kl < adr[2] then
+					newdpoints.(1kl):=pol.2knot.dpoints.(1kl);
+				elif 1kl > adr[2] then
+					newdpoints.(1kl-1):=pol.2knot.dpoints.(1kl);
+				elif 1kl = adr[2] then
+					Print("Attention.\t The 1-face of the 2-knot was delite.\n");
+					Unbind(pol.(1kl));
+				fi;
+			od;
+			pol.2knot.dpoints:=newdpoints;
+		fi;
+	fi;
+
+return pol;
+end);
+
+################################################################################
+
+# <ManSection><Func Name="PolMinusPol" Arg="pol, subpol, dim" />
+# 	<Description>
+# 		Функция вырезает подполитоп <M>subpol</M> из политопа <M>pol<M>. По
+# 		возможности выбирается такой способ вырезания, который будет более
+# 		экономичным.
+#		<Example>
+#		</Example>
+#	</Description>
+# </ManSection>
+
+# зависимости:
+# Read("~/ProgGAP/***.g");
+
+
+
+InstallGlobalFunction(PolMinusPol, function(pol1,subpol,dim)
+	local	pol, sostav, d, bigdim, kl;
+
+	pol:=StructuralCopy(pol);
+	sostav:=rec();
+	sostav.(dim):=subpol;
+	for d in [1 .. dim] do
+		sostav.(d-1):=Set(Concatenation(pol.faces[d]{sostav.(d)}));
+	od;
+	bigdim:=Length(pol.faces);
+	if bigdim = dim+1 then
+		for d in [dim, dim-1 .. 0] do
+			for kl in sostav.(d) do
+				pol:=PolMinusFaceDoublingMethod(pol,[d,kl]);
+			od;
+		od;
+	else
+		for d in [dim, dim-1 .. 0] do
+			for kl in sostav.(d) do
+				pol:=PolMinusFace(pol,[d,kl]);
+			od;
+		od;
+	fi;
+
+return pol;
+end);
+
+################################################################################
+
+# <ManSection><Func Name="PolSimplify" Arg="pol" />
+# 	<Description>
+# 		проводит упрощение политопа <M>pol</M> фукцией UnionFaces. Данная
+# 		функция перебирает все возможности начиная с клеток максимальной
+# 		размерности. Вновь появившиеся возможности функция не исследует. По
+# 		этому функцию можно запускать несколько раз если целью стоит максимально
+# 		упростить политоп.
+#		<Example>
+# gap> a:=ballTriangul(3);;
+# gap> PolSimplify(a);
+# rec( faces := [ [ [ 1, 2 ], [ 1, 2 ] ], [ [ 1, 2 ], [ 1, 2 ] ], [ [ 1, 2 ] ]
+#      ], vertices := [ 1, 2 ] )
+#		</Example>
+#	</Description>
+# </ManSection>
+
+# зависимости:
+# Read("~/ProgGAP/***.g");
+
+
+
+InstallGlobalFunction(PolSimplify, function(pol0)
+	local	pol, dim, d, l, ssilki, chastots, wherecan, kl, pos;
+
+	pol:=StructuralCopy(pol0);
+	dim:=Length(pol.faces);
+
+	for d in [dim-1, dim-2 .. 1] do
+		l:=Length(pol.faces[d]);
+		ssilki:=Concatenation(pol.faces[d+1]);
+		chastots:=List([1 .. l], x -> Length(Positions(ssilki,x)));
+		wherecan:=Positions(chastots, 2);
+		Sort(wherecan, function(x,y) return x > y; end);
+		for kl in wherecan do
+			pos:=List([1 .. Length(pol.faces[d+1])], 
+		 		x -> (kl in pol.faces[d+1][x]));
+			pos:=Positions(pos,true);
+			pol:=UnionFace(pol,[d+1,pos[1]],[d+1,pos[2]]);
+		od;
+	od;
+
+	l:=Length(pol.vertices);
+	ssilki:=Concatenation(pol.faces[1]);
+	chastots:=List([1 .. l], x -> Length(Positions(ssilki, x)));
+	wherecan := Positions(chastots, 2);
+	Sort(wherecan, function(x,y) return x > y; end);
+	for kl in wherecan do
+		pos:=List([1 .. Length(pol.faces[1])], x->(kl in pol.faces[1][x]));
+		pos:=Positions(pos,true);
+		pol:=UnionFace(pol,[1,pos[1]],[1,pos[2]]);
+	od;
+
+
+return pol;
+end);
+
+
+################################################################################
+
+# <ManSection><Func Name="ParallelSimplify" Arg="pol,subpol,dim" />
+# 	<Description>
+# 		В политопе <M>pol</M> производится упрощение с помощью функции
+# 		UnionFaces, параллельно с этим упрощается подполитоп <M>subpol</M>
+# 		размерности <M>dim.</M> Информация о клетках подполитопа помещается в
+# 		список .subpol. Функция работает только для подполитопов чья размерность
+# 		меньше размерности объемлющего пространства.
+#
+# 		Если вложенное подмногообразие <M>A</M> той же размерности, что и
+# 		политоп <M>M</M>, можно провести параллельное упрощение c пересечением
+# 		<M>C = A \cap \overline{(M\A)}.</M>
+#		<Example>
+#		</Example>
+#	</Description>
+# </ManSection>
+
+
+InstallGlobalFunction(ParallelSimplify, function(pol0,subpol,dim)
+	local	bigdim, sostav, d, l, may, kl, where, kl1, kl2, pol, paras,
+	verify, elem, sost, i, newl, ind, zapret, wasdel;
+
+	pol:=StructuralCopy(pol0);
+	bigdim:=Length(pol.faces);
+
+	d:=bigdim-1;
+	while d > dim do
+		l:=Length(pol.faces[d]);
+		may:=Concatenation(pol.faces[d+1]);
+		may:=List([1..l], x -> Length(Positions(may,x)));
+		may:=Positions(may,2);
+		while not IsEmpty(may) do
+			kl:=Remove(may);
+			where:=List(pol.faces[d+1], x -> kl in x);
+			where:=Positions(where, true);
+			kl1:=[d+1, where[1]];
+			kl2:=[d+1, where[2]];
+			pol:=UnionFace(pol,kl1,kl2);
+		od;
+		d:=d-1;
+	od;
+
+	zapret:=StructuralCopy(subpol);
+	l:=Length(pol.faces[d]);
+	ind:=[1 .. l];
+	may:=Concatenation(pol.faces[d+1]);
+	may:=List(ind, x -> Length(Positions(may,x)));
+	may:=Positions(may,2);
+	may:=Difference(may, zapret);
+	wasdel:=[];
+	while not IsEmpty(may) do
+		kl:=Remove(may);
+		where:=List(pol.faces[d+1], x -> kl in x);
+		where:=Positions(where, true);
+		kl1:=[d+1, where[1]];
+		kl2:=[d+1, where[2]];
+		pol:=UnionFace(pol,kl1,kl2);
+		newl:=Length(pol.faces[d]);
+		if newl < l then
+			Add(wasdel,kl);
+			l:=StructuralCopy(newl);
+		fi;
+	od;
+	while not IsEmpty(wasdel) do
+		i:=Remove(wasdel);
+		Remove(ind,i);
+	od;
+	zapret:=List(zapret, x -> Position(ind,x));
+	
+	sost:=Set(Concatenation(pol.faces[d]{zapret}));
+	d:=d-1;
+	while d > -1 do
+		if d = 0 then
+			l:=Length(pol.vertices);
+		else
+			l:=Length(pol.faces[d]);
+		fi;
+		ind:=[1 .. l];
+		may:=Concatenation(pol.faces[d+1]);
+		may:=List(ind, x -> Length(Positions(may,x)));
+		may:=Positions(may,2);
+		while not IsEmpty(may) do
+			kl:=Remove(may);
+			where:=List(pol.faces[d+1], x -> kl in x);
+			where:=Positions(where, true);
+			kl1:=[d+1, where[1]];
+			kl2:=[d+1, where[2]];
+			verify:=Intersection(where, sost);
+			verify:= not (Length(verify)=1);
+			if verify then
+				pol:=UnionFace(pol,kl1,kl2);
+				newl:=Length(pol.faces[d+1]);
+				if l > newl then
+					l:=StructuralCopy(newl);
+					i:=1;
+					for elem in sost do
+						if elem > where[2] then
+							sost[i]:=sost[i]-1;
+						elif elem = where[2] then
+							sost[i]:=where[1];
+						fi;
+						i:=i+1;
+					od;
+				fi;
+			fi;
+		od;
+		if d > 0 then
+			sost:=Set(Concatenation(pol.faces[d]{Set(sost)}));
+		fi;
+		d:=d-1;
+	od;
+	
+	pol.subpol:=zapret;
+
+	# Допустим клетка kl принадлежит подмногообразию, эту клетку можно удалять
+	# из шарового комплекса и две клетки на размернсоть больше из звезды
+	# Star(kl) не принадлежат подподмногообразию. Данный случай возможен только
+	# водной единственной размерности, когда dim(kl) = dim. Во всех остальных
+	# случаях в Star(kl) должны быть клетки из подмногообразия, следовательно
+	# мощьность |Star(kl)| > 2 и данное удаление неразрешенно.
+
+return pol;
+end);
+
+
+################################################################################
+
+# <ManSection><Func Name="LengthPol" Arg="pol" />
+# 	<Description>
+# 		В <M>resul.d</M> указывается мощьность <M>d</M>-мерного остова в
+# 		политопе <M>pol.</M>
+#		<Example>
+# gap> LengthPol(T2);
+# total16
+# rec( 0 := 4, 1 := 8, 2 := 4 )
+#		</Example>
+#	</Description>
+# </ManSection>
+
+
+InstallGlobalFunction(LengthPol, function(pol)
+	local	l, dim, i, total;
+	
+	l:=rec();
+	l.0:=Length(pol.vertices);
+	dim:=Length(pol.faces);
+	for i in [1 .. dim] do
+		l.(i):=Length(pol.faces[i]);
+	od;
+	
+	total:=List([0 .. dim], x -> l.(x));
+	Print("total: ", Sum(total),"\n");
+
+return l;
+end);

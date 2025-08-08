@@ -15,7 +15,7 @@
 <body class="chap2"  onload="jscontent()">
 
 
-<div class="chlinktop"><span class="chlink1">Перейти к главе: </span><a href="chap0.html">Начало</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+<div class="chlinktop"><span class="chlink1">Перейти к главе: </span><a href="chap0.html">Начало</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
 
 <div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Начало книги]</a>&nbsp;  <a href="chap0.html#contents">[Содержание]</a>&nbsp;  &nbsp;<a href="chap1.html">[Предыдущая глава]</a>&nbsp;  &nbsp;<a href="chap3.html">[Следующая глава]</a>&nbsp;  </div>
 
@@ -26,15 +26,19 @@
 <div class="ContSSBlock">
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X846E72167C7779D2">2.1-1 SetOfFacesBoundary</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X857F686C8672E246">2.1-2 SubPolytope</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X80512E7E8394ADDB">2.1-3 PolMinusFace</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7876CF9E8413B6D6">2.1-4 PolMinusFaceDoublingMethod</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X804271D78379B73C">2.1-5 PolMinusPol</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X83D3EDBD86CC8F58">2.1-3 ParallelSimplify</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X80512E7E8394ADDB">2.1-4 PolMinusFace</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7876CF9E8413B6D6">2.1-5 PolMinusFaceDoublingMethod</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X804271D78379B73C">2.1-6 PolMinusPol</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X79DD05937B0FD9D2">2.1-7 GlueFaces</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7D9ACC967D3ACE2A">2.1-8 VerticesRullGlueFace</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X86C045E57D71AB84">2.1-9 VerticesRullGluePol</a></span>
 </div></div>
 </div>
 
 <h3>2 <span class="Heading">Подполитопы, вложения</span></h3>
 
-<p>Множество <span class="SimpleMath">subpol</span> клеток размерности <span class="SimpleMath">k</span> будем называть подполитопом, если они задают некоторое вложенное многообразие в многообразие <span class="SimpleMath">pol.</span> Самый простой пример подполитопа это список из одного элемента любой размерности, который здает диск внутри политопа <span class="SimpleMath">pol.</span> Тем не менее мы не будем создавать какой либо жесткой структуры обозначающей подполитоп, так как его использование будет ясным из контекста программ.</p>
+<p>Множество <span class="SimpleMath">subpol</span> клеток размерности <span class="SimpleMath">k</span> будем называть подполитопом, если они задают некоторое вложенное многообразие <span class="SimpleMath">N ⊂ M.</span> Самый простой пример подполитопа это список из одного элемента любой размерности, который задает диск внутри политопа <span class="SimpleMath">pol.</span> Тем не менее мы не будем создавать какой либо жесткой структуры обозначающей подполитоп, так как его использование будет ясным из контекста программ.</p>
 
 <p><a id="X7DEA53D985CB7916" name="X7DEA53D985CB7916"></a></p>
 
@@ -45,7 +49,7 @@
 <h5>2.1-1 SetOfFacesBoundary</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SetOfFacesBoundary</code>( <var class="Arg">pol</var>, <var class="Arg">subpol</var>, <var class="Arg">dim</var> )</td><td class="tdright">( функция )</td></tr></table></div>
-<p>Функция выводит границу подполитопа <span class="SimpleMath">subpol</span>. На выходе будут указаны клетки внутри политопа <span class="SimpleMath">pol</span> образующие границу подполитопа <span class="SimpleMath">subpol.</span> Размерность указанных клеток <span class="SimpleMath">dim-1.</span></p>
+<p>Функция выводит границу подполитопа <span class="SimpleMath">subpol</span>. На выходе будут указаны клетки внутри политопа <span class="SimpleMath">pol</span> образующие границу подполитопа <span class="SimpleMath">subpol.</span> Размерность указанных клеток равняется <span class="SimpleMath">dim-1.</span></p>
 
 
 <div class="example"><pre>
@@ -58,7 +62,7 @@
 <h5>2.1-2 SubPolytope</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SubPolytope</code>( <var class="Arg">pol</var>, <var class="Arg">subpol</var>, <var class="Arg">dim</var> )</td><td class="tdright">( функция )</td></tr></table></div>
-<p>выделяем указанный подполитоп как самостоятельный.</p>
+<p>выделяем указанный подполитоп как самостоятельный. Отношение порядка клеток в создаваемом политопе наследуется из объемлющего политопа <span class="SimpleMath">pol.</span></p>
 
 
 <div class="example"><pre>
@@ -67,19 +71,26 @@ rec( faces := [ [ [ 1, 2 ], [ 1, 2 ] ] ],
   vertices := [ [ "A", "A" ], [ "A", "B" ] ] )
 					</pre></div>
 
+<p><a id="X83D3EDBD86CC8F58" name="X83D3EDBD86CC8F58"></a></p>
+
+<h5>2.1-3 ParallelSimplify</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ParallelSimplify</code>( <var class="Arg">pol</var>, <var class="Arg">subpol</var>, <var class="Arg">dim</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<p>В политопе <span class="SimpleMath">pol</span> производится упрощение с помощью функции UnionFaces, параллельно с этим упрощается подполитоп <span class="SimpleMath">subpol</span> размерности <span class="SimpleMath">dim.</span> Информация о клетках подполитопа помещается в список .subpol. Функция работает только для подполитопов чья размерность меньше размерности объемлющего пространства. Если вложенное подмногообразие <span class="SimpleMath">A</span> той же размерности, что и политоп <span class="SimpleMath">M</span>, можно провести параллельное упрощение c пересечением <span class="SimpleMath">C = A ∩ overline(MA).</span></p>
+
 <p><a id="X80512E7E8394ADDB" name="X80512E7E8394ADDB"></a></p>
 
-<h5>2.1-3 PolMinusFace</h5>
+<h5>2.1-4 PolMinusFace</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PolMinusFace</code>( <var class="Arg">pol</var>, <var class="Arg">adr</var> )</td><td class="tdright">( функция )</td></tr></table></div>
 <p>cuts out a neighborhood of a face with given adress from polytope. Функция построена таким образом, что после вырезания клетки позиции старых клеток в списках pol.faces[i] и pol.vertices не изменяются.</p>
 
 <p><a id="X7876CF9E8413B6D6" name="X7876CF9E8413B6D6"></a></p>
 
-<h5>2.1-4 PolMinusFaceDoublingMethod</h5>
+<h5>2.1-5 PolMinusFaceDoublingMethod</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PolMinusFaceDoublingMethod</code>( <var class="Arg">pol</var>, <var class="Arg">adr</var> )</td><td class="tdright">( функция )</td></tr></table></div>
-<p>Допустим, некоторая окрестность k-клетки <span class="SimpleMath">a</span> в pl-комплексе <span class="SimpleMath">M</span> обладает окрестностью эквиванетной нескольким копиям n-дисков <span class="SimpleMath">D^n_i</span> склееных по представленной клетке <span class="SimpleMath">a.</span> Тогда можно осуществить разрез по данной клетке в pl-многообразии более экономичным способом, создав для каждого n-диска <span class="SimpleMath">D^n_i</span> свою копию клетки <span class="SimpleMath">a.</span> В качестве примера приведем букет трех отрезков, склеенный по вершине [0,1].</p>
+<p>Допустим, некоторая окрестность k-клетки <span class="SimpleMath">a</span> в pl-комплексе <span class="SimpleMath">M</span> обладает окрестностью эквивалентной нескольким копиям n-дисков <span class="SimpleMath">D^n_i</span> склеенных по представленной клетке <span class="SimpleMath">a.</span> Тогда можно осуществить разрез по данной клетке в pl-многообразии более экономичным способом, создав для каждого n-диска <span class="SimpleMath">D^n_i</span> свою копию клетки <span class="SimpleMath">a.</span> В качестве примера приведем букет трех отрезков, склеенный по вершине [0,1].</p>
 
 
 <div class="example"><pre>
@@ -90,20 +101,51 @@ rec( vertices := [ 1, 2, 3, 4, 5, 6 ],
  faces:=[ [ [ 1, 2 ], [ 3, 5 ], [ 4, 6 ] ] ] )
 					</pre></div>
 
-<p>Каждый диск <span class="SimpleMath">D^n_i</span> может иметь свое подразбиение внутри pl-многообразия <span class="SimpleMath">M.</span> При этом очевидно, что в pl-комплексе существует такое подразбиение шарвого комплекса, что линк клетки <span class="SimpleMath">a</span> распадается на несколько связных компонент (по числу дисков <span class="SimpleMath">D^n_i</span>). Именно это свойство взято в качестве критерия нахождения и разделения дисков <span class="SimpleMath">D^n_i.</span> Данное вырезание не затрагивает границу клетки, оставляя ее на месте, при этом индексы не участвующих в разрезании клеток не изменяются.</p>
+<p>Каждый диск <span class="SimpleMath">D^n_i</span> может иметь свое подразбиение внутри pl-многообразия <span class="SimpleMath">M.</span> При этом очевидно, что в pl-комплексе существует такое подразбиение шарового комплекса, что линк клетки <span class="SimpleMath">a</span> распадается на несколько связных компонент (по числу дисков <span class="SimpleMath">D^n_i</span>). Именно это свойство взято в качестве критерия нахождения и разделения дисков <span class="SimpleMath">D^n_i.</span> Данное вырезание не затрагивает границу клетки, оставляя ее на месте, при этом индексы не участвующих в разрезании клеток не изменяются.</p>
 
 <p><a id="X804271D78379B73C" name="X804271D78379B73C"></a></p>
 
-<h5>2.1-5 PolMinusPol</h5>
+<h5>2.1-6 PolMinusPol</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PolMinusPol</code>( <var class="Arg">pol</var>, <var class="Arg">subpol</var> )</td><td class="tdright">( функция )</td></tr></table></div>
-<p>cut out a neighborhood of a subpolytope from polytope.</p>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PolMinusPol</code>( <var class="Arg">pol</var>, <var class="Arg">subpol</var>, <var class="Arg">dim</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<p>Функция вырезает подполитоп <span class="SimpleMath">subpol</span> из политопа <span class="SimpleMath">pol</span>. По возможности выбирается такой способ вырезания, который будет более экономичным.</p>
+
+<p><a id="X79DD05937B0FD9D2" name="X79DD05937B0FD9D2"></a></p>
+
+<h5>2.1-7 GlueFaces</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; GlueFaces</code>( <var class="Arg">pol</var>, <var class="Arg">face1</var>, <var class="Arg">face2</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<p>Склеить две клетки в многообразие у которых общая граница. Замечание: функция не проверяет действительно ли у клеток одинаковая граница. Так же проверку, что после склейки получаются корректные данные возлагаем на пользователя. Например, функнция будет работать в следующем случае некорректно:</p>
+
+
+<div class="example"><pre>
+gap&gt;d2:=ballAB(2);;
+gap&gt;GlueFaces(d2,[1,2],1);
+rec(faces:=[ [ [1,2] ], [ [1] ] ],
+	vertices:= ["A","B"]
+					</pre></div>
+
+<p>Как мы видим из примера полученные данные уже не являются <span class="SimpleMath">pl-</span>разбиением.</p>
+
+<p><a id="X7D9ACC967D3ACE2A" name="X7D9ACC967D3ACE2A"></a></p>
+
+<h5>2.1-8 VerticesRullGlueFace</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; VerticesRullGlueFace</code>( <var class="Arg">pol</var>, <var class="Arg">para</var>, <var class="Arg">dim</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<p>Производится склейка двух клеток политопа. Клетки индексы клеток помещаются в список para, размерность dim клеток указывается отдельно.</p>
+
+<p><a id="X86C045E57D71AB84" name="X86C045E57D71AB84"></a></p>
+
+<h5>2.1-9 VerticesRullGluePol</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; VerticesRullGluePol</code>( <var class="Arg">pol</var>, <var class="Arg">subpol1</var>, <var class="Arg">subpol2</var>, <var class="Arg">dim</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<p>В политопе указывается два набора связных подполитопов, которые необходимо склеить. Правила склеики подполитопов указываются в именах вершин (вершины с одинаковыми именами склеиваются в одну), далее все это индуцируется на клетки большей размерности. Для работы данного алгоритма необходимо, что бы у подполитопов были одинаковые pl-разбиения, а также, что бы в этом pl-разбиении содержалась хоть одна n-клетка натянутая на хотябы на (n+1) вершин.</p>
 
 
 <div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Начало книги]</a>&nbsp;  <a href="chap0.html#contents">[Содержание]</a>&nbsp;  &nbsp;<a href="chap1.html">[Предыдущая глава]</a>&nbsp;  &nbsp;<a href="chap3.html">[Следующая глава]</a>&nbsp;  </div>
 
 
-<div class="chlinkbot"><span class="chlink1">Перейти к главе: </span><a href="chap0.html">Начало</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+<div class="chlinkbot"><span class="chlink1">Перейти к главе: </span><a href="chap0.html">Начало</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
 
 <hr />
 <p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>

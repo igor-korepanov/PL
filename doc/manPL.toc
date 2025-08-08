@@ -1,60 +1,89 @@
-\contentsline {chapter}{\numberline {1}\leavevmode {\color {Chapter }Unicode(1064)Unicode(1072)Unicode(1088)Unicode(1086)Unicode(1074)Unicode(1099)Unicode(1077) Unicode(1082)Unicode(1086)Unicode(1084)Unicode(1087)Unicode(1083)Unicode(1077)Unicode(1082)Unicode(1089)Unicode(1099).}}{5}{chapter.1}
-\contentsline {section}{\numberline {1.1}\leavevmode {\color {Chapter }Representation of a PL ball complex}}{5}{section.1.1}
-\contentsline {subsection}{\numberline {1.1.1}\leavevmode {\color {Chapter }IsPolytope}}{6}{subsection.1.1.1}
-\contentsline {section}{\numberline {1.2}\leavevmode {\color {Chapter }Unicode(1059)Unicode(1082)Unicode(1079)Unicode(1099)Unicode(1074)Unicode(1072)Unicode(1102)Unicode(1097)Unicode(1080)Unicode(1077) Unicode(1092)Unicode(1091)Unicode(1085)Unicode(1082)Unicode(1094)Unicode(1080)Unicode(1080)}}{7}{section.1.2}
-\contentsline {subsection}{\numberline {1.2.1}\leavevmode {\color {Chapter }FundGroup}}{7}{subsection.1.2.1}
-\contentsline {section}{\numberline {1.3}\leavevmode {\color {Chapter }Unicode(1054)Unicode(1073)Unicode(1097)Unicode(1072)Unicode(1103) Unicode(1080)Unicode(1085)Unicode(1092)Unicode(1086)Unicode(1088)Unicode(1084)Unicode(1072)Unicode(1094)Unicode(1080)Unicode(1103) Unicode(1086) Unicode(1096)Unicode(1072)Unicode(1088)Unicode(1086)Unicode(1074)Unicode(1086)Unicode(1084) Unicode(1082)Unicode(1086)Unicode(1084)Unicode(1083)Unicode(1087)Unicode(1077)Unicode(1082)Unicode(1089)Unicode(1077)}}{7}{section.1.3}
-\contentsline {subsection}{\numberline {1.3.1}\leavevmode {\color {Chapter }PolBoundary}}{7}{subsection.1.3.1}
-\contentsline {subsection}{\numberline {1.3.2}\leavevmode {\color {Chapter }PolInnerFaces}}{8}{subsection.1.3.2}
-\contentsline {subsection}{\numberline {1.3.3}\leavevmode {\color {Chapter }MaxTree}}{8}{subsection.1.3.3}
-\contentsline {subsection}{\numberline {1.3.4}\leavevmode {\color {Chapter }CellOrient}}{8}{subsection.1.3.4}
-\contentsline {subsection}{\numberline {1.3.5}\leavevmode {\color {Chapter }PolOrient}}{9}{subsection.1.3.5}
-\contentsline {subsection}{\numberline {1.3.6}\leavevmode {\color {Chapter }OrientTriangulated}}{9}{subsection.1.3.6}
-\contentsline {subsection}{\numberline {1.3.7}\leavevmode {\color {Chapter }dataPachner}}{9}{subsection.1.3.7}
-\contentsline {subsection}{\numberline {1.3.8}\leavevmode {\color {Chapter }FromSimplexToPolytope}}{11}{subsection.1.3.8}
-\contentsline {section}{\numberline {1.4}\leavevmode {\color {Chapter }Unicode(1056)Unicode(1072)Unicode(1073)Unicode(1086)Unicode(1090)Unicode(1072) Unicode(1089) Unicode(1082)Unicode(1083)Unicode(1077)Unicode(1090)Unicode(1082)Unicode(1072)Unicode(1084)Unicode(1080)}}{11}{section.1.4}
-\contentsline {subsection}{\numberline {1.4.1}\leavevmode {\color {Chapter }PolBnd}}{12}{subsection.1.4.1}
-\contentsline {subsection}{\numberline {1.4.2}\leavevmode {\color {Chapter }FaceComp}}{12}{subsection.1.4.2}
-\contentsline {subsection}{\numberline {1.4.3}\leavevmode {\color {Chapter }StarFace}}{13}{subsection.1.4.3}
-\contentsline {subsection}{\numberline {1.4.4}\leavevmode {\color {Chapter }PolCheckComb}}{13}{subsection.1.4.4}
-\contentsline {section}{\numberline {1.5}\leavevmode {\color {Chapter }Unicode(1048)Unicode(1079)Unicode(1084)Unicode(1077)Unicode(1085)Unicode(1077)Unicode(1085)Unicode(1080)Unicode(1077) $pl-$Unicode(1088)Unicode(1072)Unicode(1079)Unicode(1073)Unicode(1080)Unicode(1077)Unicode(1085)Unicode(1080)Unicode(1103) (Unicode(1085)Unicode(1077) Unicode(1080)Unicode(1079)Unicode(1084)Unicode(1077)Unicode(1085)Unicode(1102)Unicode(1097)Unicode(1080)Unicode(1077))}}{14}{section.1.5}
-\contentsline {subsection}{\numberline {1.5.1}\leavevmode {\color {Chapter }PolTriangulate}}{14}{subsection.1.5.1}
-\contentsline {subsection}{\numberline {1.5.2}\leavevmode {\color {Chapter }FirstBoundary}}{14}{subsection.1.5.2}
-\contentsline {subsection}{\numberline {1.5.3}\leavevmode {\color {Chapter }PermFaces}}{15}{subsection.1.5.3}
-\contentsline {subsection}{\numberline {1.5.4}\leavevmode {\color {Chapter }ContractMiniFace}}{15}{subsection.1.5.4}
-\contentsline {subsection}{\numberline {1.5.5}\leavevmode {\color {Chapter }DivideFace}}{17}{subsection.1.5.5}
-\contentsline {subsection}{\numberline {1.5.6}\leavevmode {\color {Chapter }PolSimplify1}}{18}{subsection.1.5.6}
-\contentsline {section}{\numberline {1.6}\leavevmode {\color {Chapter }Unicode(1053)Unicode(1077)Unicode(1087)Unicode(1086)Unicode(1089)Unicode(1088)Unicode(1077)Unicode(1076)Unicode(1089)Unicode(1090)Unicode(1074)Unicode(1077)Unicode(1085)Unicode(1085)Unicode(1086)Unicode(1077) Unicode(1089)Unicode(1086)Unicode(1079)Unicode(1076)Unicode(1072)Unicode(1085)Unicode(1080)Unicode(1077) Unicode(1087)Unicode(1086)Unicode(1083)Unicode(1080)Unicode(1090)Unicode(1086)Unicode(1087)Unicode(1086)Unicode(1074)}}{18}{section.1.6}
-\contentsline {subsection}{\numberline {1.6.1}\leavevmode {\color {Chapter }ballAB}}{19}{subsection.1.6.1}
-\contentsline {subsection}{\numberline {1.6.2}\leavevmode {\color {Chapter }sphereAB}}{19}{subsection.1.6.2}
-\contentsline {subsection}{\numberline {1.6.3}\leavevmode {\color {Chapter }ballTriangul}}{19}{subsection.1.6.3}
-\contentsline {subsection}{\numberline {1.6.4}\leavevmode {\color {Chapter }sphereTriangul}}{20}{subsection.1.6.4}
-\contentsline {section}{\numberline {1.7}\leavevmode {\color {Chapter }Unicode(1058)Unicode(1086)Unicode(1087)Unicode(1086)Unicode(1083)Unicode(1086)Unicode(1075)Unicode(1080)Unicode(1095)Unicode(1077)Unicode(1089)Unicode(1082)Unicode(1080)Unicode(1077) Unicode(1086)Unicode(1087)Unicode(1077)Unicode(1088)Unicode(1072)Unicode(1094)Unicode(1080)Unicode(1080)}}{20}{section.1.7}
-\contentsline {subsection}{\numberline {1.7.1}\leavevmode {\color {Chapter }FreeUnionPol}}{20}{subsection.1.7.1}
-\contentsline {subsection}{\numberline {1.7.2}\leavevmode {\color {Chapter }PolCylinder}}{20}{subsection.1.7.2}
-\contentsline {subsection}{\numberline {1.7.3}\leavevmode {\color {Chapter }PolDoubleCone}}{20}{subsection.1.7.3}
-\contentsline {subsection}{\numberline {1.7.4}\leavevmode {\color {Chapter }PolProduct}}{20}{subsection.1.7.4}
-\contentsline {subsection}{\numberline {1.7.5}\leavevmode {\color {Chapter }ImageInPolProduct}}{21}{subsection.1.7.5}
-\contentsline {subsection}{\numberline {1.7.6}\leavevmode {\color {Chapter }PolProductSyms}}{22}{subsection.1.7.6}
-\contentsline {subsection}{\numberline {1.7.7}\leavevmode {\color {Chapter }PolProductSymsDict}}{23}{subsection.1.7.7}
-\contentsline {subsection}{\numberline {1.7.8}\leavevmode {\color {Chapter }PolFactorInvolution}}{23}{subsection.1.7.8}
-\contentsline {section}{\numberline {1.8}\leavevmode {\color {Chapter }Unicode(1054)Unicode(1089)Unicode(1085)Unicode(1086)Unicode(1074)Unicode(1085)Unicode(1099)Unicode(1077) Unicode(1087)Unicode(1088)Unicode(1080)Unicode(1085)Unicode(1094)Unicode(1099)Unicode(1087)Unicode(1099) Unicode(1087)Unicode(1077)Unicode(1088)Unicode(1077)Unicode(1089)Unicode(1090)Unicode(1088)Unicode(1086)Unicode(1077)Unicode(1082) Unicode(1096)Unicode(1072)Unicode(1088)Unicode(1086)Unicode(1074)Unicode(1099)Unicode(1093) Unicode(1082)Unicode(1086)Unicode(1084)Unicode(1087)Unicode(1083)Unicode(1077)Unicode(1082)Unicode(1089)Unicode(1086)Unicode(1074)}}{23}{section.1.8}
-\contentsline {subsection}{\numberline {1.8.1}\leavevmode {\color {Chapter }DelFace}}{24}{subsection.1.8.1}
-\contentsline {chapter}{\numberline {2}\leavevmode {\color {Chapter }Unicode(1055)Unicode(1086)Unicode(1076)Unicode(1087)Unicode(1086)Unicode(1083)Unicode(1080)Unicode(1090)Unicode(1086)Unicode(1087)Unicode(1099), Unicode(1074)Unicode(1083)Unicode(1086)Unicode(1078)Unicode(1077)Unicode(1085)Unicode(1080)Unicode(1103)}}{25}{chapter.2}
-\contentsline {section}{\numberline {2.1}\leavevmode {\color {Chapter }Unicode(1056)Unicode(1072)Unicode(1089)Unicode(1087)Unicode(1086)Unicode(1079)Unicode(1085)Unicode(1072)Unicode(1102)Unicode(1097)Unicode(1080)Unicode(1077)}}{26}{section.2.1}
-\contentsline {subsection}{\numberline {2.1.1}\leavevmode {\color {Chapter }SetOfFacesBoundary}}{26}{subsection.2.1.1}
-\contentsline {subsection}{\numberline {2.1.2}\leavevmode {\color {Chapter }SubPolytope}}{26}{subsection.2.1.2}
-\contentsline {subsection}{\numberline {2.1.3}\leavevmode {\color {Chapter }PolMinusFace}}{27}{subsection.2.1.3}
-\contentsline {subsection}{\numberline {2.1.4}\leavevmode {\color {Chapter }PolMinusFaceDoublingMethod}}{27}{subsection.2.1.4}
-\contentsline {subsection}{\numberline {2.1.5}\leavevmode {\color {Chapter }PolMinusPol}}{29}{subsection.2.1.5}
-\contentsline {chapter}{\numberline {3}\leavevmode {\color {Chapter }Unicode(1055)Unicode(1086)Unicode(1075)Unicode(1088)Unicode(1091)Unicode(1078)Unicode(1077)Unicode(1085)Unicode(1080)Unicode(1103) Unicode(1080) Unicode(1091)Unicode(1079)Unicode(1083)Unicode(1099).}}{30}{chapter.3}
-\contentsline {section}{\numberline {3.1}\leavevmode {\color {Chapter }Unicode(1047)Unicode(1072)Unicode(1076)Unicode(1072)Unicode(1085)Unicode(1080)Unicode(1077) Unicode(1076)Unicode(1080)Unicode(1072)Unicode(1075)Unicode(1088)Unicode(1072)Unicode(1084)Unicode(1084) Unicode(1091)Unicode(1079)Unicode(1083)Unicode(1086)Unicode(1074).}}{30}{section.3.1}
-\contentsline {section}{\numberline {3.2}\leavevmode {\color {Chapter }Unicode(1054)Unicode(1076)Unicode(1085)Unicode(1086)Unicode(1084)Unicode(1077)Unicode(1088)Unicode(1085)Unicode(1099)Unicode(1077) Unicode(1091)Unicode(1079)Unicode(1083)Unicode(1099)}}{40}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}\leavevmode {\color {Chapter }KnotInS3}}{40}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}\leavevmode {\color {Chapter }ZeroLinkFromKnot}}{40}{subsection.3.2.2}
-\contentsline {subsection}{\numberline {3.2.3}\leavevmode {\color {Chapter }ComplementOfKnot}}{41}{subsection.3.2.3}
-\contentsline {subsection}{\numberline {3.2.4}\leavevmode {\color {Chapter }TriangulateComplementOfKnot}}{42}{subsection.3.2.4}
-\contentsline {subsection}{\numberline {3.2.5}\leavevmode {\color {Chapter }ZeifertSurface}}{42}{subsection.3.2.5}
-\contentsline {subsection}{\numberline {3.2.6}\leavevmode {\color {Chapter }ZeifertSurfaceWithSimplyBoundary}}{43}{subsection.3.2.6}
-\contentsline {chapter}{\IeC {\DH }\IeC {\textexclamdown }\~N\@inpenc@undefined@ {latin1}\~N\@inpenc@undefined@ {latin1}\IeC {\DH }\IeC {\guillemotright }\IeC {\DH }\IeC {\textordmasculine }\IeC {\DH }\IeC {\c \ }}{45}{chapter*.3}
-\contentsline {chapter}{\IeC {\DH }\@inpenc@undefined@ {latin1}\IeC {\DH }\IeC {\textonehalf }\IeC {\DH }\'{}\IeC {\DH }\mu \IeC {\DH }\IeC {\textordmasculine }\~N\@inpenc@undefined@ {latin1}}{46}{section*.4}
+\contentsline {chapter}{\numberline {1}\leavevmode {\color {Chapter }\IeC {\CYRSH }\IeC {\cyra }\IeC {\cyrr }\IeC {\cyro }\IeC {\cyrv }\IeC {\cyrery }\IeC {\cyre } \IeC {\cyrk }\IeC {\cyro }\IeC {\cyrm }\IeC {\cyrp }\IeC {\cyrl }\IeC {\cyre }\IeC {\cyrk }\IeC {\cyrs }\IeC {\cyrery }.}}{4}{chapter.1}
+\contentsline {section}{\numberline {1.1}\leavevmode {\color {Chapter }Representation of a PL ball complex}}{4}{section.1.1}
+\contentsline {subsection}{\numberline {1.1.1}\leavevmode {\color {Chapter }IsPolytope}}{5}{subsection.1.1.1}
+\contentsline {section}{\numberline {1.2}\leavevmode {\color {Chapter }\IeC {\CYRU }\IeC {\cyrk }\IeC {\cyra }\IeC {\cyrz }\IeC {\cyrery }\IeC {\cyrv }\IeC {\cyra }\IeC {\cyryu }\IeC {\cyrshch }\IeC {\cyri }\IeC {\cyre } \IeC {\cyrf }\IeC {\cyru }\IeC {\cyrn }\IeC {\cyrk }\IeC {\cyrc }\IeC {\cyri }\IeC {\cyri }}}{5}{section.1.2}
+\contentsline {subsection}{\numberline {1.2.1}\leavevmode {\color {Chapter }EulerNumber}}{5}{subsection.1.2.1}
+\contentsline {subsection}{\numberline {1.2.2}\leavevmode {\color {Chapter }FundGroup}}{6}{subsection.1.2.2}
+\contentsline {section}{\numberline {1.3}\leavevmode {\color {Chapter }\IeC {\CYRO }\IeC {\cyrb }\IeC {\cyrshch }\IeC {\cyra }\IeC {\cyrya } \IeC {\cyri }\IeC {\cyrn }\IeC {\cyrf }\IeC {\cyro }\IeC {\cyrr }\IeC {\cyrm }\IeC {\cyra }\IeC {\cyrc }\IeC {\cyri }\IeC {\cyrya } \IeC {\cyro } \IeC {\cyrsh }\IeC {\cyra }\IeC {\cyrr }\IeC {\cyro }\IeC {\cyrv }\IeC {\cyro }\IeC {\cyrm } \IeC {\cyrk }\IeC {\cyro }\IeC {\cyrm }\IeC {\cyrp }\IeC {\cyrl }\IeC {\cyre }\IeC {\cyrk }\IeC {\cyrs }\IeC {\cyre }}}{6}{section.1.3}
+\contentsline {subsection}{\numberline {1.3.1}\leavevmode {\color {Chapter }LengthPol}}{6}{subsection.1.3.1}
+\contentsline {subsection}{\numberline {1.3.2}\leavevmode {\color {Chapter }PolBoundary}}{6}{subsection.1.3.2}
+\contentsline {subsection}{\numberline {1.3.3}\leavevmode {\color {Chapter }PolInnerFaces}}{6}{subsection.1.3.3}
+\contentsline {subsection}{\numberline {1.3.4}\leavevmode {\color {Chapter }MaxTree}}{7}{subsection.1.3.4}
+\contentsline {subsection}{\numberline {1.3.5}\leavevmode {\color {Chapter }CellOrient}}{7}{subsection.1.3.5}
+\contentsline {subsection}{\numberline {1.3.6}\leavevmode {\color {Chapter }PolOrient}}{7}{subsection.1.3.6}
+\contentsline {subsection}{\numberline {1.3.7}\leavevmode {\color {Chapter }OrientTriangulated}}{7}{subsection.1.3.7}
+\contentsline {subsection}{\numberline {1.3.8}\leavevmode {\color {Chapter }dataPachner}}{7}{subsection.1.3.8}
+\contentsline {subsection}{\numberline {1.3.9}\leavevmode {\color {Chapter }FromSimplexToPolytope}}{8}{subsection.1.3.9}
+\contentsline {section}{\numberline {1.4}\leavevmode {\color {Chapter }\IeC {\CYRR }\IeC {\cyra }\IeC {\cyrb }\IeC {\cyro }\IeC {\cyrt }\IeC {\cyra } \IeC {\cyrs } \IeC {\cyrk }\IeC {\cyrl }\IeC {\cyre }\IeC {\cyrt }\IeC {\cyrk }\IeC {\cyra }\IeC {\cyrm }\IeC {\cyri }}}{9}{section.1.4}
+\contentsline {subsection}{\numberline {1.4.1}\leavevmode {\color {Chapter }PolBnd}}{9}{subsection.1.4.1}
+\contentsline {subsection}{\numberline {1.4.2}\leavevmode {\color {Chapter }FaceComp}}{9}{subsection.1.4.2}
+\contentsline {subsection}{\numberline {1.4.3}\leavevmode {\color {Chapter }StarFace}}{9}{subsection.1.4.3}
+\contentsline {subsection}{\numberline {1.4.4}\leavevmode {\color {Chapter }PolCheckComb}}{10}{subsection.1.4.4}
+\contentsline {section}{\numberline {1.5}\leavevmode {\color {Chapter }\IeC {\CYRI }\IeC {\cyrz }\IeC {\cyrm }\IeC {\cyre }\IeC {\cyrn }\IeC {\cyre }\IeC {\cyrn }\IeC {\cyri }\IeC {\cyre } $pl-$\IeC {\cyrr }\IeC {\cyra }\IeC {\cyrz }\IeC {\cyrb }\IeC {\cyri }\IeC {\cyre }\IeC {\cyrn }\IeC {\cyri }\IeC {\cyrya } (\IeC {\cyrn }\IeC {\cyre } \IeC {\cyri }\IeC {\cyrz }\IeC {\cyrm }\IeC {\cyre }\IeC {\cyrn }\IeC {\cyrya }\IeC {\cyryu }\IeC {\cyrshch }\IeC {\cyri }\IeC {\cyre })}}{10}{section.1.5}
+\contentsline {subsection}{\numberline {1.5.1}\leavevmode {\color {Chapter }PolTriangulate}}{10}{subsection.1.5.1}
+\contentsline {subsection}{\numberline {1.5.2}\leavevmode {\color {Chapter }FirstBoundary}}{10}{subsection.1.5.2}
+\contentsline {subsection}{\numberline {1.5.3}\leavevmode {\color {Chapter }PermFaces}}{10}{subsection.1.5.3}
+\contentsline {subsection}{\numberline {1.5.4}\leavevmode {\color {Chapter }ContractMiniFace}}{10}{subsection.1.5.4}
+\contentsline {subsection}{\numberline {1.5.5}\leavevmode {\color {Chapter }DivideFace}}{11}{subsection.1.5.5}
+\contentsline {subsection}{\numberline {1.5.6}\leavevmode {\color {Chapter }UnionFace}}{12}{subsection.1.5.6}
+\contentsline {subsection}{\numberline {1.5.7}\leavevmode {\color {Chapter }PolSimplify}}{12}{subsection.1.5.7}
+\contentsline {section}{\numberline {1.6}\leavevmode {\color {Chapter }\IeC {\CYRN }\IeC {\cyre }\IeC {\cyrp }\IeC {\cyro }\IeC {\cyrs }\IeC {\cyrr }\IeC {\cyre }\IeC {\cyrd }\IeC {\cyrs }\IeC {\cyrt }\IeC {\cyrv }\IeC {\cyre }\IeC {\cyrn }\IeC {\cyrn }\IeC {\cyro }\IeC {\cyre } \IeC {\cyrs }\IeC {\cyro }\IeC {\cyrz }\IeC {\cyrd }\IeC {\cyra }\IeC {\cyrn }\IeC {\cyri }\IeC {\cyre } \IeC {\cyrp }\IeC {\cyro }\IeC {\cyrl }\IeC {\cyri }\IeC {\cyrt }\IeC {\cyro }\IeC {\cyrp }\IeC {\cyro }\IeC {\cyrv }}}{13}{section.1.6}
+\contentsline {subsection}{\numberline {1.6.1}\leavevmode {\color {Chapter }ballAB}}{13}{subsection.1.6.1}
+\contentsline {subsection}{\numberline {1.6.2}\leavevmode {\color {Chapter }sphereAB}}{13}{subsection.1.6.2}
+\contentsline {subsection}{\numberline {1.6.3}\leavevmode {\color {Chapter }ballTriangul}}{13}{subsection.1.6.3}
+\contentsline {subsection}{\numberline {1.6.4}\leavevmode {\color {Chapter }sphereTriangul}}{14}{subsection.1.6.4}
+\contentsline {section}{\numberline {1.7}\leavevmode {\color {Chapter }\IeC {\CYRT }\IeC {\cyro }\IeC {\cyrp }\IeC {\cyro }\IeC {\cyrl }\IeC {\cyro }\IeC {\cyrg }\IeC {\cyri }\IeC {\cyrch }\IeC {\cyre }\IeC {\cyrs }\IeC {\cyrk }\IeC {\cyri }\IeC {\cyre } \IeC {\cyro }\IeC {\cyrp }\IeC {\cyre }\IeC {\cyrr }\IeC {\cyra }\IeC {\cyrc }\IeC {\cyri }\IeC {\cyri }}}{14}{section.1.7}
+\contentsline {subsection}{\numberline {1.7.1}\leavevmode {\color {Chapter }FreeUnionPol}}{14}{subsection.1.7.1}
+\contentsline {subsection}{\numberline {1.7.2}\leavevmode {\color {Chapter }PolDoubleCone}}{14}{subsection.1.7.2}
+\contentsline {subsection}{\numberline {1.7.3}\leavevmode {\color {Chapter }PolProduct}}{14}{subsection.1.7.3}
+\contentsline {subsection}{\numberline {1.7.4}\leavevmode {\color {Chapter }ImageInPolProduct}}{15}{subsection.1.7.4}
+\contentsline {subsection}{\numberline {1.7.5}\leavevmode {\color {Chapter }PreimageInPolProduct}}{15}{subsection.1.7.5}
+\contentsline {subsection}{\numberline {1.7.6}\leavevmode {\color {Chapter }PolProductSyms}}{15}{subsection.1.7.6}
+\contentsline {subsection}{\numberline {1.7.7}\leavevmode {\color {Chapter }PolProductSymsDict}}{16}{subsection.1.7.7}
+\contentsline {subsection}{\numberline {1.7.8}\leavevmode {\color {Chapter }PolFactorInvolution}}{16}{subsection.1.7.8}
+\contentsline {section}{\numberline {1.8}\leavevmode {\color {Chapter }\IeC {\CYRO }\IeC {\cyrs }\IeC {\cyrn }\IeC {\cyro }\IeC {\cyrv }\IeC {\cyrn }\IeC {\cyrery }\IeC {\cyre } \IeC {\cyrp }\IeC {\cyrr }\IeC {\cyri }\IeC {\cyrn }\IeC {\cyrc }\IeC {\cyri }\IeC {\cyrp }\IeC {\cyrery } \IeC {\cyrp }\IeC {\cyre }\IeC {\cyrr }\IeC {\cyre }\IeC {\cyrs }\IeC {\cyrt }\IeC {\cyrr }\IeC {\cyro }\IeC {\cyre }\IeC {\cyrk } \IeC {\cyrsh }\IeC {\cyra }\IeC {\cyrr }\IeC {\cyro }\IeC {\cyrv }\IeC {\cyrery }\IeC {\cyrh } \IeC {\cyrk }\IeC {\cyro }\IeC {\cyrm }\IeC {\cyrp }\IeC {\cyrl }\IeC {\cyre }\IeC {\cyrk }\IeC {\cyrs }\IeC {\cyro }\IeC {\cyrv }}}{16}{section.1.8}
+\contentsline {subsection}{\numberline {1.8.1}\leavevmode {\color {Chapter }DelFace}}{16}{subsection.1.8.1}
+\contentsline {subsection}{\numberline {1.8.2}\leavevmode {\color {Chapter }wasDelFace}}{17}{subsection.1.8.2}
+\contentsline {chapter}{\numberline {2}\leavevmode {\color {Chapter }\IeC {\CYRP }\IeC {\cyro }\IeC {\cyrd }\IeC {\cyrp }\IeC {\cyro }\IeC {\cyrl }\IeC {\cyri }\IeC {\cyrt }\IeC {\cyro }\IeC {\cyrp }\IeC {\cyrery }, \IeC {\cyrv }\IeC {\cyrl }\IeC {\cyro }\IeC {\cyrzh }\IeC {\cyre }\IeC {\cyrn }\IeC {\cyri }\IeC {\cyrya }}}{18}{chapter.2}
+\contentsline {section}{\numberline {2.1}\leavevmode {\color {Chapter }\IeC {\CYRR }\IeC {\cyra }\IeC {\cyrs }\IeC {\cyrp }\IeC {\cyro }\IeC {\cyrz }\IeC {\cyrn }\IeC {\cyra }\IeC {\cyryu }\IeC {\cyrshch }\IeC {\cyri }\IeC {\cyre }}}{18}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}\leavevmode {\color {Chapter }SetOfFacesBoundary}}{18}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2}\leavevmode {\color {Chapter }SubPolytope}}{18}{subsection.2.1.2}
+\contentsline {subsection}{\numberline {2.1.3}\leavevmode {\color {Chapter }ParallelSimplify}}{19}{subsection.2.1.3}
+\contentsline {subsection}{\numberline {2.1.4}\leavevmode {\color {Chapter }PolMinusFace}}{19}{subsection.2.1.4}
+\contentsline {subsection}{\numberline {2.1.5}\leavevmode {\color {Chapter }PolMinusFaceDoublingMethod}}{19}{subsection.2.1.5}
+\contentsline {subsection}{\numberline {2.1.6}\leavevmode {\color {Chapter }PolMinusPol}}{19}{subsection.2.1.6}
+\contentsline {subsection}{\numberline {2.1.7}\leavevmode {\color {Chapter }GlueFaces}}{20}{subsection.2.1.7}
+\contentsline {subsection}{\numberline {2.1.8}\leavevmode {\color {Chapter }VerticesRullGlueFace}}{20}{subsection.2.1.8}
+\contentsline {subsection}{\numberline {2.1.9}\leavevmode {\color {Chapter }VerticesRullGluePol}}{20}{subsection.2.1.9}
+\contentsline {chapter}{\numberline {3}\leavevmode {\color {Chapter }\IeC {\CYRP }\IeC {\cyro }\IeC {\cyrg }\IeC {\cyrr }\IeC {\cyru }\IeC {\cyrzh }\IeC {\cyre }\IeC {\cyrn }\IeC {\cyri }\IeC {\cyrya } \IeC {\cyri } \IeC {\cyru }\IeC {\cyrz }\IeC {\cyrl }\IeC {\cyrery }}}{21}{chapter.3}
+\contentsline {section}{\numberline {3.1}\leavevmode {\color {Chapter }\IeC {\CYRK }\IeC {\cyrl }\IeC {\cyra }\IeC {\cyrs }\IeC {\cyrs }\IeC {\cyri }\IeC {\cyrch }\IeC {\cyre }\IeC {\cyrs }\IeC {\cyrk }\IeC {\cyri }\IeC {\cyre } \IeC {\cyru }\IeC {\cyrz }\IeC {\cyrl }\IeC {\cyrery }}}{21}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}\leavevmode {\color {Chapter }\IeC {\CYRS }\IeC {\cyrp }\IeC {\cyro }\IeC {\cyrs }\IeC {\cyro }\IeC {\cyrb }\IeC {\cyrery } \IeC {\cyrz }\IeC {\cyra }\IeC {\cyrd }\IeC {\cyra }\IeC {\cyrn }\IeC {\cyri }\IeC {\cyrya } \IeC {\cyrd }\IeC {\cyri }\IeC {\cyra }\IeC {\cyrg }\IeC {\cyrr }\IeC {\cyra }\IeC {\cyrm }\IeC {\cyrm }\IeC {\cyrery } \IeC {\cyru }\IeC {\cyrz }\IeC {\cyrl }\IeC {\cyra }.}}{21}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}\leavevmode {\color {Chapter }Knot1OnSphere2}}{23}{subsection.3.1.2}
+\contentsline {subsection}{\numberline {3.1.3}\leavevmode {\color {Chapter }KnotInS3}}{23}{subsection.3.1.3}
+\contentsline {subsection}{\numberline {3.1.4}\leavevmode {\color {Chapter }Reidemeister10Everywhere}}{23}{subsection.3.1.4}
+\contentsline {subsection}{\numberline {3.1.5}\leavevmode {\color {Chapter }ZeroLinkFromKnot}}{23}{subsection.3.1.5}
+\contentsline {subsection}{\numberline {3.1.6}\leavevmode {\color {Chapter }ZeifertSurface}}{24}{subsection.3.1.6}
+\contentsline {subsection}{\numberline {3.1.7}\leavevmode {\color {Chapter }ZeifertSurfaceWithSimplyBoundary}}{24}{subsection.3.1.7}
+\contentsline {section}{\numberline {3.2}\leavevmode {\color {Chapter }\IeC {\CYRD }\IeC {\cyrv }\IeC {\cyru }\IeC {\cyrm }\IeC {\cyre }\IeC {\cyrr }\IeC {\cyrn }\IeC {\cyrery }\IeC {\cyre } \IeC {\cyrz }\IeC {\cyra }\IeC {\cyru }\IeC {\cyrz }\IeC {\cyrl }\IeC {\cyre }\IeC {\cyrn }\IeC {\cyrn }\IeC {\cyrery }\IeC {\cyre } \IeC {\cyrp }\IeC {\cyro }\IeC {\cyrv }\IeC {\cyre }\IeC {\cyrr }\IeC {\cyrh }\IeC {\cyrn }\IeC {\cyro }\IeC {\cyrs }\IeC {\cyrt }\IeC {\cyri }}}{24}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}\leavevmode {\color {Chapter }\IeC {\CYRZ }\IeC {\cyra }\IeC {\cyrd }\IeC {\cyra }\IeC {\cyrn }\IeC {\cyri }\IeC {\cyre } \IeC {\cyrd }\IeC {\cyrv }\IeC {\cyru }\IeC {\cyrm }\IeC {\cyre }\IeC {\cyrr }\IeC {\cyrn }\IeC {\cyrery }\IeC {\cyrh } \IeC {\cyrz }\IeC {\cyra }\IeC {\cyru }\IeC {\cyrz }\IeC {\cyrl }\IeC {\cyre }\IeC {\cyrn }\IeC {\cyrn }\IeC {\cyrery }\IeC {\cyrh } \IeC {\cyrp }\IeC {\cyro }\IeC {\cyrv }\IeC {\cyre }\IeC {\cyrr }\IeC {\cyrh }\IeC {\cyrn }\IeC {\cyro }\IeC {\cyrs }\IeC {\cyrt }\IeC {\cyre }\IeC {\cyrishrt }}}{24}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}\leavevmode {\color {Chapter }PolSimplifyWith2Knot}}{25}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}\leavevmode {\color {Chapter }SingularitySet2Knot}}{25}{subsection.3.2.3}
+\contentsline {subsection}{\numberline {3.2.4}\leavevmode {\color {Chapter }TripleDoubleBranchPoints}}{26}{subsection.3.2.4}
+\contentsline {subsection}{\numberline {3.2.5}\leavevmode {\color {Chapter }IsDiagrammOf2Kont}}{27}{subsection.3.2.5}
+\contentsline {subsection}{\numberline {3.2.6}\leavevmode {\color {Chapter }Preimage2Knot}}{27}{subsection.3.2.6}
+\contentsline {subsection}{\numberline {3.2.7}\leavevmode {\color {Chapter }TurnKnot}}{28}{subsection.3.2.7}
+\contentsline {subsection}{\numberline {3.2.8}\leavevmode {\color {Chapter }2KnotInS4}}{29}{subsection.3.2.8}
+\contentsline {chapter}{\numberline {4}\leavevmode {\color {Chapter }\IeC {\CYRR }\IeC {\cyra }\IeC {\cyrb }\IeC {\cyro }\IeC {\cyrt }\IeC {\cyra } \IeC {\cyrs } \IeC {\cyrg }\IeC {\cyrr }\IeC {\cyra }\IeC {\cyrs }\IeC {\cyrs }\IeC {\cyrm }\IeC {\cyra }\IeC {\cyrn }\IeC {\cyro }\IeC {\cyrv }\IeC {\cyrery }\IeC {\cyrm }\IeC {\cyri } \IeC {\cyrp }\IeC {\cyre }\IeC {\cyrr }\IeC {\cyre }\IeC {\cyrm }\IeC {\cyre }\IeC {\cyrn }\IeC {\cyrn }\IeC {\cyrery }\IeC {\cyrm }\IeC {\cyri }}}{30}{chapter.4}
+\contentsline {section}{\numberline {4.1}\leavevmode {\color {Chapter }\IeC {\CYRO }\IeC {\cyrs }\IeC {\cyrn }\IeC {\cyro }\IeC {\cyrv }\IeC {\cyrn }\IeC {\cyrery }\IeC {\cyre } \IeC {\cyra }\IeC {\cyrr }\IeC {\cyri }\IeC {\cyrf }\IeC {\cyrm }\IeC {\cyre }\IeC {\cyrt }\IeC {\cyri }\IeC {\cyrch }\IeC {\cyre }\IeC {\cyrs }\IeC {\cyrk }\IeC {\cyri }\IeC {\cyre } \IeC {\cyro }\IeC {\cyrp }\IeC {\cyre }\IeC {\cyrr }\IeC {\cyra }\IeC {\cyrc }\IeC {\cyri }\IeC {\cyri }}}{30}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}\leavevmode {\color {Chapter }GrassmannMonomialsProduct}}{30}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}\leavevmode {\color {Chapter }GrassmannProduct}}{30}{subsection.4.1.2}
+\contentsline {subsection}{\numberline {4.1.3}\leavevmode {\color {Chapter }GrassmanSum}}{31}{subsection.4.1.3}
+\contentsline {subsection}{\numberline {4.1.4}\leavevmode {\color {Chapter }BerezinIntegral}}{31}{subsection.4.1.4}
+\contentsline {subsection}{\numberline {4.1.5}\leavevmode {\color {Chapter }BerezinMultipleIntegral}}{31}{subsection.4.1.5}
+\contentsline {chapter}{\numberline {5}\leavevmode {\color {Chapter }\IeC {\CYRP }\IeC {\cyrr }\IeC {\cyro }\IeC {\cyrch }\IeC {\cyre }\IeC {\cyre }}}{32}{chapter.5}
+\contentsline {section}{\numberline {5.1}\leavevmode {\color {Chapter }\IeC {\CYRS }\IeC {\cyrp }\IeC {\cyri }\IeC {\cyrs }\IeC {\cyrk }\IeC {\cyri }}}{32}{section.5.1}
+\contentsline {subsection}{\numberline {5.1.1}\leavevmode {\color {Chapter }ConnectedSubset}}{32}{subsection.5.1.1}
+\contentsline {subsection}{\numberline {5.1.2}\leavevmode {\color {Chapter }SortCircle}}{32}{subsection.5.1.2}
+\contentsline {section}{\numberline {5.2}\leavevmode {\color {Chapter }\IeC {\CYRM }\IeC {\cyra }\IeC {\cyrt }\IeC {\cyrr }\IeC {\cyri }\IeC {\cyrc }\IeC {\cyrery }}}{33}{section.5.2}
+\contentsline {chapter}{\IeC {\CYRS }\IeC {\cyrs }\IeC {\cyrery }\IeC {\cyrl }\IeC {\cyrk }\IeC {\cyri }}{34}{chapter*.3}
+\contentsline {chapter}{\IeC {\CYRI }\IeC {\cyrn }\IeC {\cyrd }\IeC {\cyre }\IeC {\cyrk }\IeC {\cyrs }}{35}{section*.4}

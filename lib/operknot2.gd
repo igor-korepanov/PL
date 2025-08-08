@@ -3,3 +3,13 @@ DeclareGlobalFunction( "ZeifertSurface" );
 DeclareGlobalFunction( "ZeifertSurfaceWithSimplyBoundary" );
 DeclareGlobalFunction( "ComplementOfKnot" );
 DeclareGlobalFunction( "TriangulateComplementOfKnot" );
+DeclareGlobalFunction( "Reidemeister10Everywhere" );
+################################################################################
+DeclareGlobalFunction( "SingularitySet2Knot" );
+DeclareGlobalFunction( "PolSimplifyWith2Knot" );
+DeclareGlobalFunction( "Knot1OnSphere2" );
+DeclareGlobalFunction( "TurnKnot" );
+DeclareGlobalFunction( "TripleDoubleBranchPoints" );
+DeclareGlobalFunction( "2KnotInS4" );
+DeclareGlobalFunction( "Preimage2Knot" );
+DeclareGlobalFunction( "IsDiagrammOf2Kont" );

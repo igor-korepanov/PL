@@ -3,10 +3,10 @@
                                 [1X The [5XPL[105X package [101X
   
   
-                                  Version 1.2
+                                  Version 2.3
   
   
-                                 February 2014
+                                   July 2014
   
   
                                Igor G. Korepanov
@@ -39,29 +39,32 @@
   1 [33X[0;0YШаровые комплексы.[133X
     1.1 [33X[0;0YRepresentation of a PL ball complex[133X
       1.1-1 IsPolytope
-    1.2 [33X[0;0YУкзывающие функции[133X
-      1.2-1 FundGroup
-    1.3 [33X[0;0YОбщая информация о шаровом комлпексе[133X
-      1.3-1 PolBoundary
-      1.3-2 PolInnerFaces
-      1.3-3 MaxTree
-      1.3-4 CellOrient
-      1.3-5 PolOrient
-      1.3-6 OrientTriangulated
-      1.3-7 dataPachner
-      1.3-8 FromSimplexToPolytope
+    1.2 [33X[0;0YУказывающие функции[133X
+      1.2-1 EulerNumber
+      1.2-2 FundGroup
+    1.3 [33X[0;0YОбщая информация о шаровом комплексе[133X
+      1.3-1 LengthPol
+      1.3-2 PolBoundary
+      1.3-3 PolInnerFaces
+      1.3-4 MaxTree
+      1.3-5 CellOrient
+      1.3-6 PolOrient
+      1.3-7 OrientTriangulated
+      1.3-8 dataPachner
+      1.3-9 FromSimplexToPolytope
     1.4 [33X[0;0YРабота с клетками[133X
       1.4-1 PolBnd
       1.4-2 FaceComp
       1.4-3 StarFace
       1.4-4 PolCheckComb
-    1.5 [33X[0;0YИзменение [22Xpl-[122Xразбиения (не изменющие)[133X
+    1.5 [33X[0;0YИзменение [22Xpl-[122Xразбиения (не изменяющие)[133X
       1.5-1 PolTriangulate
       1.5-2 FirstBoundary
       1.5-3 PermFaces
       1.5-4 ContractMiniFace
       1.5-5 DivideFace
-      1.5-6 PolSimplify1
+      1.5-6 UnionFace
+      1.5-7 PolSimplify
     1.6 [33X[0;0YНепосредственное создание политопов[133X
       1.6-1 ballAB
       1.6-2 sphereAB
@@ -69,31 +72,57 @@
       1.6-4 sphereTriangul
     1.7 [33X[0;0YТопологические операции[133X
       1.7-1 FreeUnionPol
-      1.7-2 PolCylinder
-      1.7-3 PolDoubleCone
-      1.7-4 PolProduct
-      1.7-5 ImageInPolProduct
+      1.7-2 PolDoubleCone
+      1.7-3 PolProduct
+      1.7-4 ImageInPolProduct
+      1.7-5 PreimageInPolProduct
       1.7-6 PolProductSyms
       1.7-7 PolProductSymsDict
       1.7-8 PolFactorInvolution
-    1.8 [33X[0;0YОсновные принцыпы перестроек шаровых комплексов[133X
+    1.8 [33X[0;0YОсновные принципы перестроек шаровых комплексов[133X
       1.8-1 DelFace
+      1.8-2 wasDelFace
   2 [33X[0;0YПодполитопы, вложения[133X
     2.1 [33X[0;0YРаспознающие[133X
       2.1-1 SetOfFacesBoundary
       2.1-2 SubPolytope
-      2.1-3 PolMinusFace
-      2.1-4 PolMinusFaceDoublingMethod
-      2.1-5 PolMinusPol
-  3 [33X[0;0YПогружения и узлы.[133X
-    3.1 [33X[0;0YЗадание диаграмм узлов.[133X
-    3.2 [33X[0;0YОдномерные узлы[133X
-      3.2-1 KnotInS3
-      3.2-2 ZeroLinkFromKnot
-      3.2-3 ComplementOfKnot
-      3.2-4 TriangulateComplementOfKnot
-      3.2-5 ZeifertSurface
-      3.2-6 ZeifertSurfaceWithSimplyBoundary
+      2.1-3 ParallelSimplify
+      2.1-4 PolMinusFace
+      2.1-5 PolMinusFaceDoublingMethod
+      2.1-6 PolMinusPol
+      2.1-7 GlueFaces
+      2.1-8 VerticesRullGlueFace
+      2.1-9 VerticesRullGluePol
+  3 [33X[0;0YПогружения и узлы[133X
+    3.1 [33X[0;0YКлассические узлы[133X
+      3.1-1 [33X[0;0YСпособы задания диаграммы узла.[133X
+      3.1-2 Knot1OnSphere2
+      3.1-3 KnotInS3
+      3.1-4 Reidemeister10Everywhere
+      3.1-5 ZeroLinkFromKnot
+      3.1-6 ZeifertSurface
+      3.1-7 ZeifertSurfaceWithSimplyBoundary
+    3.2 [33X[0;0YДвумерные заузленные поверхности[133X
+      3.2-1 [33X[0;0YЗадание двумерных заузленных поверхностей[133X
+      3.2-2 PolSimplifyWith2Knot
+      3.2-3 SingularitySet2Knot
+      3.2-4 TripleDoubleBranchPoints
+      3.2-5 IsDiagrammOf2Kont
+      3.2-6 Preimage2Knot
+      3.2-7 TurnKnot
+      3.2-8 2KnotInS4
+  4 [33X[0;0YРабота с грассмановыми переменными[133X
+    4.1 [33X[0;0YОсновные арифметические операции[133X
+      4.1-1 GrassmannMonomialsProduct
+      4.1-2 GrassmannProduct
+      4.1-3 GrassmanSum
+      4.1-4 BerezinIntegral
+      4.1-5 BerezinMultipleIntegral
+  5 [33X[0;0YПрочее[133X
+    5.1 [33X[0;0YСписки[133X
+      5.1-1 ConnectedSubset
+      5.1-2 SortCircle
+    5.2 [33X[0;0YМатрицы[133X
   
   
   [32X

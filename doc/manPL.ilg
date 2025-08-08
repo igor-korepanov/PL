@@ -1,6 +1,6 @@
 This is makeindex, version 2.15 [TeX Live 2014] (kpathsea + Thai support).
-Scanning input file manPL.idx....done (45 entries accepted, 0 rejected).
-Sorting entries....done (252 comparisons).
-Generating output file manPL.ind....done (85 lines written, 0 warnings).
+Scanning input file manPL.idx....done (67 entries accepted, 0 rejected).
+Sorting entries....done (421 comparisons).
+Generating output file manPL.ind....done (128 lines written, 0 warnings).
 Output written in manPL.ind.
 Transcript written in manPL.ilg.
