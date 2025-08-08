@@ -28,3 +28,4 @@ DeclareGlobalFunction( "PolSimplify" );
 DeclareGlobalFunction( "ParallelSimplify" );
 DeclareGlobalFunction( "LengthPol" );
 DeclareGlobalFunction( "ConnectedSum" );
+DeclareGlobalFunction( "OrientBrockenDiagramm" );

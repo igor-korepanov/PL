@@ -5,7 +5,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-<title>GAP (PL-manual) - Глава 1: Шаровые комплексы.</title>
+<title>GAP (PL-manual) - Chapter 1: Шаровые комплексы.</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta name="generator" content="GAPDoc2HTML" />
 <link rel="stylesheet" type="text/css" href="manual.css" />
@@ -15,9 +15,9 @@
 <body class="chap1"  onload="jscontent()">
 
 
-<div class="chlinktop"><span class="chlink1">Перейти к главе: </span><a href="chap0.html">Начало</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
 
-<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Начало книги]</a>&nbsp;  <a href="chap0.html#contents">[Содержание]</a>&nbsp;  &nbsp;<a href="chap0.html">[Предыдущая глава]</a>&nbsp;  &nbsp;<a href="chap2.html">[Следующая глава]</a>&nbsp;  </div>
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap0.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap2.html">[Next Chapter]</a>&nbsp;  </div>
 
 <p><a id="X83577E337970576A" name="X83577E337970576A"></a></p>
 <div class="ChapSects"><a href="chap1.html#X83577E337970576A">1 <span class="Heading">Шаровые комплексы.</span></a>
@@ -140,7 +140,7 @@ rec( vertices := [ "A", "B" ],
 
 <h5>1.1-1 IsPolytope</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsPolytope</code>( <var class="Arg">pol</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsPolytope</code>( <var class="Arg">pol</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>Функция проверяет формальные признаки структуры <span class="SimpleMath">pol</span> в соответствии с правилами задания политопов. Если данные построены корректным образом, то функция выдаст <span class="SimpleMath">true</span> и <span class="SimpleMath">false</span> в противном случае.</p>
 
 
@@ -161,7 +161,7 @@ true
 
 <h5>1.2-1 EulerNumber</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; EulerNumber</code>( <var class="Arg">pol</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; EulerNumber</code>( <var class="Arg">pol</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>функция вычисляет число Эйлера для шарового комплекса. Данная функция полиморфна и способна принимать для вычислений данные типа политоп (IsPolytope), именнованные списки по размерностям в котором содержится структура политопа и именованный список по размерностям элементами которого могут выступать количества клеток определенной размерности.</p>
 
 
@@ -178,7 +178,7 @@ true
 
 <h5>1.2-2 FundGroup</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FundGroup</code>( <var class="Arg">pol</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FundGroup</code>( <var class="Arg">pol</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>Computes the fundamental group of the given polytope.</p>
 
 <p><a id="X7C31865383DD667E" name="X7C31865383DD667E"></a></p>
@@ -189,7 +189,7 @@ true
 
 <h5>1.3-1 LengthPol</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LengthPol</code>( <var class="Arg">pol</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LengthPol</code>( <var class="Arg">pol</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>В <span class="SimpleMath">resul.d</span> указывается мощьность <span class="SimpleMath">d</span>-мерного остова в политопе <span class="SimpleMath">pol.</span></p>
 
 
@@ -203,7 +203,7 @@ rec( 0 := 4, 1 := 8, 2 := 4 )
 
 <h5>1.3-2 PolBoundary</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PolBoundary</code>( <var class="Arg">pol</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PolBoundary</code>( <var class="Arg">pol</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>вычисляет границу политопа. На выход подает список в котором указаны только клетки размерности <span class="SimpleMath">(n-1)</span> составляющие границу.</p>
 
 
@@ -223,7 +223,7 @@ rec( 0 := 4, 1 := 8, 2 := 4 )
 
 <h5>1.3-3 PolInnerFaces</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PolInnerFaces</code>( <var class="Arg">pol</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PolInnerFaces</code>( <var class="Arg">pol</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>Build index of inner faces of given polytope complex <span class="SimpleMath">returned[i]</span> - set of inner faces of dimensions (i-1). Any face is outer if it has at most 1 adjacent face of higher dimension of if it lies in the boundary of such a face. And inner faces are not outer faces.</p>
 
 
@@ -238,42 +238,47 @@ rec( 0 := 4, 1 := 8, 2 := 4 )
 
 <h5>1.3-4 MaxTree</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MaxTree</code>( <var class="Arg">pol</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MaxTree</code>( <var class="Arg">pol</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>finds a maximal tree in the 1-skeleton of a polytope as a list of edges.</p>
+
+<p>Пусть клетки <span class="SimpleMath">a</span> и <span class="SimpleMath">b</span> имеют размерности <span class="SimpleMath">n</span> и <span class="SimpleMath">n-1</span> соответственно и клетка <span class="SimpleMath">b</span> содержится в клетке <span class="SimpleMath">a,</span> то есть <span class="SimpleMath">b ⊂ a.</span> Назовем ориентацию клетки которую клетка <span class="SimpleMath">b</span> наследует с клетки <span class="SimpleMath">a</span> индуцированной (обозначение <span class="SimpleMath">ϵ(b|a)</span>) если она удовлетворяет условию <span class="SimpleMath">ϵ(b_1|a)ϵ(c|b_1) = -ϵ(b_2|a)ϵ(c|b_2),</span> где клетка <span class="SimpleMath">c</span> имеет размерность <span class="SimpleMath">n-2</span> и <span class="SimpleMath">c = b_1 ∩ b_2.</span> Считаем, что на ребре в вершине с меньшим индексом индуцироуется отрицательная ориентация, на ребре с большим индексом -- положительная.</p>
 
 <p><a id="X82CF2896859B26C6" name="X82CF2896859B26C6"></a></p>
 
 <h5>1.3-5 CellOrient</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CellOrient</code>( <var class="Arg">pol</var> )</td><td class="tdright">( функция )</td></tr></table></div>
-<p>Provides inductively some orientations for cells of dimensions <span class="SimpleMath">1..n=dim(pol)</span></p>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CellOrient</code>( <var class="Arg">pol</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Вычисляются индуцированные ориентации для клеток. Provides inductively some orientations for cells of dimensions <span class="SimpleMath">1..n=dim(pol)</span></p>
 
 
 <div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s3:=sphereAB(3);;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CellOrient(s3);</span>
-[ [ [ -1, 1 ], [ -1, 1 ] ], [ [ -1, 1 ], [ -1, 1 ] ], [ [ -1, 1 ], [ -1, 1 ] ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">dd;</span>
+rec(
+  faces := [ [ [ 1, 3 ], [ 2, 3 ], [ 2, 4 ], [ 1, 4 ] ], [ [ 1, 2, 3, 4 ] ] ],
+  vertices := [ 1 .. 4 ] )
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CellOrient(dd);</span>
+[ [ [ -1, 1 ], [ -1, 1 ], [ -1, 1 ], [ -1, 1 ] ], [ [ -1, 1, -1, 1 ] ] ]
 						</pre></div>
 
 <p><a id="X7A1EAA26847A1C43" name="X7A1EAA26847A1C43"></a></p>
 
 <h5>1.3-6 PolOrient</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PolOrient</code>( <var class="Arg">pol</var> )</td><td class="tdright">( функция )</td></tr></table></div>
-<p>If <span class="SimpleMath">pol</span> is orientable, gives a consistent orientation of <span class="SimpleMath">n-</span>faces (<span class="SimpleMath">n=dim(pol)</span>), otherwise returns <span class="SimpleMath">fail.</span></p>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PolOrient</code>( <var class="Arg">pol</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>If <span class="SimpleMath">pol</span> is orientable, gives a consistent orientation of <span class="SimpleMath">n-</span>faces (<span class="SimpleMath">n=dim(pol)</span>), otherwise returns <span class="SimpleMath">fail.</span> Причем, ориентации клеток находятся в следующем отношении <span class="SimpleMath">ϵ(b|a_1)ϵ(a_1) = -ϵ(b|a_2)ϵ(a_2)</span></p>
 
 <p><a id="X81AE197083B0A56A" name="X81AE197083B0A56A"></a></p>
 
 <h5>1.3-7 OrientTriangulated</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OrientTriangulated</code>( <var class="Arg">pol</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OrientTriangulated</code>( <var class="Arg">pol</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>Function computes consistent orientation on simpleces of greatest dimension on a given triangulated complex <span class="SimpleMath">pol.</span> Returns array of -1, 1-s which correspond to the orientation of simplices of greatest dimension of <span class="SimpleMath">pol.</span></p>
 
 <p><a id="X83986ED47DDF8E20" name="X83986ED47DDF8E20"></a></p>
 
 <h5>1.3-8 dataPachner</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; dataPachner</code>( <var class="Arg">dim</var>, <var class="Arg">k</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; dataPachner</code>( <var class="Arg">dim</var>, <var class="Arg">k</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>Выводит информацию о указанном движении Пахнера размерности <span class="SimpleMath">dim</span>, один из кластеров которого содержит <span class="SimpleMath">k</span> - симплексов, все информация принадлежащая данному кластеру условно обозначена буквой <span class="SimpleMath">l</span> (left). Второй кластер симплексов получающийся при преобразованиях Пахнера обозначен буквой <span class="SimpleMath">r</span> (right).</p>
 
 
@@ -321,7 +326,7 @@ rec(
 
 <h5>1.3-9 FromSimplexToPolytope</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FromSimplexToPolytope</code>( <var class="Arg">simplex</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FromSimplexToPolytope</code>( <var class="Arg">simplex</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>преобразует список симплексов в шаровой комплекс.</p>
 
 
@@ -347,7 +352,7 @@ rec(
 
 <h5>1.4-1 PolBnd</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PolBnd</code>( <var class="Arg">pol</var>, <var class="Arg">adr</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PolBnd</code>( <var class="Arg">pol</var>, <var class="Arg">adr</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>Creating an index of boundary faces of face <span class="SimpleMath">adr=[dim,ind]</span> of complex <span class="SimpleMath">pol</span>. <span class="SimpleMath">result[i]</span> - index of (i-1)-dimensional faces of <span class="SimpleMath">pol</span> which are in the boundary of <span class="SimpleMath">adr</span>.</p>
 
 
@@ -360,7 +365,7 @@ rec(
 
 <h5>1.4-2 FaceComp</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FaceComp</code>( <var class="Arg">pol</var>, <var class="Arg">adr</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FaceComp</code>( <var class="Arg">pol</var>, <var class="Arg">adr</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>функция аналогичная функции <span class="SimpleMath">PolBnd,</span> выходные данные в функции собраны по размерностям. Сама клетка тоже включена в вывод как составляющая часть самой себя.</p>
 
 
@@ -375,7 +380,7 @@ rec( 0 := [ 1, 2, 3, 4 ], 1 := [ 2, 4, 5, 7 ], 2 := [ 3 ] )
 
 <h5>1.4-3 StarFace</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; StarFace</code>( <var class="Arg">pol</var>, <var class="Arg">adr</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; StarFace</code>( <var class="Arg">pol</var>, <var class="Arg">adr</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>Вычисляет все клетки которые содержат клетку <span class="SimpleMath">adr</span> в политопе <span class="SimpleMath">pol</span>. Другими словами функция вычисляет звезду указанной клетки. result.(i) содержит индексы <span class="SimpleMath">i-</span>клеток входящих в состав звезды.</p>
 
 
@@ -390,7 +395,7 @@ rec( 1 := [ 2, 3, 6, 7 ], 2 := [ 1, 2, 3, 4 ] )
 
 <h5>1.4-4 PolCheckComb</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PolCheckComb</code>( <var class="Arg">pol</var>, <var class="Arg">adr</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PolCheckComb</code>( <var class="Arg">pol</var>, <var class="Arg">adr</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>check if a face of given complex is combinatorial complex that is, whether every its subface of lower dimension is uniquely determined by its vertices (and dimension)</p>
 
 <p><a id="X81B61AF078A1C75E" name="X81B61AF078A1C75E"></a></p>
@@ -403,7 +408,7 @@ rec( 1 := [ 2, 3, 6, 7 ], 2 := [ 1, 2, 3, 4 ] )
 
 <h5>1.5-1 PolTriangulate</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PolTriangulate</code>( <var class="Arg">pol</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PolTriangulate</code>( <var class="Arg">pol</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>функция создает триангуляцию политопа <span class="SimpleMath">pol</span>. Заметим, что политоп после триангуляции может остаться не комбинаторным.</p>
 
 
@@ -421,14 +426,14 @@ rec(
 
 <h5>1.5-2 FirstBoundary</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FirstBoundary</code>( <var class="Arg">pol</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FirstBoundary</code>( <var class="Arg">pol</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>данная функция создает такое упорядочение клеток политопа, что клетки лежащие на границе имеют наименьшие индексы в списках pol.faces[dim]. Внутренний порядок клеток на границе остается неизменным (имеется в виду порядок клеток созданный индексацией внутри политопа).</p>
 
 <p><a id="X863CAD14822179DC" name="X863CAD14822179DC"></a></p>
 
 <h5>1.5-3 PermFaces</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PermFaces</code>( <var class="Arg">pol</var>, <var class="Arg">perm</var>, <var class="Arg">dim</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PermFaces</code>( <var class="Arg">pol</var>, <var class="Arg">perm</var>, <var class="Arg">dim</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>производит переупорядочение клеток размерности <span class="SimpleMath">dim</span> в политопе <span class="SimpleMath">pol</span> по перестановке <span class="SimpleMath">perm.</span></p>
 
 <p>Клетку размерности <span class="SimpleMath">d</span> в шаровом комплексе называем минимальной, если ее граница содержит только две клетки размерности <span class="SimpleMath">(d - 1)</span></p>
@@ -437,7 +442,7 @@ rec(
 
 <h5>1.5-4 ContractMiniFace</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ContractMiniFace</code>( <var class="Arg">pol</var>, <var class="Arg">adr</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ContractMiniFace</code>( <var class="Arg">pol</var>, <var class="Arg">adr</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>В политопе <span class="SimpleMath">pol</span> стягивается минимальная клетка <span class="SimpleMath">adr.</span> Образом стягивания при этом является граничная клетка с меньшим индексом.</p>
 
 
@@ -464,7 +469,7 @@ false
 
 <h5>1.5-5 DivideFace</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DivideFace</code>( <var class="Arg">pol</var>, <var class="Arg">adr</var>, <var class="Arg">set</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DivideFace</code>( <var class="Arg">pol</var>, <var class="Arg">adr</var>, <var class="Arg">set</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>Пусть имеется клетка с адресом <span class="SimpleMath">adr</span> размерности <span class="SimpleMath">d=adr[1]</span> и клетки <span class="SimpleMath">set</span> лежащие на границе клетки <span class="SimpleMath">adr</span> образуют <span class="SimpleMath">(d-2)-</span>мерную сферу <span class="SimpleMath">S^d-2</span>, тогда клетку <span class="SimpleMath">adr</span> можно разбить на две части натянув на сферу <span class="SimpleMath">S^d-2</span> диск <span class="SimpleMath">D^d-1</span> внутри клетки <span class="SimpleMath">adr</span>.</p>
 
 
@@ -502,7 +507,7 @@ rec( faces := [ [ [ 1, 3 ], [ 1, 2 ], [ 2, 3 ] ] ], vertices := [ "A", "B", 3 ] 
 
 <h5>1.5-6 UnionFace</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnionFace</code>( <var class="Arg">pol</var>, <var class="Arg">kl1</var>, <var class="Arg">kl2</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; UnionFace</code>( <var class="Arg">pol</var>, <var class="Arg">kl1</var>, <var class="Arg">kl2</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>На вход функции посылаются две клетки одной и той же размерности для объединения их в одну клетку. По сути данной функцией реализуется обратная операция к функции <span class="SimpleMath">DivideFace</span> разбивающей клетку на две части.</p>
 
 
@@ -531,7 +536,7 @@ I cannot union the faces in a polytope.
 
 <h5>1.5-7 PolSimplify</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PolSimplify</code>( <var class="Arg">pol</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PolSimplify</code>( <var class="Arg">pol</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>Проводит упрощение политопа <span class="SimpleMath">pol</span> фукцией UnionFaces. Данная функция перебирает все возможности начиная с клеток максимальной размерности. Вновь появившиеся возможности функция не исследует. По этому функцию можно запускать несколько раз если целью стоит максимально упростить политоп.</p>
 
 
@@ -552,14 +557,14 @@ rec( faces := [ [ [ 1, 2 ], [ 1, 2 ] ], [ [ 1, 2 ], [ 1, 2 ] ], [ [ 1, 2 ] ]
 
 <h5>1.6-1 ballAB</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ballAB</code>( <var class="Arg">dim</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ballAB</code>( <var class="Arg">dim</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>Создает минимально возможное шаровое разбиение диска размерности <span class="SimpleMath">dim.</span></p>
 
 <p><a id="X791C9DFE87250DEF" name="X791C9DFE87250DEF"></a></p>
 
 <h5>1.6-2 sphereAB</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; sphereAB</code>( <var class="Arg">dim</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; sphereAB</code>( <var class="Arg">dim</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>Создает минимально возможное pl-разбиение сферы размерности <span class="SimpleMath">dim.</span></p>
 
 
@@ -576,7 +581,7 @@ rec(
 
 <h5>1.6-3 ballTriangul</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ballTriangul</code>( <var class="Arg">dim</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ballTriangul</code>( <var class="Arg">dim</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>Создает симплекс размерности <span class="SimpleMath">dim</span></p>
 
 
@@ -590,7 +595,7 @@ rec( faces := [ [ [ 1, 2 ], [ 1, 3 ], [ 2, 3 ] ], [ [ 1 .. 3 ] ] ],
 
 <h5>1.6-4 sphereTriangul</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; sphereTriangul</code>( <var class="Arg">dim</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; sphereTriangul</code>( <var class="Arg">dim</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>Триангулированная сфера создается как граница <span class="SimpleMath">(dim+1)-</span>мерного симплекса</p>
 
 
@@ -607,7 +612,7 @@ rec( faces := [ [ [ 1, 2 ], [ 1, 3 ], [ 2, 3 ] ] ], vertices := [ 1 .. 3 ] )
 
 <h5>1.7-1 FreeUnionPol</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FreeUnionPol</code>( <var class="Arg">pol1</var>, <var class="Arg">pol2</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FreeUnionPol</code>( <var class="Arg">pol1</var>, <var class="Arg">pol2</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>Свободное объединение политопов.</p>
 
 
@@ -623,7 +628,7 @@ rec( faces := [ [ [ 1, 2 ], [ 1, 2 ], [ 3, 4 ], [ 3, 4 ] ] ],
 
 <h5>1.7-2 PolDoubleCone</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PolDoubleCone</code>( <var class="Arg">pol</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PolDoubleCone</code>( <var class="Arg">pol</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>Make a double cone with vertices V1 and V2 over the given polytope <span class="SimpleMath">pol.</span></p>
 
 
@@ -639,7 +644,7 @@ rec(
 
 <h5>1.7-3 ConnectedSum</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ConnectedSum</code>( <var class="Arg">N</var>, <var class="Arg">M</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ConnectedSum</code>( <var class="Arg">N</var>, <var class="Arg">M</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>Фукнция создает связную сумму двух политопов <span class="SimpleMath">N</span> и <span class="SimpleMath">M</span> одинаковой размерности.</p>
 
 
@@ -656,7 +661,7 @@ rec(
 
 <h5>1.7-4 PolProduct</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PolProduct</code>( <var class="Arg">pol1</var>, <var class="Arg">pol2</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PolProduct</code>( <var class="Arg">pol1</var>, <var class="Arg">pol2</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>Функция вычисляет декартово произведение двух шаровых комплексов pol1 и pol2. Декартово произведение для двух шаровых комплексов определяется как шаровой комплекс составленный из всевозможных шаров <span class="SimpleMath">D^s_i × D^t_j</span>, где <span class="SimpleMath">D^s_i</span> и <span class="SimpleMath">D^t_j</span> клетки комплексов <span class="SimpleMath">M</span> и <span class="SimpleMath">N</span>, соответственно.</p>
 
 
@@ -674,7 +679,7 @@ rec(
 
 <h5>1.7-5 ImageInPolProduct</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ImageInPolProduct</code>( <var class="Arg">pol1</var>, <var class="Arg">pol2</var>, <var class="Arg">kl1xkl2</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ImageInPolProduct</code>( <var class="Arg">pol1</var>, <var class="Arg">pol2</var>, <var class="Arg">kl1xkl2</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>Вспомогательная функция для декартова произведения, вычисляет адрес клетки составленной как произведение клеток <span class="SimpleMath">kl1</span> и <span class="SimpleMath">kl2</span> из политопов <span class="SimpleMath">pol1</span> и <span class="SimpleMath">pol2,</span> соответственно. На вход функции адреса клеток подаются объединенные в список.</p>
 
 
@@ -700,28 +705,28 @@ rec( 0 := 2, 1 := 2 )
 
 <h5>1.7-6 PreimageInPolProduct</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PreimageInPolProduct</code>( <var class="Arg">pol1</var>, <var class="Arg">pol2</var>, <var class="Arg">imageface</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PreimageInPolProduct</code>( <var class="Arg">pol1</var>, <var class="Arg">pol2</var>, <var class="Arg">imageface</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>По заданному образу в декартовом произведении политопов pol1 и pol2 указываем из каких клеток была составлена данная клетка imageface.</p>
 
 <p><a id="X7A32AE2D8733963A" name="X7A32AE2D8733963A"></a></p>
 
 <h5>1.7-7 PolProductSyms</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PolProductSyms</code>(  )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PolProductSyms</code>(  )</td><td class="tdright">( function )</td></tr></table></div>
 <p>Cartesian product of two polytopes with symmetries of multipliers transferred to it. First go the symmetries of the first multiplier, then - the second.</p>
 
 <p><a id="X7B4164647D6C5EC6" name="X7B4164647D6C5EC6"></a></p>
 
 <h5>1.7-8 PolProductSymsDict</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PolProductSymsDict</code>(  )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PolProductSymsDict</code>(  )</td><td class="tdright">( function )</td></tr></table></div>
 <p>Cartesian product of two polytopes with symmetries of multipliers transferred to it. First go the symmetries of the first multiplier, then - the second. Also returns the face dictionary.</p>
 
 <p><a id="X7A3091A38613DA64" name="X7A3091A38613DA64"></a></p>
 
 <h5>1.7-9 PolFactorInvolution</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PolFactorInvolution</code>( <var class="Arg">pol</var>, <var class="Arg">invol</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PolFactorInvolution</code>( <var class="Arg">pol</var>, <var class="Arg">invol</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p><span class="SimpleMath">pol</span> is polytope with symmetries, <span class="SimpleMath">invol</span> is such a list of some of its symmetries (repetitions possible) that it is known that the product of symmetries in s is an involution returns the factored polytope.</p>
 
 <p><a id="X79A6E71D85EB8624" name="X79A6E71D85EB8624"></a></p>
@@ -734,7 +739,7 @@ rec( 0 := 2, 1 := 2 )
 
 <h5>1.8-1 DelFace</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DelFace</code>( <var class="Arg">pol</var>, <var class="Arg">adr</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; DelFace</code>( <var class="Arg">pol</var>, <var class="Arg">adr</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>клетка <span class="SimpleMath">adr</span> корректным образом исключается из политопа <span class="SimpleMath">pol.</span> После проведения данной операции корректность данных может быть нарушена.</p>
 
 
@@ -750,14 +755,16 @@ false
 
 <h5>1.8-2 wasDelFace</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; wasDelFace</code>( <var class="Arg">pol</var>, <var class="Arg">adr</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; wasDelFace</code>( <var class="Arg">pol</var>, <var class="Arg">adr</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>Функция корректирует сопуствующую информацию прикрепленную к политопу <span class="SimpleMath">pol</span> которая должна была измениться после удаления одной из клеток. На вход функции подается политоп и адрес той клетки которая была удалена. Напомним, что после удаления клетки индексы больших клеток данной размерности понижаются на едининцу, это изменение индексации должно быть отображено в той информации которая сопутствует данному шаровому комплексу. Если из какой-либо сопуствующей информации была удалена клетка, то будет выведено соответствующее сообщение, но изменения будут проведены. При обработке информации по 2-узле в политопе будет, в случае если удаляется 2-клетка, будет выведено соответствующее сообщение, индекс 2-клетки будет удален из списка .2knot.sheets, если на данную 2-клетку есть ссылка в .2knot.dpoints.(1kl), то соответсвующая позиция будет очищена.</p>
 
+<p>Для упрощения перестройки политопов в дальнейших версиях будет поддерживаться следующий принцип. Индекс <span class="SimpleMath">k-</span>клетки в списке <span class="SimpleMath">pol.faces[k]</span> является одновременно идентификатором клетки. Это позволяет нам создавать такие списки (остовы) <span class="SimpleMath">pol.faces[k]</span> в которых имеются не заполненые позиции. При удалении клетки из остова соответствующая позиция в списке <span class="SimpleMath">pol.faces[k]</span> опустошается. Такой принцып перестройки позволит упростить вычисления связанные с пересчетом индексов клеток при преобразованиях политопов. Этот принцып будет поддерживаться начиная с третьей версии пакета <span class="SimpleMath">PL,</span> начиная с четвертой версии поддерживаться будет только данный способ перестройки.</p>
 
-<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Начало книги]</a>&nbsp;  <a href="chap0.html#contents">[Содержание]</a>&nbsp;  &nbsp;<a href="chap0.html">[Предыдущая глава]</a>&nbsp;  &nbsp;<a href="chap2.html">[Следующая глава]</a>&nbsp;  </div>
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap0.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap2.html">[Next Chapter]</a>&nbsp;  </div>
 
 
-<div class="chlinkbot"><span class="chlink1">Перейти к главе: </span><a href="chap0.html">Начало</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
 
 <hr />
 <p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>

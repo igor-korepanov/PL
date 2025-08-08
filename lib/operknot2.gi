@@ -1972,7 +1972,7 @@ InstallGlobalFunction(TurnKnot, function(knot,number)
 ##  	od;
 ## 
 
-	Print("\n All good!\n\n");
+##  	Print("\n All good!\n\n");
 
 return pol;
 end);
@@ -2067,11 +2067,6 @@ InstallGlobalFunction(TripleDoubleBranchPoints, function(pol)
 		# самостоятельными компонентами.
 		spiski:=[];
 		while not IsEmpty(components) do
-##  			if [] in components then
-##  				i:=Position(components, []);
-##  				Add(spiski,[Remove(star.2, i)]);
-##  				Remove(components,i);
-##  			else
 				ind:=ConnectedSubset(components);
 				Add(spiski,star.2{ind});
 				while not IsEmpty(ind) do
@@ -2079,7 +2074,6 @@ InstallGlobalFunction(TripleDoubleBranchPoints, function(pol)
 					Remove(components, i);
 					Remove(star.2, i);
 				od;
-##  			fi;
 		od;
 		star.1:=Intersection(star.1, double_rebras);
 		point.(v):=rec(u:=[],m:=[],d:=[]);
@@ -2128,11 +2122,6 @@ InstallGlobalFunction(TripleDoubleBranchPoints, function(pol)
 		components:=List(pol.faces[2]{star.2},x->Intersection(x,inner1kl));
 		spiski:=[];
 		while not IsEmpty(components) do
-##  			if [] in components then
-##  				i:=Position(components, []);
-##  				Add(spiski, [ Remove(star.2, i) ]);
-##  				Remove(components, i);
-##  			else
 				ind:=ConnectedSubset(components);
 				Add(spiski,star.2{ind});
 				while not IsEmpty(ind) do
@@ -2140,14 +2129,12 @@ InstallGlobalFunction(TripleDoubleBranchPoints, function(pol)
 					Remove(components,i);
 					Remove(star.2,i);
 				od;
-##  			fi;
 		od;
 		star.1:=Intersection(star.1, double_rebras);
 		dp.(v):=rec(u:=[],d:=[]);
 		1kl:=star.1[1];
 		ab:=pol.2knot.dpoints.(1kl){[1,2]};
 		for sp in spiski do
-##  			ab:=pol.2knot.dpoints.(1kl){[1,2]};
 			level:=Intersection(ab,sp);
 			if IsEmpty(level) then
 				Append(dp.(v).d, sp);
@@ -2355,67 +2342,6 @@ end);
 
 ################################################################################
 
-##  # <ManSection><Func Name="Preimage2Knot" Arg="pol" />
-##  # 	<Description>
-##  #	 	Построение прообраза заузленной поверхности по диаграмме.
-##  #		<Example>
-##  #gap> pol:=TurnKnot(Trefoil,0);;
-##  # ...
-##  #gap> sp:=Preimage2Knot(pol);
-##  #rec(
-##  #  faces :=
-##  #    [ [ [ 2, 3 ], [ 2, 7 ], [ 7, 9 ], [ 8, 9 ], [ 1, 8 ], [ 5, 6 ], [ 5, 10 ],
-##  #          [ 10, 12 ], [ 11, 12 ], [ 4, 11 ], [ 7, 10 ], [ 8, 11 ], [ 3, 6 ],
-##  #          [ 7, 10 ], [ 8, 11 ], [ 3, 6 ], [ 9, 12 ], [ 2, 5 ], [ 9, 12 ],
-##  #          [ 1, 4 ], [ 1, 4 ], [ 2, 5 ] ],
-##  #      [ [ 20, 21 ], [ 1, 6, 13, 22 ], [ 2, 7, 11, 22 ], [ 3, 8, 11, 17 ],
-##  #          [ 4, 9, 12, 17 ], [ 5, 10, 12, 20 ], [ 13, 16 ], [ 1, 6, 16, 18 ],
-##  #          [ 2, 7, 14, 18 ], [ 3, 8, 14, 19 ], [ 4, 9, 15, 19 ],
-##  #          [ 5, 10, 15, 21 ] ] ],
-##  #  vertices := [ [ 1, "a" ], [ 1, "b" ], [ 1, "c" ], [ 2, "a" ], [ 2, "b" ],
-##  #      [ 2, "c" ], 7, 8, 9, 10, 11, 12 ] )
-##  #gap> PolSimplify(sp);
-##  #...
-##  #rec( faces := [ [ [ 1, 2 ], [ 1, 2 ] ], [ [ 1, 2 ], [ 1, 2 ] ] ],
-##  #  vertices := [ [ 1, "a" ], [ 1, "b" ] ] )
-##  #		</Example>
-##  #	</Description>
-##  # </ManSection>
-##  
-##  InstallGlobalFunction(Preimage2Knot, function(pol1)
-##  	local	pol, 1kl, vert, l1, i, sost, 2kl, j, v, ordver;
-##  
-##  	pol:=StructuralCopy(pol1);
-##  	#--- дублирование двойных ребер --------------------------------------------
-##  	1kl:=List(RecNames(pol.2knot.dpoints), x -> Int(x));
-##  	vert:=Set(Concatenation(pol.faces[1]{1kl}));
-##  	ordver:=List(pol.2knot.sheets,x->FaceComp(pol,[2,x]).0);
-##  	ordver:=Set(Concatenation(ordver));
-##  	l1:=Length(pol.faces[1]);
-##   	for i in 1kl do
-##  		sost:=pol.faces[1][i];
-##  		# верхняя клетка будет иметь больший индекс
-##  		Add(pol.faces[1],sost);
-##  		l1:=l1+1;
-##  		2kl:=pol.2knot.dpoints.(i){[1,2]};
-##  		for j in 2kl do
-##  			pol.faces[2][j]:=Difference(pol.faces[2][j], [i]);
-##  			Add(pol.faces[2][j],l1);
-##  		od;
-##  	od;
-##  
-##  	#--- выделение подполитопа и разрезание в вершинах -------------------------
-##  	pol:=SubPolytope(pol,pol.2knot.sheets,2);
-##  	for i in vert do
-##  		v:=Position(ordver,i);
-##  		pol:=PolMinusFaceDoublingMethod(pol,[0,v]);
-##  	od;
-##  	
-##  return rec(vertices:=pol.vertices, faces:=pol.faces);
-##  end);
-
-################################################################################
-
 # <ManSection><Func Name="IsDiagrammOf2Kont" Arg="pol" />
 # 	<Description>
 # 		Проверяет диаграмму 2-узла вложенную в трехмерное многообразие. Для
@@ -2423,9 +2349,6 @@ end);
 # 		граф двойных точек, 3) отсутствие точек самокасания.
 #		<Example>
 # gap> pol:=TurnKnot(Figure8,-1);;
-#
-#  All good!
-#
 # gap> IsDiagrammOf2Kont(pol);
 # true
 #		</Example>
@@ -2502,7 +2425,6 @@ InstallGlobalFunction(IsDiagrammOf2Kont, function(pol)
 	fi;
 
 	if verify then
-##  		knot:=Preimage2Knot(pol);
 		knot:=SurfaceOf2Knot(pol);
 		for v in [1 .. Length(knot.vertices)] do
 			star:=StarFace(knot,[0,v]).2;
@@ -2513,7 +2435,6 @@ InstallGlobalFunction(IsDiagrammOf2Kont, function(pol)
 				verify:=false;
 			fi;
 		od;
-##  		verify:=(knot = Preimage2Knot(pol));
 		verify:=(knot = SurfaceOf2Knot(pol));
 	fi;
 	if not verify then
@@ -2665,31 +2586,30 @@ end);
 #					прикреплена дополнительная информация содеражащаяся в
 #					именнованном списке <M>.preimage.</M> <M>Preimage</M>
 #					является списком дублированных прообразов. В него входят
-#					список <M>.rebras</M> и <M>.points.</M> Список
-#					<M>.rebras</M> содержит прообразы для каждого двойного
+#					список <M>.1</M> и <M>.0.</M> Список
+#					<M>.1</M> содержит прообразы для каждого двойного
 #					ребра, первым элементом пары является ребро-прообраз лежащее
 #					на нижнем листе, вторым, соответственно ребро-прообраз
 #					лежащее на верхнем листе образа в диаграмме. Список
-#					<M>.points</M> содержит состоит из списков длины 1 и 3,
+#					<M>.0</M> содержит состоит из списков длины 1 и 3,
 #					которые является списками прообразов точек ветвления и
 #					тройных точек, соответственно. Причем, для тройных точек
 #					прообраз тройной точки, лежащий на верхнем листе будет
 #					третьим в списке, на среднем - вторым и на нижнем,
 #					соответственно, первым.
-#					<Example>
-#					</Example>
 #				</Description>
 #			</ManSection>
 
 InstallGlobalFunction(SurfaceOf2Knot, function(s3)
 	local	pol, preimage, 2kl, sost, dpoints, l1, vert, r, ind, order,
-	sost1kl, i, heits, l0, v, triple, list, s, j, k, kl;
+	sost1kl, i, heits, l0, v, triple, list, s, j, k, kl, image;
 
 	pol:=SubPolytope(s3,s3.2knot.sheets,2);
 	# После такого выделения внутренний порядок в подмножестве клеток, которые
 	# образуют заузленную диаграмму сохраняется. Сейчас нужно добавить дубликаты
 	# для двойных ребер и тройных точек.
 	preimage:=rec(points:=[], rebras:=[]);
+	image:=rec();
 
 	#--- создание прообраза ----------------------------------------------------
 	2kl:=s3.2knot.sheets;
@@ -2697,6 +2617,7 @@ InstallGlobalFunction(SurfaceOf2Knot, function(s3)
 	sost:=Set(Concatenation(sost));
 	#... дублирование ребер ....................................................
 	dpoints:=List(RecNames(s3.2knot.dpoints), x -> Int(x));
+	image.rebras:=dpoints;
 	l1:=Length(sost);
 	vert:=[];
 	for r in dpoints do
@@ -2725,12 +2646,14 @@ InstallGlobalFunction(SurfaceOf2Knot, function(s3)
 			heits[r[i]]:=i;
 		od;
 	od;
+	image.points:=[];
 	vert:=Set(vert);
 	l0:=Length(pol.vertices);
 	for v in vert do
 		pol:=PolMinusFaceDoublingMethod(pol,[0,v]);
 		if IsBound(pol.vertices[l0+2]) then # это была тройная точка
 			triple:=[v, l0+1, l0+2];
+			Add(image.points,v);
 			# Получили три прообраза тройной точки, нам надо упорядочить их
 			# относительно того каким листам они принадлежат нижнему, среднему
 			# или верхнему.
@@ -2759,6 +2682,7 @@ InstallGlobalFunction(SurfaceOf2Knot, function(s3)
 			l0:=l0+1;
 		else	# это может быть только точка ветвления
 			Add(preimage.points, [v]);
+			Add(image.points, v);
 		fi;
 		# Список preimage.points будет состоять только из списков длины 1 и 3,
 		# которые отвечают точкам ветвления и тройным точкам, соответственно.
@@ -2766,7 +2690,11 @@ InstallGlobalFunction(SurfaceOf2Knot, function(s3)
 		# листа в тройной точке, чем выше порядок, тем выше лист.
 	od;
 	
-	pol.preimage:=preimage;
+	list:=Set(Concatenation(s3.faces[2]{s3.2knot.sheets}));
+	list:=Set(Concatenation(s3.faces[1]{list}));
+	image.points:=list{image.points};
+	pol.images:=rec(0:=image.points, 1:=image.rebras);
+	pol.preimages:=rec(0:=preimage.points, 1:=preimage.rebras);
 
 return pol;
 end);
@@ -2774,3 +2702,359 @@ end);
 # для 2-twist трилистника было показано, что эти прообразы сферы. Было проверено
 # количество тройных точек и точек ветвления, так же для одной из тройных точек
 # проверялось корректность упорядочения по принадлежности высотам.
+
+################################################################################
+
+#			<ManSection><Func Name="OrientBrockenDiagramm" Arg="s3" />
+#				<Description>
+#					Функция построит разорванную диаграмму для ориентируемой
+#					линейно связной заузленной поверхности. 
+#
+#					Для ориентируемого 2-узла вычисляется информация о данной
+#					диаграмме в которую входят разорванная диаграмма 2-узла и
+#					граф двойных. На выход подается именованный список. 
+#
+#					Список rez.manifold содержит прообраз двумерной заузленной
+#					поверхности.
+#					
+#					В списках rez.images и rez.preimages содержатся образ и
+#					прообраз двойных линий и сингулярных точек (тройных и точек
+#					ветвления), соответственно. Считается, что на двойных ребрах
+#					введена нумерация которая отображается в списках
+#					rez.images.1 и rez.preimages.1, то есть rez.images.1[i] и
+#					rez.preimages.1[i] это образ и прообраз i-того двойного
+#					ребра. На тройных точках и на точках ветвления введена общая
+#					нумерация которая так же отображается в списках
+#					rez.preimages.0  и rez.images.0.
+#					
+#					Граф сингулярных точек заузленной поверности состоит из
+#					набора точек соответствующих тройным точкам и точкам
+#					ветвления, при этом дуги графа могут проходить по нескольким
+#					ребрам шарового разбиения. На дугах графа двойных точек
+#					введена нумерация. Список rez.colines i-тому двойному ребру
+#					сопоставляет дугу которая графа двойных точек которая
+#					проходит по данному ребру.
+#
+#					В rez.cosheets для i-той 2-клетки заузленной поверхности
+#					указывает какому листу разорванной диаграммы эта 2-клетка
+#					принадлежит.
+#
+#					Так как по условиею прообраз заузленной поверхности является
+#					ориентируемым многообразием, то дуги графа двойных точек
+#					можно ориентировать, а так же присвоить ориентации вершинам
+#					графа. Эти ориентации содержатся в списках rez.coorient.dim,
+#					где dim=0 или 1. Заметим, что оринетации в rez.coorient.1
+#					сопоставляются не по дугам и по двойным ребрам.
+#
+#					Список rez.cofaces.0 на i-том месте содержит списко дуг
+#					графа двойных точек которые содержат i-тую вершину графа.
+#					Причем если вершина является тройной точкой, то
+#					соответствующий список состоит из шести элементов. Первая
+#					тройка списка rez.cofaces.0[i] это дуги входящие в i-тую
+#					тройную точку, оставшаяся тройка это дуги которые исходят из
+#					указанной вершины.
+#
+#					Список rez.cofaces.1 для каждой дуги графа двойных точек
+#					указывает список из трех элементов в которым первым
+#					указывается номер верхнего листа, вторым индекс нижнего
+#					листа по направлению нормали нормали верхнего листа, третьим
+#					- индекс нижнего листа против направления номрали верхенго
+#					листа.
+#					<Example>
+#					</Example>
+#				</Description>
+#			</ManSection>
+
+InstallGlobalFunction(OrientBrockenDiagramm, function(s3)
+	local	s2, s3_orient, s2_orient, cell_orient, dpoints, l2, ldp, downimage,
+	2cells, indexis, cosheets, list, i, s, grafpoints, sostrebra, colines,
+	sheets, ll, line_ind, r, triple, plate, 2kl, star_r, 3kletki, 3kl, set,
+	normal, p, part, 3star_2kl, j, wedo, wewilldo, ind, para, ident, verify,
+	ab, cd, sost, pos, info, dp_orient, direction, cofaces, a, b, enter_exit,
+	l, data, order, v, 1kl, 1kls, star, height, tdbp, coorient, gamma;
+
+	s2:=SurfaceOf2Knot(s3);
+	s3_orient:=PolOrient(s3);
+	cell_orient:=CellOrient(s3);
+	dpoints:=s2.images.1;
+	sheets:=StructuralCopy(s3.2knot.sheets);
+
+	#--- разбиение на листы и дуги --------------------------------------------
+	l2:=Length(s2.faces[2]);
+	ldp:=Length(dpoints);
+	#... разбиение на листы ...................................................
+	downimage:=List(s2.preimages.1, x -> x[1]);
+	2cells:=StructuralCopy(s2.faces[2]);
+	2cells:=List(2cells, x -> Difference(x, downimage));
+	indexis:=[1 .. l2];
+	cosheets:=[];
+	coorient:=rec(0:=[], 1:=[]);
+	s:=1;
+	while not IsEmpty(2cells) do
+		list:=Set(ConnectedSubset(2cells));
+		while not IsEmpty(list) do
+			i:=Remove(list);
+			Remove(2cells,i);
+			i:=Remove(indexis, i);
+			cosheets[i]:=StructuralCopy(s);
+		od;
+		s:=s+1;
+	od;
+
+	#... разбиение на дуги ....................................................
+	grafpoints:=StructuralCopy(s2.images.0);
+	sostrebra:=s3.faces[1]{dpoints};
+	sostrebra:=List(sostrebra, x -> Difference(x, grafpoints));
+	indexis:=[1 .. ldp];
+	colines:=[];
+	s:=1;
+	while not IsEmpty(sostrebra) do
+		list:=Set(ConnectedSubset(sostrebra));
+		while not IsEmpty(list) do
+			i:=Remove(list);
+			Remove(sostrebra, i);
+			i:=Remove(indexis, i);
+			colines[i]:=StructuralCopy(s);
+		od;
+		s:=s+1;
+	od;
+	# NOTE: до сих проверенно
+
+	#--- ориентирование листов, дуг и тройных точек ---------------------------
+	#... ориентирование диаграммы узла ........................................
+	sost:=StructuralCopy(s3.faces[2]{sheets});
+	s2_orient:=[1];
+	wedo:=[1];
+	wewilldo:=[2 .. Length(sheets)];
+	while not IsEmpty(wewilldo) do
+		j:=Remove(wewilldo,1);
+		list:=List(wedo, x -> Intersection(sost[x], sost[j]));
+		pos:=List(list, x -> IsEmpty(x));
+		pos:=Positions(pos, false);
+		ident:=wedo{pos};
+		verify:=not IsEmpty(ident);
+		para:=[];
+		while verify do
+			ind:=Remove(ident);
+			set:=Remove(list, Remove(pos));
+			while not IsEmpty(set) and IsEmpty(para) do
+				r:=Remove(set);
+				para:=sheets{[j, ind]};
+				if r in dpoints then
+					ab:=s3.2knot.dpoints.(r){[1,2]};
+					cd:=s3.2knot.dpoints.(r){[3,4]};
+					if IsSubset(ab, para) or IsSubset(cd, para) then
+					else
+						para:=[];
+					fi;
+				fi;
+			od;
+			verify:=not IsEmpty(ident);
+			if not IsEmpty(para) then
+				verify:=false;
+			fi;
+		od;
+		if not IsEmpty(para) then
+			s2_orient[j]:= - s2_orient[ind];
+			for i in para do
+				p:=Position(s3.faces[2][i], r);
+				s2_orient[j]:=s2_orient[j] * cell_orient[2][i][p];
+			od;
+			Add(wedo, StructuralCopy(j));
+		else
+			Add(wewilldo, j);
+		fi;
+	od;
+
+	#..........................................................................
+
+	ll:=StructuralCopy(s)-1;	# количество ребер графа двойных точек
+	cofaces:=rec(1:=[], 0:=[]);
+	dp_orient:=[];
+	enter_exit:=List(s2.images.0, x -> [ [], [] ]);
+	for line_ind in [1 .. ll] do
+		indexis:=Positions(colines, line_ind);
+
+	#... создание троек листов в ребрах .......................................
+		r:=dpoints[indexis[1]];
+		triple:=StructuralCopy(s3.2knot.dpoints.(r));
+		plate:=StructuralCopy(triple{[1,2]});
+		2kl:=Remove(triple,1);
+		star_r:=StarFace(s3, [1,r]);
+		3kletki:=s3.faces[3]{star_r.3};
+		3kletki:=List(3kletki, x -> Difference(x, plate));
+		# По построению, 3-клетки из star_r содержатся только либо по
+		# направлению нормали к верхнему листу (клеткам plate), либо против
+		# этого направления.
+		3kletki:=List(3kletki, x -> Intersection(x, star_r.2));
+		part:=ConnectedSubset(3kletki);
+		3star_2kl:=StarFace(s3,[2,2kl]).3;
+		3kl:=Intersection(3star_2kl, star_r.3{part})[1];
+		normal:=s3_orient[3kl];
+		p:=Position(s3.faces[3][3kl], 2kl);
+		normal:=normal * cell_orient[3][3kl][p];
+		p:=Position(sheets, 2kl);
+		normal:=normal * s2_orient[p];
+		set:=Union(3kletki{part});
+		if (normal = 1) = (triple[2] in set) then
+			triple:=triple{[1,3,2]};
+		fi;
+		triple:=List(triple, x -> Position(sheets, x));
+		Add(cofaces.1, cosheets{triple});
+
+	#... ориентирование ребер .................................................
+		list:=dpoints{indexis};
+		list:=s3.faces[1]{list};
+		info:=LineOrdering(list);
+		2kl:=sheets[triple[3]];
+		p:=Position(s3.faces[2][2kl], r);
+		direction:=StructuralCopy(cell_orient[2][2kl][p]);
+		p:=Position(sheets, 2kl);
+		direction:=direction * s2_orient[p];
+		p:=Position(info.order,1);
+		if not direction = info.orient[p] then
+			info.orient:= - info.orient;
+		fi;
+		s:=1;
+		for i in info.order do
+			j:=indexis[i];
+			coorient.1[j]:=info.orient[s];
+			s:=s+1;
+		od;
+
+	#... вход-выход по тройным точкам .........................................
+		list:=list{info.order};
+	   if not IsEmpty(s2.images.0) then
+		if Length(info.order)=1 and not IsEmpty(s2.images.0) then
+			if info.orient[1]=1 then
+				ab:=list[1];
+			else
+				ab:=list[1]{[2,1]};
+			fi;
+		else
+			l:=Length(info.order);
+			a:=Difference(list[1],list[2])[1];
+			b:=Difference(list[l], list[l-1])[1];
+			ab:=[];
+			if not (a in s2.images.0) then
+				# Если точка a не принадлежит тройным точкам, это должно
+				# означать, что точка b тоже не принадлежит тройным точкам, а
+				# следовательно a=b и данная линия является окружностью. Если на
+				# данной окружности лежит тройная точка, то она должна быть
+				# единственной (по потстроению). Для данной тройной точки,
+				# данное ребро является как входящим так и исходящим.
+				a:=Union(list);
+				a:=Intersection(a, s2.images.0);
+				if not IsEmpty(a) then
+					ab:=a{[1,1]};
+				fi;
+			else
+				if (list[1][1]=a) = (info.orient[1]=1) then
+					ab:=[a,b];
+				else
+					ab:=[b,a];
+				fi;
+			fi;
+		fi;
+		for i in [1,2] do
+			p:=Position(s2.images.0, ab[i]);
+			Add(enter_exit[p][i],line_ind);
+		od;
+	   fi;
+		# По построению в списке enter_exit первая группа это исходящие, вторая
+		# группа это входящие двойные линии.
+	#..........................................................................
+		# сбор информации о ориентации двойных линий
+		list:=indexis{info.order};
+		while not IsEmpty(list) do
+			i:=Remove(list);
+			dp_orient[i]:=Remove(info.orient);
+		od;	
+	od;
+	
+	#... упорядочение по высотам в тройных точках .............................
+	s:=1;
+	tdbp:=TripleDoubleBranchPoints(s3).triple;
+	for v in s2.images.0 do
+		if Length(s2.preimages.0[s])=3 then
+			star:=StarFace(s3,[0,v]);
+			height:=[];
+			1kls:=List(["d","m","u"],
+				x->Concatenation(s3.faces[2]{tdbp.(v).(x)}));
+			for j in [[1,2],[1,3],[2,3]] do
+				1kl:=Intersection(1kls{j});
+				1kl:=Intersection(1kl, star.1);
+				1kl:=List(1kl, x -> Position(dpoints, x));
+				1kl:=colines{1kl};
+				if 1kl[1] in enter_exit[s][1] and 1kl[2] in enter_exit[s][2] then
+				else
+					1kl:=1kl{[2,1]};
+				fi;
+				Append(height,1kl);
+			od;
+			Add(cofaces.0,height{[2,4,6,1,3,5]});
+			# Список cofaces.0 устроен следующим образом. Первые три элемента
+			# это индексы входящих в вершину двойных линий (в соответствии с
+			# направлениями на них), вторая тройка числе это, соответственно,
+			# исходящие.
+	#... ориентирование тройных точек .........................................
+			# Для тройной точки построить нормаль к верхнему листу. Направление
+			# построенной нормали сравнить с направлением соответствующей
+			# двойной линии (пересечение нижнего и среднего листов). Если
+			# направления совпадают, то тройная точка положительна.
+			star:=StarFace(s3,[0,v]);
+			sost:=s3.faces[3]{star.3};
+			sost:=List(sost, x -> Intersection(x, star.2));
+			sost:=List(sost, x -> Difference(x, tdbp.(v).u));
+			ind:=ConnectedSubset(sost);
+			3kl:=star.3[1];
+			2kl:=Intersection(s3.faces[3][3kl], tdbp.(v).u)[1];
+			normal:=s3_orient[3kl];
+			p:=Position(s3.faces[3][3kl], 2kl);
+			normal:=normal*cell_orient[3][3kl][p];
+			p:=Position(sheets, 2kl);
+			normal:=normal*s2_orient[p];
+			if normal=-1 then
+				ind:=Difference([1..Length(sost)], ind);
+			fi;
+			sost:=Set(Concatenation(sost{ind}));
+			1kl:=Intersection(s3.faces[2]{sost});
+			1kl:=Intersection(1kl, star.1);
+			1kl:=1kl[1];
+			normal:=StructuralCopy(s3.faces[1][1kl]);
+			if normal[1]=v then
+				normal:=1;
+			else
+				normal:=-1;
+			fi;
+			p:=Position(dpoints, 1kl);
+			Add(coorient.0, coorient.1[p] * normal);
+		else
+			Add(cofaces.0,Concatenation(enter_exit[s]));
+			if IsEmpty(enter_exit[s][1]) then
+				Add(coorient.0,1);
+			else
+				Add(coorient.0,-1);
+			fi;
+		fi;
+		s:=s+1;
+	od;
+
+	data:=rec(	manifold:=rec(vertices:=s2.vertices, faces:=s2.faces),
+				images:=s2.images,
+				preimages:=s2.preimages,
+				colines:=colines,
+				cosheets:=cosheets,
+				cofaces:=cofaces,
+				coorient:=coorient);
+
+return data;
+end);
+
+# ПРОВЕРКА: 
+# 1) Проверка количественных характеристик для различных диаграмм по
+# Twist-узлам (количество листов).
+# 2) Проверялась тривиальность раскрашивающего квандла для 1-twist диаграмм
+# 3) Проверялась согласованность построения троек в списках .cofaces[1]
+# 4) Проверялось количество входных и выходных линий в тройных точках
+# 5) #NOTE: Ориентация троных точек не проверена

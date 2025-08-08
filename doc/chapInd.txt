@@ -1,6 +1,6 @@
   
   
-  [1XИндекс[101X
+  [1XIndex[101X
   
   [2X2KnotInS4[102X  3.2-8
   [2XballAB[102X  1.6-1
@@ -35,7 +35,9 @@
   [2XLcmPolynomial[102X  4.2-3
   [2XLengthPol[102X  1.3-1
   License  .-1
+  [2XLineOrdering[102X  4.1-3
   [2XMaxTree[102X  1.3-4
+  [2XOrientBrockenDiagramm[102X  3.2-9
   [2XOrientTriangulated[102X  1.3-7
   [2XParallelSimplify[102X  2.1-3
   [2XPermFaces[102X  1.5-3

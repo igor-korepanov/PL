@@ -5,7 +5,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-<title>GAP (PL-manual) - Глава 3: Погружения и узлы</title>
+<title>GAP (PL-manual) - Chapter 3: Погружения и узлы</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta name="generator" content="GAPDoc2HTML" />
 <link rel="stylesheet" type="text/css" href="manual.css" />
@@ -15,9 +15,9 @@
 <body class="chap3"  onload="jscontent()">
 
 
-<div class="chlinktop"><span class="chlink1">Перейти к главе: </span><a href="chap0.html">Начало</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
 
-<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Начало книги]</a>&nbsp;  <a href="chap0.html#contents">[Содержание]</a>&nbsp;  &nbsp;<a href="chap2.html">[Предыдущая глава]</a>&nbsp;  &nbsp;<a href="chap4.html">[Следующая глава]</a>&nbsp;  </div>
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
 
 <p><a id="X82CA5E1F7B3D3A5C" name="X82CA5E1F7B3D3A5C"></a></p>
 <div class="ChapSects"><a href="chap3.html#X82CA5E1F7B3D3A5C">3 <span class="Heading">Погружения и узлы</span></a>
@@ -47,6 +47,7 @@
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X870383C87924E495">3.2-6 SurfaceOf2Knot</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X857BA8697BA2F587">3.2-7 TurnKnot</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X848FEA1F80CF0734">3.2-8 2KnotInS4</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X780890177ADEBF2C">3.2-9 OrientBrockenDiagramm</a></span>
 </div></div>
 </div>
 
@@ -94,7 +95,7 @@ rec(
 
 <h5>3.1-2 Knot1OnSphere2</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Knot1OnSphere2</code>( <var class="Arg">knot</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Knot1OnSphere2</code>( <var class="Arg">knot</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>По диаграмме узла создается двумерная сфера <span class="SimpleMath">S^2,</span> в разбиении которой указана данная диаграмма. Узел содержится в прикрепленном именованном списке .1knot, который построен в стиле задания диаграмм двумерных заузленных поверхностей.</p>
 
 
@@ -116,35 +117,35 @@ rec(
 
 <h5>3.1-3 KnotInS3</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; KnotInS3</code>( <var class="Arg">knot</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; KnotInS3</code>( <var class="Arg">knot</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>Создает трехмерную сферу в которую вложен узел. Клетки узла указаны в result.knot.</p>
 
 <p><a id="X7D7395747EC32627" name="X7D7395747EC32627"></a></p>
 
 <h5>3.1-4 Reidemeister10Everywhere</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Reidemeister10Everywhere</code>( <var class="Arg">knot</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Reidemeister10Everywhere</code>( <var class="Arg">knot</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>Проверяет диаграмму узла на наличие в ней свободных петель, которые можно убрать первым движением Райдемайстера <span class="SimpleMath">R^-1_0.</span> Число <span class="SimpleMath">10</span> в названии обозначает, что применяется движение Райдемайстера, которое берет локально одну вершину и создает из него ноль вершин, если такое движение применимо.</p>
 
 <p><a id="X7E710DED7C4E5B3A" name="X7E710DED7C4E5B3A"></a></p>
 
 <h5>3.1-5 ZeroLinkFromKnot</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZeroLinkFromKnot</code>( <var class="Arg">knot</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZeroLinkFromKnot</code>( <var class="Arg">knot</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>Не изменяя самого узла, данная функция создает такую диаграмму, которая будет иметь нулевой коэффициент зацепления с диаграммой составленной следующим образом. Для узла создается трубчатая окрестность в трехмерном пространстве. Проекция узла параллельно оси <span class="SimpleMath">Oz</span> на трубчатую окрестность создает новый узел (по сути дела тот же самый). Два узла созданных по предложенной диаграмме образуют зацепление с нулевым коэффициентом.</p>
 
 <p><a id="X797F8D4A848DD9BC" name="X797F8D4A848DD9BC"></a></p>
 
 <h5>3.1-6 KnotGroup</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; KnotGroup</code>( <var class="Arg">knot</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; KnotGroup</code>( <var class="Arg">knot</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>Вычисляется фундаментальная группа узла, которая определяется как фундаментальная группа дополнения узла в трехмерной сфере <span class="SimpleMath">S^3.</span> Для создания группы используются соотношения Виртингера.</p>
 
 <p><a id="X7EB8D0A97D7D5E57" name="X7EB8D0A97D7D5E57"></a></p>
 
 <h5>3.1-7 TorusKnot</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TorusKnot</code>( <var class="Arg">q</var>, <var class="Arg">p</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TorusKnot</code>( <var class="Arg">q</var>, <var class="Arg">p</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>Создается диаграмма торического узла <span class="SimpleMath">(q,p),</span> если <span class="SimpleMath">q</span> и <span class="SimpleMath">p</span> взаимнопростые, если это не так, то будет создано соответствующее зацепление. Параметр <span class="SimpleMath">q &gt; 0</span> соответствует количеству нитей, а параметр <span class="SimpleMath">p</span> соответствует количеству оборотов.</p>
 
 
@@ -158,7 +159,7 @@ rec( kod := [ [ 1, 1 ], [ 2, -1 ], [ 3, 1 ], [ 1, -1 ], [ 2, 1 ], [ 3, -1 ] ],
 
 <h5>3.1-8 ZeifertSurface</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZeifertSurface</code>( <var class="Arg">knot</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZeifertSurface</code>( <var class="Arg">knot</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>создает поверхность Зейферта узла, вложенную в трехмерную сферу. Все 2-клетки отвечающие поверхности Зейферта собраны в списке .zeifert прикрепленному к политопу.</p>
 
 
@@ -175,7 +176,7 @@ rec( kod := [ [ 1, 1 ], [ 2, -1 ], [ 3, 1 ], [ 1, -1 ], [ 2, 1 ], [ 3, -1 ] ],
 
 <h5>3.1-9 ZeifertSurfaceWithSimplyBoundary</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZeifertSurfaceWithSimplyBoundary</code>( <var class="Arg">knot</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ZeifertSurfaceWithSimplyBoundary</code>( <var class="Arg">knot</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>создает поверхность Зейферта узла <span class="SimpleMath">knot,</span> чья граница состоит только из двух 1-клеток (соответственно по которым и проходит сам узел).</p>
 
 
@@ -201,14 +202,14 @@ rec( kod := [ [ 1, 1 ], [ 2, -1 ], [ 3, 1 ], [ 1, -1 ], [ 2, 1 ], [ 3, -1 ] ],
 
 <h5>3.2-2 PolSimplifyWith2Knot</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PolSimplifyWith2Knot</code>( <var class="Arg">pol</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PolSimplifyWith2Knot</code>( <var class="Arg">pol</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>Упрощает политоп содержащий 2-узел. В качестве упрощающей функции была выбрана функция UnionFaces, которая объединяет два шара в политопе. Так же как и функция PolSimplify данная функция не проверяет возможны ли дальнейшие упрощение политопа <span class="SimpleMath">pol.</span> Для этой проверки необходимо еще раз запустить эту функцию на вновь полученных данных.</p>
 
 <p><a id="X859D50D9858D5B25" name="X859D50D9858D5B25"></a></p>
 
 <h5>3.2-3 SingularitySet2Knot</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SingularitySet2Knot</code>( <var class="Arg">pol</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SingularitySet2Knot</code>( <var class="Arg">pol</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>Singularity set --- граф двойных точек диаграммы 2-узла. В графе перечислены все 1-клетки объемлющего политопа <span class="SimpleMath">pol</span> которые содеражт описываемый граф. Так же в соответствии каждой вершине сопоставлен список. Данный список строится из звезды <span class="SimpleMath">Star(v)</span> в описываемом графе упорядоченной таким образом. Первая пара элементов принадлежит верхней линии двойных точек в этой вершине (получаемая на пересечении верхнего и среднего листов), вторая пара элементов принадлежит средней линии двойных точек (пересечение верхнего и нижнего листов) и третья пара принадлежит нижней линии двойных точек (пересечение среднего и нижнего листов). Таким образом соответсвующие списки для тройной точки будут состоять из шести элементов, для двойной точки из двух и для точки ветвления из одного.</p>
 
 
@@ -242,7 +243,7 @@ rec( graf := [ 7, 4, 5, 6, 19, 20, 21, 22, 17, 18, 23, 8, 9, 10, 12, 45, 32,
 
 <h5>3.2-4 TripleDoubleBranchPoints</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TripleDoubleBranchPoints</code>( <var class="Arg">pol</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TripleDoubleBranchPoints</code>( <var class="Arg">pol</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>Для шарового разбиения многообразия, внутри которого указана диаграмма заузленной поверхнсоти вычисляются те вершины политопа, которые являются тройными точками, двойными точками или точками ветвления. По возможности для каждой точки указываются 2-клетки диаграммы группированные по принадлежности различным листам. Функция выводит именованный список с полями .triple, .double и .branch. В именованном списке result.triple каждой вершине <span class="SimpleMath">v</span> под списком поля .u можно узнать 2-клетки звезды на верхнем листе в тройной точке <span class="SimpleMath">v</span>, под списком .m --- 2-клетки на среднем листе и под списком .d --- на нижнем. Для двойной точки указываются только списки .u и .d. Для точки ветвления указан только список 2-клеток узла лежащих в звезде этой вершины.</p>
 
 
@@ -286,7 +287,7 @@ rec( branch := rec( 13 := [ 2, 6, 22, 30 ], 19 := [ 13, 16, 37, 44 ] ),
 
 <h5>3.2-5 IsDiagrammOf2Kont</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsDiagrammOf2Kont</code>( <var class="Arg">pol</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsDiagrammOf2Kont</code>( <var class="Arg">pol</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>Проверяет диаграмму 2-узла вложенную в трехмерное многообразие. Для этого проверяются: 1) корректность всех ссылок на клетки политопа, 2) граф двойных точек, 3) отсутствие точек самокасания.</p>
 
 
@@ -303,8 +304,8 @@ rec( branch := rec( 13 := [ 2, 6, 22, 30 ], 19 := [ 13, 16, 37, 44 ] ),
 
 <h5>3.2-6 SurfaceOf2Knot</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SurfaceOf2Knot</code>( <var class="Arg">M3</var> )</td><td class="tdright">( функция )</td></tr></table></div>
-<p>Для заузленной поверхности указанной внутри некоторого 3-многообразия <span class="SimpleMath">M^3</span> создается прообраз этой поверхности с указанием прообразов двойных ребер, тройных точек и точек ветвления. Прообраз создается как pl-комплекс, к которому прикреплена дополнительная информация содеражащаяся в именнованном списке <span class="SimpleMath">.preimage</span>, который является списком дублированных прообразов. В него входят список <span class="SimpleMath">.rebras</span> и <span class="SimpleMath">.points.</span> Список <span class="SimpleMath">.rebras</span> это список пар содержий прообразы для каждого двойного ребра, первым элементом пары является ребро-прообраз лежащее на нижнем листе, вторым, соответственно, ребро-прообраз лежащее на верхнем листе образа в диаграмме. Список <span class="SimpleMath">.points</span> состоит из списков длины 1 и 3, которые являются списками прообразов точек ветвления и тройных точек, соответственно. Причем, для тройных точек прообраз точки, лежащий на верхнем листе будет третьим в списке, на среднем - вторым и на нижнем, соответственно, первым.</p>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; SurfaceOf2Knot</code>( <var class="Arg">M3</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Для заузленной поверхности указанной внутри некоторого 3-многообразия <span class="SimpleMath">M^3</span> создается прообраз этой поверхности с указанием прообразов двойных ребер, тройных точек и точек ветвления. Прообраз создается как pl-комплекс, к которому прикреплена дополнительная информация содеражащаяся в именнованном списке <span class="SimpleMath">.preimage</span>, который является списком дублированных прообразов. В него входят список <span class="SimpleMath">.1</span> и <span class="SimpleMath">.0.</span> Список <span class="SimpleMath">.1</span> это список пар содержий прообразы для каждого двойного ребра, первым элементом пары является ребро-прообраз лежащее на нижнем листе, вторым, соответственно, ребро-прообраз лежащее на верхнем листе образа в диаграмме. Список <span class="SimpleMath">.0</span> состоит из списков длины 1 и 3, которые являются списками прообразов точек ветвления и тройных точек, соответственно. Причем, для тройных точек прообраз точки, лежащий на верхнем листе будет третьим в списке, на среднем - вторым и на нижнем, соответственно, первым.</p>
 
 
 <div class="example"><pre>
@@ -314,7 +315,7 @@ rec( branch := rec( 13 := [ 2, 6, 22, 30 ], 19 := [ 13, 16, 37, 44 ] ),
 
 <h5>3.2-7 TurnKnot</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TurnKnot</code>( <var class="Arg">knot</var>, <var class="Arg">number</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; TurnKnot</code>( <var class="Arg">knot</var>, <var class="Arg">number</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>Cоздается диаграмма 2-узла вложенная в трехмерную сферу <span class="SimpleMath">S^3</span> с помощью алгоритма SpunTwist на основании диаграммы одномерного узла <span class="SimpleMath">knot</span>. Число <span class="SimpleMath">number</span> задает количество оборотов данной диаграммы при осуществлении twist-движения, при этом отрицательный знак данного числа задает обращение узла в противоположном направлении, при этом если <span class="SimpleMath">number</span> указать равным нулю, тогда twist-оборотов в диаграмме не будет и мы получим простую spun-диаграмму.</p>
 
 
@@ -352,14 +353,21 @@ rec(
 
 <h5>3.2-8 2KnotInS4</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; 2KnotInS4</code>( <var class="Arg">pol</var> )</td><td class="tdright">( функция )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; 2KnotInS4</code>( <var class="Arg">pol</var> )</td><td class="tdright">( function )</td></tr></table></div>
 <p>По трехмерному политопу <span class="SimpleMath">pol</span> в котором содержится диаграмма заузленной двумерной поверхности <span class="SimpleMath">T</span> создается вложение этой поверхности <span class="SimpleMath">T</span> в четырехмерную сферу <span class="SimpleMath">S^4.</span></p>
 
+<p><a id="X780890177ADEBF2C" name="X780890177ADEBF2C"></a></p>
 
-<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Начало книги]</a>&nbsp;  <a href="chap0.html#contents">[Содержание]</a>&nbsp;  &nbsp;<a href="chap2.html">[Предыдущая глава]</a>&nbsp;  &nbsp;<a href="chap4.html">[Следующая глава]</a>&nbsp;  </div>
+<h5>3.2-9 OrientBrockenDiagramm</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OrientBrockenDiagramm</code>( <var class="Arg">s3</var> )</td><td class="tdright">( function )</td></tr></table></div>
+<p>Функция построит разорванную диаграмму для ориентируемой линейно связной заузленной поверхности. Для ориентируемого 2-узла вычисляется информация о данной диаграмме в которую входят разорванная диаграмма 2-узла и граф двойных. На выход подается именованный список. Список <span class="SimpleMath">rez.manifold</span> содержит прообраз двумерной заузленной поверхности. В списках rez.images и rez.preimages содержатся образ и прообраз двойных линий и сингулярных точек (тройных и точек ветвления), соответственно. Считается, что на двойных ребрах введена нумерация которая отображается в списках <span class="SimpleMath">rez.images.1</span> и <span class="SimpleMath">rez.preimages.1</span>, то есть <span class="SimpleMath">rez.images.1[i]</span> и <span class="SimpleMath">rez.preimages.1[i]</span> это образ и прообраз <span class="SimpleMath">i-</span>того двойного ребра. На тройных точках и на точках ветвления введена общая нумерация которая так же отображается в списках <span class="SimpleMath">rez.preimages.0</span> и <span class="SimpleMath">rez.images.0.</span> Граф сингулярных точек заузленной поверности состоит из набора точек соответствующих тройным точкам и точкам ветвления, при этом дуги графа могут проходить по нескольким ребрам шарового разбиения. На дугах графа двойных точек введена нумерация. Список <span class="SimpleMath">rez.colines</span> <span class="SimpleMath">i-</span>тому двойному ребру сопоставляет дугу которая графа двойных точек которая проходит по данному ребру. В <span class="SimpleMath">rez.cosheets</span> для <span class="SimpleMath">i-</span>той 2-клетки заузленной поверхности указывает какому листу разорванной диаграммы эта 2-клетка принадлежит. Так как по условиею прообраз заузленной поверхности является ориентируемым многообразием, то дуги графа двойных точек можно ориентировать, а так же присвоить ориентации вершинам графа. Эти ориентации содержатся в списках <span class="SimpleMath">rez.coorient.dim,</span> где <span class="SimpleMath">dim=0</span> или <span class="SimpleMath">1.</span> Заметим, что оринетации в <span class="SimpleMath">rez.coorient.1</span> сопоставляются не по дугам и по двойным ребрам. Список <span class="SimpleMath">rez.cofaces.0</span> на <span class="SimpleMath">i-</span>том месте содержит списко дуг графа двойных точек которые содержат <span class="SimpleMath">i-</span>тую вершину графа. Причем если вершина является тройной точкой, то соответствующий список состоит из шести элементов. Первая тройка списка <span class="SimpleMath">rez.cofaces.0[i]</span> это дуги входящие в <span class="SimpleMath">i-</span>тую тройную точку, оставшаяся тройка это дуги которые исходят из указанной вершины. Список <span class="SimpleMath">rez.cofaces.1</span> для каждой дуги графа двойных точек указывает список из трех элементов в которым первым указывается номер верхнего листа, вторым индекс нижнего листа по направлению нормали нормали верхнего листа, третьим -- индекс нижнего листа против направления номрали верхенго листа.</p>
 
 
-<div class="chlinkbot"><span class="chlink1">Перейти к главе: </span><a href="chap0.html">Начало</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
 
 <hr />
 <p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>

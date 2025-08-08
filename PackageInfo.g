@@ -12,8 +12,8 @@ SetPackageInfo( rec(
 
 PackageName := "PL",
 Subtitle := "PL: We gonna eat your brain.",
-Version := "2.4.1",
-Date := "27/06/2013",
+Version := "2.4.2",
+Date := "1/01/2015",
 PackageWWWHome :=
   Concatenation( "http://sourceforge.net/projects/plgap",
       LowercaseString( ~.PackageName ), "/" ),
@@ -215,7 +215,7 @@ BannerString := Concatenation(
     JoinStringsWithSeparator( List( Filtered( ~.Persons, r -> r.IsAuthor ),
                                     r -> Concatenation(
         r.FirstNames, " ", r.LastName, " (", r.WWWHome, ")\n" ) ), "   " ),
-    "При поддержке гранта МГУПИ ИТГ-107\n",
+    "При поддержке гранта РФФИ мол_а № 14-01-31019\n",
     "----------------------------------------------------------------\n" ),
 
 ##  *Optional*, but recommended: path relative to package root to a file which 
