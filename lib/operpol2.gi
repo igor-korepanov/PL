@@ -1692,10 +1692,13 @@ end);
 
 ################################################################################
 
-#			<ManSection><Func Name="ConnectedSum" Arg="N,M" />
+#			<ManSection><Func Name="ConnectedSum" Arg="N,M,e" />
 #				<Description>
 #					Фукнция создает связную сумму двух политопов <M>N</M> и
-#					<M>M</M> одинаковой размерности. 
+#					<M>M</M> одинаковой размерности. Параметр <M>e</M>
+#					определяет будут ли склеены многообразия с сохранием
+#					ориентаций или ориентация одного из многообразий (<M>M</M>)
+#					будет изменена на противоположную.
 #					<Example>
 #gap> s2:=sphereAB(2);;
 #gap> ConnectedSum(s2,s2);
@@ -1708,16 +1711,17 @@ end);
 #				</Description>
 #			</ManSection>
 
-InstallGlobalFunction(ConnectedSum, function(pol10, pol20)
-	local	pol1, pol2, n, a, b, bord1, bord2, bord1kl_a, bord1kl_b, sp1, sp2,
-	l, kl, vertname, ind, pol, r1, r2, sost1, sost2, i,j;
+InstallGlobalFunction(ConnectedSum, function(pol10, pol20, e)
+    local pol1, pol2, n, a, b, bord1, bord1kl_a, bord2, bord1kl_b, sp1, sp2, l,
+    kl, pol, vertname, ind, sost1, sost2, pairs, cellorient, orient, cell_id,
+    pairs_orient, pos, i, j, cell;
 
 	pol1:=StructuralCopy(pol10);
 	pol2:=StructuralCopy(pol20);
 	if Length(pol1.faces) = Length(pol2.faces) then
 		n:=Length(pol1.faces);
 	else
-		Print("Dimensions of that polytopes must be equal.\n");
+		Print("Dimensions of this polytopes must be equal.\n");
 	fi;
 	#
 	# Еще более простой идеей является создать минимальную (n-1)-клетку в
@@ -1777,11 +1781,56 @@ InstallGlobalFunction(ConnectedSum, function(pol10, pol20)
 	sost2:=FaceComp(pol,[n-1,sp2[2]]);
 	sost1.(n-1):=sp1;
 	sost2.(n-1):=sp2;
-	for i in [0 .. n-1] do
+
+    # Оба многообразия должны содержать ориентации клеток высшей размерности,
+    # если они ориентируемы. Ориентации должны находиться в поле orient. Если
+    # соответствующего поля нет, или хоть в одно из многообразий orient=fail
+    # (т.е. многообразие неориентируемо), то будет создана произвольная связная
+    # сумма.
+	for i in [0 .. n-2] do
 		for j in [2,1] do
 			pol:=GlueFaces(pol,[sost1.(i)[j],sost2.(i)[j]],i);
 		od;
 	od;
+    # Осталось приклеить правльным образом друг к другу (n-1)-клетки.
+    # Соответствие для склейки будет выбрано на основе ориентаций. Если хоть
+    # одно из многообразий не ориентируемо или его ориентация не задана, то
+    # будет реализована случайная связная сумма (без учета ориентации склейки).
+
+    if IsList(pol1.orient) and IsList(pol2.orient) then
+        pairs := StructuralCopy(sp1);
+        Append(pairs, sp2);
+        cellorient := CellOrient(pol1)[n];
+        Append(cellorient, CellOrient(pol2)[n]);
+        orient := StructuralCopy(pol1.orient);
+        Append(orient, e * pol2.orient);
+        cell_id := 0;
+        pairs_orient := [];
+        for cell in cellorient do
+            cell_id := cell_id + 1;
+            for j in [1 .. 4] do
+                pos := Position(pol.faces[n][cell_id], pairs[j]);
+                if not pos = fail then
+                    pairs_orient[j] := orient[cell_id] * cell[pos];
+                fi;
+            od;
+        od;
+        Print(pairs_orient{[1,2]}); # Проверочная часть, эти пары должны быть
+        Print(pairs_orient{[3,4]}); # равны либо [-1,1], либо [1,-1].
+
+        if pairs_orient{[1,2]} = pairs_orient{[3,4]} then
+            pol := GlueFaces(pol, sp1, sp2{[2,1]});
+            pol.orient := orient;
+        elif pairs_orient{[2,1]} = pairs_orient{[3,4]} then
+            pol := GlueFaces(pol, sp1, sp2);
+            pol.orient := orient;
+        else
+            Print("WARNING: Something wrong with induce orient on board.\n");
+            pol := fail;
+        fi;
+    else
+        pol := GlueFaces(pol, sp1, sp2);
+    fi;
 
 return pol;
 end);

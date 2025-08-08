@@ -21,5 +21,8 @@ ReadPackage( "PL", "lib/operknot2.gd" );
 ReadPackage( "PL", "lib/ratfunc.gd" );
 ReadPackage( "PL", "lib/opermat.gd" );
 
+# 2018
 ReadPackage( "PL", "lib/discretAction.gd" );
 ReadPackage( "PL", "lib/abelian.gd" );
+ReadPackage( "PL", "lib/sparsematrix.gd" );
+ReadPackage( "PL", "lib/cohomology.gd" );

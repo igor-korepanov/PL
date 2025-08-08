@@ -203,7 +203,7 @@ InstallGlobalFunction(lookover, function(func, k)
         frec := [];
     fi;
 
-    return frec;
+    return frec/Sum(frec);
 end);
 
 #-------------------------------------------------------------------------------
