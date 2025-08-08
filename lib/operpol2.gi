@@ -53,74 +53,70 @@ end);
 # выходные данные: политоп
 # зависимости:
 
- InstallGlobalFunction(DivideFace, function(pol1,adr,nabor)
-     local interes,pos,ind,l,s,i,pol, v;
+InstallGlobalFunction(DivideFace, function(pol1,adr,nabor)
+    local interes,pos,ind,l,s,i,pol, v;
 
+    pol:=StructuralCopy(pol1);
 
+    if adr[1]>1 then 
+    #-------------------------------------------------------------------------
 
-pol:=StructuralCopy(pol1);
+        # 1) выбираем все (k-1)-клетки разбиваемой
+        interes:=pol.faces[adr[1]][adr[2]];
+        # 2) смотрим из каких (k-2)-клеток они состоят
+        interes:=pol.faces[adr[1]-1]{interes};
+        # 3) из этих наборов выкидываем (k-2)-клетки на которые будут натянута новая (k-1)-клетка
+        interes:=List(interes, i->Difference(i, nabor));
+        # 4) разделяем полученный список множеств на два списка связных наборов
+        pos:=ConnectedSubset(interes);
+        ind:=StructuralCopy(pol.faces[adr[1]][adr[2]]);
+        pos:=ind{pos}; # выделели (k-1)-клетки которые будут образовывать одну k-клетку
+        # 5) добавляем дробящую (k-1)-клетку
+        Add(pol.faces[adr[1]-1],Set(nabor));
+        l:=Length(pol.faces[adr[1]-1]); # количество (k-1)-клеток
+        # 6) заменяем раздрабливаемую клетку на половинку
+        Add(pos, l); 
+        pol.faces[adr[1]][adr[2]]:=pos;
+        # 7) создаем вторую часть дробленной клетки
+        ind:=Difference(ind,pos);
+        Add(ind, l);
+        # 8) добавляем вторую полвинку дробленной клетки
+        Add(pol.faces[adr[1]], ind);
+        # 9) учтем в (k+1)-клетках что мы подразбили клетку
+        l:=Length(pol.faces[adr[1]]);
+        if adr[1]<Length(pol.faces) then
+           s:=1;
+           for i in pol.faces[adr[1]+1] do
+              if adr[2] in i then
+                 Add(pol.faces[adr[1]+1][s],l);
+              fi;
+              s:=s+1;
+           od;
+        fi;
 
+    else
+    #--------------------------------------------------------------------------------
+    #                         если дробится ребро
 
-
-if adr[1]>1 then 
-#-------------------------------------------------------------------------
-
-	# 1) выбираем все (k-1)-клетки разбиваемой
-	interes:=pol.faces[adr[1]][adr[2]];
-	# 2) смотрим из каких (k-2)-клеток они состоят
-	interes:=pol.faces[adr[1]-1]{interes};
-	# 3) из этих наборов выкидываем (k-2)-клетки на которые будут натянута новая (k-1)-клетка
-	interes:=List(interes, i->Difference(i, nabor));
-	# 4) разделяем полученный список множеств на два списка связных наборов
-	pos:=ConnectedSubset(interes);
-	ind:=StructuralCopy(pol.faces[adr[1]][adr[2]]);
-	pos:=ind{pos}; # выделели (k-1)-клетки которые будут образовывать одну k-клетку
-	# 5) добавляем дробящую (k-1)-клетку
-	Add(pol.faces[adr[1]-1],Set(nabor));
-	l:=Length(pol.faces[adr[1]-1]); # количество (k-1)-клеток
-	# 6) заменяем раздрабливаемую клетку на половинку
-	Add(pos, l); 
-	pol.faces[adr[1]][adr[2]]:=pos;
-	# 7) создаем вторую часть дробленной клетки
-	ind:=Difference(ind,pos);
-	Add(ind, l);
-	# 8) добавляем вторую полвинку дробленной клетки
-	Add(pol.faces[adr[1]], ind);
-	# 9) учтем в (k+1)-клетках что мы подразбили клетку
-	l:=Length(pol.faces[adr[1]]);
-	if adr[1]<Length(pol.faces) then
-	   s:=1;
-	   for i in pol.faces[adr[1]+1] do
-	      if adr[2] in i then
-	         Add(pol.faces[adr[1]+1][s],l);
-	      fi;
-	      s:=s+1;
-	   od;
-	fi;
-
-else
-#--------------------------------------------------------------------------------
-#                         если дробится ребро
-
-   v:=StructuralCopy(pol.faces[1][adr[2]][2]);
-   l:=Length(pol.vertices);
-   Add(pol.vertices,nabor); # добавили имя новой вершины
-   l:=l+1;
-   # дробим ребро
-   pol.faces[1][adr[2]][2]:=StructuralCopy(l);
-   Add(pol.faces[1],[v,l]);
-   # отражаем дробление ребра на 2-клетках
-   if Length(pol.faces)>1 then
-		l:=Length(pol.faces[1]);
-		s:=1;
-		for i in pol.faces[2] do
-			if adr[2] in i then
-				Add(pol.faces[2][s], l);
-			fi;
-			s:=s+1;
-		od;
-	fi;
-fi;
+       v:=StructuralCopy(pol.faces[1][adr[2]][2]);
+       l:=Length(pol.vertices);
+       Add(pol.vertices,nabor); # добавили имя новой вершины
+       l:=l+1;
+       # дробим ребро
+       pol.faces[1][adr[2]][2]:=StructuralCopy(l);
+       Add(pol.faces[1],[v,l]);
+       # отражаем дробление ребра на 2-клетках
+       if Length(pol.faces)>1 then
+            l:=Length(pol.faces[1]);
+            s:=1;
+            for i in pol.faces[2] do
+                if adr[2] in i then
+                    Add(pol.faces[2][s], l);
+                fi;
+                s:=s+1;
+            od;
+        fi;
+    fi;
 
 return pol;
 end);
@@ -237,8 +233,6 @@ end);
  InstallGlobalFunction(IsPolytope, function(pol)
      local	name_space,verify,kolichestvo,dim,n,ostov,
      		odnorodnost,invEuler,sostav,length,i;
-
-
 
 # 1)---------------------------------------------------------------------------
 # произовдится проверка наличия соответствующих обязательных полей
@@ -400,7 +394,6 @@ pos:=adr[2];
 if dim = n then 
 	Remove(pol.faces[n],pos);
 else
-
 	# (dim+1)-клетки звезды объединяем в кластеры по n-клеткам звезды
 	star:=StarFace(pol,adr);
 	clasters:=List(star.(n), i -> FaceComp(pol,[n,i]).(dim+1));
@@ -451,7 +444,8 @@ return pol;
 end);
 
 # ПРОВЕРКА:
-# на кластере из двух тетраэдров трехмерного движения Пахрена. Было произведено разделение кластера на два не пересекающихся тетраэдра.
+# на кластере из двух тетраэдров трехмерного движения Пахрена. Было произведено
+# разделение кластера на два не пересекающихся тетраэдра.
 
 ###############################################################################
 
@@ -825,48 +819,74 @@ end);
 ################################################################################
 
 
-# <ManSection><Func Name="GlueFaces" Arg="pol, face1, face2" />
+# <ManSection><Func Name="GlueFaces" Arg="pol, faces, dim" />
 # 	<Description>
-# 		Склеить две клетки в многообразие у которых общая граница.
-# 		Замечание: функция не проверяет действительно ли у клеток
-# 		одинаковая граница. Так же проверку, что после склейки
-# 		получаются корректные данные возлагаем на пользователя.
-# 		Например, функнция будет работать в следующем случае некорректно:
-#		<Example>
-# gap>d2:=ballAB(2);;
-# gap>GlueFaces(d2,[1,2],1);
-# rec(faces:=[ [ [1,2] ], [ [1] ] ],
-# 	vertices:= ["A","B"]
-#		</Example>
-#		Как мы видим из примера полученные данные уже не являются
-#		<M>pl-<M>разбиением.
+# 		Склеить две клетки в многообразие у которых общая граница. Если склейку
+# 		указанных дисков провести невозможно функция вернет fail. Переменная
+# 		<C>faces</C> список из двух индексов клеток которые необходимо склеить,
+# 		<C>dim</C> размерность этих клеток.
+#       <!--
+#       Мы говорим, что невозможно склеивать только в том случае, если нарушется
+#       свойство комбинаторности политопа (когда существуют клетки косающиеся
+#       сами себя). Если бы существовали клетки в которых бы нарушилась
+#       комбинаторность (клетка стала косаться сама себя), то эти клетки имели
+#       бы размерность `d+1` (мы склеиваем `d`-клетки). Из этого следует, что
+#       существует такая `(d+k)`-клетка которая содержит обе склеиваемые клетки,
+#       следовательно либо эта клетка содержит только эти две клетки в своей
+#       границе, либо в ней нарушается комбинаторность, так как возникает
+#       условие склеивания по границе.
+#
+#       Ну и конечно проверить, что скливаемые клетки имеют одинаковые границы
+#       очень легко.
+#       -->
 #	</Description>
 # </ManSection>
 
 InstallGlobalFunction(GlueFaces, function(pol1, pos, dim)
 	local	ab, N, ind, pol;
 
+    N := Length(pol1.faces);
+    pol := fail;
+    # TODO: Тут на каждом этапе можно положить сообщение об ошибке, с рассказом
+    # о том, почему такую склейку нельзя проделать.
+    if pos[1] = pos[2] then
+        # Получается, что мы пытаемся приклеить клетку к самой себе.
+    elif dim > 0 and not Set(pol1.faces[dim][pos[1]]) = Set(pol1.faces[dim][pos[2]]) then
+        # Проверили, что у клеток одна и таже граница.
+    elif dim < N and Set(pos) in List(pol1.faces[dim+1], x -> Set(x)) then
+        # Проверили, что несуществует клетки с границей из склеиваемых клеток.
+    else
+        pol := StructuralCopy(pol1);
+        ab := Set(pos);
+        if dim < N then
+            Add(pol.faces[dim + 1], ab);
+        else
+            Add(pol.faces, [ab]);
+        fi;
+        ind := Length(pol.faces[dim + 1]);
+        pol := ContractMiniFace(pol, [dim + 1, ind]);
+        pol.faces := pol.faces{[1 .. N]};
+    fi;
 
-	pol:=StructuralCopy(pol1);
-if pos[1]=pos[2] then
-else
-	# идяе такая: добавляем "минимальную" клетку граница которой состоит из
-	# face1 и face2, которые мы хотим склеить. Так как у этих клеток
-	# одинаковая граница, то эта операция корректна и мы получаем клетку
-	# размерности dim+1. После этого мы стягиваем минимальную клетку на
-	# своию границу, такая функция нами уже была организована.
-	ab:=Set([pos[1],pos[2]]);
-	N := Length(pol.faces);
-	if dim < N then
-		Add(pol.faces[dim+1], ab);
-	else
-		Add(pol.faces, [ ab ]);
-	fi;
-	ind:=Length(pol.faces[dim+1]);
-	pol:=ContractMiniFace(pol,[dim+1,ind]);
-	pol.faces:=pol.faces{[1..N]};
-fi;
-
+	# pol:=StructuralCopy(pol1);
+    # if pos[1]=pos[2] then
+    # else
+    #     # идяе такая: добавляем "минимальную" клетку граница которой состоит из
+    #     # face1 и face2, которые мы хотим склеить. Так как у этих клеток
+    #     # одинаковая граница, то эта операция корректна и мы получаем клетку
+    #     # размерности dim+1. После этого мы стягиваем минимальную клетку на
+    #     # своию границу, такая функция нами уже была организована.
+    #     ab:=Set([pos[1],pos[2]]);
+    #     N := Length(pol.faces);
+    #     if dim < N then
+    #         Add(pol.faces[dim+1], ab);
+    #     else
+    #         Add(pol.faces, [ ab ]);
+    #     fi;
+    #     ind:=Length(pol.faces[dim+1]);
+    #     pol:=ContractMiniFace(pol,[dim+1,ind]);
+    #     pol.faces:=pol.faces{[1..N]};
+    # fi;
 
 return pol;
 end);
@@ -1013,7 +1033,7 @@ end);
 # 	одинаковыми именами склеиваются в одну), далее все это индуцируется на
 # 	клетки большей размерности. Для работы данного алгоритма необходимо, что бы
 # 	у подполитопов были одинаковые pl-разбиения, а также, что бы в этом
-# 	pl-разбиении содержалась хоть одна n-клетка натянутая на хотябы на (n+1)
+# 	pl-разбиении содержалась хоть одна n-клетка натянутая хотябы на (n+1)
 # 	вершин.
 #		<Example>
 #		</Example>
@@ -1031,14 +1051,19 @@ InstallGlobalFunction(VerticesRullGluePol, function(pol1,subpol1,subpol2,dim)
 	sp2:=Difference(subpol2,subpol1);
 
 	#--- нахождение комбинаторной клетки ---------------------------------------
+    # Под комбинаторной клеткой мы подразумеваем такую клетку, которая может
+    # быть однозначно идентифицирована в многообразии теми вершинами на которые
+    # она натянута.
 	s:=1;
 	verify:=false;
-	normal:=List(sp1,x->FaceComp(pol,[dim,x]).0);
-	normal:=List(normal,x->Length(Positions(normal,x)));
-	normal:=Positions(normal,1);
+    # Удаляем все клетки, которые имеют дубликаты.
+	normal:=List(sp1, x -> FaceComp(pol, [dim,x]).0);
+	normal:=List(normal, x -> Length(Positions(normal, x)));
+	normal:=Positions(normal, 1);
 	normal:=sp1{normal};
 	l:=Length(normal);
-	while s<=l and verify=false do
+	while s<=l and (not verify) do
+        # Проверяем, что все подклетки также являются комбинаторными.
 		sostav:=FaceComp(pol,[dim,normal[s]]);
 		verify:=List([1..dim-1],x->pol.faces[x]{sostav.(x)});
 		verify:=List([1..dim-1],x->Length(Set(verify[x]))=Length(verify[x]));
@@ -1047,9 +1072,11 @@ InstallGlobalFunction(VerticesRullGluePol, function(pol1,subpol1,subpol2,dim)
 		s:=s+1;
 	od;
 	s:=s-1;
-	if verify=false then
+	if not verify then
 		Print("Sorry, all faces is not combinatorial.\n");
-		break;
+		# break;
+        #s := s.stop;    # TODO необходимо посмотреть как в GAP делается
+                        # безболезненная остановка функций.
 	fi;
 	# На клетках sp1 необходимо содать упорядочение таким образом, что бы каждая
 	# следующая клетка в подмногообразии имела общую грань хотябы с одной
@@ -1058,13 +1085,16 @@ InstallGlobalFunction(VerticesRullGluePol, function(pol1,subpol1,subpol2,dim)
 	Add(sp1,s,1);
 
 	#--- запуск основного цикала -----------------------------------------------
+    # Производим поиск пар клеток подполитопов которые должны быть склеены.
 	pairs:=[];
 	namespace:=List(sp2, x -> FaceComp(pol,[dim,x]).0);
 	namespace:=List(namespace, x -> pol.vertices{x});
+    namespace := List(namespace, x -> Set(x));      # добавлено 17 июля 2017
 	for i in sp1 do
 		kl:=[dim,i];
 		name:=FaceComp(pol,kl).0;
 		name:=pol.vertices{name};
+        name := Set(name);                          # добавлено 17 июля 2017
 		pos:=Position(namespace,name);
 		i2:=Remove(sp2,pos);
 		Add(pairs,Set([i,i2]));
@@ -1160,8 +1190,6 @@ end);
 
 # зависимости:
 # Read("~/ProgGAP/***.g");
-
-
 
 InstallGlobalFunction(EulerNumber, function(data)
 	local	namespace, ln, l, i, en;
@@ -1284,8 +1312,6 @@ InstallGlobalFunction(UnionFaces, function(pol0, adr1, adr2)
 			generalsost:=rec();
 		fi;
 	fi;
-
-
 
 	# объединение двух клеток можно проводить если списки ind и generalsost
 	# совпадают, это обусловлено тем, что если это так, то выбранные клетки
@@ -1759,3 +1785,94 @@ InstallGlobalFunction(ConnectedSum, function(pol10, pol20)
 
 return pol;
 end);
+
+################################################################################
+# version PL-2.8
+################################################################################
+
+#            <ManSection><Func Name="PolCanonicalOrder" Arg="pol" />
+#                <Description>
+#                    Функция создает каноническое упорядочение клеток внутри
+#                    политопа. Каноническим упорядочением мы называем порядок
+#                    внесенный вершинами клеток, то есть клетка d1 меньше клетки d2,
+#                    если множество вершин d1 меньше множества вершин d2 в
+#                    лексикографическом смысле.
+#                </Description>
+#            </ManSection>
+
+InstallGlobalFunction(PolCanonicalOrder, function(pol0)
+    local pol, n, l, newind_CanonicalOrder, vertcell, neword, newind, s, d, i;
+
+    pol := StructuralCopy(pol0);
+    n := Length(pol.faces);     # размерность многообразия
+    l := LengthPol(pol);
+    newind_CanonicalOrder := [];
+
+    vertcell := List([1 .. l.0], x -> [x]);
+    for d in [1 .. n-1] do
+        neword := [1 .. l.(d)];
+        vertcell := List(pol.faces[d], x -> Set(Concatenation(vertcell{x})));
+        SortParallel(vertcell, neword);
+        newind := [];
+        s := 1;
+        for i in neword do
+            newind[i] := s;
+            s := s + 1;
+        od;
+        pol.faces[d] := pol.faces[d]{neword};
+        pol.faces[d+1] := List(pol.faces[d+1], x -> newind{x});
+        Add(newind_CanonicalOrder, newind);
+    od;
+
+    neword := [1 .. l.(n)];
+    vertcell := List(pol.faces[n], x -> vertcell{x});
+    SortParallel(vertcell, neword);
+    pol.faces[n] := pol.faces[n]{neword};
+    newind := [];
+    s := 1;
+    for i in neword do
+        newind[i] := s;
+        s := s + 1;
+    od;
+    Add(newind_CanonicalOrder, newind);
+    if Length(RecNames(pol)) > 2 then
+        pol.newind_CanonicalOrder := newind_CanonicalOrder;
+    fi;
+
+    pol.faces := List( pol.faces, flist -> List( flist , y -> Set(y) ) );
+
+    return pol;
+end);
+
+################################################################################
+
+#            <ManSection><Func Name="GlueIndenticalSubpolitops" Arg="pol, sub1, sub2, dim" />
+#                <Description>
+#                    Склеить два подполитопа которые имею идентичные разбиеня на
+#                    клетки.
+#                </Description>
+#            </ManSection>
+
+InstallGlobalFunction(GlueIndenticalSubpolitops, function(pol0, sub1, sub2, dim)
+    local pol, sost1, sost2, ind1, ind2, l, d, pair;
+
+    pol := StructuralCopy(pol0);
+    sost1 := List(sub1, x -> FaceComp(pol, [dim, x]));
+    sost2 := List(sub2, x -> FaceComp(pol, [dim, x]));
+    for d in [0 .. dim] do
+        ind1 := Union(List(sost1, x -> x.(d)));
+        ind2 := Union(List(sost2, x -> x.(d)));
+        l := Length(ind1);
+        while l > 0 do
+            # WARNING считаем что старший индекс затирается при склейке
+            pair := [ind1[l], ind2[l]];
+            pol := GlueFaces(pol, Set(pair), d);
+            l := l - 1;
+        od;
+    od;
+
+    return pol;
+end);
+
+################################################################################
+################################################################################

@@ -29,3 +29,9 @@ DeclareGlobalFunction( "ParallelSimplify" );
 DeclareGlobalFunction( "LengthPol" );
 DeclareGlobalFunction( "ConnectedSum" );
 DeclareGlobalFunction( "OrientBrockenDiagramm" );
+
+################################################################################
+
+DeclareGlobalFunction( "PolCanonicalOrder" );
+DeclareGlobalFunction( "GlueIndenticalSubpolitops" );
+

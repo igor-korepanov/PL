@@ -21,3 +21,5 @@ ReadPackage( "PL", "lib/operknot2.gd" );
 ReadPackage( "PL", "lib/ratfunc.gd" );
 ReadPackage( "PL", "lib/opermat.gd" );
 
+ReadPackage( "PL", "lib/discretAction.gd" );
+ReadPackage( "PL", "lib/abelian.gd" );

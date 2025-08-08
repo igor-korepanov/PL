@@ -12,3 +12,6 @@ ReadPackage( "PL", "lib/operlist.gi" );
 ReadPackage( "PL", "lib/operknot2.gi" );
 ReadPackage( "PL", "lib/ratfunc.gi" );
 ReadPackage( "PL", "lib/opermat.gi" );
+
+ReadPackage( "PL", "lib/discretAction.gi" );
+ReadPackage( "PL", "lib/abelian.gi" );

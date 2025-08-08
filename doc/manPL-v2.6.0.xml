@@ -557,53 +557,6 @@ rec( faces := [ [ [ 1, 2 ], [ 1, 2 ] ], [ [ 1, 2 ], [ 1, 2 ] ], [ [ 1, 2 ] ]
 				</ManSection>
 
 			</Section>
-			<Section><Heading>Непосредственное создание политопов</Heading>
-				Для создания <M>n-</M>мерного диска и сферы имеются стандартные
-				функции включенные в библиотеку
-				<ManSection><Func Name="ballAB" Arg="dim" />
-					<Description>
-						Создает минимально возможное шаровое разбиение диска
-						размерности <M>dim.</M>
-					</Description>
-				</ManSection>
-				<ManSection><Func Name="sphereAB" Arg="dim" />
-					<Description>
-						Создает минимально возможное pl-разбиение сферы
-						размерности <M>dim.</M>
-						<Example>
-gap> sphereAB(3);
-rec(
-  faces := [ [ [ 1, 2 ], [ 1, 2 ] ], [ [ 1, 2 ], [ 1, 2 ] ],
-      [ [ 1, 2 ], [ 1, 2 ] ] ], vertices := [ "A", "B" ] )
-						</Example>
-					</Description>
-				</ManSection>
-
-				В библиотеку так же включена функция создающая задание диска и
-				сферы в виде триангулированных шаровых комплексов
-				<ManSection><Func Name="ballTriangul"  Arg="dim" />
-					<Description>
-						Создает симплекс размерности <M>dim</M>
-						<Example>
-gap> ballTriangul(2);
-rec( faces := [ [ [ 1, 2 ], [ 1, 3 ], [ 2, 3 ] ], [ [ 1 .. 3 ] ] ],
-  vertices := [ 1 .. 3 ] )
-						</Example>
-					</Description>
-				</ManSection>
-				<ManSection><Func Name="sphereTriangul"  Arg="dim" />
-					<Description>
-						Триангулированная сфера создается как граница
-						<M>(dim+1)-</M>мерного симплекса
-						<Example>
-gap> sphereTriangul(1);
-rec( faces := [ [ [ 1, 2 ], [ 1, 3 ], [ 2, 3 ] ] ], vertices := [ 1 .. 3 ] )
-						</Example>
-					</Description>
-				</ManSection>
-				<!-- TODO добавить описание поверхности Куммера и линзовых
-				пространств -->
-			</Section>
 			<Section><Heading>Топологические операции</Heading>
 				<ManSection><Func Name="FreeUnionPol"  Arg="pol1,pol2" />
 					<Description>
@@ -810,6 +763,64 @@ false
 			<M>PL,</M> начиная с четвертой версии поддерживаться будет только
 			данный способ перестройки.
 		</Section>
+        <Section><Heading>Библиотека политопов</Heading>
+            Во время работы хорошо бы иметь реализацию стандартных многообразий
+            или их специальных клеточных разбиений.
+            
+            Для создания <M>n-</M>мерного диска и сферы имеются стандартные
+            функции включенные в библиотеку
+            <ManSection><Func Name="ballAB" Arg="dim" />
+                <Description>
+                    Создает минимально возможное шаровое разбиение диска
+                    размерности <M>dim.</M>
+                </Description>
+            </ManSection>
+            <ManSection><Func Name="sphereAB" Arg="dim" />
+                <Description>
+                    Создает минимально возможное pl-разбиение сферы
+                    размерности <M>dim.</M>
+                    <Example>
+gap> sphereAB(3);
+rec(
+faces := [ [ [ 1, 2 ], [ 1, 2 ] ], [ [ 1, 2 ], [ 1, 2 ] ],
+  [ [ 1, 2 ], [ 1, 2 ] ] ], vertices := [ "A", "B" ] )
+                    </Example>
+                </Description>
+            </ManSection>
+
+            В библиотеку так же включена функция создающая задание диска и
+            сферы в виде триангулированных шаровых комплексов
+            <ManSection><Func Name="ballTriangul"  Arg="dim" />
+                <Description>
+                    Создает симплекс размерности <M>dim</M>
+                    <Example>
+gap> ballTriangul(2);
+rec( faces := [ [ [ 1, 2 ], [ 1, 3 ], [ 2, 3 ] ], [ [ 1 .. 3 ] ] ],
+vertices := [ 1 .. 3 ] )
+                    </Example>
+                </Description>
+            </ManSection>
+            <ManSection><Func Name="sphereTriangul"  Arg="dim" />
+                <Description>
+                    Триангулированная сфера создается как граница
+                    <M>(dim+1)-</M>мерного симплекса
+                    <Example>
+gap> sphereTriangul(1);
+rec( faces := [ [ [ 1, 2 ], [ 1, 3 ], [ 2, 3 ] ] ], vertices := [ 1 .. 3 ] )
+                    </Example>
+                </Description>
+            </ManSection>
+            <ManSection><Func Name="KummerSurface" Arg="" />
+                <Description>
+                Создается поверхность Куммера.
+                </Description>
+            </ManSection>
+            <ManSection><Func Name="Lens" Arg="n, k" />
+                <Description>
+                Линзовое пространство.
+                </Description>
+            </ManSection>
+        </Section>
 	</Chapter>
 	<Chapter><Heading>Подполитопы, вложения</Heading>
 		Множество <M>subpol</M> клеток размерности <M>k</M> будем называть

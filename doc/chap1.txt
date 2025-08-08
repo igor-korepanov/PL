@@ -1,14 +1,13 @@
   
-  [1X1 [33X[0;0YШаровые комплексы.[133X[101X
+  [1X1 [33X[0;0YBall complexes[133X[101X
   
-  [33X[0;0YPiecewise-linear, or simply PL, ball complexes are, at least at this moment,
-  the  central  objects with which our package [22XPL[122X deals. First, a ball complex
-  is,  simply speaking, a kind of cell complex but such where all [13Xclosed[113X cells
-  (  =  balls)  are  [13Xembedded[113X.  In  particular,  their  boundaries are genuine
-  spheres,  not  crumpled/folded.  The  formal  definition  of [22XPL[122X ball complex
-  reads:  A  PL  ball complex is a pair [22X(X, U)[122X, where [22XX[122X is a compact Euclidean
-  polyhedron  and  [22XU[122X  is  a  covering  of  [22XX[122X  by closed PL-balls such that the
-  following axioms are satisfied:[133X
+  [33X[0;0YPackage  [5XPL[105X  deals  with  piecewise-linear  manifolds.  They  are  described
+  combinatorially  as [13Xball complexes[113X. A ball complex is, simply speaking, such
+  kind  of  a  cell complex where all [13Xclosed[113X cells ( = balls) are [13Xembedded[113X. In
+  particular,  their  boundaries are genuine spheres, not crumpled/folded. The
+  formal  definition of [5XPL[105X ball complex reads: A PL ball complex is a pair [22X(X,
+  U)[122X,  where  [22XX[122X  is a compact Euclidean polyhedron and [22XU[122X is a covering of [22XX[122X by
+  closed PL-balls such that the following axioms are satisfied:[133X
   
   [30X    [33X[0;6Ythe relative interiors of balls from [22XU[122X form a partition of [22XX[122X,[133X
   
@@ -20,7 +19,7 @@
   
   [1X1.1 [33X[0;0YRepresentation of a PL ball complex[133X[101X
   
-  [33X[0;0YA   [22XPL[122X-ball   complex   is  defined  up  to  [22XPL[122X-homeomorphism  only  by  the
+  [33X[0;0YA  PL  ball  complex  is  determined  up  to  a PL homeomorphism only by the
   combinatorics  of  adjunctions  of its balls. Due to this, we represent them
   combinatorially  in the following way. First, we assume that all vertices in
   the  complex  are  numbered from 1 to their total number [22XN_0[122X. Hence, in this
@@ -30,10 +29,10 @@
   each  of  which,  in  its  turn,  is  the  set  of numbers of [22Xk[122X-cells in its
   boundary.  Then we compose the list of length [22Xn[122X, where [22Xn[122X is the dimension of
   the   complex,  whose  elements  are  lists  of  1-,...,  [22Xn[122X-cells.  Thus,  a
-  three-dimensional  ball  [22XB^3[122X  can  be  represented  by the following [22XPL[122X ball
+  three-dimensional  ball  [22XB^3[122X  may  be  represented  by the following PL ball
   complex with two vertices 1 and 2:[133X
   
-  [4X[32X  Пример  [32X[104X
+  [4X[32X  Example  [32X[104X
     [4X[28X[[128X[104X
     [4X[28X  [ [1,2], [1,2] ], # two one-dimensional simplexes, each with[128X[104X
     [4X[28X                    # ends 1 and 2, of which the first is referred to[128X[104X
@@ -45,13 +44,12 @@
     [4X[28X			[128X[104X
   [4X[32X[104X
   
-  [33X[0;0YТУТ БЫ НАДО ВСТАВИТЬ КАРТИНКУ Actually, we add a list of vertices with their
-  names  or  something  like  that  in the beginning of the above ball complex
+  [33X[0;0YActually,  we  add  a  list  of  vertices  with  their names, or numbers, or
+  something   like   that   in   the  beginning  of  the  above  ball  complex
   representation. For instance, our function [10XballAB[110X[22X(n)[122X calls them [10X"A"[110X and [10X"B"[110X.
-  So,  our  [5XGAP[105X  representation  of  the  ball  in  Figure~\ref{fig:B3} is the
-  following record:[133X
+  So, our [5XGAP[105X representation of the mentioned ball in is the following record:[133X
   
-  [4X[32X  Пример  [32X[104X
+  [4X[32X  Example  [32X[104X
     [4X[25Xgap>[125X [27XballAB(3);  [127X[104X
     [4X[28Xrec( vertices := [ "A", "B" ], [128X[104X
     [4X[28X  faces := [ [ [ 1, 2 ], [ 1, 2 ] ], [ [ 1, 2 ], [ 1, 2 ] ], [ [ 1, 2 ] ] ] [128X[104X
@@ -59,43 +57,56 @@
     [4X[28X			[128X[104X
   [4X[32X[104X
   
+  [33X[0;0YAlso,  other useful information may be added in this record, describing, for
+  instance, the [13Xsymmetries[113X of the polytope.[133X
+  
   [1X1.1-1 IsPolytope[101X
   
-  [29X[2XIsPolytope[102X( [3Xpol[103X ) [32X функция
+  [29X[2XIsPolytope[102X( [3Xpol[103X ) [32X function
   
-  [33X[0;0YФункция  проверяет  формальные  признаки  структуры  [22Xpol[122X  в  соответствии  с
-  правилами  задания  политопов.  Если данные построены корректным образом, то
-  функция выдаст [22Xtrue[122X и [22Xfalse[122X в противном случае.[133X
+  [33X[0;0YThis  function checks that [22Xpol[122X satisfies the formal rules describing how our
+  polytopes  must  be  built.  It returns [10Xtrue[110X if no error has been found, and
+  [10Xfalse[110X otherwise.[133X
   
-  [4X[32X  Пример  [32X[104X
+  [33X[0;0YThe formal rules are as follows:[133X
+  
+  [30X    [33X[0;6Ythe presence of fields [10X.vertices[110X and [10X.faces[110X,[133X
+  
+  [30X    [33X[0;6Ythe  absence  of  dead links: each cell is a list of actually existing
+        cells making its boundary,[133X
+  
+  [30X    [33X[0;6Yalso, the Euler characteristic of each cell is checked.[133X
+  
+  [33X[0;0YIn the following example, [10XT2[110X is a two-dimensional torus.[133X
+  
+  [4X[32X  Example  [32X[104X
     [4X[25Xgap>[125X [27XIsPolytope(T2);[127X[104X
     [4X[28Xtrue[128X[104X
     [4X[28X				[128X[104X
   [4X[32X[104X
   
-  [33X[0;0YТак  как  нет единого алгоритма распознавания [22Xn-[122Xмерной сферы, проверка того,
-  что  каждая  клетка  является шаром опушена. Это может породить ошибку когда
-  данные  удовлетворяют  всем  формальным  признакам,  но  политоп не является
-  шаровым. В данном случае программа, все равно выдаст [22Xtrue[122X вместо положенного
-  [22Xfalse.[122X[133X
+  [33X[0;0YAs  there  is  no  algorithm  for  recognizing an [22Xn[122X-sphere (at least, for an
+  arbitrary  [22Xn[122X),  the verification of whether each cell is indeed a sphere has
+  been  dropped.  This  of  course may lead to a mistake in the case where the
+  data  satisfies the formal rules except that some cells are not spheres: the
+  function will still return [10Xtrue[110X in this case.[133X
   
   
-  [1X1.2 [33X[0;0YУказывающие функции[133X[101X
+  [1X1.2 [33X[0;0YClassical invariants[133X[101X
   
-  [33X[0;0YВ   данном  разделе  представлены  функции  которые  могут  либо  распознать
-  многообразие по политопу, либо вычислить инвариант этого многообразия.[133X
+  [33X[0;0YHere  are  functions computing some classical manifold invariants, including
+  the fundamental group.[133X
   
   [1X1.2-1 EulerNumber[101X
   
-  [29X[2XEulerNumber[102X( [3Xpol[103X ) [32X функция
+  [29X[2XEulerNumber[102X( [3Xpol[103X ) [32X function
   
-  [33X[0;0Yфункция  вычисляет  число  Эйлера  для  шарового  комплекса.  Данная функция
-  полиморфна   и   способна  принимать  для  вычислений  данные  типа  политоп
-  (IsPolytope),  именнованные  списки  по  размерностям  в  котором содержится
-  структура  политопа и именованный список по размерностям элементами которого
-  могут выступать количества клеток определенной размерности.[133X
+  [33X[0;0YComputes  the  Euler number for a ball complex. This function is polymorphic
+  and  can  accept as its input data in the polytope format ([10XIsPolytope[110X), or a
+  named  list whose elements are the numbers of cells of all dimensions, as is
+  returned by the function [10XLengthPol[110X.[133X
   
-  [4X[32X  Пример  [32X[104X
+  [4X[32X  Example  [32X[104X
     [4X[25Xgap>[125X [27XEulerNumber(T2);[127X[104X
     [4X[28X0[128X[104X
     [4X[25Xgap>[125X [27XEulerNumber(sphereAB(4));[127X[104X
@@ -107,20 +118,22 @@
   
   [1X1.2-2 FundGroup[101X
   
-  [29X[2XFundGroup[102X( [3Xpol[103X ) [32X функция
+  [29X[2XFundGroup[102X( [3Xpol[103X ) [32X function
   
-  [33X[0;0YComputes the fundamental group of the given polytope.[133X
+  [33X[0;0YComputes  a  corepresentation  of the fundamental group of a given polytope.
+  Uses [5XGAP[105X's algorithm to simplify it.[133X
   
   
-  [1X1.3 [33X[0;0YОбщая информация о шаровом комплексе[133X[101X
+  [1X1.3 [33X[0;0YGeneral information about a ball complex[133X[101X
   
   [1X1.3-1 LengthPol[101X
   
-  [29X[2XLengthPol[102X( [3Xpol[103X ) [32X функция
+  [29X[2XLengthPol[102X( [3Xpol[103X ) [32X function
   
-  [33X[0;0YВ [22Xresul.d[122X указывается мощьность [22Xd[122X-мерного остова в политопе [22Xpol.[122X[133X
+  [33X[0;0YReturns  the  following  record:  [10XLengthPol.[110X[22Xd[122X  is  the  cardinality  of  the
+  [22Xd[122X-skeleton in polytope [22Xpol[122X.[133X
   
-  [4X[32X  Пример  [32X[104X
+  [4X[32X  Example  [32X[104X
     [4X[25Xgap>[125X [27XLengthPol(T2);[127X[104X
     [4X[28Xtotal16[128X[104X
     [4X[28Xrec( 0 := 4, 1 := 8, 2 := 4 )[128X[104X
@@ -129,12 +142,12 @@
   
   [1X1.3-2 PolBoundary[101X
   
-  [29X[2XPolBoundary[102X( [3Xpol[103X ) [32X функция
+  [29X[2XPolBoundary[102X( [3Xpol[103X ) [32X function
   
-  [33X[0;0Yвычисляет  границу политопа. На выход подает список в котором указаны только
-  клетки размерности [22X(n-1)[122X составляющие границу.[133X
+  [33X[0;0YComputes  the  boundary  of  polytope  [22Xpol[122X.  Returns  the  list  of boundary
+  [22X(n-1)[122X-cells ([22Xn[122X is the dimension of [22Xpol[122X.[133X
   
-  [4X[32X  Пример  [32X[104X
+  [4X[32X  Example  [32X[104X
     [4X[25Xgap>[125X [27XPolBoundary(T2);[127X[104X
     [4X[28X[ ][128X[104X
     [4X[25Xgap>[125X [27Xs1:=sphereAB(1);;[127X[104X
@@ -145,85 +158,88 @@
     [4X[28X						[128X[104X
   [4X[32X[104X
   
-  [33X[0;0YВ  данном  примере  [22XT2[122X является тором, [22Xs1[122X - одномерная сфера, [22Xd2[122X - двумерный
-  диск  и  [22Xft2[122X  -  полноторие  созданное  как декартово произведение 2-диска и
-  1-сферы.[133X
+  [33X[0;0YHere  [10XT2[110X  is  a  2-torus,  [10Xs1[110X - a 1-sphere, [10Xd2[110X - a 2-ball, and [10Xft2[110X - a solid
+  torus obtained as the Cartesian product of [10Xd2[110X and [10Xs1[110X.[133X
   
   [1X1.3-3 PolInnerFaces[101X
   
-  [29X[2XPolInnerFaces[102X( [3Xpol[103X ) [32X функция
+  [29X[2XPolInnerFaces[102X( [3Xpol[103X ) [32X function
   
-  [33X[0;0YBuild  index  of  inner faces of given polytope complex [22Xreturned[i][122X - set of
-  inner  faces  of  dimensions  (i-1).  Any  face is outer if it has at most 1
-  adjacent  face  of  higher dimension of if it lies in the boundary of such a
-  face. And inner faces are not outer faces.[133X
+  [33X[0;0YBuilds  the list whose [22Xi[122X-th entry is the list of inner faces of polytope [22Xpol[122X
+  of dimension [22X(i-1)[122X. Here [22Xi[122X ranges from 1 to the polytope dimension. Any face
+  is outer if it has at most one adjacent face of a higher dimension, or if it
+  lies in the boundary of an outer face. Inner faces are, of course, the faces
+  that are not outer.[133X
   
-  [4X[32X  Пример  [32X[104X
+  [4X[32X  Example  [32X[104X
     [4X[25Xgap>[125X [27XPolInnerFaces(T2);[127X[104X
     [4X[28X[ [ 1 .. 4 ], [ 1 .. 8 ] ][128X[104X
     [4X[25Xgap>[125X [27XPolInnerFaces(ft2);[127X[104X
     [4X[28X[ [  ], [  ], [ 5, 6 ] ][128X[104X
+    [4X[25Xgap>[125X [27XPolInnerFaces(ballAB(5));[127X[104X
+    [4X[28X[ [  ], [  ], [  ], [  ], [  ] ][128X[104X
     [4X[28X						[128X[104X
   [4X[32X[104X
   
   [1X1.3-4 MaxTree[101X
   
-  [29X[2XMaxTree[102X( [3Xpol[103X ) [32X функция
+  [29X[2XMaxTree[102X( [3Xpol[103X ) [32X function
   
   [33X[0;0Yfinds a maximal tree in the 1-skeleton of a polytope as a list of edges.[133X
   
-  [33X[0;0YПусть  клетки  [22Xa[122X  и  [22Xb[122X  имеют  размерности [22Xn[122X и [22Xn-1[122X соответственно и клетка [22Xb[122X
-  содержится  в  клетке  [22Xa,[122X  то  есть [22Xb ⊂ a.[122X Назовем ориентацию клетки которую
-  клетка  [22Xb[122X  наследует с клетки [22Xa[122X индуцированной (обозначение [22Xϵ(b|a)[122X) если она
-  удовлетворяет  условию  [22Xϵ(b_1|a)ϵ(c|b_1)  =  -ϵ(b_2|a)ϵ(c|b_2),[122X где клетка [22Xc[122X
-  имеет  размерность  [22Xn-2[122X  и  [22Xc = b_1 ∩ b_2.[122X Считаем, что на ребре в вершине с
-  меньшим  индексом индуцироуется отрицательная ориентация, на ребре с большим
-  индексом -- положительная.[133X
+  [33X[0;0YLet  cells [22Xa[122X and [22Xb[122X have dimensions [22Xn[122X and [22Xn-1[122X, respectively, and let [22Xb[122X lie in
+  the  boundary of [22Xa[122X. We introduce incidence numbers, or [13Xrelative orientations[113X
+  [22Xϵ(b|a)=± 1[122X, satisfying [22Xϵ(b_1|a)ϵ(c|b_1) = -ϵ(b_2|a)ϵ(c|b_2),[122X where cell [22Xc[122X is
+  of  dimension [22Xn-2[122X and [22Xb_1, b_2 ⊂ a[122X, [22Xc ⊂ b_1 ∩ b_2[122X. If [22Xa[122X is an edge, then the
+  relative orientation is negative for its vertex with the smaller number, and
+  positive for its vertex with the bigger number.[133X
   
   [1X1.3-5 CellOrient[101X
   
-  [29X[2XCellOrient[102X( [3Xpol[103X ) [32X функция
+  [29X[2XCellOrient[102X( [3Xpol[103X ) [32X function
   
-  [33X[0;0YВычисляются  индуцированные ориентации для клеток. Provides inductively some
-  orientations for cells of dimensions [22X1..n=dim(pol)[122X[133X
+  [33X[0;0YComputes   inductively   relative   orientations  for  cells  of  dimensions
+  [22X1..n=dim(pol)[122X of polytope [22Xpol[122X.[133X
   
-  [4X[32X  Пример  [32X[104X
-    [4X[25Xgap>[125X [27Xdd;[127X[104X
-    [4X[28Xrec([128X[104X
-    [4X[28X  faces := [ [ [ 1, 3 ], [ 2, 3 ], [ 2, 4 ], [ 1, 4 ] ], [ [ 1, 2, 3, 4 ] ] ],[128X[104X
-    [4X[28X  vertices := [ 1 .. 4 ] )[128X[104X
-    [4X[25Xgap>[125X [27XCellOrient(dd);[127X[104X
-    [4X[28X[ [ [ -1, 1 ], [ -1, 1 ], [ -1, 1 ], [ -1, 1 ] ], [ [ -1, 1, -1, 1 ] ] ][128X[104X
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27Xb1 := ballAB(1);[127X[104X
+    [4X[28Xrec( faces := [ [ [ 1, 2 ] ] ], vertices := [ "A", "B" ] )[128X[104X
+    [4X[25Xgap>[125X [27Xsquare := PolProduct(b1,b1);[127X[104X
+    [4X[28Xrec( [128X[104X
+    [4X[28X  faces := [ [ [ 1, 2 ], [ 3, 4 ], [ 1, 3 ], [ 2, 4 ] ], [ [ 1, 2, 3, 4 ] ] ],[128X[104X
+    [4X[28X  vertices := [ [ "A", "A" ], [ "A", "B" ], [ "B", "A" ], [ "B", "B" ] ] )[128X[104X
+    [4X[25Xgap>[125X [27XCellOrient(square);[127X[104X
+    [4X[28X[ [ [ -1, 1 ], [ -1, 1 ], [ -1, 1 ], [ -1, 1 ] ], [ [ -1, 1, 1, -1 ] ] ][128X[104X
     [4X[28X						[128X[104X
   [4X[32X[104X
   
   [1X1.3-6 PolOrient[101X
   
-  [29X[2XPolOrient[102X( [3Xpol[103X ) [32X функция
+  [29X[2XPolOrient[102X( [3Xpol[103X ) [32X function
   
-  [33X[0;0YIf   [22Xpol[122X   is   orientable,   gives  a  consistent  orientation  of  [22Xn-[122Xfaces
-  ([22Xn=dim(pol)[122X),  otherwise returns [22Xfail.[122X Причем, ориентации клеток находятся в
-  следующем отношении [22Xϵ(b|a_1)ϵ(a_1) = -ϵ(b|a_2)ϵ(a_2)[122X[133X
+  [33X[0;0YIf   [22Xpol[122X   is   orientable,   gives  a  consistent  orientation  of  [22Xn[122X-faces
+  ([22Xn=dim(pol)[122X), otherwise returns [22Xfail[122X.[133X
   
   [1X1.3-7 OrientTriangulated[101X
   
-  [29X[2XOrientTriangulated[102X( [3Xpol[103X ) [32X функция
+  [29X[2XOrientTriangulated[102X( [3Xpol[103X ) [32X function
   
-  [33X[0;0YFunction  computes consistent orientation on simpleces of greatest dimension
-  on  a  given  triangulated  complex  [22Xpol.[122X  Returns  array  of  -1, 1-s which
-  correspond to the orientation of simplices of greatest dimension of [22Xpol.[122X[133X
+  [33X[0;0YFunction computes a consistent orientation for the simplices of the greatest
+  dimension  of  a  given  [13Xtriangulated[113X  complex [22Xpol[122X. Returns array of [22X-1, 1[122X-s
+  corresponding to the orientation of simplices of greatest dimension of [22Xpol[122X.[133X
   
   [1X1.3-8 dataPachner[101X
   
-  [29X[2XdataPachner[102X( [3Xdim[103X, [3Xk[103X ) [32X функция
+  [29X[2XdataPachner[102X( [3Xdim[103X, [3Xk[103X ) [32X function
   
-  [33X[0;0YВыводит  информацию  о  указанном  движении Пахнера размерности [22Xdim[122X, один из
-  кластеров  которого  содержит  [22Xk[122X  - симплексов, все информация принадлежащая
-  данному   кластеру  условно  обозначена  буквой  [22Xl[122X  (left).  Второй  кластер
-  симплексов  получающийся  при  преобразованиях  Пахнера  обозначен  буквой [22Xr[122X
-  (right).[133X
+  [33X[0;0YReturns  the description of the Pachner move in dimension [22Xdim[122X, whose initial
+  configuration,  or  [13Xleft-hand side[113X (l.h.s.), consists of [22Xk[122X simplices (hence,
+  the  final  configuration,  or [13Xright-hand side[113X (r.h.s.), consists of [22Xdim-k+2[122X
+  simplices).  The  description  is returned in the form of a record, where [10X.l[110X
+  describes  the  polytope  (cluster  of  simplices)  in  the l.h.s., while [10X.r[110X
+  describes the polytope in the r.h.s.[133X
   
-  [4X[32X  Пример  [32X[104X
+  [4X[32X  Example  [32X[104X
     [4X[25Xgap>[125X [27XPrint(dataPachner(3,2));[127X[104X
     [4X[28Xrec([128X[104X
     [4X[28X  l := rec([128X[104X
@@ -254,31 +270,32 @@
     [4X[28X  						[128X[104X
   [4X[32X[104X
   
-  [33X[0;0YВ  каждой из этих двух записей [22X.l[122X или [22X.r[122X содержатся структуры [22X.pol[122X - задание
-  кластера  в  виде  шарового  комплекса, [22X.sim[122X - представление кластера в виде
-  симплексов,  то  есть  задание  симплексов через набор вершин на которые они
-  натянуты и [22X.vnut[122X список внутренних [22X(n-1)-[122Xмерных клеток шарового комплекса.[133X
+  [33X[0;0YBoth  [10X.l[110X  and  [10X.r[110X are, in their turn, also records. Each of them contains an
+  entry  [10X.pol[110X  representing  the  corresponding  polytope  in  the  form  of a
+  triangulated ball complex, an entry [10X.sim[110X representing the same polytope as a
+  list  of  [22Xdim[122X-simplices each given [13Xas the list of its vertices[113X, and an entry
+  [10X.vnut[110X - the list of the (numbers of the) [13Xinner[113X [22X(n-1)[122X-cells.[133X
   
-  [33X[0;0YСимплициальный  комплекс  может  быть  задан как набор симплексов, каждый из
-  которых  представлен  списком  вершин  на  которые  он  натянут. При задании
-  симплициальных  многообразий достаточно указать симплексы размерности [22Xn.[122X При
-  этом  существенным  условием  является  то,  что  все  симплексы должны быть
-  натянуты   на  различные  наборы  вершин.  Например  граница  четырехмерного
-  симплекса может быть представлена как[133X
+  [33X[0;0YSimplicial complex are often understood in a restricted sense, namely, it is
+  requried that no two simplices have the same sets of vertices. In this case,
+  a  simplicial  complex can be given in the form of a list of simplices, each
+  of  those  specified  by  the  list  of  its  vertices. For an [22Xn[122X-dimensional
+  manifold  with  boundary,  it  is  enough  to list just its [22Xn[122X-simplices. For
+  instance, the boundary of 4-simplex 12345 can be written as[133X
   
-  [4X[32X  Пример  [32X[104X
-    [4X[25Xgap>[125X [27Xsim:=[ [ 1, 2, 3, 4 ], [ 1, 2, 3, 5 ], [ 1, 2, 4, 5 ],[127X[104X
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27Xsim := [ [ 1, 2, 3, 4 ], [ 1, 2, 3, 5 ], [ 1, 2, 4, 5 ],[127X[104X
     [4X[28X				[ 1, 3, 4, 5 ], [ 2, 3, 4, 5 ] ];[128X[104X
     [4X[28X				[128X[104X
   [4X[32X[104X
   
   [1X1.3-9 FromSimplexToPolytope[101X
   
-  [29X[2XFromSimplexToPolytope[102X( [3Xsimplex[103X ) [32X функция
+  [29X[2XFromSimplexToPolytope[102X( [3Xsim[103X ) [32X function
   
-  [33X[0;0Yпреобразует список симплексов в шаровой комплекс.[133X
+  [33X[0;0Yturns a list [22Xsim[122X of simplices into a ball complex.[133X
   
-  [4X[32X  Пример  [32X[104X
+  [4X[32X  Example  [32X[104X
     [4X[25Xgap>[125X [27XFromSimplexToPolytope(sim);[127X[104X
     [4X[28Xrec([128X[104X
     [4X[28X  faces :=[128X[104X
@@ -292,24 +309,23 @@
   [4X[32X[104X
   
   
-  [1X1.4 [33X[0;0YРабота с клетками[133X[101X
+  [1X1.4 [33X[0;0YWorking with cells[133X[101X
   
-  [33X[0;0YВ данном разделе собраны все функции позволяющие узнать информацию связанную
-  с  какой-либо  клеткой в pl-разбиении многообразия. Клетка в pl-многообразии
-  указывается как пара чисел [dim,ind], первое из которых dim есть размерность
-  клетки,  второе  ind  - позиция клетки в списке pol.faces[dim]. Такую пару в
-  описании  программ мы будет называть адресом клетки или клеткой, обозначение
-  [22Xadr.[122X[133X
+  [33X[0;0YIn  this  Section,  we  describe the functions providing information about a
+  cell in a triangulation of a PL manifold. The cell is determined by the pair
+  of  numbers [22X[dim,ind][122X, where [22Xdim[122X is its dimension, and [22Xind[122X - its position in
+  the list [10Xpol.faces[[110X[22Xdim[122X[10X][110X. Such a pair will be called below the [13Xaddress[113X of the
+  cell, or simply "cell", and denoted [22Xadr=[dim,ind][122X.[133X
   
   [1X1.4-1 PolBnd[101X
   
-  [29X[2XPolBnd[102X( [3Xpol[103X, [3Xadr[103X ) [32X функция
+  [29X[2XPolBnd[102X( [3Xpol[103X, [3Xadr[103X ) [32X function
   
-  [33X[0;0YCreating  an  index  of boundary faces of face [22Xadr=[dim,ind][122X of complex [22Xpol[122X.
-  [22Xresult[i][122X  -  index  of  (i-1)-dimensional  faces  of  [22Xpol[122X  which are in the
-  boundary of [22Xadr[122X.[133X
+  [33X[0;0YCreating  an index of boundary faces of face [22Xadr=[dim,ind][122X of complex [22Xpol[122X in
+  the form of a list. Its [22Xi[122X'th entry is the list of [22X(i-1)[122X-dimensional faces of
+  [22Xpol[122X which are in the boundary of [22Xadr[122X.[133X
   
-  [4X[32X  Пример  [32X[104X
+  [4X[32X  Example  [32X[104X
     [4X[25Xgap>[125X [27XPolBnd(T2,[2,3]);[127X[104X
     [4X[28X[ [ 1, 2, 3, 4 ], [ 2, 4, 5, 7 ] ][128X[104X
     [4X[28X						[128X[104X
@@ -317,60 +333,54 @@
   
   [1X1.4-2 FaceComp[101X
   
-  [29X[2XFaceComp[102X( [3Xpol[103X, [3Xadr[103X ) [32X функция
+  [29X[2XFaceComp[102X( [3Xpol[103X, [3Xadr[103X ) [32X function
   
-  [33X[0;0Yфункция  аналогичная  функции  [22XPolBnd,[122X  выходные данные в функции собраны по
-  размерностям. Сама клетка тоже включена в вывод как составляющая часть самой
-  себя.[133X
+  [33X[0;0YA function similar to [10XPolBnd[110X, but the output is in the form of a record with
+  entries [22X.d[122X, where [22Xd[122X is the cell dimension. Also, the input cell is included.[133X
   
-  [4X[32X  Пример  [32X[104X
+  [4X[32X  Example  [32X[104X
     [4X[25Xgap>[125X [27XFaceComp(T2,[2,3]);[127X[104X
     [4X[28Xrec( 0 := [ 1, 2, 3, 4 ], 1 := [ 2, 4, 5, 7 ], 2 := [ 3 ] )[128X[104X
     [4X[28X						[128X[104X
   [4X[32X[104X
   
-  [33X[0;0YКак  видно  из  примера  каждая  именованное  поле  соответствует  некоторой
-  размерности.[133X
-  
   [1X1.4-3 StarFace[101X
   
-  [29X[2XStarFace[102X( [3Xpol[103X, [3Xadr[103X ) [32X функция
+  [29X[2XStarFace[102X( [3Xpol[103X, [3Xadr[103X ) [32X function
   
-  [33X[0;0YВычисляет  все  клетки  которые  содержат клетку [22Xadr[122X в политопе [22Xpol[122X. Другими
-  словами  функция  вычисляет  звезду  указанной  клетки.  result.(i) содержит
-  индексы [22Xi-[122Xклеток входящих в состав звезды.[133X
+  [33X[0;0YComputes  the  star  of  cell  [22Xadr[122X,  that is, all cells of higher dimensions
+  containing  [22Xadr[122X, in the ball complex [22Xpol[122X, in the form of a record. The entry
+  [22X.i[122X contains the numbers of [22Xi[122X-cells contained in the star.[133X
   
-  [4X[32X  Пример  [32X[104X
+  [4X[32X  Example  [32X[104X
     [4X[25Xgap>[125X [27XStarFace(T2,[0,3]);[127X[104X
     [4X[28Xrec( 1 := [ 2, 3, 6, 7 ], 2 := [ 1, 2, 3, 4 ] )[128X[104X
     [4X[28X						[128X[104X
   [4X[32X[104X
   
-  [33X[0;0YВ  данном примере 1-клетки с индексами 2, 3, 6 и 7 и 2-клетки с индексами 1,
-  2, 3 и 4 образуют звезду вершины 3 данного шарового разбиения.[133X
+  [33X[0;0YIn  this example, 1-cells indexed 2, 3, 6 and 7, and 2-cells indexed 1, 2, 3
+  and 4, form the star of vertex no. 3 of the ball complex [10XT2[110X.[133X
   
   [1X1.4-4 PolCheckComb[101X
   
-  [29X[2XPolCheckComb[102X( [3Xpol[103X, [3Xadr[103X ) [32X функция
+  [29X[2XPolCheckComb[102X( [3Xpol[103X, [3Xadr[103X ) [32X function
   
-  [33X[0;0Ycheck  if  a face of given complex is combinatorial complex that is, whether
-  every  its subface of lower dimension is uniquely determined by its vertices
-  (and dimension)[133X
+  [33X[0;0YChecks  whether  face  [22Xadr[122X  of ball complex [22Xpol[122X is "strictly combinatorial",
+  that is, whether every its subface of lower dimension is uniquely determined
+  by its vertices (and dimension).[133X
   
   
-  [1X1.5 [33X[0;0YИзменение [22Xpl-[122X[101X[1Xразбиения (не изменяющие)[133X[101X
-  
-  [33X[0;0YФункции    которые   изменяют   представленное   разбиение   без   изменения
-  многообразия.[133X
+  [1X1.5 [33X[0;0YChanging the ball complex representation of the same manifold[133X[101X
   
   [1X1.5-1 PolTriangulate[101X
   
-  [29X[2XPolTriangulate[102X( [3Xpol[103X ) [32X функция
+  [29X[2XPolTriangulate[102X( [3Xpol[103X ) [32X function
   
-  [33X[0;0Yфункция  создает  триангуляцию  политопа  [22Xpol[122X.  Заметим,  что  политоп после
-  триангуляции может остаться не комбинаторным.[133X
+  [33X[0;0YTriangulates  polytope  [22Xpol[122X. Triangulation is understood in a broader sense,
+  as  a  ball  complex  made  only  of  simplices,  but  a  simplex may [13Xnot[113X be
+  determined by its boundary (not to say its vertices).[133X
   
-  [4X[32X  Пример  [32X[104X
+  [4X[32X  Example  [32X[104X
     [4X[25Xgap>[125X [27XPolTriangulate(sphereAB(2));[127X[104X
     [4X[28Xrec([128X[104X
     [4X[28X  faces := [ [ [ 1, 2 ], [ 1, 2 ], [ 1, 3 ], [ 2, 3 ], [ 1, 4 ], [ 2, 4 ] ],[128X[104X
@@ -379,52 +389,54 @@
     [4X[28X						[128X[104X
   [4X[32X[104X
   
-  [33X[0;0YTriangulating a polytope.[133X
+  [1X1.5-2 PolCanonicalOrder[101X
   
-  [1X1.5-2 FirstBoundary[101X
+  [29X[2XPolCanonicalOrder[102X( [3Xpol[103X ) [32X function
   
-  [29X[2XFirstBoundary[102X( [3Xpol[103X ) [32X функция
+  [33X[0;0YProduces  the  canonical  order  of  cells  in  a triangulated polytope. The
+  canonical  order  is  the  lexicographical  order  of  cells  when these are
+  represented by their vertices.[133X
   
-  [33X[0;0Yданная  функция  создает  такое  упорядочение  клеток  политопа,  что клетки
-  лежащие  на  границе  имеют  наименьшие  индексы  в  списках pol.faces[dim].
-  Внутренний  порядок  клеток  на  границе остается неизменным (имеется в виду
-  порядок клеток созданный индексацией внутри политопа).[133X
+  [1X1.5-3 FirstBoundary[101X
   
-  [1X1.5-3 PermFaces[101X
+  [29X[2XFirstBoundary[102X( [3Xpol[103X ) [32X function
   
-  [29X[2XPermFaces[102X( [3Xpol[103X, [3Xperm[103X, [3Xdim[103X ) [32X функция
+  [33X[0;0YChanges  the order of polytope [22Xpol[122X cells in such way that the boundary cells
+  go first in the lists [22Xpol[122X[10X.faces[[110X[22Xdim[122X[10X][110X. The order of cells within the boundary
+  remains unchanged.[133X
   
-  [33X[0;0Yпроизводит  переупорядочение  клеток  размерности  [22Xdim[122X  в  политопе  [22Xpol[122X  по
-  перестановке [22Xperm.[122X[133X
+  [1X1.5-4 PermFaces[101X
   
-  [33X[0;0YКлетку  размерности  [22Xd[122X  в  шаровом  комплексе  называем минимальной, если ее
-  граница содержит только две клетки размерности [22X(d - 1)[122X[133X
+  [29X[2XPermFaces[102X( [3Xpol[103X, [3Xperm[103X, [3Xdim[103X ) [32X function
   
-  [1X1.5-4 ContractMiniFace[101X
+  [33X[0;0YRe-orders  of  [22Xdim[122X-cells  in  polytope  [22Xpol[122X  according  to permutation [22Xperm[122X.
+  Important  note:  works correctly on [22Xpol[122X[10X.vertices[110X ([22Xdim=0[122X) and [22Xpol[122X[10X.faces[110X, but
+  [13Xignores[113X additional entries (if any), such as symmetries ([22Xpol[122X[10X.syms[110X).[133X
   
-  [29X[2XContractMiniFace[102X( [3Xpol[103X, [3Xadr[103X ) [32X функция
+  [33X[0;0YWe  call  a[22Xd[122X-cell in a ball complex [13Xminimal[113X if its boundary consists of only
+  two [22X(d - 1)[122X-cells.[133X
   
-  [33X[0;0YВ  политопе  [22Xpol[122X  стягивается минимальная клетка [22Xadr.[122X Образом стягивания при
-  этом является граничная клетка с меньшим индексом.[133X
+  [1X1.5-5 ContractMiniFace[101X
   
-  [4X[32X  Пример  [32X[104X
-    [4X[25Xgap>[125X [27Xs1:=sphereTriangul(1);[127X[104X
+  [29X[2XContractMiniFace[102X( [3Xpol[103X, [3Xadr[103X ) [32X function
+  
+  [33X[0;0YCollapses  minimal cell [22Xadr[122X in polytope [22Xpol[122X. That is, withdraws [22Xadr[122X from the
+  complex,  and  its two boundary cells (of dimension less by 1 than [22Xadr[122X) are,
+  accordingly, glued together into one cell.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27Xs1:=sphereTriangul(1); # triangulated sphere of dimension 1[127X[104X
     [4X[28Xrec( faces := [ [ [ 1, 2 ], [ 1, 3 ], [ 2, 3 ] ] ], vertices := [ 1 .. 3 ] )[128X[104X
     [4X[25Xgap>[125X [27Xs1:=ContractMiniFace(s1,[1,1]);[127X[104X
     [4X[28Xrec( faces := [ [ [ 1, 2 ], [ 1, 2 ] ] ], vertices := [ 1, 3 ] )[128X[104X
     [4X[28X						[128X[104X
   [4X[32X[104X
   
-  [33X[0;0YВ некоторых случаях стягивание минимальной клетки невозможно, так как данные
-  которые  мы  получим  после  стягивания  могут  не  оказаться [22Xpl-[122Xкомплексом.
-  Программа  проведет  стягивание минимальной клетки в любом случае, даже если
-  применение  функции  выведет  нас из категории шаровых комплексов. По этому,
-  применение этой функции требует доказательства того, что после стягивание не
-  нарушится  условие,  что  все клетки получившегося комплекса шары. Например,
-  если  в примере описанном выше попробовать стянуть в окружности [22Xs1[122X ребро, то
-  получим следующее[133X
+  [33X[0;0YIn  some  cases,  the  result of collapsing a minimal cell may [13Xnot[113X be a ball
+  complex.  This  function  does not check this, this is left to the user! For
+  instance, if we try to collapse one more edge in the above circle [22Xs1[122X, we get[133X
   
-  [4X[32X  Пример  [32X[104X
+  [4X[32X  Example  [32X[104X
     [4X[25Xgap>[125X [27Xs1:=ContractMiniFace(s1,[1,1]);[127X[104X
     [4X[28Xrec( faces := [ [ [ 1 ] ] ], vertices := [ 1 ] )[128X[104X
     [4X[25Xgap>[125X [27XIsPolytope(s1);[127X[104X
@@ -432,19 +444,21 @@
     [4X[28X						[128X[104X
   [4X[32X[104X
   
-  [33X[0;0YКак   видим  выходные  данные  не  являются  политопом.  По  этому  проверка
-  допустимости данной операции остается за пользователем.[133X
+  [1X1.5-6 DivideFace[101X
   
-  [1X1.5-5 DivideFace[101X
+  [29X[2XDivideFace[102X( [3Xpol[103X, [3Xadr[103X, [3Xset[103X ) [32X function
   
-  [29X[2XDivideFace[102X( [3Xpol[103X, [3Xadr[103X, [3Xset[103X ) [32X функция
+  [33X[0;0YLet  there  be a cell [22Xadr[122X of dimension [22Xd=adr[1][122X in ball complex [22Xpol[122X, and let
+  [22Xset[122X  be  a  set (in the GAP sense) of cells that lie in the boundary of cell
+  [22Xadr[122X, and form together a [22X(d-2)[122X-sphere [22XS^d-2[122X.[133X
   
-  [33X[0;0YПусть имеется клетка с адресом [22Xadr[122X размерности [22Xd=adr[1][122X и клетки [22Xset[122X лежащие
-  на  границе  клетки  [22Xadr[122X образуют [22X(d-2)-[122Xмерную сферу [22XS^d-2[122X, тогда клетку [22Xadr[122X
-  можно  разбить  на две части натянув на сферу [22XS^d-2[122X диск [22XD^d-1[122X внутри клетки
-  [22Xadr[122X.[133X
+  [33X[0;0YThe  function  breaks  the  cell [22Xadr[122X into two parts by spanning a disk [22XD^d-1[122X
+  over [22XS^d-2[122X and inside cell [22Xadr[122X.[133X
   
-  [4X[32X  Пример  [32X[104X
+  [33X[0;0YWarning:  the  function  does [13Xnot[113X check whether [22Xset[122X really makes a sphere in
+  the boundary of [22Xadr[122X.[133X
+  
+  [4X[32X  Example  [32X[104X
     [4X[25Xgap>[125X [27Xoctahedron;[127X[104X
     [4X[28Xrec([128X[104X
     [4X[28X  faces :=[128X[104X
@@ -465,11 +479,11 @@
     [4X[28X						[128X[104X
   [4X[32X[104X
   
-  [33X[0;0YВ  случае  когда разбивается одномерная клетка, указанная клетка дробится на
-  две части новой вершиной, вместо множества [22Xset[122X указывается имя новой вершины
-  разбиения.[133X
+  [33X[0;0YThere  is  also  a  special  case where a 1-cell [22Xadr[122X is divided, by adding a
+  vertex in its middle. In this case, the name of this new vertex is indicated
+  instead of the set [22Xset[122X.[133X
   
-  [4X[32X  Пример  [32X[104X
+  [4X[32X  Example  [32X[104X
     [4X[25Xgap>[125X [27Xs1:=sphereAB(1);[127X[104X
     [4X[28Xrec( faces := [ [ [ 1, 2 ], [ 1, 2 ] ] ], vertices := [ "A", "B" ] )[128X[104X
     [4X[25Xgap>[125X [27XDivideFace(s1,[1,1],3);[127X[104X
@@ -477,139 +491,112 @@
     [4X[28X						[128X[104X
   [4X[32X[104X
   
-  [1X1.5-6 UnionFace[101X
+  [1X1.5-7 UnionFaces[101X
   
-  [29X[2XUnionFace[102X( [3Xpol[103X, [3Xkl1[103X, [3Xkl2[103X ) [32X функция
+  [29X[2XUnionFaces[102X( [3Xpol[103X, [3Xcell1[103X, [3Xcell2[103X ) [32X function
   
-  [33X[0;0YНа  вход  функции  посылаются  две  клетки  одной  и  той же размерности для
-  объединения  их  в одну клетку. По сути данной функцией реализуется обратная
-  операция к функции [22XDivideFace[122X разбивающей клетку на две части.[133X
+  [33X[0;0YThe  input  is  ball  compex  [22Xpol[122X  and two cells [22Xcell1[122X and [22Xcell2[122X of the same
+  dimension,  whose  intersection  -  the [13Xpartition[113X between them - is just one
+  (closed) cell of dimension less by one. The function unites these cells into
+  one and deletes the partition cell. The details are as follows.[133X
   
-  [4X[32X  Пример  [32X[104X
-    [4X[25Xgap>[125X [27XUnionFace(p3,[3,1],[3,2]);[127X[104X
-    [4X[28Xrec([128X[104X
-    [4X[28X  faces :=[128X[104X
-    [4X[28X    [ [ [ 1, 2 ], [ 1, 3 ], [ 2, 3 ], [ 1, 4 ], [ 2, 4 ], [ 3, 4 ], [ 1, 5 ],[128X[104X
-    [4X[28X          [ 2, 5 ], [ 3, 5 ], [ 4, 5 ] ],[128X[104X
-    [4X[28X      [ [ 2, 4, 6 ], [ 2, 7, 9 ], [ 4, 7, 10 ], [ 3, 5, 6 ], [ 3, 8, 9 ],[128X[104X
-    [4X[28X          [ 5, 8, 10 ], [ 1, 4, 5 ], [ 1, 7, 8 ] ],[128X[104X
-    [4X[28X      [ [ 1, 2, 4, 5, 7, 8 ], [ 3, 6, 7, 8 ] ] ],[128X[104X
+  [33X[0;0YFirst,  we  assume  that  [22Xpol[122X is a correctly defined ball complex. Then, the
+  function  checks  that the intersection of [22Xcell1[122X and [22Xcell2[122X is indeed exactly
+  one  closed  cell, as described above. This implies, of course, the checking
+  of [13Xall[113X cells of [13Xall[113X dimensions less than that of [22Xcell1[122X and [22Xcell2[122X.[133X
+  
+  [33X[0;0YMoreover,  one more check is performed within the [13Xstar[113X (see [10XStarFace[110X) of the
+  partition  being  deleted:  the  absence  of  dead links after the deletion.
+  Namely,  the partition cell must not enter in the boundary of any [13Xother[113X cell
+  of the same dimension as [22Xcell1[122X and [22Xcell2[122X.[133X
+  
+  [33X[0;0YIf  the result of any of these checks is negative, then the function returns
+  the [13Xinitial[113X polytope. ****What is "p3" below?****[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27Xp3 := dataPachner(3,3).l.pol; # this gives a cluster of 3 tetrahedra [127X[104X
+    [4X[28X                                   # around an edge, as in the l.h.s.[128X[104X
+    [4X[28X                                   # of Pachner move 3-2[128X[104X
+    [4X[28Xrec( [128X[104X
+    [4X[28X  faces := [128X[104X
+    [4X[28X    [ [ [ 1, 2 ], [ 1, 3 ], [ 2, 3 ], [ 1, 4 ], [ 2, 4 ], [ 3, 4 ], [ 1, 5 ], [128X[104X
+    [4X[28X          [ 2, 5 ], [ 3, 5 ], [ 4, 5 ] ], [128X[104X
+    [4X[28X      [ [ 2, 4, 6 ], [ 2, 7, 9 ], [ 4, 7, 10 ], [ 3, 5, 6 ], [ 3, 8, 9 ], [128X[104X
+    [4X[28X          [ 5, 8, 10 ], [ 1, 2, 3 ], [ 1, 4, 5 ], [ 1, 7, 8 ] ], [128X[104X
+    [4X[28X      [ [ 1, 4, 7, 8 ], [ 2, 5, 7, 9 ], [ 3, 6, 8, 9 ] ] ], [128X[104X
     [4X[28X  vertices := [ 1, 2, 3, 4, 5 ] )[128X[104X
+    [4X[25Xgap>[125X [27XIsPolytope(p3);[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27Xp3 := UnionFaces(p3,[3,1],[3,2]); # in the new p3, the first two[127X[104X
+    [4X[28X                                       # tetrahedra are united into one cell[128X[104X
+    [4X[28Xrec( [128X[104X
+    [4X[28X  faces := [128X[104X
+    [4X[28X    [ [ [ 1, 2 ], [ 1, 3 ], [ 2, 3 ], [ 1, 4 ], [ 2, 4 ], [ 3, 4 ], [ 1, 5 ], [128X[104X
+    [4X[28X          [ 2, 5 ], [ 3, 5 ], [ 4, 5 ] ], [128X[104X
+    [4X[28X      [ [ 2, 4, 6 ], [ 2, 7, 9 ], [ 4, 7, 10 ], [ 3, 5, 6 ], [ 3, 8, 9 ], [128X[104X
+    [4X[28X          [ 5, 8, 10 ], [ 1, 4, 5 ], [ 1, 7, 8 ] ], [128X[104X
+    [4X[28X      [ [ 1, 2, 4, 5, 7, 8 ], [ 3, 6, 7, 8 ] ] ], [128X[104X
+    [4X[28X  vertices := [ 1, 2, 3, 4, 5 ] )[128X[104X
+    [4X[25Xgap>[125X [27XIsPolytope(p3);[127X[104X
+    [4X[28Xtrue[128X[104X
     [4X[28X						[128X[104X
   [4X[32X[104X
   
-  [33X[0;0YОбъединение  двух  клеток [22XD^k_1[122X и [22XD^k_2[122X в одну в политопе [22Xpol[122X можно провести
-  только  в  том  случае если звезда пересечения этих клеток состоит только из
-  [22XD^k_1[122X  и  [22XD^k_2[122X.  Для  проведения  объединения функция проверяет, что данные
-  клетки пересекаются по одному диску. Если после объединения указанных клеток
-  комплекс  перестанет  быть шаровым разбиением, то функция не будет проводить
-  объединение,  на выход будет подан начальный политоп и информационная строка
-  с пояснением почему функция отказывается работать.[133X
-  
-  [4X[32X  Пример  [32X[104X
-    [4X[25Xgap>[125X [27XUnionFace(T2,[2,1],[2,3]);;[127X[104X
-    [4X[28XThis faces intersected on some balls or not intersected.[128X[104X
-    [4X[28XI cannot union the faces in a polytope.[128X[104X
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XUnionFaces(T2,[2,1],[2,3]) = T2;   # T2 is a 2-torus made of four squares[127X[104X
+    [4X[28Xtrue[128X[104X
     [4X[28X						[128X[104X
   [4X[32X[104X
   
-  [1X1.5-7 PolSimplify[101X
+  [1X1.5-8 PolSimplify[101X
   
-  [29X[2XPolSimplify[102X( [3Xpol[103X ) [32X функция
+  [29X[2XPolSimplify[102X( [3Xpol[103X ) [32X function
   
-  [33X[0;0YПроводит   упрощение   политопа   [22Xpol[122X  фукцией  UnionFaces.  Данная  функция
-  перебирает  все возможности начиная с клеток максимальной размерности. Вновь
-  появившиеся  возможности  функция  не  исследует.  По  этому  функцию  можно
-  запускать несколько раз если целью стоит максимально упростить политоп.[133X
+  [33X[0;0YSimplifies  polytope [22Xpol[122X using [10XUnionFaces[110X. The function searches through all
+  possibilities,  starting  from  the  cells  of  the maximal dimension. Note,
+  however,  that,  after  applying this function, new possibilities may occur.
+  So,  the  function  can  be  applied several times, in order to simplify the
+  polytope as far as possible.[133X
   
-  [4X[32X  Пример  [32X[104X
-    [4X[25Xgap>[125X [27Xa:=ballTriangul(3);;[127X[104X
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27Xa:=ballTriangul(3); # triangulated 3-ball (tetrahedron)[127X[104X
+    [4X[28Xrec( [128X[104X
+    [4X[28X  faces := [ [ [ 1, 2 ], [ 1, 3 ], [ 1, 4 ], [ 2, 3 ], [ 2, 4 ], [ 3, 4 ] ], [128X[104X
+    [4X[28X      [ [ 1, 2, 4 ], [ 1, 3, 5 ], [ 2, 3, 6 ], [ 4, 5, 6 ] ], [ [ 1 .. 4 ] ] ][128X[104X
+    [4X[28X    , vertices := [ 1 .. 4 ] )[128X[104X
     [4X[25Xgap>[125X [27XPolSimplify(a);[127X[104X
-    [4X[28Xrec( faces := [ [ [ 1, 2 ], [ 1, 2 ] ], [ [ 1, 2 ], [ 1, 2 ] ], [ [ 1, 2 ] ][128X[104X
-    [4X[28X     ], vertices := [ 1, 2 ] )[128X[104X
+    [4X[28Xrec( faces := [ [ [ 1, 2 ], [ 1, 2 ] ], [ [ 1, 2 ], [ 1, 2 ] ], [ [ 1, 2 ] ] ][128X[104X
+    [4X[28X    , vertices := [ 1, 2 ] )[128X[104X
     [4X[28X						[128X[104X
   [4X[32X[104X
   
   
-  [1X1.6 [33X[0;0YНепосредственное создание политопов[133X[101X
+  [1X1.6 [33X[0;0YTopological operations[133X[101X
   
-  [33X[0;0YДля  создания [22Xn-[122Xмерного диска и сферы имеются стандартные функции включенные
-  в библиотеку[133X
+  [1X1.6-1 FreeUnionPol[101X
   
-  [1X1.6-1 ballAB[101X
+  [29X[2XFreeUnionPol[102X( [3Xpol1[103X, [3Xpol2[103X ) [32X function
   
-  [29X[2XballAB[102X( [3Xdim[103X ) [32X функция
+  [33X[0;0YFree union of polytopes[133X
   
-  [33X[0;0YСоздает минимально возможное шаровое разбиение диска размерности [22Xdim.[122X[133X
-  
-  [1X1.6-2 sphereAB[101X
-  
-  [29X[2XsphereAB[102X( [3Xdim[103X ) [32X функция
-  
-  [33X[0;0YСоздает минимально возможное pl-разбиение сферы размерности [22Xdim.[122X[133X
-  
-  [4X[32X  Пример  [32X[104X
-    [4X[25Xgap>[125X [27XsphereAB(3);[127X[104X
-    [4X[28Xrec([128X[104X
-    [4X[28X  faces := [ [ [ 1, 2 ], [ 1, 2 ] ], [ [ 1, 2 ], [ 1, 2 ] ],[128X[104X
-    [4X[28X      [ [ 1, 2 ], [ 1, 2 ] ] ], vertices := [ "A", "B" ] )[128X[104X
-    [4X[28X						[128X[104X
-  [4X[32X[104X
-  
-  [33X[0;0YВ  библиотеку так же включена функция создающая задание диска и сферы в виде
-  триангулированных шаровых комплексов[133X
-  
-  [1X1.6-3 ballTriangul[101X
-  
-  [29X[2XballTriangul[102X( [3Xdim[103X ) [32X функция
-  
-  [33X[0;0YСоздает симплекс размерности [22Xdim[122X[133X
-  
-  [4X[32X  Пример  [32X[104X
-    [4X[25Xgap>[125X [27XballTriangul(2);[127X[104X
-    [4X[28Xrec( faces := [ [ [ 1, 2 ], [ 1, 3 ], [ 2, 3 ] ], [ [ 1 .. 3 ] ] ],[128X[104X
-    [4X[28X  vertices := [ 1 .. 3 ] )[128X[104X
-    [4X[28X						[128X[104X
-  [4X[32X[104X
-  
-  [1X1.6-4 sphereTriangul[101X
-  
-  [29X[2XsphereTriangul[102X( [3Xdim[103X ) [32X функция
-  
-  [33X[0;0YТриангулированная сфера создается как граница [22X(dim+1)-[122Xмерного симплекса[133X
-  
-  [4X[32X  Пример  [32X[104X
-    [4X[25Xgap>[125X [27XsphereTriangul(1);[127X[104X
-    [4X[28Xrec( faces := [ [ [ 1, 2 ], [ 1, 3 ], [ 2, 3 ] ] ], vertices := [ 1 .. 3 ] )[128X[104X
-    [4X[28X						[128X[104X
-  [4X[32X[104X
-  
-  
-  [1X1.7 [33X[0;0YТопологические операции[133X[101X
-  
-  [1X1.7-1 FreeUnionPol[101X
-  
-  [29X[2XFreeUnionPol[102X( [3Xpol1[103X, [3Xpol2[103X ) [32X функция
-  
-  [33X[0;0YСвободное объединение политопов.[133X
-  
-  [4X[32X  Пример  [32X[104X
+  [4X[32X  Example  [32X[104X
     [4X[25Xgap>[125X [27XFreeUnionPol(s1,s1);[127X[104X
     [4X[28Xrec( faces := [ [ [ 1, 2 ], [ 1, 2 ], [ 3, 4 ], [ 3, 4 ] ] ],[128X[104X
     [4X[28X  vertices := [ [ 1, "A" ], [ 1, "B" ], [ 2, "A" ], [ 2, "B" ] ] )[128X[104X
     [4X[28X						[128X[104X
   [4X[32X[104X
   
-  [33X[0;0YОбъединение  происходит  путем  слияния  соответствующих  списков.  При этом
-  индексы второго политопа увеличиваются.[133X
+  [33X[0;0YThe free union is performed by concatenating the lists of faces. The indices
+  (numbers)  of faces belonging to the second polytope are shifted - increased
+  by the number of corresponding faces in the first polytope.[133X
   
-  [1X1.7-2 PolDoubleCone[101X
+  [1X1.6-2 PolDoubleCone[101X
   
-  [29X[2XPolDoubleCone[102X( [3Xpol[103X ) [32X функция
+  [29X[2XPolDoubleCone[102X( [3Xpol[103X ) [32X function
   
-  [33X[0;0YMake a double cone with vertices V1 and V2 over the given polytope [22Xpol.[122X[133X
+  [33X[0;0YMakes a double cone with vertices V1 and V2 over the given polytope [22Xpol[122X.[133X
   
-  [4X[32X  Пример  [32X[104X
+  [4X[32X  Example  [32X[104X
     [4X[25Xgap>[125X [27XPolDoubleCone(s1);[127X[104X
     [4X[28Xrec([128X[104X
     [4X[28X  faces := [ [ [ 1, 2 ], [ 1, 2 ], [ 1, 3 ], [ 2, 3 ], [ 1, 4 ], [ 2, 4 ] ],[128X[104X
@@ -618,32 +605,43 @@
     [4X[28X						[128X[104X
   [4X[32X[104X
   
-  [1X1.7-3 ConnectedSum[101X
+  [1X1.6-3 ConnectedSum[101X
   
-  [29X[2XConnectedSum[102X( [3XN[103X, [3XM[103X ) [32X функция
+  [29X[2XConnectedSum[102X( [3XN[103X, [3XM[103X ) [32X function
   
-  [33X[0;0YФукнция создает связную сумму двух политопов [22XN[122X и [22XM[122X одинаковой размерности.[133X
+  [33X[0;0YMakes a connected sum of two polytopes [22XN[122X and [22XM[122X of the same dimension.[133X
   
-  [4X[32X  Пример  [32X[104X
-    [4X[25Xgap>[125X [27Xs2:=sphereAB(2);;[127X[104X
-    [4X[25Xgap>[125X [27XConnectedSum(s2,s2);[127X[104X
-    [4X[28Xrec([128X[104X
-    [4X[28X  faces := [ [ [ 1, 2 ], [ 1, 2 ], [ 1, 2 ], [ 1, 2 ] ],[128X[104X
-    [4X[28X      [ [ 1, 3 ], [ 1, 2 ], [ 3, 4 ], [ 2, 4 ] ] ],[128X[104X
+  [33X[0;0YCurrently,  the  function  does  not  take care of orientations. An improved
+  function is expected to appear in this package, where the result will depend
+  on the orientations prescribed by the user.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27Xs2 := sphereAB(2);[127X[104X
+    [4X[28Xrec( faces := [ [ [ 1, 2 ], [ 1, 2 ] ], [ [ 1, 2 ], [ 1, 2 ] ] ], [128X[104X
+    [4X[28X  vertices := [ "A", "B" ] )[128X[104X
+    [4X[25Xgap>[125X [27Xs2s2 := ConnectedSum(s2,s2);[127X[104X
+    [4X[28Xrec( [128X[104X
+    [4X[28X  faces := [ [ [ 1, 2 ], [ 1, 2 ], [ 1, 2 ], [ 1, 2 ] ], [128X[104X
+    [4X[28X      [ [ 1, 3 ], [ 1, 2 ], [ 3, 4 ], [ 2, 4 ] ] ], [128X[104X
+    [4X[28X  vertices := [ [ 1, "A" ], [ 1, "B" ] ] )[128X[104X
+    [4X[25Xgap>[125X [27Xs2s2 := PolSimplify(s2s2);[127X[104X
+    [4X[28Xrec( faces := [ [ [ 1, 2 ], [ 1, 2 ] ], [ [ 1, 2 ], [ 1, 2 ] ] ], [128X[104X
     [4X[28X  vertices := [ [ 1, "A" ], [ 1, "B" ] ] )[128X[104X
     [4X[28X						[128X[104X
   [4X[32X[104X
   
-  [1X1.7-4 PolProduct[101X
+  [33X[0;0YWe see also that here [10XPolSimplify[110X returns essentially the same [10Xs2[110X from which
+  we started.[133X
   
-  [29X[2XPolProduct[102X( [3Xpol1[103X, [3Xpol2[103X ) [32X функция
+  [1X1.6-4 PolProduct[101X
   
-  [33X[0;0YФункция  вычисляет  декартово  произведение  двух  шаровых комплексов pol1 и
-  pol2.  Декартово  произведение  для двух шаровых комплексов определяется как
-  шаровой комплекс составленный из всевозможных шаров [22XD^s_i × D^t_j[122X, где [22XD^s_i[122X
-  и [22XD^t_j[122X клетки комплексов [22XM[122X и [22XN[122X, соответственно.[133X
+  [29X[2XPolProduct[102X( [3Xpol1[103X, [3Xpol2[103X ) [32X function
   
-  [4X[32X  Пример  [32X[104X
+  [33X[0;0YCalculates  the  Cartesian product of two ball complexes [22Xpol1[122X and [22Xpol2[122X. This
+  is  the  ball complex made of all balls [22XD^s_i × D^t_j[122X, where [22XD^s_i[122X and [22XD^t_j[122X
+  are cells in [22XM[122X and [22XN[122X, respectively.[133X
+  
+  [4X[32X  Example  [32X[104X
     [4X[25Xgap>[125X [27XPolProduct(s1,s1);[127X[104X
     [4X[28Xrec([128X[104X
     [4X[28X  faces :=[128X[104X
@@ -654,29 +652,29 @@
     [4X[28X						[128X[104X
   [4X[32X[104X
   
-  [1X1.7-5 ImageInPolProduct[101X
+  [1X1.6-5 ImageInPolProduct[101X
   
-  [29X[2XImageInPolProduct[102X( [3Xpol1[103X, [3Xpol2[103X, [3Xkl1xkl2[103X ) [32X функция
+  [29X[2XImageInPolProduct[102X( [3Xpol1[103X, [3Xpol2[103X, [3Xcells[103X ) [32X function
   
-  [33X[0;0YВспомогательная  функция  для декартова произведения, вычисляет адрес клетки
-  составленной  как  произведение  клеток  [22Xkl1[122X и [22Xkl2[122X из политопов [22Xpol1[122X и [22Xpol2,[122X
-  соответственно.  На  вход  функции  адреса  клеток  подаются  объединенные в
-  список.[133X
+  [33X[0;0YAuxiliary  function  for calculating the Cartesian product of polytopes [22Xpol1[122X
+  and  [22Xpol2[122X.  The  last  argument  [22Xcells[122X  is the list of two cells [22Xkl1[122X and [22Xkl2[122X
+  belonging  to  these  two respective polytopes. Computes the address of cell
+  [22Xkl1 × kl2[122X in the mentioned Cartesian product.[133X
   
-  [4X[32X  Пример  [32X[104X
-    [4X[25Xgap>[125X [27Xt2:=PolProduct(s1,s1);;[127X[104X
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27Xs1:=sphereAB(1);[127X[104X
+    [4X[28Xrec( faces := [ [ [ 1, 2 ], [ 1, 2 ] ] ], vertices := [ "A", "B" ] )[128X[104X
     [4X[25Xgap>[125X [27XImageInPolProduct(s1,s1,[[1,2],[1,1]]);[127X[104X
     [4X[28X[ 2, 3 ][128X[104X
     [4X[28X						[128X[104X
   [4X[32X[104X
   
-  [33X[0;0YВ  качестве входных данных функции могут поступить не только политопы pol1 и
-  pol2,  но  и  именованные  списки  по  размерностям,  каждой размерности k в
-  котором  сопоставлена  мощность  клеток  размерности  k.  Данная возможность
-  позволяет  не вычислять эту информацию, при частом вызове функции для одного
-  и того же декартова произведения.[133X
+  [33X[0;0YOne  more possibility for the input is named lists instead of polytopes [22Xpol1[122X
+  and  [22Xpol2[122X.  In these, to each dimension [22Xk[122X corresponds the cardinality of the
+  set  of [22Xk[122X-cells. This possibility helps if the function is frequently called
+  for one and the same Cartesian product.[133X
   
-  [4X[32X  Пример  [32X[104X
+  [4X[32X  Example  [32X[104X
     [4X[25Xgap>[125X [27Xls1:=rec(0:=2, 1:=2);[127X[104X
     [4X[28Xrec( 0 := 2, 1 := 2 )[128X[104X
     [4X[25Xgap>[125X [27XImageInPolProduct(ls1,ls1,[[1,2],[1,1]]);[127X[104X
@@ -684,104 +682,232 @@
     [4X[28X						[128X[104X
   [4X[32X[104X
   
-  [33X[0;0YОбратим   внимание,   что   функция  вычисляет  клетку  только  в  комплексе
-  составленном   функцией  PolProduct.  Если  произошло  какое-либо  изменение
-  комплекса, указанный адрес может оказаться не корректным.[133X
+  [33X[0;0YNote that the function is valid only for the complex obtained by [10XPolProduct[110X.
+  If the complex has changed somehow, the address may become incorrect.[133X
   
-  [1X1.7-6 PreimageInPolProduct[101X
+  [1X1.6-6 PreimageInPolProduct[101X
   
-  [29X[2XPreimageInPolProduct[102X( [3Xpol1[103X, [3Xpol2[103X, [3Ximageface[103X ) [32X функция
+  [29X[2XPreimageInPolProduct[102X( [3Xpol1[103X, [3Xpol2[103X, [3Ximageface[103X ) [32X function
   
-  [33X[0;0YПо  заданному  образу  в  декартовом  произведении  политопов  pol1  и  pol2
-  указываем из каких клеток была составлена данная клетка imageface.[133X
+  [33X[0;0YFor  a  given  cell [22Ximageface[122X in the Cartesian product of polytopes [22Xpol1[122X and
+  [22Xpol2[122X,  returns  the  list of two cells whose Cartesian product is [22Ximageface[122X.
+  The Cartesian product is of course made according to [10XPolProduct[110X.[133X
   
-  [1X1.7-7 PolProductSyms[101X
+  [1X1.6-7 PolProductSyms[101X
   
-  [29X[2XPolProductSyms[102X(  ) [32X функция
+  [29X[2XPolProductSyms[102X(  ) [32X function
   
   [33X[0;0YCartesian   product   of   two  polytopes  with  symmetries  of  multipliers
   transferred  to  it. First go the symmetries of the first multiplier, then -
   the second.[133X
   
-  [1X1.7-8 PolProductSymsDict[101X
+  [1X1.6-8 PolProductSymsDict[101X
   
-  [29X[2XPolProductSymsDict[102X(  ) [32X функция
+  [29X[2XPolProductSymsDict[102X(  ) [32X function
   
   [33X[0;0YCartesian   product   of   two  polytopes  with  symmetries  of  multipliers
   transferred  to  it. First go the symmetries of the first multiplier, then -
   the second. Also returns the face dictionary.[133X
   
-  [1X1.7-9 PolFactorInvolution[101X
+  [1X1.6-9 PolFactorInvolution[101X
   
-  [29X[2XPolFactorInvolution[102X( [3Xpol[103X, [3Xinvol[103X ) [32X функция
+  [29X[2XPolFactorInvolution[102X( [3Xpol[103X, [3Xinvol[103X ) [32X function
   
-  [33X[0;0Y[22Xpol[122X  is  polytope  with  symmetries,  [22Xinvol[122X  is  such  a list of some of its
+  [33X[0;0Y[22Xpol[122X  is  a  polytope  with  symmetries,  [22Xinvol[122X is such a list of some of its
   symmetries  (repetitions  possible)  that  it  is  known that the product of
-  symmetries in s is an involution returns the factored polytope.[133X
+  symmetries in [22Xinvol[122X is an involution. Returns the factored polytope.[133X
+  
+  [33X[0;0YThe function is used in [10XKummerSurface()[110X.[133X
   
   
-  [1X1.8 [33X[0;0YОсновные принципы перестроек шаровых комплексов[133X[101X
+  [1X1.7 [33X[0;0YMain principles of ball complex re-buildings[133X[101X
   
-  [33X[0;0YВ  данном  разделе  рассказывается об основных принципах перестройки шаровых
-  комплексов  связанных  с  изменением индексации клеток. Изменение индексации
-  клеток  является  одной  из  основных  трудностей  для  быстрого  и удобного
-  построения  программ.  Во  второй версии пакета [22XPL[122X мы пользовались следующей
-  идеей.  По  возможности адреса клеток которые не участвуют в операции должны
-  остаться  неизменными. Тем не менее это не всегда возможно, когда, например,
-  клетка удаляется из политопа. Если не удается избежать смещение индексов, то
-  по   возможности  необходимо  сделать  так,  что  бы  индексы  изменились  у
-  минимального   количества  индексов.  Та  особенность,  что  все  построение
-  политопа  привязана  к позиции соответствующих клеток в списках pol.faces[k]
-  осложняет  работу  связанную  с  перестройкой  комплексов. Начиная с третьей
-  версии  пакета  [22XPL[122X будет организована возможность жесткой индексации клеток,
-  когда  позиция  клетки  в списке pol.faces[k] является одновременно и именем
-  этой клетки. Это, например, будет означать, что в списках pol.faces[k] могут
-  присутствовать  пустые  адреса.  На  данный  момент  присутствуют  следующие
-  функции  позволяющие корректно изменять структуру политопа и прикрепленную к
-  нему информацию.[133X
+  [33X[0;0YHere,  we  expalin the main principles of ball complex re-buildings that are
+  related  to  the  change of cell indexation (numbers of cells in the lists).
+  Change  of  cell  indexation is one of the main difficulties for writing our
+  programs  in  a  fast  and easy way. In the second version of package [5XPL[105X, we
+  used  the  following  idea. As far as it is feasible, the addresses of cells
+  not taking part in an operation must remain unchanged. This is, however, not
+  always  possible. For instance, this is impossible if a cell is removed from
+  a  polytope.  If  shifting  indices  cannot  be avoided, then we must try to
+  change  the  minimal  amount  of  indices.  The  fact  that all the polytope
+  construction  is  based  upon  the  cell  numbers in the lists [22Xpol[122X[10X.faces[[110X[22Xk[122X[10X][110X,
+  complicates  the  work  related  to  complex re-buildings. Starting from the
+  third  version  of package [5XPL[105X, a possibility will be implemented for a rigid
+  cell  indexation,  where the position of a cell in [22Xpol[122X[10X.faces[[110X[22Xk[122X[10X][110X will be also
+  the name of this cell. This will mean, in particular, that empty entries may
+  appear  in  the  lists [22Xpol[122X[10X.faces[[110X[22Xk[122X[10X][110X. At this moment, there are the following
+  functions  that  permit  to  change  the  polytope  structure  and  attached
+  information.[133X
   
-  [1X1.8-1 DelFace[101X
+  [1X1.7-1 DelFace[101X
   
-  [29X[2XDelFace[102X( [3Xpol[103X, [3Xadr[103X ) [32X функция
+  [29X[2XDelFace[102X( [3Xpol[103X, [3Xadr[103X ) [32X function
   
-  [33X[0;0Yклетка  [22Xadr[122X корректным образом исключается из политопа [22Xpol.[122X После проведения
-  данной операции корректность данных может быть нарушена.[133X
+  [33X[0;0YCell  [22Xadr[122X  is  removed  from  polytope  [22Xpol[122X. Note that the result may is not
+  guaranteed to be a correct polytope:[133X
   
-  [4X[32X  Пример  [32X[104X
-    [4X[25Xgap>[125X [27Xpol:=DelFace(t2,[1,2]);;[127X[104X
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27Xs1 := sphereAB(1);[127X[104X
+    [4X[28Xrec( faces := [ [ [ 1, 2 ], [ 1, 2 ] ] ], vertices := [ "A", "B" ] )[128X[104X
+    [4X[25Xgap>[125X [27Xt2 := PolProduct(s1,s1);[127X[104X
+    [4X[28Xrec( [128X[104X
+    [4X[28X  faces := [128X[104X
+    [4X[28X    [ [ [ 1, 2 ], [ 1, 2 ], [ 3, 4 ], [ 3, 4 ], [ 1, 3 ], [ 2, 4 ], [ 1, 3 ], [128X[104X
+    [4X[28X          [ 2, 4 ] ], [128X[104X
+    [4X[28X      [ [ 1, 3, 5, 6 ], [ 2, 4, 5, 6 ], [ 1, 3, 7, 8 ], [ 2, 4, 7, 8 ] ] ], [128X[104X
+    [4X[28X  vertices := [ [ "A", "A" ], [ "A", "B" ], [ "B", "A" ], [ "B", "B" ] ] )[128X[104X
+    [4X[25Xgap>[125X [27Xpol := DelFace(t2,[1,2]);[127X[104X
+    [4X[28Xrec( [128X[104X
+    [4X[28X  faces := [128X[104X
+    [4X[28X    [ [ [ 1, 2 ], [ 3, 4 ], [ 3, 4 ], [ 1, 3 ], [ 2, 4 ], [ 1, 3 ], [ 2, 4 ] ][128X[104X
+    [4X[28X        , [ [ 1, 2, 4, 5 ], [ 3, 4, 5 ], [ 1, 2, 6, 7 ], [ 3, 6, 7 ] ] ], [128X[104X
+    [4X[28X  vertices := [ [ "A", "A" ], [ "A", "B" ], [ "B", "A" ], [ "B", "B" ] ] )[128X[104X
     [4X[25Xgap>[125X [27XIsPolytope(pol);[127X[104X
     [4X[28Xfalse[128X[104X
     [4X[28X					[128X[104X
   [4X[32X[104X
   
-  [33X[0;0YФункция  содержит  наиболее  часто  встречающийся  код  в  функциях  который
-  позволяет  корректно  удалить  все  упоминания о данной клетке и подготовить
-  данные для дальнейшей работы алгоритма.[133X
+  [33X[0;0YThis  function contains the most frequently used code that permits to remove
+  all  mentionings of the given cell and prepare the data for the further work
+  of the algorithm. Namely, it does the following:[133X
   
-  [1X1.8-2 wasDelFace[101X
+  [30X    [33X[0;6Ythe cell [22Xadr = [d, k][122X is removed,[133X
   
-  [29X[2XwasDelFace[102X( [3Xpol[103X, [3Xadr[103X ) [32X функция
+  [30X    [33X[0;6Yreferences to this cell are removed,[133X
   
-  [33X[0;0YФункция  корректирует  сопуствующую  информацию прикрепленную к политопу [22Xpol[122X
-  которая  должна  была  измениться  после  удаления  одной из клеток. На вход
-  функции  подается политоп и адрес той клетки которая была удалена. Напомним,
-  что   после  удаления  клетки  индексы  больших  клеток  данной  размерности
-  понижаются  на  едининцу,  это изменение индексации должно быть отображено в
-  той  информации  которая  сопутствует  данному  шаровому  комплексу. Если из
-  какой-либо  сопуствующей  информации  была удалена клетка, то будет выведено
-  соответствующее  сообщение,  но  изменения  будут  проведены.  При обработке
-  информации  по  2-узле  в  политопе будет, в случае если удаляется 2-клетка,
-  будет  выведено  соответствующее  сообщение, индекс 2-клетки будет удален из
-  списка    .2knot.sheets,   если   на   данную   2-клетку   есть   ссылка   в
-  .2knot.dpoints.(1kl), то соответсвующая позиция будет очищена.[133X
+  [30X    [33X[0;6Ythe indexation of [22Xd[122X-cells is changed,[133X
   
-  [33X[0;0YДля   упрощения   перестройки   политопов   в   дальнейших   версиях   будет
-  поддерживаться  следующий  принцип.  Индекс  [22Xk-[122Xклетки  в списке [22Xpol.faces[k][122X
-  является  одновременно  идентификатором  клетки. Это позволяет нам создавать
-  такие  списки (остовы) [22Xpol.faces[k][122X в которых имеются не заполненые позиции.
-  При  удалении клетки из остова соответствующая позиция в списке [22Xpol.faces[k][122X
-  опустошается.   Такой  принцып  перестройки  позволит  упростить  вычисления
-  связанные  с  пересчетом индексов клеток при преобразованиях политопов. Этот
-  принцып  будет  поддерживаться начиная с третьей версии пакета [22XPL,[122X начиная с
-  четвертой версии поддерживаться будет только данный способ перестройки.[133X
+  [30X    [33X[0;6Yaccordingly, the references to [22Xd[122X-cells in [22X(d+1)[122X-cells are changed.[133X
+  
+  [1X1.7-2 wasDelFace[101X
+  
+  [29X[2XwasDelFace[102X( [3Xpol[103X, [3Xadr[103X ) [32X function
+  
+  [33X[0;0YCorrects  the  information  attached  to  polytope [22Xpol[122X that may have changed
+  after  removing  cell [22Xadr[122X. The indices of the cells of the same dimension as
+  [22Xadr[122X and that go after [22Xadr[122X must be decreased by 1.[133X
+  
+  [33X[0;0YCurrently, this function works only for the information defining a 2-knot in
+  a polytope. Namely, in the case if a 2-cell is removed, the relevant message
+  will  be  displayed,  the  index of the 2-cell will be removed from the list
+  [10X.2knot.sheets[110X   and,   if   there   is   a   reference  to  this  2-cell  in
+  [10X.2knot.dpoints.([110X[22X1kl[122X[10X)[110X, then the corresponding position will be cleared.[133X
+  
+  [33X[0;0YIn  order  to simplify polytope re-buildings, we will stick to the following
+  principle in the following releases of [5XPL[105X. The index of a [22Xk[122X-cell in the list
+  [10Xpol.faces[[110X[22Xk[122X[10X][110X  is simultaneously its identifier. This will allow us to create
+  lists  (skeletons)  [10Xpol.faces[[110X[22Xk[122X[10X][110X  with empty positions. If a cell is removed
+  from a skeleton, the corresponding position in [10Xpol.faces[[110X[22Xk[122X[10X][110X is emptied. This
+  will  alow  us to simplify the calculations related to the re-enumerating of
+  cells.  This  principle will be supported starting from the third version of
+  Package  [5XPL[105X.  Starting from the fourth version, [13Xonly[113X this way of re-building
+  will be supported.[133X
+  
+  
+  [1X1.8 [33X[0;0YThe library of polytopes[133X[101X
+  
+  [33X[0;0YHere  we  list some ball complex realizations of "standard" manifolds. There
+  are the following functions for the disks and spheres of a given dimension.[133X
+  
+  [1X1.8-1 ballAB[101X
+  
+  [29X[2XballAB[102X( [3Xdim[103X ) [32X function
+  
+  [33X[0;0YCreates  the minimal ball complex decomposition of a [22Xdim[122X-ball, with just two
+  vertices "A" and "B".[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XballAB(3);[127X[104X
+    [4X[28Xrec( faces := [ [ [ 1, 2 ], [ 1, 2 ] ], [ [ 1, 2 ], [ 1, 2 ] ], [ [ 1, 2 ] ] ][128X[104X
+    [4X[28X    , vertices := [ "A", "B" ] )[128X[104X
+    [4X[28X                    [128X[104X
+  [4X[32X[104X
+  
+  [1X1.8-2 sphereAB[101X
+  
+  [29X[2XsphereAB[102X( [3Xdim[103X ) [32X function
+  
+  [33X[0;0YCreates  the  minimal  ball complex decomposition of a [22Xdim[122X-sphere, with just
+  two vertices "A" and "B".[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XsphereAB(3);[127X[104X
+    [4X[28Xrec([128X[104X
+    [4X[28Xfaces := [ [ [ 1, 2 ], [ 1, 2 ] ], [ [ 1, 2 ], [ 1, 2 ] ],[128X[104X
+    [4X[28X  [ [ 1, 2 ], [ 1, 2 ] ] ], vertices := [ "A", "B" ] )[128X[104X
+    [4X[28X                    [128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThere are also [13Xtriangulated[113X balls and spheres.[133X
+  
+  [1X1.8-3 ballTriangul[101X
+  
+  [29X[2XballTriangul[102X( [3Xdim[103X ) [32X function
+  
+  [33X[0;0YCreates a simplex of dimension [22Xdim[122X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XballTriangul(2);[127X[104X
+    [4X[28Xrec( faces := [ [ [ 1, 2 ], [ 1, 3 ], [ 2, 3 ] ], [ [ 1 .. 3 ] ] ],[128X[104X
+    [4X[28Xvertices := [ 1 .. 3 ] )[128X[104X
+    [4X[28X                    [128X[104X
+  [4X[32X[104X
+  
+  [1X1.8-4 sphereTriangul[101X
+  
+  [29X[2XsphereTriangul[102X( [3Xdim[103X ) [32X function
+  
+  [33X[0;0YCreates   a   triangulated   sphere  in  the  form  of  the  boundary  of  a
+  [22X(dim+1)[122Xsimplex.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XsphereTriangul(1);[127X[104X
+    [4X[28Xrec( faces := [ [ [ 1, 2 ], [ 1, 3 ], [ 2, 3 ] ] ], vertices := [ 1 .. 3 ] )[128X[104X
+    [4X[28X                    [128X[104X
+  [4X[32X[104X
+  
+  [1X1.8-5 projectivePlane[101X
+  
+  [29X[2XprojectivePlane[102X( [3Xdim[103X ) [32X function
+  
+  [33X[0;0YReal projective space of dimension [22Xdim[122X[133X
+  
+  [1X1.8-6 s2s2twisted[101X
+  
+  [29X[2Xs2s2twisted[102X[32X global variable
+  
+  [33X[0;0YTwisted product of two spheres [22XS^2[122X[133X
+  
+  [1X1.8-7 cp2[101X
+  
+  [29X[2Xcp2[102X[32X global variable
+  
+  [33X[0;0YComplex projective plane[133X
+  
+  [1X1.8-8 PoincareSphere[101X
+  
+  [29X[2XPoincareSphere[102X[32X global variable
+  
+  [33X[0;0YPoincare sphere[133X
+  
+  [1X1.8-9 TorTwist[101X
+  
+  [29X[2XTorTwist[102X( [3Xn[103X ) [32X function
+  
+  [33X[0;0YTwisted  3-torus - the torus bundle over [22XS^1[122X, with the monodromy matrix [10X [ [
+  1, -n ], [ 0, 1 ][110X The algorithm works for [13Xnatural[113X [22Xn=1,2,3,...[122X.[133X
+  
+  [1X1.8-10 KummerSurface[101X
+  
+  [29X[2XKummerSurface[102X(  ) [32X function
+  
+  [33X[0;0YCreates  the  Kummer  surface,  with  singularities  resolved - i.e., a true
+  4-manifold.[133X
+  
+  [1X1.8-11 Lens[101X
+  
+  [29X[2XLens[102X( [3Xn[103X, [3Xk[103X ) [32X function
+  
+  [33X[0;0YThree-dimensional lens space [22XL(n,k)[122X.[133X
   

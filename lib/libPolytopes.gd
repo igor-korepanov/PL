@@ -36,6 +36,10 @@ DeclareGlobalVariable( "DoubleLantern", "double lantern (interior and exterior) 
 
 DeclareGlobalVariable( "MobiusBand", "Mobius band made of two squares" );
 
+DeclareGlobalVariable( "PoincareSphere", "Poincare sphere");
+DeclareGlobalVariable( "s2s2twisted", "Twisted product of 2-sphere");
+DeclareGlobalVariable( "cp2", "Complex projective plane" );
+
 ############################################################# now functions
 
 DeclareGlobalFunction( "Lens" ); # 3-d lens spaces; usage: Lens(7,1)
@@ -48,5 +52,6 @@ DeclareGlobalFunction( "sphereAB" ); # a sphere of dimension n and just two vert
 
 DeclareGlobalFunction( "KummerSurface" ); # KummerSurface() makes the Kummer surface
 
-
+DeclareGlobalFunction( "TorTwist" ); # Вычисляется n раз скученный тор по одной матрице
+DeclareGlobalFunction( "projectivePlane" ); # Вещественные проективные пространства
 
